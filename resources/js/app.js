@@ -551,10 +551,10 @@ feedback_btn?.addEventListener('click', function (e) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const packagingBtn = document.getElementById('add_package');
+    const packagingBtn = document?.getElementById('add_package');
     const packageContainer = document.getElementById('packages_container');
 
-    packagingBtn.addEventListener('click', function (e) {
+    packagingBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         packageContainer.style.display = 'flex';
 
@@ -593,7 +593,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dimensionsBtn = document.getElementById('add_dimensions');
     const dimensionsContainer = document.getElementById('dimensions_container');
 
-    dimensionsBtn.addEventListener('click', function (e) {
+    dimensionsBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         dimensionsContainer.style.display = 'flex';
 
@@ -632,7 +632,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const upload_timeBtn = document.getElementById('add_time');
     const upload_time_containerContainer = document.getElementById('upload_time_container');
 
-    upload_timeBtn.addEventListener('click', function (e) {
+    upload_timeBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         upload_time_containerContainer.style.display = 'flex';
 
@@ -671,7 +671,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const upload_finalBtn = document.getElementById('add_final');
     const upload_final_containerContainer = document.getElementById('upload_final_container');
 
-    upload_finalBtn.addEventListener('click', function (e) {
+    upload_finalBtn?.addEventListener('click', function (e) {
         e.preventDefault();
         upload_final_containerContainer.style.display = 'flex';
 
@@ -715,7 +715,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const constantBlock = document.getElementById('constant_block');
 
     function updateWhenType() {
-        const value = whenSelect.value;
+        const value = whenSelect?.value;
 
         if (value === '1') {
             // Готов к загрузке
@@ -723,16 +723,20 @@ document.addEventListener('DOMContentLoaded', function () {
             constantBlock.style.display = 'none';
         } else if (value === '2') {
             // Постоянно
+            if (readyBlock) {
             readyBlock.style.display = 'none';
             constantBlock.style.display = 'flex';
+            }
         } else {
             // Груза нет — скрыть всё
+            if (readyBlock) {
             readyBlock.style.display = 'none';
             constantBlock.style.display = 'none';
+            }
         }
     }
 
-    whenSelect.addEventListener('change', updateWhenType);
+    whenSelect?.addEventListener('change', updateWhenType);
 
     // Инициализируем при загрузке
     updateWhenType();
@@ -743,7 +747,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const dateInput = document.getElementById('date');
     const dateLabel = document.getElementById('date-label-text');
 
-    dateInput.addEventListener('change', function () {
+    dateInput?.addEventListener('change', function () {
         if (this.value) {
             const formatted = new Date(this.value).toLocaleDateString('ru-RU');
             dateLabel.textContent = formatted;
@@ -756,7 +760,7 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener("DOMContentLoaded", function () {
     const currencySelect = document.getElementById('currency');
 
-    currencySelect.addEventListener('change', function () {
+    currencySelect?.addEventListener('change', function () {
         const selectedCurrency = this.options[this.selectedIndex].textContent;
 
         // Находим все <p>, содержащие валюту после input
@@ -831,7 +835,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lengthInput, widthInput, heightInput, diameterInput
     ];
 
-    inputs.forEach(el => el.addEventListener('input', updateCargoSummary));
+    inputs?.forEach(el => el?.addEventListener('input', updateCargoSummary));
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -846,7 +850,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateWhenSummary() {
         let summary = '';
 
-        switch (whenType.value) {
+        switch (whenType?.value) {
             case '1': // Готов к загрузке
                 const date = readyDate.value;
                 const days = archiveDays.value;
@@ -867,8 +871,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
         }
 
-        whenSummaryText.textContent = summary || 'не заполнено';
-        whenSummaryBlock.classList.toggle('active', summary !== '');
+        if (whenSummaryText && whenSummaryBlock) {
+            whenSummaryText.textContent = summary || 'не заполнено';
+            whenSummaryBlock.classList.toggle('active', summary !== '');
+        }
     }
 
     [whenType, readyDate, archiveDays, constantFrequency].forEach(el => {
@@ -878,7 +884,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateWhenSummary(); // инициализация
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const loadCity = document.getElementById('place');
     const loadAddress = document.getElementById('address');
     const unloadCity = document.getElementById('final_unload_city');
@@ -901,8 +907,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (toAddr) parts.push(toAddr);
 
         const full = parts.join(', ');
-        routeSummaryText.textContent = full || 'не заполнено';
-        routeSummaryBlock.classList.toggle('active', full !== '');
+        if (routeSummaryText && routeSummaryBlock) {
+            routeSummaryText.textContent = full || 'не заполнено';
+            routeSummaryBlock.classList.toggle('active', full !== '');
+        }
     }
 
     [loadCity, loadAddress, unloadCity, unloadAddress].forEach(el => {
@@ -912,7 +920,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateRouteSummary(); // инициализация
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document?.addEventListener('DOMContentLoaded', () => {
     const withVatInput = document.getElementById('with_vat_cashless');
     const currencySelect = document.getElementById('currency');
     const withoutVatInput = document.getElementById('without_vat_cashless');
@@ -926,38 +934,40 @@ document.addEventListener('DOMContentLoaded', () => {
     function updatePaymentSummary() {
         const parts = [];
 
-        if (withVatInput.value.trim()) {
+        if (withVatInput?.value?.trim()) {
             let currency = currencySelect.options[currencySelect.selectedIndex]?.text || '';
             parts.push(`С НДС: ${withVatInput.value} ${currency}`);
         }
 
-        if (withoutVatInput.value.trim()) {
+        if (withoutVatInput?.value?.trim()) {
             let currency = currencySelect.options[currencySelect.selectedIndex]?.text || '';
             parts.push(`Без НДС: ${withoutVatInput.value} ${currency}`);
         }
 
-        if (cashInput.value.trim()) {
+        if (cashInput?.value?.trim()) {
             let currency = currencySelect.options[currencySelect.selectedIndex]?.text || '';
             parts.push(`Наличные: ${cashInput.value} ${currency}`);
         }
 
-        if (onCardCheckbox.checked) {
+        if (onCardCheckbox?.checked) {
             parts.push('на карту');
         }
 
-        if (counterOffersCheckbox.checked) {
+        if (counterOffersCheckbox?.checked) {
             parts.push('встречные предложения');
         }
 
         const full = parts.join(', ');
-        paymentText.textContent = full || 'не заполнено';
-        paymentBlock.classList.toggle('active', full !== '');
+        if (paymentText && paymentBlock) {
+            paymentText.textContent = full || 'не заполнено';
+            paymentBlock.classList.toggle('active', full !== '');
+        }
     }
 
     [
         withVatInput, currencySelect, withoutVatInput,
         cashInput, onCardCheckbox, counterOffersCheckbox
-    ].forEach(el => el.addEventListener('input', updatePaymentSummary));
+    ]?.forEach(el => el?.addEventListener('input', updatePaymentSummary));
 
     updatePaymentSummary(); // инициализация
 });
