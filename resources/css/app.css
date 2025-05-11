@@ -1,0 +1,126 @@
+.advantages-cards {
+    margin-bottom: unset;
+}
+
+.iti--separate-dial-code {
+    width: 100%;
+}
+
+.iti__country-name {
+    display: inline !important;
+}
+
+.iti__country {
+    text-align: center !important;
+}
+
+.iti--separate-dial-code .iti__selected-flag {
+    border-radius: 22px;
+}
+
+.profile-content__wrapper {
+    height: unset !important;
+}
+
+/* Добавляем отступы для email */
+.input-email {
+    margin-bottom: 15px; /* Отступ снизу */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Добавляем отступы для телефона */
+.input-phone {
+    margin-bottom: 15px; /* Отступ снизу */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Контейнер для изображений, используем flexbox */
+.image-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Отступ между изображениями */
+}
+
+/* Обертка для каждого изображения */
+.image-wrapper {
+    position: relative;
+    width: 100px; /* Ширина изображения */
+    height: 100px; /* Высота изображения */
+    overflow: hidden; /* Скрыть все, что выходит за пределы */
+    border-radius: 5px; /* Округление углов */
+}
+
+/* Стили для самого изображения */
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Обеспечивает корректное отображение изображения */
+}
+
+/* Кнопка удаления */
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 5px 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Удалить кнопку при наведении */
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+.email-wrapper {
+    display: flex;
+    align-items: baseline;
+}
+
+.phone-wrapper {
+    display: flex;
+    align-items: baseline;
+}
+
+.user-message {
+    grid-template-columns: 30% 40% 10% !important;
+}
+
+.user-message.active {
+    background-color: #e6f3ff !important;
+}
+
+.user-message__date {
+    align-items: flex-end;
+}
+
+.message_file {
+    color: cornflowerblue
+}
+
+.file-preview {
+    margin-left: 6px;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.file-preview-item {
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.file-preview-item svg {
+    width: 14px;
+    height: 14px;
+}
