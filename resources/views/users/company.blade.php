@@ -80,10 +80,9 @@
 									</div>
 									<div class="input__row-profile">
 										<label for="work_start_date">Начало работы компании</label>
-										<input type="date" id="work_start_date" name="work_start_date"
-											   value="{{ old('work_start_date', optional(auth()->user()?->company?->work_start_date)->format('Y-m-d')) }}"
-											   required>
+										<input type="date" id="work_start_date" name="work_start_date" placeholder="2002" required value="{{ old('work_start_date', auth()->user()?->company?->work_start_date ?? '')?->format('Y-m-d') }}">
 									</div>
+
 									<div class="input__row-profile">
 										<label for="employees_count">Количество сотрудников</label>
 										<input type="number" id="employees_count" name="employees_count" placeholder="101-500" required value="{{ old('employees_count', auth()->user()?->company?->employees_count ?? '') }}">
@@ -176,7 +175,6 @@
 								</div>
 							</div>
 							<div class="form-buttons">
-								<button type="button" class="form-btn form-btn-white">Редактировать</button>
 								<button type="submit" class="form-btn">Сохранить</button>
 							</div>
 					</div>
