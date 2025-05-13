@@ -80,7 +80,9 @@
 									</div>
 									<div class="input__row-profile">
 										<label for="work_start_date">Начало работы компании</label>
-										<input type="date" id="work_start_date" name="work_start_date" placeholder="2002" required value="{{ old('work_start_date', auth()->user()?->company?->work_start_date ?? '') }}">
+										<input type="date" id="work_start_date" name="work_start_date"
+											   value="{{ old('work_start_date', optional(auth()->user()?->company?->work_start_date)->format('Y-m-d')) }}"
+											   required>
 									</div>
 									<div class="input__row-profile">
 										<label for="employees_count">Количество сотрудников</label>
