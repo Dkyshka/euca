@@ -84,7 +84,7 @@
 									</div>
 									<div class="input__row-profile">
 										<label for="employees_count">Количество сотрудников</label>
-										<input type="text" id="employees_count" name="employees_count" placeholder="101-500" required value="{{ old('employees_count', auth()->user()?->company?->employees_count ?? '') }}">
+										<input type="number" id="employees_count" name="employees_count" placeholder="101-500" required value="{{ old('employees_count', auth()->user()?->company?->employees_count ?? '') }}">
 									</div>
 
 									<div class="profile-content__info">

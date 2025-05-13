@@ -111,7 +111,7 @@
                         <legend>По направлениям</legend>
                         @foreach($directions as $direction)
                         <input class="visually-hidden" type="checkbox" name="directions[]" value="{{ $direction->id }}" id="special-{{ $direction->id }}" data-bind="directions[]" {{ in_array('fcl', request('directions', [])) ? 'checked' : '' }}>
-                        <label for="fcl">{{ Str::limit($direction->name, 20) }}</label>
+                        <label for="special-{{ $direction->id }}">{{ Str::limit($direction->name, 20) }}</label>
                         @endforeach
                     </fieldset>
                 </form>
