@@ -31,7 +31,7 @@
                 @endif
             </div>
 
-            <h1><span class="count">15</span>{{ $article->name }}</h1>
+            <h1><span class="count"></span>{{ $article->name }}</h1>
 
             @if($article->directions->isNotEmpty())
             <div class="catalog-card__tags">
