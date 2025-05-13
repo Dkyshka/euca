@@ -67,6 +67,7 @@ class MessageController extends Controller
         $chat->messages()->create([
             'user_id' => $sender->id,
             'message' => $request->input('message'),
+//            'is_read' => true,
         ]);
 
         return response()->json([

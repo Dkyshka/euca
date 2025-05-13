@@ -24,4 +24,9 @@ class Chat extends Model
     {
         return $this->hasMany(Message::class);
     }
+
+    public function latestMessage(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(Message::class)->latestOfMany();
+    }
 }

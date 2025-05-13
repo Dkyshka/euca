@@ -161,19 +161,43 @@
 
 
                 <div class="swiper-wrapper catalog-inner__container">
+                    @php
+                        $certificates = $article->certificates;
+                        $count = $certificates->count();
+                    @endphp
 
-                    @if($article->certificates->isNotEmpty())
-                    @foreach($article->certificates as $certificate)
-                    <div class="swiper-slide catalog-inner__slide">
-                        <picture>
-                            <source srcset="{{ asset($certificate->image_path) }}">
-                            <img srcset="{{ asset($certificate->image_path) }}" width="997" height="503" alt="сертификат" loading="lazy">
-                        </picture>
-                    </div>
-                    @endforeach
+                    @if($count > 0)
+                        @foreach($certificates as $certificate)
+                            <div class="swiper-slide catalog-inner__slide">
+                                <picture>
+                                    <source srcset="{{ asset($certificate->image_path) }}">
+                                    <img srcset="{{ asset($certificate->image_path) }}" width="997" height="503" alt="сертификат" loading="lazy">
+                                </picture>
+                            </div>
+                        @endforeach
+
+                        @if($count === 1)
+                            {{-- дублируем тот же слайд ещё 2 раза --}}
+                            @for($i = 0; $i < 2; $i++)
+                                <div class="swiper-slide catalog-inner__slide">
+                                    <picture>
+                                        <source srcset="{{ asset($certificates[0]->image_path) }}">
+                                        <img srcset="{{ asset($certificates[0]->image_path) }}" width="997" height="503" alt="сертификат" loading="lazy">
+                                    </picture>
+                                </div>
+                            @endfor
+                        @elseif($count === 2)
+                            {{-- дублируем первый слайд один раз --}}
+                            <div class="swiper-slide catalog-inner__slide">
+                                <picture>
+                                    <source srcset="{{ asset($certificates[0]->image_path) }}">
+                                    <img srcset="{{ asset($certificates[0]->image_path) }}" width="997" height="503" alt="сертификат" loading="lazy">
+                                </picture>
+                            </div>
+                        @endif
                     @endif
-
                 </div>
+
             </div>
 
         </div>

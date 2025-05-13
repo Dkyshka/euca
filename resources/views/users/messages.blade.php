@@ -64,7 +64,7 @@
                                 </div>
                             </a>
                         @empty
-                            <p class="p-4 text-gray-500">Переписок пока нет</p>
+
                         @endforelse
                     </div>
 

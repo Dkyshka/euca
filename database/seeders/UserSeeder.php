@@ -109,5 +109,14 @@ class UserSeeder extends Seeder
         $company->emails()->create([
             'email' => 'info2@gmail.com',
         ]);
+
+        $user = User::create([
+            'login' => 'carrier-2',
+            'name' => 'Carrier-2',
+            'email' => 'carrier2@gmail.com',
+            'role_id' => Role::CARRIER,
+            'password' => 'agdepassword',
+            'phone' => '+998909037044',
+        ]);
     }
 }

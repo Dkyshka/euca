@@ -46,12 +46,13 @@ class UserController extends Controller
             ])
             ->with([
                 'users' => fn($q) => $q->where('users.id', '!=', $user->id),
-                'messages' => fn($q) => $q->latest()->limit(1)
+                'messages' => fn($q) => $q->orderBy('id', 'DESC')->latest()
             ])
             ->latest()
             ->get();
 
         $activeChat = null;
+
         if ($chat) {
             // Проверяем, принадлежит ли пользователь к чату
             if (!$chat->users()->where('users.id', $user->id)->exists()) {

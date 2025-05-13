@@ -124,3 +124,7 @@
     width: 14px;
     height: 14px;
 }
+
+.catalog-inner__slide img {
+    object-fit: contain !important;
+}
