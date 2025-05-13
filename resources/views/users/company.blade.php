@@ -78,9 +78,13 @@
 										<label for="address">Адрес компании</label>
 										<input type="text" id="address" name="address" placeholder="...." required value="{{ old('address', auth()->user()?->company?->address ?? '') }}">
 									</div>
+									@php
+										$workStartDate = auth()->user()?->company?->work_start_date;
+                                        $formattedDate = \Carbon\Carbon::parse($workStartDate)?->format('Y-m-d');
+									@endphp
 									<div class="input__row-profile">
 										<label for="work_start_date">Начало работы компании</label>
-										<input type="date" id="work_start_date" name="work_start_date" placeholder="2002" required value="{{ old('work_start_date', auth()->user()?->company?->work_start_date ?? '') }}">
+										<input type="date" id="work_start_date" name="work_start_date" placeholder="2002" required value="{{ old('work_start_date', $formattedDate ?? '') }}">
 									</div>
 
 									<div class="input__row-profile">
