@@ -26,7 +26,7 @@ class Company extends Model
     ];
 
     protected $casts = [
-        'work_start_date' => 'datetime',
+        'work_start_date' => 'date',
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
