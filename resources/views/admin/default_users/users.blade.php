@@ -68,7 +68,7 @@
                                     @if($users)
                                         @foreach($users as $user)
                                             <tr>
-                                                <td style="vertical-align: middle;">{{ $user->name }}</td>
+                                                <td style="vertical-align: middle;">{{ $user->login }}</td>
                                                 <td style="width: 5%; vertical-align: middle;">
                                                     <a href="{{ route('telegram_users_edit', [$user->id]) }}" style="padding: 0 15px;"><i class="fas fa-pen"></i></a>
                                                 </td>
