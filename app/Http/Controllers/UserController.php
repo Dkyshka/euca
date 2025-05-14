@@ -229,6 +229,8 @@ class UserController extends Controller
             $directory = now()->format('Y-m-d');
 
             $file->storeAs("public/avatars/{$directory}", $fileName);
+            $directoryPath = storage_path("app/public/avatars/{$directory}");
+            @chmod($directoryPath, 0755);
 
             $company->update([
                 'avatar' => 'storage/avatars/' . "{$directory}/" . $fileName,
@@ -266,6 +268,8 @@ class UserController extends Controller
                 $directory = now()->format('Y-m-d');
 
                 $file->storeAs("public/certificates/{$directory}", $fileName);
+                $directoryPath = storage_path("app/public/certificates/{$directory}");
+                @chmod($directoryPath, 0755);
 
                 $company->certificates()->create([
                     'image_path' => 'storage/certificates/' . "{$directory}/" . $fileName,
