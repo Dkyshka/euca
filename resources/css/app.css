@@ -128,3 +128,11 @@
 .catalog-inner__slide img {
     object-fit: contain !important;
 }
+
+.main__inner-image {
+    height: calc(var(--offset) * 5) !important;
+}
+
+.main__inner-image img {
+    object-fit: contain;
+}
