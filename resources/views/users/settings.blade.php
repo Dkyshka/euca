@@ -106,7 +106,7 @@
 
 								<div class="input__row-profile">
 									<label for="inn">Инн</label>
-									<input type="text" id="inn" placeholder="25294594655" name="inn" value="{{ old('inn', auth()->user()->inn ?? '') }}">
+									<input type="text" id="inn" placeholder="..." name="inn" value="{{ old('inn', auth()->user()->inn ?? '') }}">
 								</div>
 							</div>
 						</div>
