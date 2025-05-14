@@ -115,13 +115,17 @@
 
         @php
             use Illuminate\Support\Facades\Auth;
+            use App\Models\Message;
 
-            $totalUnreadMessages = App\Models\Message::whereHas('chat.users', function ($q) {
-                $q->where('users.id', Auth::id());
-            })
-            ->where('is_read', false)
-            ->where('user_id', '!=', Auth::id())
-            ->count();
+            $userId = Auth::id();
+
+            $totalUnreadMessages = Message::where('is_read', false)
+                ->where('sender_id', '!=', $userId)
+                ->whereHas('chat', function ($query) use ($userId) {
+                    $query->where('sender_id', $userId)
+                          ->orWhere('recipient_id', $userId);
+                })
+                ->count();
         @endphp
         <li>
             <div class="side-bar__menu-row">

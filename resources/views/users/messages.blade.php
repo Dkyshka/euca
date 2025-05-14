@@ -33,8 +33,8 @@
                     <div class="{{ $activeChat ? 'chat-mobile__hide ' : '' }}users-messages">
                         @forelse($chats as $chat)
                             @php
-                                $lastMessage = $chat->messages->first();
-                                $otherUser = $chat->users->first();
+                                $lastMessage = $chat->latestMessage;
+                                $otherUser = $chat->sender_id === auth()->id() ? $chat->recipient : $chat->sender;
                             @endphp
                             <a href="{{ route('messages', [app()->getLocale(), $chat]) }}" class="user-message {{ optional($activeChat)->id === $chat->id ? 'active' : '' }}">
                                 @if($otherUser->avatar)
@@ -72,7 +72,7 @@
                         <div class="chat chat-window">
                             @foreach($activeChat->messages->sortBy('created_at') as $message)
                                 @php
-                                    $isMe = $message->user_id === auth()->id();
+                                    $isMe = $message->sender_id === auth()->id();
                                     $class = $isMe ? 'request' : 'response';
                                 @endphp
 

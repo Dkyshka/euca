@@ -26,7 +26,6 @@ class DatabaseSeeder extends Seeder
             ProfileSeeder::class,
             SettingSeeder::class,
 
-            ChatSeeder::class,
             CargoTypeSeeder::class,
             PackageSeeder::class,
             CountrySeeder::class,

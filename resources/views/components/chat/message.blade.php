@@ -1,6 +1,6 @@
 @php
-    $isMe = $message->user_id === auth()->id();
-    $class = $isMe ? 'request' : 'response';
+    $isMe = $message->sender_id === auth()->id();
+   $class = $isMe ? 'request' : 'response';
 @endphp
 
 <div class="{{ $class }}">

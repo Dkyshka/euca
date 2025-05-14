@@ -154,13 +154,39 @@ class User extends Authenticatable
         return $this->hasOne(Company::class);
     }
 
-    public function chats(): BelongsToMany
+    // Сообщения, которые пользователь отправил
+    public function sentMessages(): HasMany
     {
-        return $this->belongsToMany(Chat::class)->withTimestamps();
+        return $this->hasMany(Message::class, 'sender_id');
     }
 
-    public function messages(): HasMany
+    // Чаты, где пользователь отправитель
+    public function sentChats(): HasMany
     {
-        return $this->hasMany(Message::class);
+        return $this->hasMany(Chat::class, 'sender_id');
     }
+
+    // Чаты, где пользователь получатель
+    public function receivedChats(): HasMany
+    {
+        return $this->hasMany(Chat::class, 'recipient_id');
+    }
+
+    // Все чаты, где участвует пользователь (отправитель или получатель)
+    public function allChats()
+    {
+        return Chat::where('sender_id', $this->id)
+            ->orWhere('recipient_id', $this->id);
+    }
+
+//    public function chats(): BelongsToMany
+//    {
+//        return $this->belongsToMany(Chat::class)->withTimestamps();
+//    }
+
+//    public function messages(): HasMany
+//    {
+//        return $this->hasMany(Message::class);
+//    }
+
 }

@@ -38,15 +38,20 @@ class UserController extends Controller
         $this->page = Page::findOrFail(6);
         $user = Auth::user();
 
-        $chats = Chat::whereHas('users', fn($q) => $q->where('user_id', $user->id))
+        // Все чаты, где текущий пользователь — либо отправитель, либо получатель
+        $chats = Chat::where(function ($q) use ($user) {
+            $q->where('sender_id', $user->id)
+                ->orWhere('recipient_id', $user->id);
+        })
             ->withCount([
                 'messages as unread_count' => fn($q) => $q
                     ->where('is_read', false)
-                    ->where('user_id', '!=', $user->id)
+                    ->where('sender_id', '!=', $user->id)
             ])
             ->with([
-                'users' => fn($q) => $q->where('users.id', '!=', $user->id),
-                'messages' => fn($q) => $q->orderBy('id', 'DESC')->latest()
+                'sender',
+                'recipient',
+                'latestMessage'
             ])
             ->latest()
             ->get();
@@ -54,20 +59,23 @@ class UserController extends Controller
         $activeChat = null;
 
         if ($chat) {
-            // Проверяем, принадлежит ли пользователь к чату
-            if (!$chat->users()->where('users.id', $user->id)->exists()) {
+            // Проверка принадлежности пользователя к чату
+            if ($chat->sender_id !== $user->id && $chat->recipient_id !== $user->id) {
                 abort(403, 'Вы не имеете доступа к этому чату');
             }
 
+            // Загрузка сообщений и вложений
             $activeChat = Chat::with([
-                'users',
-                'messages.user',
+                'sender',
+                'recipient',
+                'messages.sender',
                 'messages.attachments'
             ])->findOrFail($chat->id);
 
+            // Отметить входящие сообщения как прочитанные
             $activeChat->messages()
+                ->where('sender_id', '!=', $user->id)
                 ->where('is_read', false)
-                ->where('user_id', '!=', $user->id)
                 ->update(['is_read' => true]);
         }
 

@@ -13,23 +13,28 @@ class Message extends Model
 
     protected $fillable = [
         'chat_id',
-        'user_id',
+        'sender_id', // заменено с user_id
         'message',
         'is_read',
     ];
-
-    public function attachments(): HasMany
-    {
-        return $this->hasMany(MessageAttachment::class);
-    }
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    public function sender(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
     public function chat(): BelongsTo
     {
         return $this->belongsTo(Chat::class);
+    }
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(MessageAttachment::class);
     }
 }
