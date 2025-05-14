@@ -17,8 +17,22 @@ class MessageController extends Controller
             'files.*' => 'file|max:10240',
         ]);
 
+        $userId = auth()->id();
+
+        $recipientId = $chat->sender_id === $userId
+            ? $chat->recipient_id
+            : $chat->sender_id;
+
+        if ($chat->sender_id === $chat->recipient_id) {
+            return response()->json([
+                'message' => 'Нельзя отправить сообщение самому себе.'
+            ], 422);
+        }
+
+
         $message = $chat->messages()->create([
-            'sender_id' => auth()->id(),
+            'sender_id' => $userId,
+            'recipient_id' => $recipientId,
             'message' => $request->input('message'),
         ]);
 
@@ -64,13 +78,14 @@ class MessageController extends Controller
             $chat = Chat::create([
                 'sender_id' => $sender->id,
                 'recipient_id' => $recipient->id,
-                'title' => $recipient->name . ' — ' . $sender->name,
+                'title' => $recipient->login . ' — ' . $sender->login,
             ]);
         }
 
         // Создать сообщение
         $message = $chat->messages()->create([
             'sender_id' => $sender->id,
+            'recipient_id' => $recipient->id,
             'message' => $request->input('message'),
             'is_read' => false,
         ]);

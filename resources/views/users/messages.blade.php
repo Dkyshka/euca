@@ -53,7 +53,7 @@
                                 </div>
                                 @endif
                                 <div class="user-message__info">
-                                    <b>{{ $otherUser->name ?? 'Неизвестный пользователь' }}</b>
+                                    <b>{{ $otherUser->login ?? 'Неизвестный пользователь' }}</b>
                                     <p>{{ Str::limit($lastMessage?->message, 35) ?? 'Нет сообщений' }}</p>
                                 </div>
                                 <div class="user-message__date">

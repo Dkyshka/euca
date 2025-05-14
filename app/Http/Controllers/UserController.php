@@ -36,7 +36,7 @@ class UserController extends Controller
     public function messages($locale, ?Chat $chat = null): View
     {
         $this->page = Page::findOrFail(6);
-        $user = Auth::user();
+        $user = auth()->user();
 
         // Все чаты, где текущий пользователь — либо отправитель, либо получатель
         $chats = Chat::where(function ($q) use ($user) {
@@ -60,9 +60,9 @@ class UserController extends Controller
 
         if ($chat) {
             // Проверка принадлежности пользователя к чату
-//            if ($chat->sender_id != $user->id || $chat->recipient_id != $user->id) {
-//                abort(403, 'Вы не имеете доступа к этому чату');
-//            }
+            if ($chat->sender_id != $user->id && $chat->recipient_id != $user->id) {
+                abort(403, 'Вы не имеете доступа к этому чату');
+            }
 
 
             // Загрузка сообщений и вложений
