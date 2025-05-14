@@ -1,5 +1,5 @@
 @php
-    $isMe = $message->sender_id === auth()->id();
+    $isMe = $message->sender_id === auth()->user()->id();
    $class = $isMe ? 'request' : 'response';
 @endphp
 
