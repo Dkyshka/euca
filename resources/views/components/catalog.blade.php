@@ -193,7 +193,7 @@
                     <span>Elite</span>
                     <div class="catalog-card__tags">
                         @if($company->directions->isNotEmpty())
-                        @foreach($company->directions as $direction)
+                        @foreach($company->directions()->limit(10)->get() as $direction)
                         <span>{{ $direction->name }}</span>
                         @endforeach
                         @endif
