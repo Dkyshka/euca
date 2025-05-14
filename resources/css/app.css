@@ -136,3 +136,7 @@
 .main__inner-image img {
     object-fit: contain;
 }
+
+.catalog-inner__container {
+    height: 500px;
+}
