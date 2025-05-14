@@ -17,7 +17,7 @@ class MessageController extends Controller
             'files.*' => 'file|max:10240',
         ]);
 
-        $userId = auth()->id();
+        $userId = auth()->user()->id;
 
         $recipientId = $chat->sender_id === $userId
             ? $chat->recipient_id
@@ -57,7 +57,7 @@ class MessageController extends Controller
     public function getOrCreatePrivateChat(Request $request): JsonResponse
     {
         $request->validate([
-            'recipient_id' => 'required|exists:users,id|not_in:' . auth()->id(),
+            'recipient_id' => 'required|exists:users,id|not_in:' . auth()->user()->id,
             'message' => 'required|string|max:1000',
         ]);
 
