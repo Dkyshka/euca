@@ -19,11 +19,11 @@ class MessageController extends Controller
 
         $userId = auth()->user()->id;
 
-        $recipientId = $chat->sender_id === $userId
+        $recipientId = $chat->sender_id == $userId
             ? $chat->recipient_id
             : $chat->sender_id;
 
-        if ($chat->sender_id === $chat->recipient_id) {
+        if ($chat->sender_id == $chat->recipient_id) {
             return response()->json([
                 'message' => 'Нельзя отправить сообщение самому себе.'
             ], 422);

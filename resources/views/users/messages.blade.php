@@ -34,7 +34,7 @@
                         @forelse($chats as $chat)
                             @php
                                 $lastMessage = $chat->latestMessage;
-                                $otherUser = $chat->sender_id === auth()->user()->id ? $chat->recipient : $chat->sender;
+                                $otherUser = $chat->sender_id == auth()->user()->id ? $chat->recipient : $chat->sender;
                             @endphp
                             <a href="{{ route('messages', [app()->getLocale(), $chat]) }}" class="user-message {{ optional($activeChat)->id === $chat->id ? 'active' : '' }}">
                                 @if($otherUser->avatar)
