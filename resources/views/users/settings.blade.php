@@ -68,16 +68,16 @@
 							<div class="left-col">
 								<div class="input__row-profile">
 									<label for="name">Фамилия Имя Отчество</label>
-									<input type="text" id="name" placeholder="Имя Фамилия" required name="full_name" value="{{ auth()->user()->full_name ?? '' }}">
+									<input type="text" id="name" placeholder="Имя Фамилия Отчество" required name="full_name" value="{{ old('full_name', auth()->user()->full_name ?? '') }}">
 								</div>
 								<div class="input__row-profile">
 									<label for="tel">Номер телефона</label>
-									<input type="tel" id="tel" placeholder="+7(928) 468-61- 30" required name="tel" value="{{ auth()->user()->phone ?? '' }}">
+									<input type="tel" id="tel" placeholder="+7(928) 468-61- 30" required name="tel" value="{{ old('tel', auth()->user()->phone ?? '') }}">
 								</div>
 
 								<div class="input__row-profile">
 									<label for="email">Электронная почта</label>
-									<input type="email" id="email" placeholder="info@textmail.ru" required name="email" value="{{ auth()->user()->email ?? '' }}">
+									<input type="email" id="email" placeholder="info@textmail.ru" required name="email" value="{{ old('email', auth()->user()->email ?? '') }}">
 								</div>
 
 {{--								<button type="button" class="add-field">--}}
@@ -106,7 +106,7 @@
 
 								<div class="input__row-profile">
 									<label for="inn">Инн</label>
-									<input type="text" id="inn" placeholder="25294594655" name="inn" value="{{ auth()->user()->inn ?? '' }}">
+									<input type="text" id="inn" placeholder="25294594655" name="inn" value="{{ old('inn', auth()->user()->inn ?? '') }}">
 								</div>
 							</div>
 						</div>
