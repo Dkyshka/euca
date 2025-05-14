@@ -36,7 +36,7 @@
                                 $lastMessage = $chat->latestMessage;
                                 $otherUser = $chat->sender_id == auth()->user()->id ? $chat->recipient : $chat->sender;
                             @endphp
-                            <a href="{{ route('messages', [app()->getLocale(), $chat]) }}" class="user-message {{ optional($activeChat)->id === $chat->id ? 'active' : '' }}">
+                            <a href="{{ route('messages', [app()->getLocale(), $chat]) }}" class="user-message {{ optional($activeChat)->id == $chat->id ? 'active' : '' }}">
                                 @if($otherUser->avatar)
                                 <div class="user-message__image">
                                     <picture>
@@ -72,7 +72,7 @@
                         <div class="chat chat-window">
                             @foreach($activeChat->messages->sortBy('created_at') as $message)
                                 @php
-                                    $isMe = $message->sender_id === auth()->id();
+                                    $isMe = $message->sender_id == auth()->id();
                                     $class = $isMe ? 'request' : 'response';
                                 @endphp
 
