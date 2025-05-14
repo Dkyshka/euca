@@ -186,7 +186,7 @@
 
                 <div class="catalog-card__info">
                     <div class="catalog-card__title">
-                        <span>{{ $company->id }}</span>
+                        <span>{{ ($companies->currentPage() - 1) * $companies->perPage() + $loop->iteration }}</span>
                         {{ Str::limit($company->name, 20) }}
                     </div>
                     <p>{{ Str::limit($company?->country, 20) }} - {{ Str::limit($company?->city, 20) }}</p>
