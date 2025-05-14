@@ -60,10 +60,10 @@ class UserController extends Controller
 
         if ($chat) {
             // Проверка принадлежности пользователя к чату
-            if ($chat->sender_id !== $user->id || $chat->recipient_id !== $user->id) {
+            if ($chat->sender_id != $user->id || $chat->recipient_id != $user->id) {
                 abort(403, 'Вы не имеете доступа к этому чату');
             }
-            
+
 
             // Загрузка сообщений и вложений
             $activeChat = Chat::with([
