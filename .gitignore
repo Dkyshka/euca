@@ -5,3 +5,12 @@
 .phpunit.result.cache
 npm-debug.log
 /.idea
+
+# Исключить весь storage
+/storage/
+
+# Но разрешить storage/app/public, если надо
+!storage/app/public/
+
+# Исключить Zone.Identifier файлы (Windows метаданные)
+*.Zone.Identifier
