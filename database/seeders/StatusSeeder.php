@@ -13,7 +13,7 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        $statuses = ['Free', 'Pro', 'Elite', 'Vip'];
+        $statuses = ['Free', 'Pro'];
 
         foreach ($statuses as $status) {
             Status::firstOrCreate(['name' => $status]);

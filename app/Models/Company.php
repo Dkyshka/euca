@@ -22,6 +22,7 @@ class Company extends Model
         'work_start_date',
         'is_featured',
         'is_active',
+        'is_partner',
         'is_favorite',
         'status_id'
     ];

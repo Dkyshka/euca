@@ -165,3 +165,8 @@
 .send-offer__col2 {
     flex-wrap: wrap !important;
 }
+
+.members-card img {
+    object-fit: contain !important;
+    width: 100% !important;
+}

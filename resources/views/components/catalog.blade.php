@@ -198,7 +198,7 @@
                         <span>{{ ($companies->currentPage() - 1) * $companies->perPage() + $loop->iteration }}</span>
                         {{ Str::limit($company->name, 20) }}
                     </div>
-                    <p>{{ Str::limit($company?->country, 20) }} - {{ Str::limit($company?->city, 20) }}</p>
+                    <p>{{ Str::limit($company?->country, 20) }}</p>
                     <span>{{ $company?->status?->name }}</span>
                     <div class="catalog-card__tags">
                         @if($company->directions->isNotEmpty())
@@ -218,8 +218,8 @@
         <div class="catalog-new-members">
             <div class="members-title">Новые участники</div>
 
-            @foreach($newCompanies as $newCompany)
             <div class="members-cards">
+                @foreach($newCompanies as $newCompany)
                 <a href="{{ $section->page->link .'/company/'.$newCompany->id }}" class="members-card">
                     @if($newCompany->avatar)
                         <picture>
@@ -239,11 +239,11 @@
                         <svg width="12" height="15">
                             <use xlink:href="#location"></use>
                         </svg>
-                        {{ Str::limit($newCompany?->country, 20) }} - {{ Str::limit($newCompany?->city, 20) }}
+                        {{ Str::limit($newCompany?->country, 20) }}
                     </div>
                 </a>
+                @endforeach
             </div>
-            @endforeach
         </div>
 
 

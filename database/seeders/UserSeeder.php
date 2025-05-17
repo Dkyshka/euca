@@ -40,36 +40,36 @@ class UserSeeder extends Seeder
             'avatar' => '/storage/avatars/2025-05-04/68172ae2f155b.jpg'
         ]);
 
-        $company = $user->company()->create([
-            'name' => 'OOO TransInvest',
-            'country' => 'Uzbekistan',
-            'city' => 'Tashkent',
-            'address' => 'Tashkent, Yashnobod tumani',
-            'website' => 'https://google.com',
-            'description' => 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-            'work_start_date' => '2002-01-01',
-            'employees_count' => 10,
-            'avatar' => 'https://naumovn808.github.io/euca/images/catalog-logo.avif',
-            'status_id' => 2,
-        ]);
+//        $company = $user->company()->create([
+//            'name' => 'OOO TransInvest',
+//            'country' => 'Uzbekistan',
+//            'city' => 'Tashkent',
+//            'address' => 'Tashkent, Yashnobod tumani',
+//            'website' => 'https://google.com',
+//            'description' => 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+//            'work_start_date' => '2002-01-01',
+//            'employees_count' => 10,
+//            'avatar' => 'https://naumovn808.github.io/euca/images/catalog-logo.avif',
+//            'status_id' => 2,
+//        ]);
+//
+//        $company->directions()->sync([1, 2, 3]);
 
-        $company->directions()->sync([1, 2, 3]);
+//        $company->certificates()->create([
+//            'image_path' => '/assets/images/catalog-inner.avif',
+//        ]);
 
-        $company->certificates()->create([
-            'image_path' => '/assets/images/catalog-inner.avif',
-        ]);
-
-        $company->phones()->create([
-            'phone' => '+998909037044',
-        ]);
-
-        $company->phones()->create([
-            'phone' => '+998909037046',
-        ]);
-
-        $company->emails()->create([
-            'email' => 'info@gmail.com',
-        ]);
+//        $company->phones()->create([
+//            'phone' => '+998909037044',
+//        ]);
+//
+//        $company->phones()->create([
+//            'phone' => '+998909037046',
+//        ]);
+//
+//        $company->emails()->create([
+//            'email' => 'info@gmail.com',
+//        ]);
 
         $user = User::create([
             'login' => 'consignor',
@@ -81,36 +81,36 @@ class UserSeeder extends Seeder
             'avatar' => '/assets/images/catalog-inner.avif'
         ]);
 
-        $company = $user->company()->create([
-            'name' => 'OOO AviaTrans',
-            'country' => 'Uzbekistan',
-            'city' => 'Nukus',
-            'address' => 'Nukus, Nukus tumani',
-            'website' => 'https://google.com',
-            'description' => 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-            'work_start_date' => '2010-01-01',
-            'employees_count' => 20,
-            'avatar' => '/assets/images/catalog-inner.avif',
-            'status_id' => 2,
-        ]);
-
-        $company->directions()->sync([1, 2, 3, 4, 5]);
-
-        $company->certificates()->create([
-            'image_path' => '/assets/images/catalog-inner.avif',
-        ]);
-
-        $company->phones()->create([
-            'phone' => '+998907777777',
-        ]);
-
-        $company->emails()->create([
-            'email' => 'info@gmail.com',
-        ]);
-
-        $company->emails()->create([
-            'email' => 'info2@gmail.com',
-        ]);
+//        $company = $user->company()->create([
+//            'name' => 'OOO AviaTrans',
+//            'country' => 'Uzbekistan',
+//            'city' => 'Nukus',
+//            'address' => 'Nukus, Nukus tumani',
+//            'website' => 'https://google.com',
+//            'description' => 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+//            'work_start_date' => '2010-01-01',
+//            'employees_count' => 20,
+//            'avatar' => '/assets/images/catalog-inner.avif',
+//            'status_id' => 2,
+//        ]);
+//
+//        $company->directions()->sync([1, 2, 3, 4, 5]);
+//
+//        $company->certificates()->create([
+//            'image_path' => '/assets/images/catalog-inner.avif',
+//        ]);
+//
+//        $company->phones()->create([
+//            'phone' => '+998907777777',
+//        ]);
+//
+//        $company->emails()->create([
+//            'email' => 'info@gmail.com',
+//        ]);
+//
+//        $company->emails()->create([
+//            'email' => 'info2@gmail.com',
+//        ]);
 
         $user = User::create([
             'login' => 'carrier-2',

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_partner')->default(false);
             $table->boolean('is_favorite')->default(false);
             $table->timestamps();
         });

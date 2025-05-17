@@ -44,7 +44,7 @@
             @auth
 
                 <div class="order-icons">
-                <a class="catalog-inner__link" href="javascript:;" data-modal-target="dropdown-chat1">связаться</a>
+                <a class="catalog-inner__link" href="javascript:;" data-modal-target="dropdown-chat1">Связаться</a>
 
                     <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat1" style="top: -100%;left: 0;">
                         <button class="order-close-btn" data-modal-close="dropdown-chat1"></button>
@@ -159,14 +159,12 @@
                     </svg>
                 </button>
 
-
+                @php
+                    $certificates = $article->certificates;
+                    $count = $certificates->count();
+                @endphp
+                @if($count > 0)
                 <div class="swiper-wrapper catalog-inner__container">
-                    @php
-                        $certificates = $article->certificates;
-                        $count = $certificates->count();
-                    @endphp
-
-                    @if($count > 0)
                         @foreach($certificates as $certificate)
                             <div class="swiper-slide catalog-inner__slide">
                                 <picture>
@@ -195,8 +193,8 @@
                                 </picture>
                             </div>
                         @endif
-                    @endif
                 </div>
+                @endif
 
             </div>
 

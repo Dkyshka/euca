@@ -1041,16 +1041,16 @@
 {{--                                </div>--}}
 {{--                            </div>--}}
 
-                            <div class="add-goods__bottom-radios">
-                                <input type="radio" name="top" id="top">
-                                <label for="top">Поднять груз в ТОП поиска (Приоритетный заказ)</label>
+    {{--                            <div class="add-goods__bottom-radios">--}}
+    {{--                                <input type="radio" name="top" id="top">--}}
+    {{--                                <label for="top">Поднять груз в ТОП поиска (Приоритетный заказ)</label>--}}
 
-{{--                                <input type="radio" name="top" id="hidden">--}}
-{{--                                <label for="hidden">Скрыть груз от нежелательных фирм(Стелс)</label>--}}
+    {{--                                <input type="radio" name="top" id="hidden">--}}
+    {{--                                <label for="hidden">Скрыть груз от нежелательных фирм(Стелс)</label>--}}
 
-{{--                                <input type="radio" name="top" id="agree">--}}
-{{--                                <label for="agree">Разрешить перевозчикам бронировать груз</label>--}}
-                            </div>
+    {{--                                <input type="radio" name="top" id="agree">--}}
+    {{--                                <label for="agree">Разрешить перевозчикам бронировать груз</label>--}}
+    {{--                            </div>--}}
 
 {{--                            <div class="add-goods__bottom">--}}
 {{--                                <svg width="15" height="15">--}}

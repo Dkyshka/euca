@@ -31,9 +31,9 @@
 			<main class="profile-content">
 				<div class="profile-content__wrapper">
 					<div class="subscribe-card">
-						<p>Ваш ID: 2</p>
-						<p>На вашем балансе: 455 000 сум</p>
-						<p>Расход: 45 000 сум</p>
+						<p>Ваш ID: {{ auth()->user()->id }}</p>
+						<p>На вашем балансе: 0</p>
+						<p>Расход: 0</p>
 						<div class="subscribe-card__images">
 							<div class="card-pay">
 								<picture>
