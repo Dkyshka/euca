@@ -38,6 +38,7 @@ document.getElementById('register_submit')?.addEventListener('click', function (
 
     let data = {
         role_id: form.querySelector('[name="role_id"]').value,
+        full_name: form.querySelector('[name="full_name"]').value,
         email: form.querySelector('[name="email"]').value,
         login: form.querySelector('[name="login"]').value,
         password: form.querySelector('[name="password"]').value,

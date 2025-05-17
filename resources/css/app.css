@@ -161,3 +161,7 @@
     object-fit: contain;
     height: auto;
 }
+
+.send-offer__col2 {
+    flex-wrap: wrap !important;
+}
