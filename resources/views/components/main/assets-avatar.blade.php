@@ -12,6 +12,6 @@
     @endif
     <div class="profile__info">
         <b>{{ Str::limit(auth()->user()->login, 20) }}</b>
-        <span>{{ auth()->user()->role->alias }}</span>
+        <span>{{ __('lang.'.auth()->user()->role->alias) }}</span>
     </div>
 </a>
