@@ -212,6 +212,7 @@
                                              style="display: {{ (old('constant_frequency') || $errors->has('constant_frequency')) ? 'block' : 'none' }};">
                                             <label>
                                                 <select name="constant_frequency" class="add-input input-select">
+                                                    <option value="" {{ old('constant_frequency') === null ? 'selected' : '' }}>Выберите частоту</option>
                                                     <option value="daily" {{ old('constant_frequency') === 'daily' ? 'selected' : '' }}>Ежедневно</option>
                                                     <option value="workdays" {{ old('constant_frequency') === 'workdays' ? 'selected' : '' }}>По рабочим дням</option>
                                                 </select>

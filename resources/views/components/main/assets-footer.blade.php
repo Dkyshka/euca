@@ -157,6 +157,15 @@
             </div>
 
             <div class="input__row">
+                <p>ФИО</p>
+
+                <label for="email">
+                    <input type="text" name="full_name" id="full_name" placeholder="ФИО" >
+                </label>
+
+            </div>
+
+            <div class="input__row">
                 <p>Email</p>
 
                 <label for="email">

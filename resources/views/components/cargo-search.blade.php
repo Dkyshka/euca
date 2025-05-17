@@ -218,7 +218,7 @@
     </form>
 
     <div class="banner__mark">
-        <img src="{{ asset('assets/images/rek.jpg') }}" alt="" width="" height="">
+        <img src="{{ asset('assets/images/0517.gif') }}" alt="" width="" height="">
     </div>
 
     <div class="result-goods">
@@ -399,5 +399,5 @@
 </section>
 
 <div class="search-page__mark">
-    <img src="{{ asset('assets/images/about-info.jpg') }}" alt="" width="" height="">
+    <img src="{{ asset('assets/images/banner_right.jpg') }}" alt="" width="" height="">
 </div>

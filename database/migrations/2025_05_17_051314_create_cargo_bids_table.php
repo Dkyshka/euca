@@ -25,7 +25,6 @@ return new class extends Migration
             $table->enum('status', ['pending', 'accepted', 'declined'])->default('pending')->comment('Статус предложения');
             $table->timestamps();
         });
-
     }
 
     /**

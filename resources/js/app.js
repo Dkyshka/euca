@@ -93,9 +93,15 @@ let resendTimerInterval;
 
 function startResendTimer() {
     let timer = resendCooldown;
-    document.getElementById('resend_timer').innerText = timer;
-    document.getElementById('resend_info').style.display = 'block';
-    document.getElementById('resend_code_btn').style.display = 'none';
+    const timerSpan = document.getElementById('resend_timer');
+    const infoBlock = document.getElementById('resend_info');
+    const resendBtn = document.getElementById('resend_code_btn');
+
+    if (!timerSpan || !infoBlock || !resendBtn) return;
+
+    timerSpan.innerText = timer;
+    infoBlock.style.display = 'block';
+    resendBtn.style.display = 'none';
 
     resendTimerInterval = setInterval(() => {
         timer--;
@@ -114,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startResendTimer();
 });
 
-document.getElementById('resend_code_btn').addEventListener('click', async () => {
+document.getElementById('resend_code_btn')?.addEventListener('click', async () => {
     const email = document.getElementById('verification_email').value;
     const btn = document.getElementById('resend_code_btn');
     btn.disabled = true;
@@ -137,7 +143,7 @@ document.getElementById('resend_code_btn').addEventListener('click', async () =>
 });
 
 
-document.getElementById('verify_email_form').addEventListener('submit', async function (e) {
+document.getElementById('verify_email_form')?.addEventListener('submit', async function (e) {
     e.preventDefault();
     const email = document.getElementById('verification_email').value;
     const code = document.getElementById('verification_code').value;

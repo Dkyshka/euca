@@ -51,10 +51,7 @@
                 @foreach($cargoLoadings as $cargo)
                 <div class="order-info">
                     <div class="order-info-second order-info__head">
-                        <label for="dir" class="label-order">
-                            <input type="checkbox" id="dir">
-                            Груз
-                        </label>
+                        <p>Груз</p>
 
                         <p>загрузка</p>
                         <p>разгрузка</p>

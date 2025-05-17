@@ -27,6 +27,7 @@ class UserRegisterRequest extends FormRequest
     {
         return [
             'role_id' => ['required', Rule::in([Role::CARRIER, Role::CONSIGNOR])],
+            'full_name' => ['required', 'string'],
             'email' => ['required', 'email', Rule::unique('users')],
             'phone' => ['required'],
             'password' => ['required', 'string', 'min:8'],
@@ -46,6 +47,7 @@ class UserRegisterRequest extends FormRequest
         return [
             'role_id.required' => __('lang.Укажите роль'),
             'email.required' => __('lang.Введите email'),
+            'full_name.required' => __('Ведите ФИО'),
             'email.unique' => __('lang.Такой пользователь уже существует'),
             'email.email' => __('lang.Введите корректный email'),
             'login.required' => __('lang.Поле логин обязательно для заполнения'),

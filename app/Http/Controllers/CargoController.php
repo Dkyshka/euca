@@ -158,6 +158,7 @@ class CargoController extends Controller
 
             'constant_frequency' => [
                 Rule::requiredIf(fn () => request('when_type') == 2),
+                'nullable',
                 Rule::in(['daily', 'workdays']),
             ],
 

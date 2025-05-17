@@ -209,12 +209,12 @@
             <h3>{{ __('Профиль компании') }}</h3>
             {{ $article->description }}
         </div>
-        <div class="catalog-profile__image">
-            <picture>
-                <source srcset="{{ asset('assets/images/catalog-info.avif') }}">
-                <img src="{{ asset('assets/images/catalog-info.jpg') }}" alt="информация о компании" width="846" height="594">
-            </picture>
-        </div>
+{{--        <div class="catalog-profile__image">--}}
+{{--            <picture>--}}
+{{--                <source srcset="{{ asset('assets/images/catalog-info.avif') }}">--}}
+{{--                <img src="{{ asset('assets/images/catalog-info.jpg') }}" alt="информация о компании" width="846" height="594">--}}
+{{--            </picture>--}}
+{{--        </div>--}}
     </section>
 
 {{--    <section class="news">--}}

@@ -139,12 +139,32 @@
                 </div>
                 <b>{{ $article->company->name }}</b>
                 <p>{{ $article->company->country }}</p>
-                <div class="company-contacts">
+                <div class="company-contacts" style="position: relative">
                     <p>{{ $article->company->user?->full_name }}</p>
                     @foreach($article->company->phones as $item)
                     <a href="tel:{{ str_replace(['(', ')', '-', ' '], '', $item->phone) }}">{{ $item->phone }}</a>
                     @endforeach
-                    <a class="company-link" href="javascript:;">Написать сообщение</a>
+                    <a class="company-link" href="javascript:;" data-modal-target="dropdown-chat1">Написать сообщение</a>
+
+                    <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat1" style="top: -100%;left: 0;">
+                        <button class="order-close-btn" data-modal-close="dropdown-chat1"></button>
+                        <div class="tr">
+                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
+                            </svg>
+                        </div>
+                        <b>Отправить сообщение</b>
+                        <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
+                            @csrf
+                            <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $article->company->user->id }}">
+                            <textarea required name="message" id="chat_text_public" rows="5" style="height: auto; overflow: hidden"></textarea>
+
+                            <button class="form-btn" data-modal-close="dropdown-chat1">Отправить</button>
+                            <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">Отмена</button>
+                        </form>
+
+                    </div>
+
                     @auth
                         <button class="form-btn" data-modal-target="send-offer">Отправить предложение(2)</button>
                     @else
@@ -158,19 +178,19 @@
     <x-main.assets-footer :footer="$footer" :settings="$settings"/>
 
 
-    <div class="modal-overlay" data-modal="modal-change-tarifs">
-        <div class="modal modal-change-tarifs">
-            <b>Смена тарифа</b>
+{{--    <div class="modal-overlay" data-modal="modal-change-tarifs">--}}
+{{--        <div class="modal modal-change-tarifs">--}}
+{{--            <b>Смена тарифа</b>--}}
 
-            <p>
-                Lorem ipsum dolor sit amet consectetur. Sagittis metus aenean convallis nulla accumsan tortor est est ornare. Pretium ornare
-                congue at egestas tellus amet arcu.
-            </p>
+{{--            <p>--}}
+{{--                Lorem ipsum dolor sit amet consectetur. Sagittis metus aenean convallis nulla accumsan tortor est est ornare. Pretium ornare--}}
+{{--                congue at egestas tellus amet arcu.--}}
+{{--            </p>--}}
 
-            <button class="form-btn">Подвердить</button>
-            <button class="tarifs-change-btn" data-modal-close="modal-change-tarifs">Отмена</button>
-        </div>
-    </div>
+{{--            <button class="form-btn">Подвердить</button>--}}
+{{--            <button class="tarifs-change-btn" data-modal-close="modal-change-tarifs">Отмена</button>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
     <div class="modal-overlay" data-modal="get-goods">
         <div class="modal modal-create-order">
@@ -494,6 +514,9 @@
 </style>
 
 <script>
+    let urlPin = "{{ asset('assets/images/svg/map-pin.svg') }}";
+    const COORDINATES = [{{ $settings->markup['coordinates']['lat'] ?? '' }}, {{ $settings->markup['coordinates']['long'] ?? '' }}];
+
     ymaps.ready(init);
 
     function init() {
@@ -512,6 +535,7 @@
             zoom: 10,
             controls: ['zoomControl', 'trafficControl', 'typeSelector', 'rulerControl']
         });
+
 
         myMap.geoObjects.add(multiRoute);
 

@@ -23,7 +23,7 @@ class CargoSearch extends Component
      */
     public function render(): View|Closure|string
     {
-        $cargoLoadings = CargoLoading::where('status', 1)->paginate(15);
+        $cargoLoadings = CargoLoading::where('status', CargoLoading::IN_PROGRESS)->orderByDesc('id')->paginate(15);
 
         return view('components.cargo-search', compact('cargoLoadings'));
     }

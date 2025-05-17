@@ -71,9 +71,7 @@
                 @foreach($cargoLoadings as $cargoLoading)
                 <div class="order-info">
                     <div class="order-info__head order-info-second">
-                        <label for="dir" class="label-order">
-                            Груз
-                        </label>
+                        <p>>Груз</p>
 
                         <p>загрузка</p>
                         <p>разгрузка</p>
