@@ -160,7 +160,7 @@
                 <p>ФИО</p>
 
                 <label for="email">
-                    <input type="text" name="full_name" id="full_name" placeholder="ФИО" >
+                    <input type="text" name="full_name" id="full_name" placeholder="ФИО">
                 </label>
 
             </div>

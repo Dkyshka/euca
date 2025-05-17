@@ -71,7 +71,7 @@ class AuthController extends Controller
 //            ]);
         } catch (\Exception $e) {
             return response()->json([
-                'error' => 'Произошла ошибка',
+                'error' => 'Произошла ошибка'. $e->getMessage(),
             ], 500);
         }
     }
