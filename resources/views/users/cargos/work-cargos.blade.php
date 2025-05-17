@@ -34,50 +34,8 @@
                     <button type="button" class="form-btn form-btn__filters">Поиск по фильтрам</button>
 
                     <form class="form-order form-order-goods">
-{{--                        <button class="form-order-close">--}}
-{{--                            <span></span>--}}
-{{--                            <span></span>--}}
-{{--                        </button>--}}
 
                         <div class="form-order_row">
-{{--                            <label for="all" class="search-icon">--}}
-{{--                                <svg width="12" height="16">--}}
-{{--                                    <use xlink:href="#search-icon"></use>--}}
-{{--                                </svg>--}}
-{{--                                <input type="text" id="all" placeholder="Все подразделения" name="all">--}}
-{{--                            </label>--}}
-
-{{--                            <label for="name">--}}
-{{--                                <select name="name" id="name" class="input-select">--}}
-{{--                                    <option value="" hidden>Имя</option>--}}
-{{--                                    <option value="">Имя1</option>--}}
-{{--                                    <option value="">Имя2</option>--}}
-{{--                                    <option value="">Имя3</option>--}}
-{{--                                </select>--}}
-{{--                            </label>--}}
-
-{{--                            <label for="place">--}}
-{{--                                <select name="name" id="place" class="input-select">--}}
-{{--                                    <option value="" hidden>Все площадки</option>--}}
-{{--                                    <option value="">площадка1</option>--}}
-{{--                                    <option value="">площадка2</option>--}}
-{{--                                    <option value="">площадка3</option>--}}
-{{--                                </select>--}}
-{{--                            </label>--}}
-
-{{--                            <label for="status">--}}
-{{--                                <select name="name" id="status" class="input-select">--}}
-{{--                                    <option value="" hidden>Все статусы грузов</option>--}}
-{{--                                    <option value="">на погрузке</option>--}}
-{{--                                    <option value="">в пути</option>--}}
-{{--                                    <option value="">ожидает одобрения</option>--}}
-{{--                                </select>--}}
-{{--                            </label>--}}
-
-{{--                            <label class="check-offer">--}}
-{{--                                <input type="checkbox">--}}
-{{--                                Только со встречными предложениями--}}
-{{--                            </label>--}}
 
                             <a href="{{ route('cargos.create', app()->getLocale()) }}" class="form-btn">
                                 <svg width="14" height="14">
@@ -86,52 +44,6 @@
                                 Добавить груз
                             </a>
                         </div>
-
-{{--                        <div class="form-order_row">--}}
-{{--                            <label for="all" class="search-icon">--}}
-{{--                                <svg width="12" height="16">--}}
-{{--                                    <use xlink:href="#search-icon"></use>--}}
-{{--                                </svg>--}}
-{{--                                <input type="text" id="all" placeholder="№ груза/Заказа" name="all">--}}
-{{--                            </label>--}}
-
-{{--                            <label for="from">--}}
-{{--                                <svg width="12" height="16">--}}
-{{--                                    <use xlink:href="#map"></use>--}}
-{{--                                </svg>--}}
-
-{{--                                <input type="text" id="from" placeholder="Откуда" name="from">--}}
-{{--                            </label>--}}
-
-{{--                            <label for="to">--}}
-{{--                                <svg width="12" height="16">--}}
-{{--                                    <use xlink:href="#map"></use>--}}
-{{--                                </svg>--}}
-
-{{--                                <input type="text" id="to" placeholder="Откуда" name="to">--}}
-{{--                            </label>--}}
-
-{{--                            <div class="form-order__counts">--}}
-{{--                                Вес--}}
-{{--                                <label for="weightfrom" class="label-small">--}}
-{{--                                    <input type="text" placeholder="от" id="weightfrom">--}}
-{{--                                    <span>T</span>--}}
-{{--                                </label>--}}
-{{--                                <label for="weightto" class="label-small">--}}
-{{--                                    <input type="text" placeholder="до" id="weightto">--}}
-{{--                                    <span>T</span>--}}
-{{--                                </label>--}}
-{{--                                Объем--}}
-{{--                                <label for="valuefrom" class="label-small">--}}
-{{--                                    <input type="text" placeholder="от" id="valuefrom">--}}
-{{--                                    <span>м<sup>2</sup></span>--}}
-{{--                                </label>--}}
-{{--                                <label for="valueto" class="label-small">--}}
-{{--                                    <input type="text" placeholder="до" id="valueto">--}}
-{{--                                    <span>м<sup>2</sup></span>--}}
-{{--                                </label>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
                     </form>
                 </div>
 
@@ -153,40 +65,38 @@
 
                     <div class="order-info-content">
                         <div class="order-info-second order-info__card">
-                            <div class="order-info-col">
-                                <label for="dir" class="mobile-order-head label-order">
-                                    <input type="checkbox" id="dir">
-                                    Груз
-                                </label>
 
-                                <details>
-                                    <summary>{{ $cargo?->cargo?->title }}</summary>
-                                </details>
+                            <div class="order-info-col">
+                                <p class="car-head"><strong>{{ Str::limit($cargo->cargo->title, 50) }}</strong></p>
                             </div>
 
                             <div class="order-info-col">
                                 <p class="mobile-order-head">загрузка</p>
                                 <p>{{ $cargo?->country }}</p>
-                                <p>{{ $cargo?->address }}</p>
+                                @if($cargo->cargo->constant_frequency)
+                                    <p><strong>{{ $cargo->cargo->constant_frequency }}</strong></p>
+                                @elseif($cargo?->cargo?->ready_date)
+                                    <p><strong>{{ $cargo?->cargo?->ready_date?->format('d.m.Y') }}</strong></p>
+                                @else
+                                @endif
                             </div>
 
                             <div class="order-info-col">
                                 <p class="mobile-order-head">разгрузка</p>
-                                <p>{{ $cargo?->final_unload_country }}</p>
-                                <p>{{ $cargo?->final_unload_address }}</p>
+                                <p>{{ $cargo?->final_unload_city }}</p>
+                                <p>{{ $cargo->final_unload_date_from?->format('d.m.Y') }}</p>
                             </div>
 
                             <div class="order-info-col">
                                 <p class="mobile-order-head">ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
-                                <p class="car-head"><strong>{{ $cargo?->cargo?->weight }} / {{ $cargo?->cargo?->weight_type }}</strong></p>
-                                <p class="car-head"><strong>{{ $cargo?->cargo?->volume }}</strong></p>
+                                <p class="car-head"><strong>{{ $cargo?->cargo?->weight }} - {{ $cargo?->cargo?->weight_type }} /</strong>
+                                    {{ $cargo?->cargo?->volume }} М3
+                                </p>
                             </div>
 
                             <div class="order-info-col">
                                 <p class="mobile-order-head">Транспорт</p>
-                                <p>{{ implode(', ', $cargo?->body_types) }}</p>
-                                <p>{{ implode(', ', $cargo?->loading_types) }}</p>
-                                <p>{{ implode(', ', $cargo?->unloading_types) }}</p>
+                                <p>{{ Str::limit(implode(', ', array_slice($cargo?->body_types, 0, 5)), 70) }}</p>
                             </div>
 
                             <div class="order-info-col">

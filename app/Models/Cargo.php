@@ -18,7 +18,7 @@ class Cargo extends Model
         'ready_date', 'archive_after_days', 'shipment_type',
         'needs_hitch', 'needs_air_suspension', 'needs_koniki', 'truck_count',
         'crew_required', 'adr_classes', 'permits', 'strap_count', 'carrying_capacity',
-        'bargain_type', 'rates', 'payments', 'direct_contract',
+        'bargain_type', 'rates', 'payments', 'direct_contract', 'constant_frequency',
         'contact_id', 'note'
     ];
 

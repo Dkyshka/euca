@@ -50,7 +50,13 @@ document.getElementById('register_submit')?.addEventListener('click', function (
     axios.post(actionUrl, data)
         .then(response => {
             if (response.data.success) {
-                window.location.href = response.data.redirect_url;
+                // window.location.href = response.data.redirect_url;
+                // Сохраняем email для подтверждения
+                document.getElementById('verification_email').value = data.email;
+
+                // Показываем модалку подтверждения
+                document.querySelector('[data-modal="modal-register"]')?.classList.remove('open');
+                document.querySelector('[data-modal="modal-verify"]')?.classList.add('open');
             } else if (response.data?.error) {
                 let box = document.createElement('div');
                 box.className = 'form-global-error input-error';
@@ -80,6 +86,81 @@ document.getElementById('register_submit')?.addEventListener('click', function (
         .finally(() => {
             isSubmitting = false;
         });
+});
+
+let resendCooldown = 60;
+let resendTimerInterval;
+
+function startResendTimer() {
+    let timer = resendCooldown;
+    document.getElementById('resend_timer').innerText = timer;
+    document.getElementById('resend_info').style.display = 'block';
+    document.getElementById('resend_code_btn').style.display = 'none';
+
+    resendTimerInterval = setInterval(() => {
+        timer--;
+        document.getElementById('resend_timer').innerText = timer;
+
+        if (timer <= 0) {
+            clearInterval(resendTimerInterval);
+            document.getElementById('resend_info').style.display = 'none';
+            document.getElementById('resend_code_btn').style.display = 'inline-block';
+        }
+    }, 1000);
+}
+
+// Запустить при первом открытии формы подтверждения
+document.addEventListener('DOMContentLoaded', () => {
+    startResendTimer();
+});
+
+document.getElementById('resend_code_btn').addEventListener('click', async () => {
+    const email = document.getElementById('verification_email').value;
+    const btn = document.getElementById('resend_code_btn');
+    btn.disabled = true;
+    btn.innerText = 'Отправка...';
+
+    try {
+        const res = await axios.post('/resend-code', { email });
+
+        if (res.data.success) {
+            startResendTimer(); // запустить заново
+        } else {
+            alert('Ошибка при повторной отправке');
+        }
+    } catch (err) {
+        alert('Ошибка: ' + (err.response?.data?.error || 'Попробуйте позже'));
+    } finally {
+        btn.disabled = false;
+        btn.innerText = 'Отправить код повторно';
+    }
+});
+
+
+document.getElementById('verify_email_form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const email = document.getElementById('verification_email').value;
+    const code = document.getElementById('verification_code').value;
+
+    document.querySelector('.error_box_verify').innerText = '';
+
+    try {
+        const res = await axios.post('/verify-code', {
+            email: email,
+            code: code
+        });
+
+        if (res.data.success) {
+            window.location.href = res.data.redirect_url;
+        }
+
+    } catch (err) {
+        if (err.response?.data?.errors) {
+            document.querySelector('.error_box_verify').innerText = Object.values(err.response.data.errors).join('\n');
+        } else {
+            document.querySelector('.error_box_verify').innerText = err.response?.data?.error || 'Ошибка подтверждения.';
+        }
+    }
 });
 
 document.querySelector('.modal-login form')?.addEventListener('submit', function (e) {

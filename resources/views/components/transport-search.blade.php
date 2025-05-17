@@ -185,7 +185,7 @@
     </form>
 
     <div class="banner__mark">
-        <img src="{{ asset('assets/images/about-info.jpg') }}" alt="" width="" height="">
+        <img src="{{ asset('assets/images/rek.jpg') }}" alt="" width="" height="">
     </div>
 
     <div class="result-goods">
@@ -281,9 +281,9 @@
                                 <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
                             </button>
 
-                            <button class="chat-message" data-modal-target="dropdown-close">
-                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">
-                            </button>
+{{--                            <button class="chat-message" data-modal-target="dropdown-close">--}}
+{{--                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                            </button>--}}
 
                             <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat1">
                                 <button class="order-close-btn" data-modal-close="dropdown-chat1"></button>
@@ -360,9 +360,9 @@
                             </button>
 
 
-                            <button class="chat-message" data-modal-target="dropdown-close">
-                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">
-                            </button>
+{{--                            <button class="chat-message" data-modal-target="dropdown-close">--}}
+{{--                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                            </button>--}}
 
                             <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat2">
                                 <button class="order-close-btn" data-modal-close="dropdown-chat2"></button>
@@ -438,9 +438,9 @@
                                 <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
                             </button>
 
-                            <button class="chat-message" data-modal-target="dropdown-close">
-                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">
-                            </button>
+{{--                            <button class="chat-message" data-modal-target="dropdown-close">--}}
+{{--                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                            </button>--}}
 
                             <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat3">
                                 <button class="order-close-btn" data-modal-close="dropdown-chat3"></button>
@@ -516,9 +516,9 @@
                                 <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
                             </button>
 
-                            <button class="chat-message" data-modal-target="dropdown-close">
-                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">
-                            </button>
+{{--                            <button class="chat-message" data-modal-target="dropdown-close">--}}
+{{--                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                            </button>--}}
 
                             <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat4">
                                 <button class="order-close-btn" data-modal-close="dropdown-chat4"></button>

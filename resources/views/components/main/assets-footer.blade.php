@@ -115,11 +115,9 @@
             <button type="submit" class="form-btn">Войти</button>
 
             <button type="button" class="is-have-auth" data-modal-target="modal-register">
-                Нет аккаунта? Зарегестрироваться
+                Нет аккаунта? Зарегистрироваться
             </button>
 
-            <span>Нажимая кнопку «Продолжить», вы принимаете условия</span>
-            <a href="#">Пользовательского соглашения</a>
         </form>
 
         <button class="modal-close" type="button" data-modal-close="modal-login">
@@ -199,16 +197,6 @@
 
                 <div class="iput-row__wrapper">
 
-{{--                    <button type="button" class="input-row__icon">--}}
-
-{{--                        <img src="{{ asset('assets/images/phone-mask.png') }}" alt="mask">--}}
-
-{{--                        <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-{{--                            <path d="M7.33395 1.24661L4.24409 4.33647C4.17253 4.40803 4.09558 4.46305 4.01324 4.50153C3.93091 4.54 3.84049 4.55885 3.742 4.55808C3.64351 4.55731 3.55309 4.53808 3.47076 4.50037C3.38842 4.46267 3.31147 4.40765 3.23991 4.33532L0.150048 1.24546C0.107727 1.20236 0.0719462 1.15273 0.0427059 1.09656C0.014235 1.04039 -1.56405e-07 0.979984 -1.5923e-07 0.915348C-1.64881e-07 0.786074 0.0423211 0.674883 0.126964 0.581776C0.213146 0.488668 0.325876 0.442114 0.465153 0.442114L7.01769 0.442114C7.15774 0.442114 7.27047 0.489823 7.35588 0.585238C7.44129 0.680654 7.484 0.79146 7.484 0.917655C7.484 0.949974 7.43398 1.05924 7.33395 1.24545" fill="#2E3645"/>--}}
-{{--                        </svg>--}}
-
-{{--                    </button>--}}
-
                     <label for="phone">
                         <input type="tel" name="phone" id="phone" placeholder="+998 99 999 99 99">
                     </label>
@@ -224,8 +212,8 @@
             </button>
 
             <span>Нажимая кнопку «Продолжить», вы принимаете условия</span>
-            <a href="#">Пользовательского соглашения</a>
-
+            <a href="{{ asset('assets/documents/public_offer.pdf') }}" target="_blank">Пользовательского соглашения</a>
+            <a href="{{ asset('assets/documents/registration.pdf') }}" target="_blank">Правила регистрации</a>
         </form>
 
         <button class="modal-close" type="button" data-modal-close="modal-register">
@@ -235,6 +223,46 @@
 
     </div>
 </div>
+
+<div class="modal-overlay" data-modal="modal-verify">
+    <div class="modal modal-verify">
+
+        <b>Подтвердите Email</b>
+        <p class="verify-instruction">Мы отправили 6-значный код на вашу почту. Введите его ниже:</p>
+
+        <form id="verify_email_form">
+            <div class="input__row">
+                <label for="verification_code">
+                    <input type="text" name="code" id="verification_code" placeholder="Введите код" maxlength="6">
+                </label>
+            </div>
+
+            <input type="hidden" name="email" id="verification_email">
+
+            <div class="error_box_verify" style="color: red; margin-bottom: 10px;"></div>
+
+            <button type="submit" class="form-btn">Подтвердить</button>
+
+            <p id="resend_info" style="margin-top: 10px;">
+                Отправить код повторно через <span id="resend_timer">60</span> сек.
+            </p>
+            <button type="button" id="resend_code_btn" style="display:none;" class="form-btn-outline">
+                Отправить код повторно
+            </button>
+
+            <button type="button" class="is-have-auth" data-modal-target="modal-login">
+                Уже есть аккаунт? Войти
+            </button>
+        </form>
+
+        <button class="modal-close" type="button" data-modal-close="modal-verify">
+            <span></span>
+            <span></span>
+        </button>
+
+    </div>
+</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
 </body>

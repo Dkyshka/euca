@@ -12,6 +12,21 @@ class CargoLoading extends Model
 {
     use HasFactory;
 
+    public const IN_PROGRESS = 1;
+
+    public const COORDINATION = 2;
+
+    public const IN_PERFORMANCE = 3;
+
+    public const ARCHIVE = 4;
+
+    public const STATUSES = [
+        self::IN_PROGRESS => 'В работе',
+        self::COORDINATION => 'Согласование',
+        self::IN_PERFORMANCE => 'В исполнении',
+        self::ARCHIVE => 'Архив',
+    ];
+
     protected $fillable = [
         'company_id', 'country_id', 'country', 'address', 'time_at', 'time_to', 'is_24h',
         'final_unload_date_from', 'final_unload_date_to',
@@ -71,4 +86,10 @@ class CargoLoading extends Model
     {
         return $this->belongsTo(User::class, 'contact_id');
     }
+
+    public function bids(): HasMany
+    {
+        return $this->hasMany(CargoBid::class);
+    }
+
 }

@@ -74,42 +74,42 @@
                             </div>
                         </div>
 
-                        <table class="notifications-table">
-                            <thead></thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <label class="table-checkbox">
-                                        <input type="checkbox">
-                                        TS1OOO
-                                    </label>
-                                </td>
+{{--                        <table class="notifications-table">--}}
+{{--                            <thead></thead>--}}
+{{--                            <tbody>--}}
+{{--                            <tr>--}}
+{{--                                <td>--}}
+{{--                                    <label class="table-checkbox">--}}
+{{--                                        <input type="checkbox">--}}
+{{--                                        TS1OOO--}}
+{{--                                    </label>--}}
+{{--                                </td>--}}
 
-                                <td>
-                                    <a href="{{ route('notificationsInner', app()->getLocale()) }}"><strong>Встречное предложение на груз:</strong>
-                                        IPA2E2473, Автомобиль(ный), Санкт-Петербург - Улан-Удэ, 10т, 10м2, закр., изотерм., реф., боковая
-                                    </a>
-                                </td>
-                                <td><b>1100</b></td>
-                            </tr>
+{{--                                <td>--}}
+{{--                                    <a href="{{ route('notificationsInner', app()->getLocale()) }}"><strong>Встречное предложение на груз:</strong>--}}
+{{--                                        IPA2E2473, Автомобиль(ный), Санкт-Петербург - Улан-Удэ, 10т, 10м2, закр., изотерм., реф., боковая--}}
+{{--                                    </a>--}}
+{{--                                </td>--}}
+{{--                                <td><b>1100</b></td>--}}
+{{--                            </tr>--}}
 
-                            <tr>
-                                <td>
-                                    <label class="table-checkbox">
-                                        <input type="checkbox">
-                                        TS1OOO
-                                    </label>
-                                </td>
+{{--                            <tr>--}}
+{{--                                <td>--}}
+{{--                                    <label class="table-checkbox">--}}
+{{--                                        <input type="checkbox">--}}
+{{--                                        TS1OOO--}}
+{{--                                    </label>--}}
+{{--                                </td>--}}
 
-                                <td>
-                                    <a href="{{ route('notificationsInner', app()->getLocale()) }}"><strong>Встречное предложение на груз:</strong>
-                                        IPA2E2473, Автомобиль(ный), Санкт-Петербург - Улан-Удэ, 10т, 10м2, закр., изотерм., реф., боковая
-                                    </a>
-                                </td>
-                                <td><b>1100</b></td>
-                            </tr>
-                            </tbody>
-                        </table>
+{{--                                <td>--}}
+{{--                                    <a href="{{ route('notificationsInner', app()->getLocale()) }}"><strong>Встречное предложение на груз:</strong>--}}
+{{--                                        IPA2E2473, Автомобиль(ный), Санкт-Петербург - Улан-Удэ, 10т, 10м2, закр., изотерм., реф., боковая--}}
+{{--                                    </a>--}}
+{{--                                </td>--}}
+{{--                                <td><b>1100</b></td>--}}
+{{--                            </tr>--}}
+{{--                            </tbody>--}}
+{{--                        </table>--}}
                     </form>
                 </div>
             </main>

@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\CargoLoading;
 use App\Models\Section;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -22,6 +23,8 @@ class CargoSearch extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.cargo-search');
+        $cargoLoadings = CargoLoading::where('status', 1)->paginate(15);
+
+        return view('components.cargo-search', compact('cargoLoadings'));
     }
 }

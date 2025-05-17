@@ -110,9 +110,16 @@
                     <fieldset>
                         <legend>По направлениям</legend>
                         @foreach($directions as $direction)
-                        <input class="visually-hidden" type="checkbox" name="directions[]" value="{{ $direction->id }}" id="special-{{ $direction->id }}" data-bind="directions[]" {{ in_array('fcl', request('directions', [])) ? 'checked' : '' }}>
-                        <label for="special-{{ $direction->id }}">{{ Str::limit($direction->name, 20) }}</label>
+                            <input
+                                    class="visually-hidden"
+                                    type="checkbox"
+                                    name="directions[]"
+                                    value="{{ $direction->id }}"
+                                    id="special-{{ $direction->id }}"
+                                    {{ in_array($direction->id, request('directions', [])) ? 'checked' : '' }}>
+                            <label for="special-{{ $direction->id }}">{{ Str::limit($direction->name, 20) }}</label>
                         @endforeach
+
                     </fieldset>
                 </form>
 
@@ -148,23 +155,25 @@
                     </fieldset>
                 </form>
 
-                <form class="filters-directions filters-status" action="" method="post">
+                <form class="filters-directions filters-status" method="GET" onsubmit="submitStatusFilter(event)">
                     <fieldset>
                         <legend>По статусу</legend>
 
-                        <input class="visually-hidden" type="checkbox" id="free" name="">
-                        <label for="free">Free</label>
-
-                        <input class="visually-hidden" type="checkbox" id="elite" name="">
-                        <label for="elite">Elite</label>
-
-                        <input class="visually-hidden" type="checkbox" name="" id="premium">
-                        <label for="premium">Premium</label>
-
-                        <input class="visually-hidden" type="checkbox" name="" id="vip">
-                        <label for="vip">Vip</label>
+                        @foreach(\App\Models\Status::all() as $status)
+                            <input class="visually-hidden"
+                                   type="checkbox"
+                                   id="status_{{ $status->id }}"
+                                   name="statuses[]"
+                                   value="{{ $status->id }}"
+                                    {{ in_array($status->id, request('statuses', [])) ? 'checked' : '' }}>
+                            <label for="status_{{ $status->id }}">{{ $status->name }}</label>
+                        @endforeach
                     </fieldset>
+
+
+                    <button type="submit" style="display: none;"></button> {{-- скрытая кнопка для JS или Enter --}}
                 </form>
+
             </div>
         </div>
 
@@ -190,7 +199,7 @@
                         {{ Str::limit($company->name, 20) }}
                     </div>
                     <p>{{ Str::limit($company?->country, 20) }} - {{ Str::limit($company?->city, 20) }}</p>
-                    <span>Elite</span>
+                    <span>{{ $company?->status->name }}</span>
                     <div class="catalog-card__tags">
                         @if($company->directions->isNotEmpty())
                         @foreach($company->directions()->limit(10)->get() as $direction)
@@ -266,6 +275,70 @@
         }
 
 
+        document.addEventListener('DOMContentLoaded', function () {
+            let statusFilterTimeout;
+
+            document.querySelectorAll('input[name="statuses[]"]').forEach(input => {
+                input.addEventListener('change', function () {
+                    const form = this.closest('form');
+
+                    // Очистить предыдущий таймер
+                    clearTimeout(statusFilterTimeout);
+
+                    // Запустить новый с задержкой 500 мс
+                    statusFilterTimeout = setTimeout(() => {
+                        if (form) {
+                            submitStatusFilter({ preventDefault: () => {}, target: form });
+                        }
+                    }, 500); // можно увеличить/уменьшить
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let filterDebounceTimer;
+
+            const watchedInputs = document.querySelectorAll(
+                'input[name="statuses[]"], input[name="directions[]"]'
+            );
+
+            watchedInputs.forEach(input => {
+                input.addEventListener('change', () => {
+                    clearTimeout(filterDebounceTimer);
+
+                    filterDebounceTimer = setTimeout(() => {
+                        applyFilters();
+                    }, 500); // ⏱ задержка 500 мс
+                });
+            });
+
+            function applyFilters() {
+                const url = new URL(window.location.href);
+
+                // Сброс старых параметров
+                url.searchParams.delete('statuses');
+                url.searchParams.delete('statuses[]');
+                url.searchParams.delete('directions');
+                url.searchParams.delete('directions[]');
+
+                // Добавить выбранные статусы
+                document.querySelectorAll('input[name="statuses[]"]:checked').forEach(el => {
+                    url.searchParams.append('statuses[]', el.value);
+                });
+
+                // Добавить выбранные направления
+                document.querySelectorAll('input[name="directions[]"]:checked').forEach(el => {
+                    url.searchParams.append('directions[]', el.value);
+                });
+
+                // Сбросить пагинацию
+                url.searchParams.delete('page');
+
+                // Перенаправление
+                window.location.href = url.toString();
+            }
+        });
+
 
         function submitRangeFilter() {
             const minValue = document.getElementById("minValue").value;
@@ -303,6 +376,25 @@
             }, 3000); // раз в секунду — или оптимизируй с debounce
         }
 
+        function submitStatusFilter(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const url = new URL(window.location.href);
+
+            // Удаляем старые параметры статуса
+            url.searchParams.delete('statuses[]');
+            url.searchParams.delete('statuses');
+
+            // Добавляем все выбранные значения
+            const statuses = form.querySelectorAll('input[name="statuses[]"]:checked');
+            statuses.forEach(status => {
+                url.searchParams.append('statuses[]', status.value);
+            });
+
+            url.searchParams.delete('page'); // сбрасываем пагинацию
+            window.location.href = url.toString();
+        }
 
     </script>
 

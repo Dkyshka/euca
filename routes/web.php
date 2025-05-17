@@ -122,6 +122,7 @@ Route::prefix('{locale?}')->middleware(['localization', 'guest'])->group(functio
     Route::post('register', [AuthController::class, 'store'])->name('auth_store');
 });
 
+
 // Profile
 Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function() {
     // Chats
@@ -173,8 +174,9 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
 Route::prefix('{locale?}')->middleware(['localization'])->group(function() {
     Route::get('{page:slug?}', [PageController::class, 'index']);
     Route::get('{page:slug?}/company/{article?}', [ArticleController::class, 'index'])->name('company-inner');
-    Route::get('{page:slug?}/cargo-inner', [ArticleController::class, 'cargo'])->name('cargo-inner');
+    Route::get('{page:slug?}/cargo-inner/{cargoLoading?}', [ArticleController::class, 'cargo'])->name('cargo-inner');
 });
 
-
+Route::post('/verify-code', [AuthController::class, 'verifyCode']);
+Route::post('/resend-code', [AuthController::class, 'resendCode']);
 //Route::post('send-telegram', [FeedbackController::class, 'sendTelegram'])->name('send.telegram');

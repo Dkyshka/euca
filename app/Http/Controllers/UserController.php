@@ -203,6 +203,7 @@ class UserController extends Controller
                 'website' => $request->input('website'),
                 'description' => $request->input('description'),
                 'employees_count' => $request->input('employees_count'),
+                'status_id' => 1,
             ]);
         } else {
             $company->update([

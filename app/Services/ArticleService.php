@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Cargo;
+use App\Models\CargoLoading;
 use App\Models\Company;
 use App\Models\News;
 use App\Models\Page;
@@ -36,13 +37,13 @@ class ArticleService
 
     public static function cargo(Page $page, $article): array
     {
-//        self::$article = Cargo::where('is_active', true)
-//            ->where('id', $article)
-//            ->firstOrFail();
+        self::$article = CargoLoading::where('status', 1)
+            ->where('id', $article)
+            ->firstOrFail();
 
         return [
             'template' => 'cargo-inner',
-//            'model' => self::$article
+            'model' => self::$article
         ];
     }
 }

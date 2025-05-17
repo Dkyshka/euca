@@ -33,9 +33,9 @@ class ArticleController extends Controller
             ]);
     }
 
-    public function cargo(string $locale, Page $page, ?string $slug = null): View
+    public function cargo(string $locale, Page $page, $article): View
     {
-        $data = ArticleService::cargo($page, $slug);
+        $data = ArticleService::cargo($page, $article);
         $menu = Page::whereStatus(1)->where('parent_id', null)->whereHeader(1)->orderBy('sort_order')->get();
         $settings = Cache::remember('site_settings', now()->addHour(), fn() => Setting::find(1));
         $footer = Cache::remember('footer_menu', now()->addHour(), function () {
@@ -49,7 +49,7 @@ class ArticleController extends Controller
         return view("articles.$data[template]",
             [
                 'page' => $page,
-//                'article' => $data['model'],
+                'article' => $data['model'],
                 'menu' => $menu,
                 'settings' => $settings,
                 'footer' => $footer

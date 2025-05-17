@@ -22,7 +22,8 @@ class Company extends Model
         'work_start_date',
         'is_featured',
         'is_active',
-        'is_favorite'
+        'is_favorite',
+        'status_id'
     ];
 
     protected $casts = [
@@ -52,5 +53,10 @@ class Company extends Model
     public function directions(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Direction::class, 'company_direction')->withTimestamps();
+    }
+
+    public function status(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Status::class);
     }
 }

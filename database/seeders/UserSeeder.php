@@ -49,7 +49,8 @@ class UserSeeder extends Seeder
             'description' => 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
             'work_start_date' => '2002-01-01',
             'employees_count' => 10,
-            'avatar' => 'https://naumovn808.github.io/euca/images/catalog-logo.avif'
+            'avatar' => 'https://naumovn808.github.io/euca/images/catalog-logo.avif',
+            'status_id' => 2,
         ]);
 
         $company->directions()->sync([1, 2, 3]);
@@ -89,7 +90,8 @@ class UserSeeder extends Seeder
             'description' => 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
             'work_start_date' => '2010-01-01',
             'employees_count' => 20,
-            'avatar' => '/assets/images/catalog-inner.avif'
+            'avatar' => '/assets/images/catalog-inner.avif',
+            'status_id' => 2,
         ]);
 
         $company->directions()->sync([1, 2, 3, 4, 5]);

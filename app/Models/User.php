@@ -43,7 +43,8 @@ class User extends Authenticatable
         'bonus_invites',
         'login',
         'organization',
-        'inn'
+        'inn',
+        'email_verified_at'
     ];
 
     /**
@@ -178,15 +179,9 @@ class User extends Authenticatable
         return Chat::where('sender_id', $this->id)
             ->orWhere('recipient_id', $this->id);
     }
-
-//    public function chats(): BelongsToMany
-//    {
-//        return $this->belongsToMany(Chat::class)->withTimestamps();
-//    }
-
-//    public function messages(): HasMany
-//    {
-//        return $this->hasMany(Message::class);
-//    }
+    public function cargoBids(): HasMany
+    {
+        return $this->hasMany(CargoBid::class);
+    }
 
 }

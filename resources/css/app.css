@@ -140,3 +140,24 @@
 .catalog-inner__container {
     height: 600px;
 }
+
+.search-inner-wrapper {
+    padding-bottom: 0 !important;
+}
+
+.verify-instruction {
+    margin-bottom: 20px;
+}
+
+#verify_email_form {
+    text-align: center;
+}
+
+#resend_code_btn {
+    margin-bottom: 20px;
+}
+
+.catalog-content__card img {
+    object-fit: contain;
+    height: auto;
+}

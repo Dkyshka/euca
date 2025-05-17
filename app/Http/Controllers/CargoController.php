@@ -139,9 +139,9 @@ class CargoController extends Controller
             'diameter' => ['nullable', 'numeric'],
 
             // Упаковка
-            'package_id' => ['sometimes', 'exists:packages,id'],
+            'package_id' => ['sometimes', 'nullable', 'exists:packages,id'],
             // Количество упаковки
-            'quantity' => ['sometimes', 'numeric'],
+            'quantity' => ['sometimes', 'nullable', 'numeric', 'max:3000'],
             // компания груза
             'company_id' => ['required', 'numeric', 'exists:companies,id'],
             // страна загрузки
@@ -162,7 +162,7 @@ class CargoController extends Controller
             ],
 
             // archive_after_days — не обязательный
-            'archive_after_days' => ['nullable', 'integer', 'min:0'],
+            'archive_after_days' => ['nullable', 'integer', 'min:0', 'max:5'],
 
             'time_at' => [
 //                Rule::requiredIf(fn () => !request('is_24h')),
@@ -200,7 +200,7 @@ class CargoController extends Controller
             // Круглосуточно чекбокс
             'final_is_24h' => ['nullable', Rule::in(['0', '1'])],
 
-            'body_types' => ['array'],
+            'body_types' => ['required', 'array', 'min:1'],
 
             'loading_types' => ['array'],
 
@@ -237,6 +237,7 @@ class CargoController extends Controller
             'time_to' => $request->input('time_to'),
             'is_24h' => $request->input('is_24h'),
             'final_unload_country' => $request->input('final_unload_country'),
+            'final_unload_city' => $request->input('final_unload_city'),
             'final_unload_address' => $request->input('final_unload_address'),
             'final_unload_date_from' => $request->input('final_unload_date_from'),
             'final_unload_date_to' => $request->input('final_unload_date_to'),
@@ -270,9 +271,10 @@ class CargoController extends Controller
             'width' => $request->input('width'),
             'height' => $request->input('height'),
             'diameter' => $request->input('diameter'),
+            'constant_frequency' => $request->input('constant_frequency'),
         ]);
 
-        return redirect()->route('cargos');
+        return redirect()->route('workCargos');
     }
 
     public function edit(CargoLoading $cargoLoading)

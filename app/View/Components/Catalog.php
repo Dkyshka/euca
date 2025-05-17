@@ -48,6 +48,16 @@ class Catalog extends Component
             ]);
         }
 
+        if ($statusIds = Request::get('statuses')) {
+            $query->whereIn('status_id', $statusIds);
+        }
+
+        if ($directionIds = Request::get('directions')) {
+            $query->whereHas('directions', function ($q) use ($directionIds) {
+                $q->whereIn('directions.id', $directionIds);
+            });
+        }
+
         $companies = $query
             ->orderBy('id', 'asc')
             ->paginate(15)

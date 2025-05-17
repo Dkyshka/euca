@@ -101,21 +101,7 @@ return new class extends Migration
             $table->date('ready_date')->nullable();
             $table->integer('archive_after_days')->default(30);
 
-//            $table->enum('shipment_type', ['FTL', 'FTL_LTL'])->default('FTL');
-
-//            $table->boolean('needs_hitch')->default(false);
-//            $table->boolean('needs_air_suspension')->default(false);
-//            $table->boolean('needs_koniki')->default(false);
-//            $table->integer('truck_count')->default(1);
-//            $table->boolean('crew_required')->default(false);
-//            $table->json('adr_classes')->nullable(); // [1,2,3]
-//            $table->json('permits')->nullable(); // TIR, CMR, etc.
-//            $table->integer('strap_count')->nullable();
-//            $table->float('carrying_capacity')->nullable();
-
-//            $table->enum('bargain_type', ['negotiable', 'fixed'])->default('negotiable');
-//            $table->json('rates')->nullable(); // ставки: ндс, валюта, наличка
-//            $table->boolean('direct_contract')->default(false);
+            $table->enum('constant_frequency', ['daily', 'workdays'])->nullable();
             $table->timestamps();
         });
 
