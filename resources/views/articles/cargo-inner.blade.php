@@ -436,7 +436,7 @@
                             {{-- без торга --}}
                             @if($article->payment_type == 'no_haggling')
                             <label for="offer">
-                                <select name="price" id="offer">
+                                <select name="price" id="offer">1
                                     @if($article->with_vat_cashless)
                                     <option value="{{ $article->with_vat_cashless }}">{{ $article->with_vat_cashless }} С НДС, безнал</option>
                                     @endif

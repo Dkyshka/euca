@@ -51,13 +51,14 @@ document.getElementById('register_submit')?.addEventListener('click', function (
     axios.post(actionUrl, data)
         .then(response => {
             if (response.data.success) {
-                // window.location.href = response.data.redirect_url;
+                window.location.href = response.data.redirect_url;
+
                 // Сохраняем email для подтверждения
-                document.getElementById('verification_email').value = data.email;
+                // document.getElementById('verification_email').value = data.email;
 
                 // Показываем модалку подтверждения
-                document.querySelector('[data-modal="modal-register"]')?.classList.remove('open');
-                document.querySelector('[data-modal="modal-verify"]')?.classList.add('open');
+                // document.querySelector('[data-modal="modal-register"]')?.classList.remove('open');
+                // document.querySelector('[data-modal="modal-verify"]')?.classList.add('open');
             } else if (response.data?.error) {
                 let box = document.createElement('div');
                 box.className = 'form-global-error input-error';

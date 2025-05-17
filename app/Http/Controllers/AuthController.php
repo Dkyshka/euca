@@ -43,34 +43,34 @@ class AuthController extends Controller
             $user = User::create($userRegisterRequest->validated());
 
             // Генерируем 6-значный код
-            $code = rand(100000, 999999);
-
-            // Сохраняем код в email_verification_codes
-            DB::table('email_verification_codes')->updateOrInsert(
-                ['email' => $user->email],
-                [
-                    'code' => $code,
-                    'expires_at' => now()->addMinutes(10),
-                    'updated_at' => now(),
-                    'created_at' => now(),
-                ]
-            );
-
-            // Отправляем код по email
-            Mail::to($user->email)->send(new EmailVerificationCode($code));
-
-            DB::commit();
-            return response()->json([
-                'success' => true,
-                'message' => 'Код подтверждения отправлен на почту',
-            ]);
-
-//            auth()->login($user);
-
+//            $code = rand(100000, 999999);
+//
+//            // Сохраняем код в email_verification_codes
+//            DB::table('email_verification_codes')->updateOrInsert(
+//                ['email' => $user->email],
+//                [
+//                    'code' => $code,
+//                    'expires_at' => now()->addMinutes(10),
+//                    'updated_at' => now(),
+//                    'created_at' => now(),
+//                ]
+//            );
+//
+//            // Отправляем код по email
+//            Mail::to($user->email)->send(new EmailVerificationCode($code));
+//
+//            DB::commit();
 //            return response()->json([
 //                'success' => true,
-//                'redirect_url' => url(app()->getLocale())
+//                'message' => 'Код подтверждения отправлен на почту',
 //            ]);
+
+            auth()->login($user);
+
+            return response()->json([
+                'success' => true,
+                'redirect_url' => url(app()->getLocale())
+            ]);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
