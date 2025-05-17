@@ -199,7 +199,7 @@
                         {{ Str::limit($company->name, 20) }}
                     </div>
                     <p>{{ Str::limit($company?->country, 20) }} - {{ Str::limit($company?->city, 20) }}</p>
-                    <span>{{ $company?->status->name }}</span>
+                    <span>{{ $company?->status?->name }}</span>
                     <div class="catalog-card__tags">
                         @if($company->directions->isNotEmpty())
                         @foreach($company->directions()->limit(10)->get() as $direction)
