@@ -65,7 +65,8 @@ return new class extends Migration
             $table->json('body_types')->nullable();
             $table->json('loading_types')->nullable();
             $table->json('unloading_types')->nullable();
-            $table->string('payment_type')->default('no_haggling');
+            $table->string('payment_type')->default('no_haggling')
+                ->comment('no_haggling - без торга, negotiable - возможен торг, payment_request - запрос');
             $table->string('currency')->default('узб.сум');
 
             $table->unsignedInteger('with_vat_cashless')->nullable()->comment('С НДС, безнал');

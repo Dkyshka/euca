@@ -184,4 +184,13 @@ class User extends Authenticatable
         return $this->hasMany(CargoBid::class);
     }
 
+    public function drivers(): HasMany
+    {
+        return $this->hasMany(Driver::class);
+    }
+
+    public function transports(): HasMany
+    {
+        return $this->hasMany(Transport::class);
+    }
 }

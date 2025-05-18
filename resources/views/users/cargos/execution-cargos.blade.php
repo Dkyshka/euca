@@ -30,174 +30,177 @@
             </header>
 
             <main class="coorfinations-content profile-content">
-                <div class="order-head order-head-second">
-                    <form class="form-order">
-                        <label for="all" class="search-icon">
-                            <svg width="12" height="16">
-                                <use xlink:href="#search-icon"></use>
-                            </svg>
-                            <input type="text" id="all" placeholder="Все подразделения" name="all">
-                        </label>
+{{--                <div class="order-head order-head-second">--}}
+{{--                    <form class="form-order">--}}
+{{--                        <label for="all" class="search-icon">--}}
+{{--                            <svg width="12" height="16">--}}
+{{--                                <use xlink:href="#search-icon"></use>--}}
+{{--                            </svg>--}}
+{{--                            <input type="text" id="all" placeholder="Все подразделения" name="all">--}}
+{{--                        </label>--}}
 
-                        <label for="name">
-                            <select name="name" id="name">
-                                <option value="" hidden>Имя</option>
-                                <option value="">Имя1</option>
-                                <option value="">Имя2</option>
-                                <option value="">Имя3</option>
-                            </select>
-                        </label>
+{{--                        <label for="name">--}}
+{{--                            <select name="name" id="name">--}}
+{{--                                <option value="" hidden>Имя</option>--}}
+{{--                                <option value="">Имя1</option>--}}
+{{--                                <option value="">Имя2</option>--}}
+{{--                                <option value="">Имя3</option>--}}
+{{--                            </select>--}}
+{{--                        </label>--}}
 
-                        <label for="from">
-                            <svg width="12" height="16">
-                                <use xlink:href="#map"></use>
-                            </svg>
+{{--                        <label for="from">--}}
+{{--                            <svg width="12" height="16">--}}
+{{--                                <use xlink:href="#map"></use>--}}
+{{--                            </svg>--}}
 
-                            <input type="text" id="from" placeholder="Откуда" name="from">
-                        </label>
+{{--                            <input type="text" id="from" placeholder="Откуда" name="from">--}}
+{{--                        </label>--}}
 
-                        <label for="to">
-                            <svg width="12" height="16">
-                                <use xlink:href="#map"></use>
-                            </svg>
+{{--                        <label for="to">--}}
+{{--                            <svg width="12" height="16">--}}
+{{--                                <use xlink:href="#map"></use>--}}
+{{--                            </svg>--}}
 
-                            <input type="text" id="to" placeholder="Откуда" name="to">
-                        </label>
-                    </form>
-                    <button class="form-btn">
-                        <svg width="14" height="14">
-                            <use xlink:href="#plus"></use>
-                        </svg>
+{{--                            <input type="text" id="to" placeholder="Откуда" name="to">--}}
+{{--                        </label>--}}
+{{--                    </form>--}}
+{{--                    <button class="form-btn">--}}
+{{--                        <svg width="14" height="14">--}}
+{{--                            <use xlink:href="#plus"></use>--}}
+{{--                        </svg>--}}
 
-                        Добавить заявку водителю
-                    </button>
-                </div>
+{{--                        Добавить заявку водителю--}}
+{{--                    </button>--}}
+{{--                </div>
 
-                <div class="order-info">
-                    <div class="order-info-second order-info__head">
-                        <label for="dir" class="label-order">
-                            <input type="checkbox" id="dir">
-                            Груз
-                        </label>
+--}}
 
-                        <p>загрузка</p>
-                        <p>разгрузка</p>
-                        <p>ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
-                        <p>Транспорт</p>
-                        <p>ставка</p>
-                    </div>
 
-                    <div class="order-info-content">
-                        <div class="order-info__card order-info-second">
-                            <div class="order-info-col">
-                                <label for="dir" class="mobile-order-head label-order">
-                                    <input type="checkbox" id="dir">
-                                    Груз
-                                </label>
+{{--                <div class="order-info">--}}
+{{--                    <div class="order-info-second order-info__head">--}}
+{{--                        <label for="dir" class="label-order">--}}
+{{--                            <input type="checkbox" id="dir">--}}
+{{--                            Груз--}}
+{{--                        </label>--}}
 
-                                <details>
-                                    <summary>RUS</summary>
-                                </details>
-                            </div>
+{{--                        <p>загрузка</p>--}}
+{{--                        <p>разгрузка</p>--}}
+{{--                        <p>ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>--}}
+{{--                        <p>Транспорт</p>--}}
+{{--                        <p>ставка</p>--}}
+{{--                    </div>--}}
 
-                            <div class="order-info-col">
-                                <p class="mobile-order-head">загрузка</p>
-                                <p class="car-head"><strong>Санкт-Петербург</strong></p>
-                                <p>Lorem ipsum dolor sit amet</p>
-                                <p><strong>готов 6 сен</strong></p>
-                            </div>
+{{--                    <div class="order-info-content">--}}
+{{--                        <div class="order-info__card order-info-second">--}}
+{{--                            <div class="order-info-col">--}}
+{{--                                <label for="dir" class="mobile-order-head label-order">--}}
+{{--                                    <input type="checkbox" id="dir">--}}
+{{--                                    Груз--}}
+{{--                                </label>--}}
 
-                            <div class="order-info-col">
-                                <p class="mobile-order-head">разгрузка</p>
-                                <p class="car-head"><strong>Улан-удЭ</strong></p>
-                                <p>110 квартал, 14</p>
-                            </div>
+{{--                                <details>--}}
+{{--                                    <summary>RUS</summary>--}}
+{{--                                </details>--}}
+{{--                            </div>--}}
 
-                            <div class="order-info-col">
-                                <p class="mobile-order-head">ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
-                                <p class="car-head"><strong>10/10</strong>автомобиль(ли)</p>
-                            </div>
+{{--                            <div class="order-info-col">--}}
+{{--                                <p class="mobile-order-head">загрузка</p>--}}
+{{--                                <p class="car-head"><strong>Санкт-Петербург</strong></p>--}}
+{{--                                <p>Lorem ipsum dolor sit amet</p>--}}
+{{--                                <p><strong>готов 6 сен</strong></p>--}}
+{{--                            </div>--}}
 
-                            <div class="order-info-col">
-                                <p class="mobile-order-head">Транспорт</p>
-                                <p class="car-head"><strong>закр. + терм.</strong></p>
-                                <p>загр/выгр: задн, отд.машина</p>
-                            </div>
+{{--                            <div class="order-info-col">--}}
+{{--                                <p class="mobile-order-head">разгрузка</p>--}}
+{{--                                <p class="car-head"><strong>Улан-удЭ</strong></p>--}}
+{{--                                <p>110 квартал, 14</p>--}}
+{{--                            </div>--}}
 
-                            <div class="order-info-col">
-                                <p class="mobile-order-head">Ставка</p>
-                                <p class="car-head"><strong>26 124</strong>руб нал</p>
-                                <p class="car-head"><strong>27 166</strong>руб с НДС</p>
-                                <p class="car-head"><strong>26 124</strong>руб без НДС торг</p>
-                                <div class="order-icons">
-                                    <button class="chat-message" data-modal-target="dropdown-chat">
-                                        <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
-                                    </button>
+{{--                            <div class="order-info-col">--}}
+{{--                                <p class="mobile-order-head">ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>--}}
+{{--                                <p class="car-head"><strong>10/10</strong>автомобиль(ли)</p>--}}
+{{--                            </div>--}}
 
-                                    <div class="order-cansel-modal order-cansel-dropdown" data-modal="dropdown-chat">
-                                        <button class="order-close-btn" data-modal-close="dropdown-chat"></button>
-                                        <div class="tr">
-                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
-                                            </svg>
-                                        </div>
-                                        <b>Отправить сообщение</b>
-                                        <form action="" method="">
-                                            <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>
+{{--                            <div class="order-info-col">--}}
+{{--                                <p class="mobile-order-head">Транспорт</p>--}}
+{{--                                <p class="car-head"><strong>закр. + терм.</strong></p>--}}
+{{--                                <p>загр/выгр: задн, отд.машина</p>--}}
+{{--                            </div>--}}
 
-                                            <button class="form-btn" data-modal-close="dropdown-chat">Отправить</button>
-                                            <button type="button" class="order-cansel" data-modal-close="dropdown-chat">Не
-                                                отклонять</button>
-                                        </form>
-                                    </div>
+{{--                            <div class="order-info-col">--}}
+{{--                                <p class="mobile-order-head">Ставка</p>--}}
+{{--                                <p class="car-head"><strong>26 124</strong>руб нал</p>--}}
+{{--                                <p class="car-head"><strong>27 166</strong>руб с НДС</p>--}}
+{{--                                <p class="car-head"><strong>26 124</strong>руб без НДС торг</p>--}}
+{{--                                <div class="order-icons">--}}
+{{--                                    <button class="chat-message" data-modal-target="dropdown-chat">--}}
+{{--                                        <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                                    </button>--}}
 
-                                    <button class="chat-message" data-modal-target="dropdown">
-                                        <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">
-                                    </button>
+{{--                                    <div class="order-cansel-modal order-cansel-dropdown" data-modal="dropdown-chat">--}}
+{{--                                        <button class="order-close-btn" data-modal-close="dropdown-chat"></button>--}}
+{{--                                        <div class="tr">--}}
+{{--                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>--}}
+{{--                                            </svg>--}}
+{{--                                        </div>--}}
+{{--                                        <b>Отправить сообщение</b>--}}
+{{--                                        <form action="" method="">--}}
+{{--                                            <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>--}}
 
-                                    <button class="chat-message" data-modal-target="dropdown-close">
-                                        <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">
-                                    </button>
+{{--                                            <button class="form-btn" data-modal-close="dropdown-chat">Отправить</button>--}}
+{{--                                            <button type="button" class="order-cansel" data-modal-close="dropdown-chat">Не--}}
+{{--                                                отклонять</button>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
 
-                                    <div class="order-cansel-modal order-cansel-dropdown" data-modal="dropdown-close">
-                                        <button class="order-close-btn" data-modal-close="dropdown-close"></button>
-                                        <div class="tr">
-                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
-                                            </svg>
-                                        </div>
-                                        <b>Отклонить предложение</b>
-                                        <p>Укажите причину отмены предложения</p>
-                                        <form action="" method="">
-                                            <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>
-                                            <b>Что сделать с грузом</b>
+{{--                                    <button class="chat-message" data-modal-target="dropdown">--}}
+{{--                                        <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                                    </button>--}}
 
-                                            <label for="save">
-                                                Восстановить груз
-                                                <input type="radio" name="archiveOption" id="save">
-                                            </label>
-                                            <label for="stay">
-                                                Оставить груз в Архиве
-                                                <input type="radio" name="archiveOption" id="stay">
-                                            </label>
+{{--                                    <button class="chat-message" data-modal-target="dropdown-close">--}}
+{{--                                        <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                                    </button>--}}
 
-                                            <button class="form-btn" data-modal-close="dropdown-close">Отклонить
-                                                предложение</button>
-                                            <button type="button" class="order-cansel" data-modal-close="dropdown-close">Не
-                                                отклонять</button>
-                                        </form>
-                                    </div>
+{{--                                    <div class="order-cansel-modal order-cansel-dropdown" data-modal="dropdown-close">--}}
+{{--                                        <button class="order-close-btn" data-modal-close="dropdown-close"></button>--}}
+{{--                                        <div class="tr">--}}
+{{--                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>--}}
+{{--                                            </svg>--}}
+{{--                                        </div>--}}
+{{--                                        <b>Отклонить предложение</b>--}}
+{{--                                        <p>Укажите причину отмены предложения</p>--}}
+{{--                                        <form action="" method="">--}}
+{{--                                            <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>--}}
+{{--                                            <b>Что сделать с грузом</b>--}}
 
-                                    <div class="modal-overlay dropdown-links-order" data-modal="dropdown">
-                                        <button data-modal-target="modal-change-bid">Изменить ставку</button>
-                                        <button data-modal-target="modal-change-road">Изменить маршрут</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+{{--                                            <label for="save">--}}
+{{--                                                Восстановить груз--}}
+{{--                                                <input type="radio" name="archiveOption" id="save">--}}
+{{--                                            </label>--}}
+{{--                                            <label for="stay">--}}
+{{--                                                Оставить груз в Архиве--}}
+{{--                                                <input type="radio" name="archiveOption" id="stay">--}}
+{{--                                            </label>--}}
 
-                        <div class="order-info__card order-info__buttom order-card-border">
-                            <div class="order-info-col">
+{{--                                            <button class="form-btn" data-modal-close="dropdown-close">Отклонить--}}
+{{--                                                предложение</button>--}}
+{{--                                            <button type="button" class="order-cansel" data-modal-close="dropdown-close">Не--}}
+{{--                                                отклонять</button>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+
+{{--                                    <div class="modal-overlay dropdown-links-order" data-modal="dropdown">--}}
+{{--                                        <button data-modal-target="modal-change-bid">Изменить ставку</button>--}}
+{{--                                        <button data-modal-target="modal-change-road">Изменить маршрут</button>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="order-info__card order-info__buttom order-card-border">--}}
+{{--                            <div class="order-info-col">--}}
 {{--                                <div class="road">--}}
 {{--                                    <svg width="18" height="14">--}}
 {{--                                        <use xlink:href="#dark-car"></use>--}}
@@ -219,7 +222,7 @@
 {{--                                        <use xlink:href="#pen-order"></use>--}}
 {{--                                    </svg>--}}
 {{--                                </p>--}}
-                            </div>
+{{--                            </div>--}}
 
 {{--                            <div class="order-info-col order-info-m">--}}
 {{--                                <p>--}}
@@ -237,7 +240,7 @@
 {{--                                </p>--}}
 {{--                            </div>--}}
 
-                            <div class="order-info-col order-info-m">
+{{--                            <div class="order-info-col order-info-m">--}}
 {{--                                <p>TS1, ООО</p>--}}
 
 {{--                                <div class="stars">--}}
@@ -259,83 +262,251 @@
 {{--                                </div>--}}
 
 {{--                                <div class="rating">3.67</div>--}}
+{{--                            </div>--}}
+
+{{--                            <div class="order-info-col order-info-bottom__end">--}}
+{{--                                <div class="order-info-m order-buttons-dosc order-buttons-second">--}}
+{{--                                    <span>Заказ</span>--}}
+{{--                                    <p>№7777 от 02.09.2022</p>--}}
+{{--                                    <p>--}}
+{{--                                        <svg width="18" height="14">--}}
+{{--                                            <use xlink:href="#order-plus"></use>--}}
+{{--                                        </svg>--}}
+
+{{--                                        <button data-modal-target="modal-file">Документы и фото (1)</button>--}}
+{{--                                    </p>--}}
+{{--                                </div>--}}
+
+{{--                                <div class="order-buttons-second">--}}
+{{--                                    <p><a href="#">Заказ</a> в исполнении</p>--}}
+{{--                                    <div class="order-buttons">--}}
+{{--                                        <button class="form-btn" data-modal-target="modal-create-order">Завершить</button>--}}
+
+{{--                                        <span>сегодня в 11:18</span>--}}
+{{--                                    </div>--}}
+
+{{--                                    <div class="order-cansel-modal">--}}
+{{--                                        <button class="order-close-btn"></button>--}}
+{{--                                        <div class="tr">--}}
+{{--                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"/>--}}
+{{--                                            </svg>--}}
+{{--                                        </div>--}}
+{{--                                        <b>Отклонить предложение</b>--}}
+{{--                                        <p>Укажите причину отмены предложения</p>--}}
+{{--                                        <form action="" method="">--}}
+{{--                                            <textarea name="" id=""></textarea>--}}
+{{--                                            <b>Что сделать с грузом</b>--}}
+
+{{--                                            <label for="save">--}}
+{{--                                                Восстановить груз--}}
+{{--                                                <input type="radio" name="archiveOption" id="save">--}}
+{{--                                            </label>--}}
+{{--                                            <label for="stay">--}}
+{{--                                                Оставить груз в Архиве--}}
+{{--                                                <input type="radio" name="archiveOption" id="stay">--}}
+{{--                                            </label>--}}
+
+{{--                                            <button class="form-btn">Отклонить предложение</button>--}}
+{{--                                            <button type="button" class="order-cansel">Не отклонять</button>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="order-info__card-search">--}}
+{{--                            <label>--}}
+{{--                                <select name="" id="">--}}
+{{--                                    <option value="" hidden>Нет статуса</option>--}}
+{{--                                    <option value="">выгрузился</option>--}}
+{{--                                    <option value="">на погрузке</option>--}}
+{{--                                    <option value="">Еду на загрузку</option>--}}
+{{--                                    <option value="">Загружаюсь</option>--}}
+{{--                                    <option value="">Ожидаю выгрузку</option>--}}
+{{--                                </select>--}}
+{{--                            </label>--}}
+
+{{--                            <label for="">--}}
+{{--                                <svg width="20" height="26">--}}
+{{--                                    <use xlink:href="#map"></use>--}}
+{{--                                </svg>--}}
+{{--                                <textarea name="" id="" placeholder="Добавьте водители в заказ и пригласите его, чтобы видеть  грууз на карте"></textarea>--}}
+
+{{--                                <a href="#" class="linkmap">Карта</a>--}}
+{{--                            </label>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+                @if($cargoLoadings->isNotEmpty())
+                @foreach($cargoLoadings as $cargoLoading)
+                <div class="order-info">
+                    <div class="order-info__head order-info-second">
+                        <p>Груз</p>
+
+                        <p>загрузка</p>
+                        <p>разгрузка</p>
+                        <p>ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
+                        <p>Транспорт</p>
+                        <p>ставка</p>
+                    </div>
+
+                    <div class="order-info-content">
+                        <div class="order-info__card order-info-second">
+                            <div class="order-info-col">
+                                <p class="car-head"><strong>{{ Str::limit($cargoLoading->cargo->title, 50) }}</strong></p>
+                            </div>
+
+                            <div class="order-info-col">
+                                <p class="mobile-order-head">загрузка</p>
+                                <p class="car-head"><strong>{{ Str::limit($cargoLoading->country, 50) }}</strong></p>
+                                @if($cargoLoading->cargo->constant_frequency)
+                                    <p><strong>{{ $cargoLoading->cargo->constant_frequency }}</strong></p>
+                                @elseif($cargoLoading?->cargo?->ready_date)
+                                    <p><strong>{{ $cargoLoading?->cargo?->ready_date?->format('d.m.Y') }}</strong></p>
+                                @else
+                                @endif
+                            </div>
+
+                            <div class="order-info-col">
+                                <p class="mobile-order-head">ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
+                                <p class="car-head"><strong>{{ Str::limit($cargoLoading->final_unload_city, 50) }}</strong></p>
+                                <p>{{ $cargoLoading->final_unload_date_from?->format('d.m.Y') }}</p>
+                            </div>
+
+                            <div class="order-info-col">
+                                <p class="mobile-order-head">Транспорт</p>
+                                <p class="car-head">
+                                    <strong>{{ $cargoLoading->cargo->weight }} - </strong>
+                                    {{ $cargoLoading->cargo->weight_type }} /
+                                    {{ $cargoLoading->cargo->volume }} М3
+                                </p>
+                            </div>
+
+                            <div class="order-info-col">
+                                <p class="mobile-order-head">ставка</p>
+                                <p class="car-head">
+                                    <strong>
+                                        Кузов
+                                    </strong>
+                                </p>
+                                <p>
+                                    {{ Str::limit(implode(', ', array_slice($cargoLoading->body_types, 0, 5)), 70) }}
+                                </p>
+                            </div>
+
+                            <div class="order-info-col">
+                                <p class="mobile-order-head"></p>
+                                @if($cargoLoading->with_vat_cashless)
+                                    <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} С НДС, безнал</p>
+                                @endif
+                                @if($cargoLoading->without_vat_cashless)
+                                    <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} Без НДС, безнал</p>
+                                @endif
+                                @if($cargoLoading->cash)
+                                    <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} Наличными</p>
+                                @endif
+
+                                {{-- Если есть перевозчик то можно открыть и написать --}}
+                                <button class="chat-message" data-modal-target="dropdown-chat">
+                                    <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
+                                </button>
+
+                                <div class="order-cansel-modal" data-modal="dropdown-chat">
+                                    <button class="order-close-btn" data-modal-close="dropdown-chat"></button>
+                                    <div class="tr">
+                                        <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
+                                        </svg>
+                                    </div>
+                                    <b>Отправить сообщение</b>
+                                    <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
+                                        @csrf
+                                        <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $cargoLoading?->bids?->first()?->user->id }}">
+                                        <textarea required name="message" id="chat_text_public" rows="5" style="height: auto; overflow: hidden"></textarea>
+
+                                        <button class="form-btn" data-modal-close="dropdown-chat1">Отправить</button>
+                                        <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">Отмена</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="order-info__card order-info__buttom order-card-border">
+                            <div class="order-info-col">
+
                             </div>
 
                             <div class="order-info-col order-info-bottom__end">
-                                <div class="order-info-m order-buttons-dosc order-buttons-second">
-                                    <span>Заказ</span>
-                                    <p>№7777 от 02.09.2022</p>
-                                    <p>
-                                        <svg width="18" height="14">
-                                            <use xlink:href="#order-plus"></use>
-                                        </svg>
-
-                                        <button data-modal-target="modal-file">Документы и фото (1)</button>
-                                    </p>
+                                <div class="order-info-m">
                                 </div>
-
                                 <div class="order-buttons-second">
-                                    <p><a href="#">Заказ</a> в исполнении</p>
+                                    <p>Заказ в исполнении</p>
+                                    <form action="{{ route('cargo.bids.finished', [app()->getLocale(), $cargoLoading->id]) }}" method="POST">
+                                    @csrf
                                     <div class="order-buttons">
-                                        <button class="form-btn" data-modal-target="modal-create-order">Завершить</button>
-
-                                        <span>сегодня в 11:18</span>
+                                        <button class="form-btn button-text" data-modal-target="modal-create-order-{{ $cargoLoading->id }}">Завершить</button>
+                                        <span>{{ $cargoLoading->created_at?->format('d.m.Y H:i') }}</span>
                                     </div>
+                                    </form>
 
-                                    <div class="order-cansel-modal">
-                                        <button class="order-close-btn"></button>
-                                        <div class="tr">
-                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"/>
-                                            </svg>
-                                        </div>
-                                        <b>Отклонить предложение</b>
-                                        <p>Укажите причину отмены предложения</p>
-                                        <form action="" method="">
-                                            <textarea name="" id=""></textarea>
-                                            <b>Что сделать с грузом</b>
+{{--                                    <div class="order-cansel-modal order-cansel-dropdown" data-modal="dropdown-close">--}}
+{{--                                        <button class="order-close-btn" data-modal-close="dropdown-close"></button>--}}
+{{--                                        <div class="tr">--}}
+{{--                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>--}}
+{{--                                            </svg>--}}
+{{--                                        </div>--}}
+{{--                                        <b>Заказ в исполнении</b>--}}
+{{--                                        <form action="" method="POST">--}}
+{{--                                            @csrf--}}
+{{--                                            <textarea name="comment" id="comment" style="height: auto; overflow: hidden"></textarea>--}}
+{{--                                            <b>Что сделать с грузом</b>--}}
 
-                                            <label for="save">
-                                                Восстановить груз
-                                                <input type="radio" name="archiveOption" id="save">
-                                            </label>
-                                            <label for="stay">
-                                                Оставить груз в Архиве
-                                                <input type="radio" name="archiveOption" id="stay">
-                                            </label>
+{{--                                            <label for="save">--}}
+{{--                                                Восстановить груз--}}
+{{--                                                <input type="radio" name="archiveOption" id="save" value="restore" checked>--}}
+{{--                                            </label>--}}
+{{--                                            <label for="stay">--}}
+{{--                                                Оставить груз в архиве--}}
+{{--                                                <input type="radio" name="archiveOption" id="stay" value="keep">--}}
+{{--                                            </label>--}}
 
-                                            <button class="form-btn">Отклонить предложение</button>
-                                            <button type="button" class="order-cansel">Не отклонять</button>
-                                        </form>
-                                    </div>
+{{--                                            <button class="form-btn" data-modal-close="dropdown-close">Отклонить--}}
+{{--                                                предложение</button>--}}
+{{--                                            <button type="button" class="order-cansel" data-modal-close="dropdown-close">Не--}}
+{{--                                                отклонять</button>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
+
                                 </div>
                             </div>
                         </div>
-
-                        <div class="order-info__card-search">
-                            <label>
-                                <select name="" id="">
-                                    <option value="" hidden>Нет статуса</option>
-                                    <option value="">выгрузился</option>
-                                    <option value="">на погрузке</option>
-                                    <option value="">Еду на загрузку</option>
-                                    <option value="">Загружаюсь</option>
-                                    <option value="">Ожидаю выгрузку</option>
-                                </select>
-                            </label>
-
-                            <label for="">
-                                <svg width="20" height="26">
-                                    <use xlink:href="#map"></use>
-                                </svg>
-                                <textarea name="" id="" placeholder="Добавьте водители в заказ и пригласите его, чтобы видеть  грууз на карте"></textarea>
-
-                                <a href="#" class="linkmap">Карта</a>
-                            </label>
-                        </div>
                     </div>
                 </div>
+                @endforeach
+                @else
+                    <div class="goods-empty notifications-empty">
+                        <picture>
+                            <source srcset="{{ asset('assets/images/goods.avif') }}">
+                            <img src="{{ asset('assets/images/goods.png') }}" alt="empty" width="85" height="85">
+                        </picture>
+                        @if ($errors->has('company'))
+                            <div class="alert alert-danger" style="color: red">
+                                {{ $errors->first('company') }}
+                            </div>
+                        @endif
+                        <a href="{{ route('cargos.create', app()->getLocale()) }}" class="form-btn">
+                            Добавить груз
+                        </a>
+                    </div>
+                @endif
 
+
+
+                
 {{--                <div class="order-info">--}}
 {{--                    <div class="order-info__head">--}}
 {{--                        <p>ТC/ Информация о грузе</p>--}}

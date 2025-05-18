@@ -90,6 +90,7 @@ document.getElementById('register_submit')?.addEventListener('click', function (
         });
 });
 
+
 let resendCooldown = 60;
 let resendTimerInterval;
 
@@ -1060,3 +1061,103 @@ document?.addEventListener('DOMContentLoaded', () => {
 
     updatePaymentSummary(); // инициализация
 });
+
+
+// Отправка заявки
+
+document.getElementById('bidForm')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    axios.post(form.action, formData)
+        .then(response => {
+            if (response.data.status) {
+                alert(response.data.message || 'Отклик успешно отправлен!');
+                const modal = document.querySelector('[data-modal="send-offer"]');
+                modal.classList.remove('open');
+
+                // ✅ Удаляем класс с body
+                document.body.classList.remove('modal-open');
+                // Пример: очистить форму или закрыть модалку
+                // form.reset();
+            } else {
+                alert(response.data.message || 'Произошла ошибка');
+            }
+        })
+        .catch(error => {
+            if (error.response && error.response.status === 422) {
+                const errors = error.response.data.errors;
+                let messages = '';
+                for (let field in errors) {
+                    messages += errors[field].join('\n') + '\n';
+                }
+                alert('Ошибка валидации:\n' + messages);
+            } else {
+                alert('Ошибка сервера. Попробуйте позже.');
+            }
+        });
+});
+
+
+// Водители
+
+document.getElementById('add-driver-form')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const actionUrl = form.getAttribute('action');
+    const data = new FormData(form);
+
+    axios.post(actionUrl, data)
+        .then(res => {
+            window.location.reload();
+
+            // ✅ Закрываем модалку
+            const modal = document.querySelector('[data-modal="add-driver"]');
+            modal.classList.remove('open');
+
+            // ✅ Удаляем класс с body
+            document.body.classList.remove('modal-open');
+        })
+        .catch(err => {
+            if (err.response && err.response.status === 422) {
+                const errors = err.response.data.errors;
+                let messages = '';
+                for (let field in errors) {
+                    messages += errors[field].join('\n') + '\n';
+                }
+                alert('Ошибка валидации:\n' + messages);
+            } else {
+                alert('Ошибка сервера. Попробуйте позже.');
+            }
+        });
+});
+
+document.getElementById('transportForm')?.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    axios.post(form.action, formData)
+        .then(response => {
+            window.location.reload();
+            // Если хочешь — перезагрузить страницу или сбросить форму:
+            // form.reset();
+        })
+        .catch(err => {
+            if (err.response && err.response.status === 422) {
+                const errors = err.response.data.errors;
+                let messages = '';
+                for (let field in errors) {
+                    messages += errors[field].join('\n') + '\n';
+                }
+                alert('Ошибка валидации:\n' + messages);
+            } else {
+                alert('Ошибка сервера. Попробуйте позже.');
+            }
+        });
+});
+

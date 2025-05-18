@@ -50,7 +50,7 @@ class CargoController extends Controller
     {
         $user = auth()->user();
         $this->page = Page::findOrFail(11);
-        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->get();
+        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->where('status', CargoLoading::IN_PROGRESS)->get();
 
         return view('users.cargos.work-cargos', [
             'page' => $this->page,
@@ -65,7 +65,7 @@ class CargoController extends Controller
     {
         $user = auth()->user();
         $this->page = Page::findOrFail(11);
-        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->get();
+        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->where('status', CargoLoading::COORDINATION)->get();
 
         return view('users.cargos.coordinations-cargos', [
             'page' => $this->page,
@@ -80,7 +80,8 @@ class CargoController extends Controller
     {
         $user = auth()->user();
         $this->page = Page::findOrFail(11);
-        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->get();
+        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)
+            ->where('status', CargoLoading::IN_PERFORMANCE)->get();
 
         return view('users.cargos.execution-cargos', [
             'page' => $this->page,

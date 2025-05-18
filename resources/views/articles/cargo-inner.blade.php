@@ -116,9 +116,9 @@
 
                     <div class="route-footer-col">
                         @auth
-                            <button class="form-btn" data-modal-target="send-offer">Отправить предложение(2)</button>
+                            <button class="form-btn" data-modal-target="send-offer">Отправить предложение</button>
                         @else
-                            <button class="form-btn" data-modal-target="modal-login">Отправить предложение(2)</button>
+                            <button class="form-btn" data-modal-target="modal-login">Отправить предложение</button>
                         @endauth
                     </div>
                 </div>
@@ -166,9 +166,9 @@
                     </div>
 
                     @auth
-                        <button class="form-btn" data-modal-target="send-offer">Отправить предложение(2)</button>
+                        <button class="form-btn" data-modal-target="send-offer">Отправить предложение</button>
                     @else
-                        <button class="form-btn" data-modal-target="modal-login">Отправить предложение(2)</button>
+                        <button class="form-btn" data-modal-target="modal-login">Отправить предложение</button>
                     @endauth
                 </div>
             </div>
@@ -395,24 +395,21 @@
                 </div>
 
                 @if($article->counter_offers)
-                    {{-- Тут будут предложенные ставки --}}
-                <div class="send-offer__row">
-                    <div class="send-offer__col">
-                        <p>3000 доллар б/нал без НДС</p>
-                    </div>
-                    <div class="send-offer__col">
-                        <p>14.01.2025 11:02</p>
-                    </div>
-                </div>
+                    @if($article->bids->isNotEmpty())
+                        @foreach($article->bids as $bid)
+                        <div class="send-offer__row">
+                            <div class="send-offer__col">
+                                <p>{{ $bid->with_vat_cashless }} {{ $article->currency }} С НДС, безнал</p>
+                                <p>{{ $bid->without_vat_cashless }} {{ $article->currency }} Без НДС, безнал</p>
+                                <p>{{ $bid->cash }} {{ $article->currency }} наличными</p>
+                            </div>
+                            <div class="send-offer__col">
+                                <p>{{ $bid->created_at?->format('d.m.Y') }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    @endif
 
-                <div class="send-offer__row">
-                    <div class="send-offer__col">
-                        <p>3000 доллар б/нал без НДС</p>
-                    </div>
-                    <div class="send-offer__col">
-                        <p>13.01.2025 19:18</p>
-                    </div>
-                </div>
                 @else
                     <div class="send-offer__row">
                         <div class="send-offer__col">
@@ -425,7 +422,8 @@
             <div class="send-offer__header">
                 <b>Ваше предложение</b>
             </div>
-            <form action="#" method="get">
+            <form action="{{ route('cargo.bids.store', [app()->getLocale(), $article->id]) }}" method="POST" id="bidForm">
+                @csrf
                 <div class="send-offer__card">
                     <div class="send-offer__row">
                         <div class="send-offer__col1">
@@ -436,9 +434,9 @@
                             {{-- без торга --}}
                             @if($article->payment_type == 'no_haggling')
                             <label for="offer">
-                                <select name="price" id="offer">1
+                                <select name="price" id="offer">
                                     @if($article->with_vat_cashless)
-                                    <option value="{{ $article->with_vat_cashless }}">{{ $article->with_vat_cashless }} С НДС, безнал</option>
+                                    <option value="{{ $article->with_vat_cashless }}">{{ $article->with_vat_cashless }} {{ $article->currency }} С НДС, безнал</option>
                                     @endif
                                     @if($article->without_vat_cashless)
                                     <option value="{{ $article->without_vat_cashless }}">{{ $article->without_vat_cashless }} {{ $article->currency }} Без НДС, безнал</option>
@@ -450,9 +448,17 @@
                             </label>
                             <p>Ставка фиксирована и не предполагает торга</p>
                             @else
-                            <label for="">
-                                <input type="text" placeholder="asd" class="add-input input-search">
-                                <p>НДС</p>
+                            <label for="without_vat_cashless">
+                                <input type="number" name="with_vat_cashless">
+                                <p>С НДС, безнал</p>
+                            </label>
+                            <label for="without_vat_cashless">
+                                <input type="number" name="without_vat_cashless">
+                                <p>Без НДС, безнал</p>
+                            </label>
+                            <label for="cash">
+                                <input type="number" name="cash">
+                                <p>наличными</p>
                             </label>
                             @endif
                         </div>
@@ -463,24 +469,27 @@
                             <p><strong>Дополнительно:</strong></p>
                         </div>
                         <div class="send-offer__col2 send-offer__flex">
-                            <label for="beforepay" class="label-checkbox">
-                                <input type="checkbox" name="beforepay" id="beforepay">
+                            <label for="is_prepayment" class="label-checkbox">
+                                <input type="checkbox" name="is_prepayment" hidden value="0">
+                                <input type="checkbox" name="is_prepayment" id="is_prepayment" value="1">
                                 <span>Предоплата</span>
                             </label>
-                            <label for="percent">
-                                <input type="number" name="percent" id="percent">
+                            <label for="prepayment_percent">
+                                <input type="number" name="prepayment_percent" id="prepayment_percent">
                                 <span>%</span>
                             </label>
-                            <label for="onload" class="label-checkbox">
-                                <input type="checkbox" name="onload" id="onload">
+                            <label for="is_on_unloading" class="label-checkbox">
+                                <input type="checkbox" name="is_on_unloading" hidden value="0">
+                                <input type="checkbox" name="is_on_unloading" id="is_on_unloading" value="1">
                                 <span>На выгрузке</span>
                             </label>
-                            <label for="throw" class="label-checkbox">
-                                <input type="checkbox" name="throw" id="throw">
+                            <label for="is_bank_transfer" class="label-checkbox">
+                                <input type="checkbox" name="is_bank_transfer" id="is_bank_transfer" hidden value="0">
+                                <input type="checkbox" name="is_bank_transfer" id="is_bank_transfer" value="1">
                                 <span>Через</span>
                             </label>
-                            <label for="bank">
-                                <input type="number" name="bank" id="bank">
+                            <label for="bank_transfer_days">
+                                <input type="number" name="bank_transfer_days" id="bank_transfer_days">
                                 <span>банк дней</span>
                             </label>
                         </div>
@@ -492,7 +501,7 @@
                         </div>
                         <div class="send-offer__col2">
                             <label class="commtent-textarea">
-                                <textarea name="" id=""></textarea>
+                                <textarea name="payment_comment" id="payment_comment"></textarea>
                             </label>
                             <p>не более 512 символов</p>
                         </div>
@@ -503,8 +512,8 @@
                             <p><strong>Дата:</strong></p>
                         </div>
                         <div class="send-offer__col2">
-                            <label for="data" class="label-date">
-                                <input type="date">
+                            <label for="ready_date" class="label-date">
+                                <input type="date" name="ready_date" id="ready_date">
                             </label>
                         </div>
                     </div>
@@ -515,26 +524,18 @@
                         </div>
 
                         <div class="send-offer__col2">
-                            <a class="send-offer__link" href="tel:+998998077353">Fillipov Filip Filipovich</a>
+                            <p>{{ auth()->user()?->full_name }}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="send-offer__bottom">
                     <div class="send-offer__buttons">
-                        <button class="form-btn">Сохранить</button>
-                        <button class="form-btn-gray" data-modal-close="send-offer">Закрыть</button>
+                        <button class="form-btn">Отправить</button>
+                        <a href="javascript:;" class="form-btn-gray" data-modal-close="send-offer">Закрыть</a>
                     </div>
                 </div>
 
-{{--                <div class="send-offer__rules">--}}
-{{--                    <p><strong>Правила:</strong></p>--}}
-{{--                    <ul>--}}
-{{--                        <li>Отзывы могут только платные участники </li>--}}
-{{--                        <li>Встречные предложения видны всем участникам системы.</li>--}}
-{{--                        <li>При  редактировании заявки автором все встречные предложения автоматически удаляются.</li>--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
             </form>
             <button class="modal-close" type="button" data-modal-close="send-offer">
                 <span></span>

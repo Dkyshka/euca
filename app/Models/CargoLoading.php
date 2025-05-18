@@ -92,4 +92,9 @@ class CargoLoading extends Model
         return $this->hasMany(CargoBid::class);
     }
 
+    public function bid(): HasOne
+    {
+        return $this->hasOne(CargoBid::class)->where('status', CargoBid::PENDING);
+    }
+
 }

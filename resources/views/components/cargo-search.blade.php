@@ -338,7 +338,7 @@
                 </tr>
                 <tr class="table-footer">
                     <th class="row-flex">
-                        <button type="button" class="show-contacts_btn">{{ __('показать контакты и справку') }}</button>
+                        <button type="button" class="show-contacts_btn">{{ __('показать контакты') }}</button>
 
                         <div class="show-info-contacts">
                             <p>{{ $cargoLoading->company->name }}</p>

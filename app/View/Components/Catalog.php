@@ -60,7 +60,7 @@ class Catalog extends Component
 
         $companies = $query
             ->orderBy('id', 'asc')
-            ->paginate(15)
+            ->paginate(25)
             ->appends(Request::except('page'));
 
         $newCompanies = Company::where('is_active', true)

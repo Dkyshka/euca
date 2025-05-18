@@ -2,16 +2,6 @@
     <h1 class="title">{{ $section->page->name }}</h1>
 
     <form action="" method class="form-search">
-{{--        <div class="form-search-row">--}}
-{{--            <label for="point" class="input-check-red">--}}
-{{--                <input type="checkbox" id="point">--}}
-{{--                <span>Искать грузы в “эллипсе” маршрута</span>--}}
-{{--            </label>--}}
-{{--            <label for="length" class="input-check-red">--}}
-{{--                <input type="checkbox" id="length">--}}
-{{--                <span>Длина маршрута</span>--}}
-{{--            </label>--}}
-{{--        </div>--}}
 
         <div class="form-search-head">
             <div class="form-search-inputs-wrapper">
@@ -25,18 +15,6 @@
                         <input type="number" id="to" placeholder="КМ" class="input-form">
                     </label>
                 </div>
-{{--                <div class="form-search-inputs__bottom">--}}
-{{--                    <select name="" id="">--}}
-{{--                        <option value="" hidden>Выбрать список</option>--}}
-{{--                        <option value="">список 1</option>--}}
-{{--                        <option value="">список 2</option>--}}
-{{--                    </select>--}}
-
-{{--                    <label for="goods" class="input-check-red">--}}
-{{--                        <input type="checkbox" id="goods">--}}
-{{--                        <span>точно по Загрузке</span>--}}
-{{--                    </label>--}}
-{{--                </div>--}}
             </div>
 
             <svg width="23" height="23">
@@ -190,26 +168,46 @@
 
     <div class="result-goods">
         <div class="result-goods__head">
-            <h1 class="title">573 машины найдено</h1>
-            <div class="result-pagination">
-                <button type="button">
-                    <svg width="14" height="7">
-                        <use xlink:href="#pag-left"></use>
-                    </svg>
-                </button>
+            <h1 class="title">Транспорт ({{ $transports->count() }})</h1>
 
-                <a class="current" href="#" aria-label="следущая странница">1</a>
-                <a href="#" aria-label="следущая странница">2</a>
-                <a href="#" aria-label="следущая странница">3</a>
-                <a href="#" aria-label="следущая странница">4</a>
-                <a href="#" aria-label="следущая странница">5</a>
-                <span>из 11</span>
-                <button type="button">
-                    <svg width="14" height="7">
-                        <use xlink:href="#pag-right"></use>
-                    </svg>
-                </button>
-            </div>
+            @if ($transports->hasPages())
+                <div class="result-pagination">
+                    {{-- Кнопка "Назад" --}}
+                    @if ($transports->onFirstPage())
+                        <button type="button" disabled>
+                            <svg width="14" height="7"><use xlink:href="#pag-left"></use></svg>
+                        </button>
+                    @else
+                        <a href="{{ $transports->previousPageUrl() }}" aria-label="предыдущая страница">
+                            <svg width="14" height="7"><use xlink:href="#pag-left"></use></svg>
+                        </a>
+                    @endif
+
+                    {{-- Номера страниц --}}
+                    @foreach ($transports->getUrlRange(1, $transports->lastPage()) as $page => $url)
+                        @if ($page == $transports->currentPage())
+                            <a class="current" href="#" aria-label="текущая страница">{{ $page }}</a>
+                        @else
+                            <a href="{{ $url }}" aria-label="страница {{ $page }}">{{ $page }}</a>
+                        @endif
+                        @if ($page == 5 && $transports->lastPage() > 6)
+                            <span>из {{ $transports->lastPage() }}</span>
+                            @break
+                        @endif
+                    @endforeach
+
+                    {{-- Кнопка "Вперёд" --}}
+                    @if ($transports->hasMorePages())
+                        <a href="{{ $transports->nextPageUrl() }}" aria-label="следующая страница">
+                            <svg width="14" height="7"><use xlink:href="#pag-right"></use></svg>
+                        </a>
+                    @else
+                        <button type="button" disabled>
+                            <svg width="14" height="7"><use xlink:href="#pag-right"></use></svg>
+                        </button>
+                    @endif
+                </div>
+            @endif
         </div>
 
         <div class="resilts-goods__cards">
@@ -217,59 +215,79 @@
                 <thead>
                 <tr>
                     <th>
-                        <label class="label-table">
-                            <input type="checkbox">
-                            <span>НАПРАВЛ</span>
-                        </label>
+                    <span>НАПРАВЛ</span>
                     </th>
                     <th>ТРАНСПОРТ</th>
-                    <th>ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ</th>
+                    <th>ОБЪЕМ, М³ Д-Ш-В</th>
                     <th>МАРШРУТ</th>
                     <th>СТАВКА</th>
                 </tr>
                 </thead>
 
+                @foreach($transports as $transport)
                 <tbody>
                 <tr>
                     <td>
                         <p class="mobile-order-head">НАПРАВЛЕНИЕ</p>
-                        <label class="label-table">
-                            <input type="checkbox">
-                            <span>UZB-TKM</span>
-                        </label>
-                        <br><span class="color-greed-table">1295 км</span>
+                        <span>UZB-TKM</span>
                     </td>
                     <td>
                         <p class="mobile-order-head">ТРАНСПОРТ</p>
-                        <strong>негаб.</strong><br><span>загрузка/выгр</span> верх.<br>отд. машина
+                        <strong>{{ $transport->body_type }}</strong><br>
+                        <p>Грузоподъёмность - {{ $transport->capacity }} T</p>
                     </td>
                     <td>
-                        <p class="mobile-order-head">ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ</p>
-                        <strong>63</strong> / - ТНП
+                        <p class="mobile-order-head">ОБЪЕМ, М³ ДхШхВ</p>
+                        <strong>{{ $transport->volume }}  М³</strong> /
+                        {{ $transport->length }} /
+                        {{ $transport->width }} /
+                        {{ $transport->height }}
                     </td>
                     <td>
                         <p class="mobile-order-head">МАРШРУТ</p>
-                        <strong>Каракуль</strong><br><span>Бухарская область</span><br><i><strong>готов 13-17 января</strong></i>
+                        <strong>{{ $transport->country }}</strong><br> - <strong>{{ $transport->final_country }}</strong><br>
+                        <br><i><strong>готов {{ $transport->ready_date?->format('d.m.Y') }}</strong></i>
                     </td>
                     <td>
                         <p class="mobile-order-head">СТАВКА</p>
+                        @if($transport->payment_type == 'payment_request')
                         <span>Скрыто</span>
+                        @else
+                            @if($transport->with_vat_cashless)
+                                <p><strong>{{ $transport->with_vat_cashless }}</strong> {{ $transport->currency }} С НДС, безнал</p>
+                            @endif
+                            @if($transport->without_vat_cashless)
+                                <p><strong>{{ $transport->without_vat_cashless }}</strong> {{ $transport->currency }} Без НДС, безнал</p>
+                            @endif
+                            @if($transport->cash)
+                                <p><strong>{{ $article->cash }}</strong> {{ $transport->currency }} Наличными</p>
+                            @endif
+                        @endif
                     </td>
                 </tr>
                 <tr class="table-footer">
                     <th class="row-flex">
-                        <button type="button" class="show-contacts_btn">показать контакты и справку</button>
+                        <button type="button" class="show-contacts_btn">показать контакты</button>
 
                         <div class="show-info-contacts">
-                            <p>Самком-Логистика, ООО</p>
+                            @if($transport->user?->company?->name)
+                            <p>{{ $transport->user?->company?->name }}</p>
+                            @else
+                            <p>{{ $transport->user?->full_name }}</p>
+                            @endif
                             <p>
-                                <a href="tel:+7777777777">+7 777 77 77 77</a>
-                                Алина Богомолова
+                                @if($transport->user?->company?->phones)
+                                    @foreach($transport->user->company->phones as $item)
+                                        <a href="tel:{{ str_replace(['(', ')', ' ', '-'], '', $item->phone) }}">{{ $item->phone }}</a>
+                                    @endforeach
+                                @else
+                                    <a href="tel:{{ str_replace(['(', ')', ' ', '-'], '', $transport->user->phone) }}">{{ $transport->user->phone }}</a>
+                                @endif
                             </p>
                         </div>
                     </th>
                     <th>
-                        <p>доступно бесплатно после первой регистраци</p>
+{{--                        <p>доступно бесплатно после первой регистраци</p>--}}
                     </th>
 
                     <th></th>
@@ -281,10 +299,6 @@
                                 <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
                             </button>
 
-{{--                            <button class="chat-message" data-modal-target="dropdown-close">--}}
-{{--                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
-{{--                            </button>--}}
-
                             <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat1">
                                 <button class="order-close-btn" data-modal-close="dropdown-chat1"></button>
                                 <div class="tr">
@@ -293,254 +307,20 @@
                                     </svg>
                                 </div>
                                 <b>Отправить сообщение</b>
-                                <form action="" method="">
-                                    <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>
+                                <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
+                                    @csrf
+                                    <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $transport->user->id }}">
+                                    <textarea required name="message" id="chat_text_public" rows="5" style="height: auto; overflow: hidden"></textarea>
 
                                     <button class="form-btn" data-modal-close="dropdown-chat1">Отправить</button>
-                                    <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">
-                                        Не отклонять
-                                    </button>
+                                    <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">Отмена</button>
                                 </form>
                             </div>
                         </div>
                     </th>
                 </tr>
                 </tbody>
-
-                <tbody>
-                <tr>
-                    <td>
-                        <p class="mobile-order-head">НАПРАВЛЕНИЕ</p>
-                        <label class="label-table">
-                            <input type="checkbox">
-                            <span>UZB-TKM</span>
-                        </label>
-                        <br><span class="color-greed-table">1295 км</span>
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">ТРАНСПОРТ</p>
-                        <strong>негаб.</strong><br><span>загрузка/выгр</span> верх.<br>отд. машина
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ</p>
-                        <strong>63</strong> / - ТНП
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">МАРШРУТ</p>
-                        <strong>Каракуль</strong><br><span>Бухарская область</span><br><i><strong>готов 13-17 января</strong></i>
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">СТАВКА</p>
-                        <span>Скрыто</span>
-                    </td>
-                </tr>
-                <tr class="table-footer">
-                    <th class="row-flex">
-                        <button type="button" class="show-contacts_btn">показать контакты и справку</button>
-
-                        <div class="show-info-contacts">
-                            <p>Самком-Логистика, ООО</p>
-                            <p>
-                                <a href="tel:+7777777777">+7 777 77 77 77</a>
-                                Алина Богомолова
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <p>доступно бесплатно после первой регистраци</p>
-                    </th>
-
-                    <th></th>
-                    <th></th>
-
-                    <th class="table-footer__buttons">
-                        <div class="order-icons">
-                            <button class="chat-message" data-modal-target="dropdown-chat2">
-                                <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
-                            </button>
-
-
-{{--                            <button class="chat-message" data-modal-target="dropdown-close">--}}
-{{--                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
-{{--                            </button>--}}
-
-                            <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat2">
-                                <button class="order-close-btn" data-modal-close="dropdown-chat2"></button>
-                                <div class="tr">
-                                    <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
-                                    </svg>
-                                </div>
-                                <b>Отправить сообщение</b>
-                                <form action="" method="">
-                                    <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>
-
-                                    <button class="form-btn" data-modal-close="dropdown-chat2">Отправить</button>
-                                    <button type="button" class="order-cansel" data-modal-close="dropdown-chat2">
-                                        Не отклонять
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </th>
-                </tr>
-                </tbody>
-
-                <tbody>
-                <tr>
-                    <td>
-                        <p class="mobile-order-head">НАПРАВЛЕНИЕ</p>
-                        <label class="label-table">
-                            <input type="checkbox">
-                            <span>UZB-TKM</span>
-                        </label>
-                        <br><span class="color-greed-table">1295 км</span>
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">ТРАНСПОРТ</p>
-                        <strong>негаб.</strong><br><span>загрузка/выгр</span> верх.<br>отд. машина
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ</p>
-                        <strong>63</strong> / - ТНП
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">МАРШРУТ</p>
-                        <strong>Каракуль</strong><br><span>Бухарская область</span><br><i><strong>готов 13-17 января</strong></i>
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">СТАВКА</p>
-                        <span>Скрыто</span>
-                    </td>
-                </tr>
-                <tr class="table-footer">
-                    <th class="row-flex">
-                        <button type="button" class="show-contacts_btn">показать контакты и справку</button>
-
-                        <div class="show-info-contacts">
-                            <p>Самком-Логистика, ООО</p>
-                            <p>
-                                <a href="tel:+7777777777">+7 777 77 77 77</a>
-                                Алина Богомолова
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <p>доступно бесплатно после первой регистраци</p>
-                    </th>
-
-                    <th></th>
-                    <th></th>
-
-                    <th class="table-footer__buttons">
-                        <div class="order-icons">
-                            <button class="chat-message" data-modal-target="dropdown-chat2">
-                                <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
-                            </button>
-
-{{--                            <button class="chat-message" data-modal-target="dropdown-close">--}}
-{{--                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
-{{--                            </button>--}}
-
-                            <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat3">
-                                <button class="order-close-btn" data-modal-close="dropdown-chat3"></button>
-                                <div class="tr">
-                                    <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
-                                    </svg>
-                                </div>
-                                <b>Отправить сообщение</b>
-                                <form action="" method="">
-                                    <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>
-
-                                    <button class="form-btn" data-modal-close="dropdown-chat3">Отправить</button>
-                                    <button type="button" class="order-cansel" data-modal-close="dropdown-chat3">
-                                        Не отклонять
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </th>
-                </tr>
-                </tbody>
-
-                <tbody>
-                <tr>
-                    <td>
-                        <p class="mobile-order-head">НАПРАВЛЕНИЕ</p>
-                        <label class="label-table">
-                            <input type="checkbox">
-                            <span>UZB-TKM</span>
-                        </label>
-                        <br><span class="color-greed-table">1295 км</span>
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">ТРАНСПОРТ</p>
-                        <strong>негаб.</strong><br><span>загрузка/выгр</span> верх.<br>отд. машина
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ</p>
-                        <strong>63</strong> / - ТНП
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">МАРШРУТ</p>
-                        <strong>Каракуль</strong><br><span>Бухарская область</span><br><i><strong>готов 13-17 января</strong></i>
-                    </td>
-                    <td>
-                        <p class="mobile-order-head">СТАВКА</p>
-                        <span>Скрыто</span>
-                    </td>
-                </tr>
-                <tr class="table-footer">
-                    <th class="row-flex">
-                        <button type="button" class="show-contacts_btn">показать контакты и справку</button>
-
-                        <div class="show-info-contacts">
-                            <p>Самком-Логистика, ООО</p>
-                            <p>
-                                <a href="tel:+7777777777">+7 777 77 77 77</a>
-                                Алина Богомолова
-                            </p>
-                        </div>
-                    </th>
-                    <th>
-                        <p>доступно бесплатно после первой регистраци</p>
-                    </th>
-
-                    <th></th>
-                    <th></th>
-
-                    <th class="table-footer__buttons">
-                        <div class="order-icons">
-                            <button class="chat-message" data-modal-target="dropdown-chat2">
-                                <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
-                            </button>
-
-{{--                            <button class="chat-message" data-modal-target="dropdown-close">--}}
-{{--                                <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
-{{--                            </button>--}}
-
-                            <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat4">
-                                <button class="order-close-btn" data-modal-close="dropdown-chat4"></button>
-                                <div class="tr">
-                                    <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
-                                    </svg>
-                                </div>
-                                <b>Отправить сообщение</b>
-                                <form action="" method="">
-                                    <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>
-
-                                    <button class="form-btn" data-modal-close="dropdown-chat4">Отправить</button>
-                                    <button type="button" class="order-cansel" data-modal-close="dropdown-chat4">
-                                        Не отклонять
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </th>
-                </tr>
-                </tbody>
+                @endforeach
             </table>
         </div>
     </div>

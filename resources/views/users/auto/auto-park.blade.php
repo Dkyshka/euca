@@ -10,7 +10,7 @@
         <div class="profile-settings">
             <header class="profile-header">
 
-                <button class="nav__btn-header" aria-label="навигационное меню">
+            <button class="nav__btn-header" aria-label="навигационное меню">
 			<span>
 				<span></span>
 			</span>
@@ -35,11 +35,10 @@
                 </div>
 
 
-
                 <div class="drivers__list">
                     <div class="drivers-content">
-                        <h5>Автопроезд (сцепка)</h5>
-
+                        <h5>Автопарк</h5>
+                        @foreach($transports as $transport)
                         <div class="drivers-card ts-card">
                             <picture>
                                 <source srcset="{{ asset('assets/images/driver-card.avif') }}">
@@ -47,31 +46,15 @@
                             </picture>
 
                             <div class="ts__info">
-                                <b>Ванхул 50 (92 кw) O 000 OO 03 RUS</b>
-                                <span>тентованный, 8 т</span>
+                                <b>{{ $transport->body_type }}</b>
+                                <span>{{ $transport->country }} - {{ $transport->final_country }}, {{ $transport->capacity }} т</span>
                             </div>
-                            <div class="drivers-card__buttons">
-                                <button>Редактировать</button>
-                                <button>Удалить</button>
-                            </div>
+{{--                            <div class="drivers-card__buttons">--}}
+{{--                                <button>Редактировать</button>--}}
+{{--                                <button>Удалить</button>--}}
+{{--                            </div>--}}
                         </div>
-
-                        <div class="drivers-card ts-card">
-                            <picture>
-                                <source srcset="{{ asset('assets/images/driver-card.avif') }}">
-                                <img src="{{ asset('assets/images/driver-card.png') }}" alt="водитель" width="90" height="90">
-                            </picture>
-
-                            <div class="ts__info">
-                                <b>Ванхул 50 (92 кw) O 000 OO 03 RUS</b>
-                                <span>тентованный, 8 т</span>
-                            </div>
-
-                            <div class="drivers-card__buttons">
-                                <button>Редактировать</button>
-                                <button>Удалить</button>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -84,163 +67,171 @@
 <div class="modal-overlay" data-modal="add-ts">
     <div class="modal modal-add-ts">
         <b>Добавить грузовик</b>
-        <div class="text-head">Подтвердите транспорт и станьте привлекательнее для заказчиков</div>
 
-        <form action="" method="get">
+        <form action="{{ route('transports.store', app()->getLocale()) }}" method="POST" id="transportForm">
             @csrf
-            <div class="add-ts-inputs">
-                <label for="mark">
-                    *Марка
-                    <input type="text" id="mark">
-                </label>
-                <label for="model">
-                    *Модель
-                    <input type="text" id="model">
-                </label>
-                <label for="yearf">
-                    *Год выпуска
-                    <input type="text" id="year">
-                </label>
-                <label for="vin">
-                    *VIN
-                    <input type="text" id="vin">
-                </label>
-                <label for="ctc">
-                    *CTC
-                    <input type="text" id="ctc">
-                </label>
-                <label for="ser">
-                    *Серия и номер ПТС
-                    <input type="text" id="ser">
-                </label>
-            </div>
-
-            <label for="avto" class="avto">
-                ГОСОНОМЕР
-                <input type="text" id="avto" placeholder="M 123 MM 78 UZS">
-            </label>
 
             <div class="choise-cash">
-                <input type="radio" name="payment" id="own">
-                <label for="own">Собственное</label>
 
-                <input type="radio" name="payment" id="myne">
-                <label for="myne">Привлеченное</label>
+                <input type="radio" name="payment_type" id="notr" value="no_haggling">
+                <label for="notr">Есть ставка</label>
 
-                <input type="radio" name="payment" id="arenda">
-                <label for="arenda">Аренда</label>
-
-                <input type="radio" name="payment" id="lizing">
-                <label for="lizing">Лизинг</label>
+                <input type="radio" name="payment_type" id="tr" value="payment_request" checked>
+                <label for="tr">Запросить ставку</label>
             </div>
 
-            <div class="driver-input-row ts-info-row">
-                <label for="who" class="textarea">
-                    <span>Владелец по свидетельству о регистрации ТС</span>
-                    <textarea name="" id="who"></textarea>
-                </label>
-            </div>
-
-            <label for="driver-check" class="driver-check ts-check">
-                <input id="driver-check" type="checkbox">
-                Показывать в вашем Паспорте участника
-            </label>
-
-            <label class="file" for="files">
-                <p>Документы на ТС</p>
-                <div>
-                    <svg width="16" height="18">
-                        <use xlink:href="#file"></use>
-                    </svg>
-                    Загрузить СТС и ПТС
+            <div class="add-goods__bid">
+                <div class="add-goods__bid-row">
+                    <p>С НДС, безнал</p>
+                    <label for="with_vat_cashless">
+                        <input type="number" name="with_vat_cashless" id="with_vat_cashless">
+                    </label>
+                    <label>
+                        <select name="currency" id="currency" class="input-select">
+                            <option value="узб.сум" {{ old('currency') === 'узб.сум' ? 'selected' : '' }}>узб.сум</option>
+                            <option value="узб.сум/км" {{ old('currency') === 'узб.сум/км' ? 'selected' : '' }}>узб.сум/км</option>
+                            <option value="узб.сум/т" {{ old('currency') === 'узб.сум/т' ? 'selected' : '' }}>узб.сум/т</option>
+                            <option value="доллар" {{ old('currency') === 'доллар' ? 'selected' : '' }}>доллар</option>
+                            <option value="доллар/км" {{ old('currency') === 'доллар/км' ? 'selected' : '' }}>доллар/км</option>
+                            <option value="доллар/т" {{ old('currency') === 'доллар/т' ? 'selected' : '' }}>доллар/т</option>
+                            <option value="евро" {{ old('currency') === 'евро' ? 'selected' : '' }}>евро</option>
+                            <option value="евро/км" {{ old('currency') === 'евро/км' ? 'selected' : '' }}>евро/км</option>
+                            <option value="евро/т" {{ old('currency') === 'евро/т' ? 'selected' : '' }}>евро/т</option>
+                            <option value="руб" {{ old('currency') === 'руб' ? 'selected' : '' }}>руб</option>
+                            <option value="руб/км" {{ old('currency') === 'руб/км' ? 'selected' : '' }}>руб/км</option>
+                            <option value="руб/т" {{ old('currency') === 'руб/т' ? 'selected' : '' }}>руб/т</option>
+                        </select>
+                    </label>
                 </div>
-                <input type="file" id="files" multiple="multiple">
-            </label>
+                <div class="add-goods__bid-row">
+                    <p>Без НДС, безнал</p>
+                    <label for="without_vat_cashless">
+                        <input type="number" name="without_vat_cashless" value="{{ old('without_vat_cashless') }}" id="without_vat_cashless">
+                    </label>
+                    <p>узб.сум</p>
+                </div>
+                <div class="add-goods__bid-row">
+                    <p>Наличными</p>
+                    <label for="cash">
+                        <input type="number" name="cash" id="cash" value="{{ old('cash') }}">
+                    </label>
+                    <p>узб.сум</p>
+                </div>
+            </div>
 
             <div class="descriptions-ts">
                 <b>Характеристики</b>
                 <span>Тип кузова</span>
-                <label>
-                    <select name="" id="">
-                        <option value="" hidden>Тип кузова</option>
-                        <option value="">1</option>
-                        <option value="">2</option>
+                <label for="body_type">
+                    <select name="body_type" id="body_type" required>
+                        <option value="" hidden>Выберите тип кузова</option>
+                        <option value="Тент">Тент</option>
+                        <option value="Рефрижератор">Рефрижератор</option>
+                        <option value="Открытый">Открытый</option>
+                        <option value="Контейнер">Контейнер</option>
+                        <option value="Другое">Другое</option>
                     </select>
                 </label>
             </div>
 
-            <div class="ts-inputs-cards">
-                <label for="gruz">
+            <div class="ts-inputs-cards" style="flex-wrap: wrap">
+                <label for="capacity">
                     Грузоподъемность,т
-                    <input type="number" id="gruz">
+                    <input type="number" id="capacity" name="capacity" required>
                 </label>
-                <label for="L">
-                    Обьем, м3
-                    <input type="number" id="L">
+                <label for="volume">
+                    Объем, м3
+                    <input type="number" id="volume" name="volume" required>
                 </label>
                 <label for="length">
                     Длина,м
-                    <input type="number" id="length">
+                    <input type="number" id="length" name="length" required>
                 </label>
                 <label for="width">
                     Ширина
-                    <input type="number" id="width">
+                    <input type="number" id="width" name="width" required>
                 </label>
                 <label for="height">
                     Высота,м
-                    <input type="number" id="height">
+                    <input type="number" id="height" name="height" required>
                 </label>
             </div>
 
-            <label for="ts-photo" class="file">
-                <div>
-                    <svg width="16" height="18">
-                        <use xlink:href="#file"></use>
-                    </svg>
-                    Загрузить фотографии ТС
+            <div class="add-goods__inputs__row" style="margin-bottom: 20px;">
+                <label for="when_type">
+                    <select id="when_type" class="add-input input-select label-big" name="when_type" required>
+                        <option value="1">Готов к загрузке</option>
+                        <option value="2">Постоянно</option>
+                    </select>
+                </label>
+
+                <!-- Дата и кол-во дней -->
+                <div id="ready_block" style="display: flex; gap: 10px;">
+                    <label for="ready_date" class="date-driver">
+                        <input id="ready_date" name="ready_date" type="date" class="add-input" required>
+                    </label>
+
+{{--                    <label for="archive_after_days" style="display: none">--}}
+{{--                        <select name="archive_after_days" id="archive_after_days" class="add-input input-small input-select">--}}
+{{--                            <option value="0" {{ old('archive_after_days') == 0 ? 'selected' : '' }}>0 дн.</option>--}}
+{{--                            <option value="1" {{ old('archive_after_days') == 1 ? 'selected' : '' }}>1 дн.</option>--}}
+{{--                            <option value="2" {{ old('archive_after_days') == 2 ? 'selected' : '' }}>2 дн.</option>--}}
+{{--                            <option value="3" {{ old('archive_after_days') == 3 ? 'selected' : '' }}>3 дн.</option>--}}
+{{--                            <option value="4" {{ old('archive_after_days') == 4 ? 'selected' : '' }}>4 дн.</option>--}}
+{{--                            <option value="5" {{ old('archive_after_days') == 5 ? 'selected' : '' }}>5 дн.</option>--}}
+{{--                        </select>--}}
+{{--                    </label>--}}
                 </div>
-                <input type="file" multiple="multiple" id="ts-photo">
-            </label>
 
-            <p><strong>Геопозиция</strong></p>
-            <span>Датчик GPS/глонасс в тс</span>
+                <!-- Блок "Постоянно" -->
+                <div id="constant_block">
+                    <label>
+                        <select name="availability_mode" class="add-input input-select">
+                            <option value="" {{ old('availability_mode') === null ? 'selected' : '' }}>Выберите частоту</option>
+                            <option value="daily" {{ old('availability_mode') === 'daily' ? 'selected' : '' }}>Ежедневно</option>
+                            <option value="workdays" {{ old('availability_mode') === 'workdays' ? 'selected' : '' }}>По рабочим дням</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
 
-            <button class="add-ts-btn">
-                <svg width="18" height="14">
-                    <use xlink:href="#order-plus"></use>
-                </svg>
-                Добавить датчик
-            </button>
+            <div class="descriptions-ts">
+                <span>Водитель</span>
+                <label for="driver_id">
+                    <select name="driver_id" id="driver_id">
+                        <option value="" hidden>Выберите водителя</option>
+                        @foreach($drivers as $driver)
+                        <option value="{{ $driver->id }}">{{ $driver->first_name }} {{ $driver->middle_name }}</option>
+                        @endforeach
+                    </select>
+                </label>
+            </div>
 
-            <button class="add-ts-btn">
-                <svg width="18" height="14">
-                    <use xlink:href="#order-plus"></use>
-                </svg>
-                Добавить водителя
-            </button>
+            <div class="add-goods__inputs no-border">
+                <b>*Загрузка</b>
+                <div>
+                    <div class="add-goods__inputs__row">
+                        <label for="country">
+                            <input type="text" name="country" required id="country" class="add-input input-search" placeholder="Населенный пункт">
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-            <p><strong>Дополнительно</strong></p>
-            <label class="dp-check" for="dp-chek1">
-                <input type="checkbox" id="dp-chek1">
-                можно возить реф-контейнеры
-            </label>
-            <label class="dp-check" for="dp-chek2">
-                <input type="checkbox" id="dp-chek2">
-                есть Genset (навесной генератор)
-            </label>
-            <label class="dp-check" for="dp-chek3">
-                можно возить тяжелые контейнеры
-                <input type="checkbox" id="dp-chek3">
-            </label>
+            <div class="add-goods__inputs">
+                <b>*Возможная разгрузка</b>
+                <div>
+                    <div class="add-goods__inputs__row">
+                        <label for="final_country">
+                            <input type="text" name="final_country" required id="final_country" class="add-input input-search" placeholder="Населенный пункт">
+                        </label>
+                    </div>
 
-            <button class="add-ts-btn add-ts-dp">
-                <svg width="18" height="14">
-                    <use xlink:href="#order-plus"></use>
-                </svg>
-                Добавить прицеп
-            </button>
+                </div>
 
-            <button class="form-btn" data-modal-close="add-ts">Добавить</button>
+            </div>
+
+            <button class="form-btn">Добавить</button>
         </form>
 
         <button class="modal-close" type="button" data-modal-close="add-ts">

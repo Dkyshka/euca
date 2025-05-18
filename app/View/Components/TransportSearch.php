@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Section;
+use App\Models\Transport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -22,6 +23,8 @@ class TransportSearch extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.transport-search');
+        $transports = Transport::paginate(15);
+
+        return view('components.transport-search', compact('transports'));
     }
 }

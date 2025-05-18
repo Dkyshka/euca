@@ -108,9 +108,9 @@
                                 <p class="car-head">{{ $cargo?->cash }} {{ $cargo?->currency }}</p>
                                 @endif
                                 <div class="order-icons">
-                                    <a href="" class="chat-message" data-modal-target="dropdown-chat">
-                                        <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">
-                                    </a>
+{{--                                    <a href="" class="chat-message" data-modal-target="dropdown-chat">--}}
+{{--                                        <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                                    </a>--}}
 
                                     <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat">
                                         <button class="order-close-btn" data-modal-close="dropdown-chat"></button>
@@ -152,12 +152,27 @@
 
                             <div class="order-info-col order-goods-info order-info-bottom__end">
                                 <p>доб <strong>{{ $cargo->created_at->format('d.m.Y H:i') }}</strong></p>
-                                <button class="form-btn">Предложить груз</button>
+                                <a href="{{ url(app()->getLocale(), 'transport-search') }}" target="_blank" class="form-btn" style="color: #fff; text-decoration: none;">Предложить груз</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 @endforeach
+                @else
+                    <div class="goods-empty notifications-empty">
+                        <picture>
+                            <source srcset="{{ asset('assets/images/goods.avif') }}">
+                            <img src="{{ asset('assets/images/goods.png') }}" alt="empty" width="85" height="85">
+                        </picture>
+                        @if ($errors->has('company'))
+                            <div class="alert alert-danger" style="color: red">
+                                {{ $errors->first('company') }}
+                            </div>
+                        @endif
+                        <a href="{{ route('cargos.create', app()->getLocale()) }}" class="form-btn">
+                            Добавить груз
+                        </a>
+                    </div>
                 @endif
             </main>
         </div>

@@ -15,11 +15,14 @@ use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AutoController;
+use App\Http\Controllers\CargoBidController;
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\TransportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -168,6 +171,18 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
     Route::get('notifications', [AutoController::class, 'notifications'])->name('notifications');
     Route::get('notifications/inner', [AutoController::class, 'notificationsInner'])->name('notificationsInner');
 
+
+    // Cargo bid
+    Route::post('/cargo/{cargo}/bid', [CargoBidController::class, 'store'])->name('cargo.bids.store');
+    Route::post('/bids/{bid}/accept', [CargoBidController::class, 'accept'])->name('cargo.bids.accept');
+    Route::post('/bids/{cargoLoading}/finish', [CargoBidController::class, 'finish'])->name('cargo.bids.finished');
+    Route::post('/bids/{bid}/decline', [CargoBidController::class, 'decline'])->name('cargo.bids.decline');
+
+    // Drivers
+    Route::post('/drivers/store', [DriverController::class, 'store'])->name('drivers.store');
+
+    // Transport
+    Route::post('/transports', [TransportController::class, 'store'])->name('transports.store');
 });
 
 // Pages

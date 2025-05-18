@@ -71,7 +71,7 @@
                 @foreach($cargoLoadings as $cargoLoading)
                 <div class="order-info">
                     <div class="order-info__head order-info-second">
-                        <p>>Груз</p>
+                        <p>Груз</p>
 
                         <p>загрузка</p>
                         <p>разгрузка</p>
@@ -137,25 +137,27 @@
                                 @endif
 
                                 {{-- Если есть перевозчик то можно открыть и написать --}}
-{{--                                <button class="chat-message" data-modal-target="dropdown-chat">--}}
-{{--                                    <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">--}}
-{{--                                </button>--}}
+                                <button class="chat-message" data-modal-target="dropdown-chat">
+                                    <img src="{{ asset('assets/images/svg/message.svg') }}" alt="meassge" width="30" height="30">
+                                </button>
 
-{{--                                <div class="order-cansel-modal" data-modal="dropdown-chat">--}}
-{{--                                    <button class="order-close-btn" data-modal-close="dropdown-chat"></button>--}}
-{{--                                    <div class="tr">--}}
-{{--                                        <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
-{{--                                            <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>--}}
-{{--                                        </svg>--}}
-{{--                                    </div>--}}
-{{--                                    <b>Отправить сообщение</b>--}}
-{{--                                    <form action="" method="">--}}
-{{--                                        <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>--}}
+                                <div class="order-cansel-modal" data-modal="dropdown-chat">
+                                    <button class="order-close-btn" data-modal-close="dropdown-chat"></button>
+                                    <div class="tr">
+                                        <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
+                                        </svg>
+                                    </div>
+                                    <b>Отправить сообщение</b>
+                                    <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
+                                        @csrf
+                                        <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $cargoLoading?->bids?->first()?->user->id }}">
+                                        <textarea required name="message" id="chat_text_public" rows="5" style="height: auto; overflow: hidden"></textarea>
 
-{{--                                        <button class="form-btn" data-modal-close="dropdown-chat">Отправить</button>--}}
-{{--                                        <button type="button" class="order-cansel" data-modal-close="dropdown-chat">Отмена</button>--}}
-{{--                                    </form>--}}
-{{--                                </div>--}}
+                                        <button class="form-btn" data-modal-close="dropdown-chat1">Отправить</button>
+                                        <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">Отмена</button>
+                                    </form>
+                                </div>
 
                             </div>
                         </div>
@@ -172,11 +174,11 @@
                                     <p>Перевозчик взял груз</p>
                                     <p>Вы можете оформить заявку</p>
                                     <div class="order-buttons">
-                                        <button class="form-btn button-text" data-modal-target="modal-create-order">Оформить</button>
+                                        <button class="form-btn button-text" data-modal-target="modal-create-order-{{ $cargoLoading->id }}">Оформить</button>
 
                                         <button class="button-text chat-message" data-modal-target="dropdown-close">Отклонить</button>
 
-                                        <span>сегодня в 11:18</span>
+                                        <span>{{ $cargoLoading->bid->created_at?->format('d.m.Y H:i') }}</span>
                                     </div>
 
                                     <div class="order-cansel-modal order-cansel-dropdown" data-modal="dropdown-close">
@@ -188,17 +190,18 @@
                                         </div>
                                         <b>Отклонить предложение</b>
                                         <p>Укажите причину отмены предложения</p>
-                                        <form action="" method="">
-                                            <textarea name="" id="" style="height: auto; overflow: hidden"></textarea>
+                                        <form action="{{ route('cargo.bids.decline', [app()->getLocale(), $cargoLoading->bid->id]) }}" method="POST">
+                                            @csrf
+                                            <textarea name="comment" id="comment" style="height: auto; overflow: hidden"></textarea>
                                             <b>Что сделать с грузом</b>
 
                                             <label for="save">
                                                 Восстановить груз
-                                                <input type="radio" name="archiveOption" id="save">
+                                                <input type="radio" name="archiveOption" id="save" value="restore" checked>
                                             </label>
                                             <label for="stay">
-                                                Оставить груз в Архиве
-                                                <input type="radio" name="archiveOption" id="stay">
+                                                Оставить груз в архиве
+                                                <input type="radio" name="archiveOption" id="stay" value="keep">
                                             </label>
 
                                             <button class="form-btn" data-modal-close="dropdown-close">Отклонить
@@ -208,36 +211,161 @@
                                         </form>
                                     </div>
 
-                                    <div class="order-cansel-modal">
-                                        <button class="order-close-btn"></button>
-                                        <div class="tr">
-                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"/>
-                                            </svg>
-                                        </div>
-                                        <b>Отклонить предложение</b>
-                                        <p>Укажите причину отмены предложения</p>
-                                        <form action="" method="">
-                                            <textarea name="" id=""></textarea>
-                                            <b>Что сделать с грузом</b>
+{{--                                    <div class="order-cansel-modal">--}}
+{{--                                        <button class="order-close-btn"></button>--}}
+{{--                                        <div class="tr">--}}
+{{--                                            <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">--}}
+{{--                                                <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"/>--}}
+{{--                                            </svg>--}}
+{{--                                        </div>--}}
+{{--                                        <b>Отклонить предложение</b>--}}
+{{--                                        <p>Укажите причину отмены предложения</p>--}}
+{{--                                        <form action="" method="">--}}
+{{--                                            <textarea name="" id=""></textarea>--}}
+{{--                                            <b>Что сделать с грузом</b>--}}
 
-                                            <label for="save">
-                                                Восстановить груз
-                                                <input type="radio" name="archiveOption" id="save">
-                                            </label>
-                                            <label for="stay">
-                                                Оставить груз в Архиве
-                                                <input type="radio" name="archiveOption" id="stay">
-                                            </label>
+{{--                                            <label for="save">--}}
+{{--                                                Восстановить груз--}}
+{{--                                                <input type="radio" name="archiveOption" id="save">--}}
+{{--                                            </label>--}}
+{{--                                            <label for="stay">--}}
+{{--                                                Оставить груз в Архиве--}}
+{{--                                                <input type="radio" name="archiveOption" id="stay">--}}
+{{--                                            </label>--}}
 
-                                            <button class="form-btn">Отклонить предложение</button>
-                                            <button type="button" class="order-cansel">Не отклонять</button>
-                                        </form>
-                                    </div>
+{{--                                            <button class="form-btn">Отклонить предложение</button>--}}
+{{--                                            <button type="button" class="order-cansel">Не отклонять</button>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
 
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="modal-overlay" data-modal="modal-create-order-{{ $cargoLoading->id }}">
+                    <div class="modal modal-create-order">
+                        <b>Предложение на перевозку</b>
+                        <p>Пока вы не примите решение, груз будет недоступен для других перевозчиков</p>
+
+                        <form action="{{ route('cargo.bids.accept', [app()->getLocale(), $cargoLoading->bid?->id]) }}" method="post">
+                            @csrf
+
+                            @if ($cargoLoading->bid?->user?->company)
+                            <p>От фирмы</p>
+                            <div class="create-order-card">
+                                <svg width="24" height="18">
+                                    <use xlink:href="#create1"></use>
+                                </svg>
+                                <div class="create-order-card__info">
+                                    <p>
+                                        <strong>{{ $cargoLoading->bid?->user?->company?->name ?? 'Неизвестно' }}</strong>
+                                    </p>
+                                    @foreach($cargoLoading->bid?->user?->company?->phones as $phone)
+                                    <p>{{ $phone->phone }}</p>
+                                    @endforeach
+                                </div>
+                            </div>
+                            @endif
+                            <p>Ставка</p>
+                            @if($cargoLoading->bid->price)
+                            <div class="cretae-order-row">
+                                <p>
+                                    <svg width="24" height="18">
+                                        <use xlink:href="#create1"></use>
+                                    </svg>
+                                    <strong>{{ $cargoLoading->bid->price }} {{ $cargoLoading->currency }}</strong>
+                                </p>
+                            </div>
+                            @else
+                                @if($article->with_vat_cashless)
+                                    <div class="cretae-order-row">
+                                        <p>
+                                            <svg width="24" height="18">
+                                                <use xlink:href="#create1"></use>
+                                            </svg>
+                                            <strong>{{ $cargoLoading->bid->with_vat_cashless }} {{ $cargoLoading->bid->currency }}</strong>
+                                            С НДС, безнал
+                                        </p>
+                                    </div>
+                                @endif
+
+                                @if($article->without_vat_cashless)
+                                    <div class="cretae-order-row">
+                                        <p>
+                                            <svg width="24" height="18">
+                                                <use xlink:href="#create1"></use>
+                                            </svg>
+                                            <strong>{{ $cargoLoading->bid->without_vat_cashless }} {{ $cargoLoading->bid->currency }}</strong>
+                                            Без НДС, безнал
+                                        </p>
+                                    </div>
+                                @endif
+
+                                @if($article->cash)
+                                    <div class="cretae-order-row">
+                                        <p>
+                                            <svg width="24" height="18">
+                                                <use xlink:href="#create1"></use>
+                                            </svg>
+                                            <strong>{{ $cargoLoading->bid->cash }} {{ $cargoLoading->bid->currency }}</strong>
+                                            Наличными
+                                        </p>
+                                    </div>
+                                @endif
+
+                            @endif
+
+{{--                            <p>ТС</p>--}}
+{{--                            <div class="cretae-order-row">--}}
+{{--                                <p>--}}
+{{--                                    <svg width="24" height="18">--}}
+{{--                                        <use xlink:href="#create3"></use>--}}
+{{--                                    </svg>--}}
+{{--                                    <strong>Укажу данные позже</strong>--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+
+{{--                            <p>Водитель</p>--}}
+{{--                            <div class="cretae-order-row">--}}
+{{--                                <p>--}}
+{{--                                    <svg width="24" height="18">--}}
+{{--                                        <use xlink:href="#human"></use>--}}
+{{--                                    </svg>--}}
+{{--                                    <strong>Укажу данные позже</strong>--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+
+                            <p>Информация</p>
+                            <div class="create-order-card">
+                                <svg width="24" height="18">
+                                    <use xlink:href="#create1"></use>
+                                </svg>
+                                <div class="create-order-card__info">
+                                    <p>
+                                        <strong>{{ $cargoLoading->bid?->user?->full_name }}</strong>
+                                    </p>
+                                    <p><span>ИНН</span>{{ $cargoLoading->bid?->user?->inn }}</p>
+                                </div>
+                            </div>
+
+                            <p>Комментарий</p>
+                            <div class="create-order-card">
+                                <div class="create-order-card__info">
+                                    <p>{{ $cargoLoading->bid?->payment_comment }}</p>
+                                </div>
+                            </div>
+
+                            <div class="create-order-buttons">
+                                <button type="submit" class="form-btn" data-modal-close="modal-create-order-{{ $cargoLoading->id }}">Одобрить и создать заказ</button>
+                            </div>
+                        </form>
+
+                        <button class="modal-close" type="button" data-modal-close="modal-create-order-{{ $cargoLoading->id }}">
+                            <span></span>
+                            <span></span>
+                        </button>
                     </div>
                 </div>
                 @endforeach
@@ -247,6 +375,11 @@
                         <source srcset="{{ asset('assets/images/goods.avif') }}">
                         <img src="{{ asset('assets/images/goods.png') }}" alt="empty" width="85" height="85">
                     </picture>
+                    @if ($errors->has('company'))
+                        <div class="alert alert-danger" style="color: red">
+                            {{ $errors->first('company') }}
+                        </div>
+                    @endif
                     <a href="{{ route('cargos.create', app()->getLocale()) }}" class="form-btn">
                         Добавить груз
                     </a>
@@ -258,90 +391,6 @@
 
     </div>
 </main>
-
-<div class="modal-overlay" data-modal="modal-create-order">
-    <div class="modal modal-create-order">
-        <b>Предложение на перевозку</b>
-        <p>Пока вы не примите решение, груз будет недоступен для других перевозчиков</p>
-
-        <form action="" method="post">
-            <p>От фирмы</p>
-            <div class="create-order-card">
-                <svg width="24" height="18">
-                    <use xlink:href="#create1"></use>
-                </svg>
-                <div class="create-order-card__info">
-                    <p>
-                        <strong>tsi</strong>
-                        <svg width="9" height="9">
-                            <use xlink:href="#create1-1"></use>
-                        </svg>
-                    </p>
-                    <p>Код: 357120, Перевозчик, Санкт-Петербург</p>
-                    <p>Иван, +7 999 999-99-99</p>
-                </div>
-            </div>
-            <p>Ставка</p>
-            <div class="cretae-order-row">
-                <p>
-                    <svg width="24" height="18">
-                        <use xlink:href="#create1"></use>
-                    </svg>
-                    <strong>100 000</strong>
-                    с НДС, торг
-                </p>
-
-                <p>Груз №AZE2739</p>
-            </div>
-            <p>ТС</p>
-            <div class="cretae-order-row">
-                <p>
-                    <svg width="24" height="18">
-                        <use xlink:href="#create3"></use>
-                    </svg>
-                    <strong>Укажу данные позже</strong>
-                </p>
-
-                <p>Груз №AZE2739</p>
-            </div>
-            <p>Водитель</p>
-            <div class="cretae-order-row">
-                <p>
-                    <svg width="24" height="18">
-                        <use xlink:href="#human"></use>
-                    </svg>
-                    <strong>Укажу данные позже</strong>
-                </p>
-
-                <p>Груз №AZE2739</p>
-            </div>
-            <p>Реквизиты</p>
-            <div class="create-order-card">
-                <svg width="24" height="18">
-                    <use xlink:href="#create1"></use>
-                </svg>
-                <div class="create-order-card__info">
-                    <p>
-                        <strong>Леонов АВ, СЗ</strong>
-                    </p>
-                    <p><span>ИНН</span>00 000 00000 00 00</p>
-                    <a href="#">Показать полностью</a>
-                </div>
-                <a href="#">Проверить</a>
-            </div>
-
-            <div class="create-order-buttons">
-                <button type="button" class="form-btn" data-modal-close="modal-create-order">Одобрить и создать заказ</button>
-                <button type="button" class="create-order-cansel" data-modal-close="modal-create-order">Отклонить</button>
-            </div>
-        </form>
-
-        <button class="modal-close" type="button" data-modal-close="modal-create-order">
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</div>
 
 <div class="modal-overlay" data-modal="modal-take-load">
     <div class="modal modal-create-order">

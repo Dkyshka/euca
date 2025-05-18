@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Driver;
 use App\Models\Page;
 use App\Models\Setting;
+use App\Models\Transport;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -32,24 +34,30 @@ class AutoController extends Controller
     public function autoPark()
     {
         $this->page = Page::findOrFail(11);
+        $drivers = Driver::where('user_id', auth()->user()->id)->get();
+        $transports = Transport::where('user_id', auth()->user()->id)->get();
 
         return view('users.auto.auto-park', [
             'page' => $this->page,
             'setting' => $this->setting,
             'footer' => $this->footer,
             'menu' => $this->menu,
+            'drivers' => $drivers,
+            'transports' => $transports,
         ]);
     }
 
     public function drivers()
     {
         $this->page = Page::findOrFail(11);
+        $drivers = Driver::where('user_id', auth()->user()->id)->get();
 
         return view('users.drivers.drivers', [
             'page' => $this->page,
             'setting' => $this->setting,
             'footer' => $this->footer,
             'menu' => $this->menu,
+            'drivers' => $drivers,
         ]);
     }
 

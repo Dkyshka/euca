@@ -179,7 +179,6 @@
 								</div>
 							</div>
 							<div class="form-buttons">
-								<button type="button" class="form-btn form-btn-white">Редактировать</button>
 								<button type="submit" class="form-btn">Сохранить</button>
 							</div>
 					</div>
