@@ -148,6 +148,8 @@
                         <option value="" hidden>Укажите ваш профиль</option>
                         <option value="4">Перевозчик</option>
                         <option value="5">Грузовладелец</option>
+                        <option value="6">Экспедитор</option>
+                        <option value="7">Логист</option>
                     </select>
 
                     <span class="arrow"></span>
