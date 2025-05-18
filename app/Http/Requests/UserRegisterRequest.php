@@ -26,7 +26,7 @@ class UserRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'role_id' => ['required', Rule::in([Role::CARRIER, Role::CONSIGNOR])],
+            'role_id' => ['required', Rule::in([Role::CARRIER, Role::CONSIGNOR, Role::FORWARDED, Role::LOGISTIC])],
             'full_name' => ['required', 'string'],
             'email' => ['required', 'email', Rule::unique('users')],
             'phone' => ['required'],
