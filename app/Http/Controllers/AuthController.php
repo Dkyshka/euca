@@ -39,7 +39,7 @@ class AuthController extends Controller
     public function store(UserRegisterRequest $userRegisterRequest): \Illuminate\Http\JsonResponse
     {
         try {
-            DB::beginTransaction();
+//            DB::beginTransaction();
             $user = User::create($userRegisterRequest->validated());
 
             // Генерируем 6-значный код
@@ -72,7 +72,7 @@ class AuthController extends Controller
                 'redirect_url' => url(app()->getLocale())
             ]);
         } catch (\Exception $e) {
-            DB::rollBack();
+//            DB::rollBack();
             return response()->json([
                 'error' => 'Произошла ошибка'. $e->getMessage(),
             ], 500);
