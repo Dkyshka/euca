@@ -71,7 +71,7 @@
                                 <p class="mobile-order-head">загрузка</p>
                                 <p>{{ $cargo?->country }}</p>
                                 @if($cargo->cargo->constant_frequency)
-                                    <p><strong>{{ $cargo->cargo->constant_frequency }}</strong></p>
+                                    <p><strong>{{ $cargo->cargo->constant_frequency == 'daily' ? __('Ежедневно') : __('По рабочим дням') }}</strong></p>
                                 @elseif($cargo?->cargo?->ready_date)
                                     <p><strong>{{ $cargo?->cargo?->ready_date?->format('d.m.Y') }}</strong></p>
                                 @else
@@ -98,19 +98,24 @@
 
                             <div class="order-info-col">
                                 <p class="mobile-order-head">ставка</p>
-                                @if($cargo?->with_vat_cashless)
-                                <p class="car-head">{{ $cargo?->with_vat_cashless }} {{ $cargo?->currency }}</p>
-                                @endif
-                                @if($cargo?->without_vat_cashless)
-                                <p class="car-head">{{ $cargo?->without_vat_cashless }} {{ $cargo?->currency }}</p>
-                                @endif
-                                @if($cargo?->cash)
-                                <p class="car-head">{{ $cargo?->cash }} {{ $cargo?->currency }}</p>
+                                @if($cargo->payment_type == 'payment_request')
+                                    <p class="car-head">{{ __('Запрос ставки') }}</p>
+                                @else
+                                    @if($cargo?->with_vat_cashless)
+                                    <p class="car-head">{{ $cargo?->with_vat_cashless }} {{ $cargo?->currency }}</p>
+                                    @endif
+                                    @if($cargo?->without_vat_cashless)
+                                    <p class="car-head">{{ $cargo?->without_vat_cashless }} {{ $cargo?->currency }}</p>
+                                    @endif
+                                    @if($cargo?->cash)
+                                    <p class="car-head">{{ $cargo?->cash }} {{ $cargo?->currency }}</p>
+                                    @endif
                                 @endif
                                 <div class="order-icons">
-{{--                                    <a href="" class="chat-message" data-modal-target="dropdown-chat">--}}
-{{--                                        <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">--}}
-{{--                                    </a>--}}
+                                    {{--Редактирование--}}
+                                    <a href="{{ route('cargos.edit', [app()->getLocale(), $cargo->id]) }}" class="chat-message" data-modal-target="dropdown-chat">
+                                        <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">
+                                    </a>
 
                                     <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat">
                                         <button class="order-close-btn" data-modal-close="dropdown-chat"></button>

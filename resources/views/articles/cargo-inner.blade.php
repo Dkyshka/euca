@@ -29,7 +29,7 @@
                         </div>
                         <div class="route-goods__info">
                             <div class="route-goods__info-top">
-                                <p>{{ $article->country }} ({{ $article->address }})</p>
+                                <p>{{ $article->country }}</p>
                                 @if($article->cargo->constant_frequency)
                                     <p><strong>{{ $article->cargo->constant_frequency == 'daily' ? 'Ежедневно' : 'По рабочим дням' }}</strong></p>
                                 @elseif($article?->cargo?->ready_date)
@@ -45,7 +45,7 @@
                                 </p>
                             </div>
                             <div class="route-goods__info-bottom">
-                                <p>{{ $article->final_unload_city }} ({{ $article->final_unload_address }})</p>
+                                <p>{{ $article->final_unload_city }}</p>
                                 <p><strong>Разгрузка</strong></p>
                                 @if($article->final_unload_date_from)
                                 <p><strong>{{ $article->final_unload_date_from?->format('d.m.Y') }}</strong>
@@ -98,22 +98,27 @@
                 </div>
                 <p><strong>Ставка</strong></p>
                 <div class="route-footer">
-                    <div class="route-footer-col">
-                    @if($article->with_vat_cashless)
-                        <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} С НДС, безнал</p>
+                    @if($article->payment_type == 'payment_request')
+                        <div class="route-footer-col">
+                            <p><strong>{{ __('Запрос ставки') }}</strong></p>
+                        </div>
+                    @else
+                        <div class="route-footer-col">
+                        @if($article->with_vat_cashless)
+                            <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} С НДС, безнал</p>
+                        @endif
+                        </div>
+                        @if($article->without_vat_cashless)
+                        <div class="route-footer-col">
+                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} Без НДС, безнал</p>
+                        </div>
+                        @endif
+                        @if($article->cash)
+                        <div class="route-footer-col">
+                            <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} Наличными</p>
+                        </div>
+                        @endif
                     @endif
-                    </div>
-                    @if($article->without_vat_cashless)
-                    <div class="route-footer-col">
-                            <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} Без НДС, безнал</p>
-                    </div>
-                    @endif
-                    @if($article->cash)
-                    <div class="route-footer-col">
-                        <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} Наличными</p>
-                    </div>
-                    @endif
-
                     <div class="route-footer-col">
                         @auth
                             <button class="form-btn" data-modal-target="send-offer">Отправить предложение</button>
@@ -370,14 +375,18 @@
                         <p><strong>Ставка:</strong></p>
                     </div>
                     <div class="send-offer__col2">
-                        @if($article->with_vat_cashless)
-                            <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} С НДС, безнал</p>
-                        @endif
-                        @if($article->without_vat_cashless)
-                            <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} Без НДС, безнал</p>
-                        @endif
-                        @if($article->cash)
-                            <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} Наличными</p>
+                        @if($article->payment_type == 'payment_request')
+                            {{ __('Запрос ставки') }}
+                        @else
+                            @if($article->with_vat_cashless)
+                                <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} С НДС, безнал</p>
+                            @endif
+                            @if($article->without_vat_cashless)
+                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} Без НДС, безнал</p>
+                            @endif
+                            @if($article->cash)
+                                <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} Наличными</p>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -394,7 +403,7 @@
                     </div>
                 </div>
 
-                @if($article->counter_offers)
+                @if(!$article->counter_offers)
                     @if($article->bids->isNotEmpty())
                         @foreach($article->bids as $bid)
                         <div class="send-offer__row">
@@ -545,7 +554,7 @@
     </div>
 </main>
 
-<script src="https://api-maps.yandex.ru/2.1/?apikey=49817d12-35af-402e-82b9-91b83b18ac74&lang=ru_RU"></script>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=49817d12-35af-402e-82b9-91b83b18ac74&lang={{ app()->getLocale() }}"></script>
 
 <style>
     #myMap {
@@ -561,11 +570,39 @@
     ymaps.ready(init);
 
     function init() {
-        const pointA = "{{ $article->country }} {{ $article->address }}";
-        const pointB = "{{ $article->final_unload_city }} {{ $article->final_unload_address }}";
+        const pointALat = {{ $article->place_lat ?? 'null' }};
+        const pointALng = {{ $article->place_lng ?? 'null' }};
+        const pointBLat = {{ $article->final_unload_city_lat ?? 'null' }};
+        const pointBLng = {{ $article->final_unload_city_lng ?? 'null' }};
+
+        let referencePoints = [];
+
+        if (pointALat !== null && pointALng !== null) {
+            referencePoints.push([pointALat, pointALng]);
+        } else {
+            {{--referencePoints.push("{{ $article->country }} {{ $article->address }}");--}}
+            referencePoints.push("{{ $article->country }}");
+        }
+
+        if (pointBLat !== null && pointBLng !== null) {
+            referencePoints.push([pointBLat, pointBLng]);
+        } else {
+            {{--referencePoints.push("{{ $article->final_unload_city }} {{ $article->final_unload_address }}");--}}
+            referencePoints.push("{{ $article->final_unload_city }}");
+        }
+
+        {{--const pointA = "{{ $article->country }} {{ $article->address }}";--}}
+        {{--const pointB = "{{ $article->final_unload_city }} {{ $article->final_unload_address }}";--}}
+
+        // const multiRoute = new ymaps.multiRouter.MultiRoute({
+        //     referencePoints: [pointA, pointB],
+        //     params: { results: 1 }
+        // }, {
+        //     boundsAutoApply: true
+        // });
 
         const multiRoute = new ymaps.multiRouter.MultiRoute({
-            referencePoints: [pointA, pointB],
+            referencePoints: referencePoints,
             params: { results: 1 }
         }, {
             boundsAutoApply: true

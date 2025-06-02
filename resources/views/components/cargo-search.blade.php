@@ -271,7 +271,7 @@
                 <thead>
                 <tr>
                     <th>
-                        <span>НАПРАВЛ</span>
+                        <span>НАПРАВЛЕНИЕ</span>
                     </th>
                     <th>ТРАНСПОРТ</th>
                     <th>ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ</th>
@@ -285,7 +285,7 @@
                 <tr>
                     <td>
                         <p class="mobile-order-head">НАПРАВЛЕНИЕ</p>
-                        <span>{{ Str::limit($cargoLoading->country, 50) }}-{{ Str::limit($cargoLoading->final_unload_city, 50) }}</span>
+                        <span>{{ Str::limit($cargoLoading->country, 50) }} - {{ Str::limit($cargoLoading->final_unload_city, 50) }}</span>
                     </td>
                     <td>
                         <p class="mobile-order-head">ТРАНСПОРТ</p>
@@ -311,12 +311,12 @@
                     </td>
                     <td>
                         <p class="mobile-order-head">МАРШРУТ</p>
-                        <strong>{{ Str::limit($cargoLoading->country, 50) }}</strong> / <span>{{ Str::limit($cargoLoading->address, 50) }}</span>
+                        <strong>{{ Str::limit($cargoLoading->country, 50) }}</strong>
                         <br>
-                        <strong>{{ $cargoLoading->final_unload_city }}</strong> / <span>{{ $cargoLoading->final_unload_address }}</span>
+                        <strong>{{ $cargoLoading->final_unload_city }}</strong>
                         <br><br>
                         @if($cargoLoading->cargo->constant_frequency)
-                            <p><strong>{{ $cargoLoading->cargo->constant_frequency }}</strong></p>
+                            <p><strong>{{ $cargoLoading->cargo->constant_frequency == 'daily' ? __('Ежедневно') : __('По рабочим дням') }}</strong></p>
                         @elseif($cargoLoading?->cargo?->ready_date)
                             <i><strong>{{ $cargoLoading?->cargo?->ready_date?->format('d.m.Y') }}</strong></i>
                         @else
@@ -325,14 +325,18 @@
                     </td>
                     <td>
                         <p class="mobile-order-head">СТАВКА</p>
-                        @if($cargoLoading->with_vat_cashless)
-                            <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} С НДС, безнал</p>
-                        @endif
-                        @if($cargoLoading->without_vat_cashless)
-                            <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} Без НДС, безнал</p>
-                        @endif
-                        @if($cargoLoading->cash)
-                            <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} Наличными</p>
+                        @if($cargoLoading->payment_type == 'payment_request')
+                            <p class="car-head"><strong>{{ __('Запрос ставки') }}</strong></p>
+                        @else
+                            @if($cargoLoading->with_vat_cashless)
+                                <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} С НДС, безнал</p>
+                            @endif
+                            @if($cargoLoading->without_vat_cashless)
+                                <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} Без НДС, безнал</p>
+                            @endif
+                            @if($cargoLoading->cash)
+                                <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} Наличными</p>
+                            @endif
                         @endif
                     </td>
                 </tr>

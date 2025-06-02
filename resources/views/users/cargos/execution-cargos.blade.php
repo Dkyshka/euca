@@ -362,7 +362,7 @@
                                 <p class="mobile-order-head">загрузка</p>
                                 <p class="car-head"><strong>{{ Str::limit($cargoLoading->country, 50) }}</strong></p>
                                 @if($cargoLoading->cargo->constant_frequency)
-                                    <p><strong>{{ $cargoLoading->cargo->constant_frequency }}</strong></p>
+                                    <p><strong>{{ $cargoLoading->cargo->constant_frequency == 'daily' ? __('Ежедневно') : __('По рабочим дням') }}</strong></p>
                                 @elseif($cargoLoading?->cargo?->ready_date)
                                     <p><strong>{{ $cargoLoading?->cargo?->ready_date?->format('d.m.Y') }}</strong></p>
                                 @else
@@ -398,14 +398,18 @@
 
                             <div class="order-info-col">
                                 <p class="mobile-order-head"></p>
-                                @if($cargoLoading->with_vat_cashless)
-                                    <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} С НДС, безнал</p>
-                                @endif
-                                @if($cargoLoading->without_vat_cashless)
-                                    <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} Без НДС, безнал</p>
-                                @endif
-                                @if($cargoLoading->cash)
-                                    <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} Наличными</p>
+                                @if($cargoLoading->payment_type == 'payment_request')
+                                    <p class="car-head">{{ __('Запрос ставки') }}</p>
+                                @else
+                                    @if($cargoLoading->with_vat_cashless)
+                                        <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} С НДС, безнал</p>
+                                    @endif
+                                    @if($cargoLoading->without_vat_cashless)
+                                        <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} Без НДС, безнал</p>
+                                    @endif
+                                    @if($cargoLoading->cash)
+                                        <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} Наличными</p>
+                                    @endif
                                 @endif
 
                                 {{-- Если есть перевозчик то можно открыть и написать --}}

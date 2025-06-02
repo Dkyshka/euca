@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CargoRequest;
 use App\Models\Cargo;
 use App\Models\CargoLoading;
 use App\Models\CargoType;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class CargoController extends Controller
@@ -50,7 +52,7 @@ class CargoController extends Controller
     {
         $user = auth()->user();
         $this->page = Page::findOrFail(11);
-        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->where('status', CargoLoading::IN_PROGRESS)->get();
+        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->where('status', CargoLoading::IN_PROGRESS)->orderByDesc('id')->get();
 
         return view('users.cargos.work-cargos', [
             'page' => $this->page,
@@ -65,7 +67,7 @@ class CargoController extends Controller
     {
         $user = auth()->user();
         $this->page = Page::findOrFail(11);
-        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->where('status', CargoLoading::COORDINATION)->get();
+        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->where('status', CargoLoading::COORDINATION)->orderByDesc('id')->get();
 
         return view('users.cargos.coordinations-cargos', [
             'page' => $this->page,
@@ -81,7 +83,7 @@ class CargoController extends Controller
         $user = auth()->user();
         $this->page = Page::findOrFail(11);
         $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)
-            ->where('status', CargoLoading::IN_PERFORMANCE)->get();
+            ->where('status', CargoLoading::IN_PERFORMANCE)->orderByDesc('id')->get();
 
         return view('users.cargos.execution-cargos', [
             'page' => $this->page,
@@ -119,128 +121,21 @@ class CargoController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(CargoRequest $request)
     {
-        $request->validate([
-            // название груза
-            'title' => ['required', 'string', 'min:3', 'max:255'],
-            // вес груза
-            'weight' => ['required', 'numeric'],
-            // Тип веса груза
-            'weight_type' => ['required', Rule::in(['t', 'kg'])],
-            // Объём груза
-            'volume' => ['required', 'numeric'],
-
-            'length' => ['nullable', 'numeric'],
-
-            'width' => ['nullable', 'numeric'],
-
-            'height' => ['nullable', 'numeric'],
-
-            'diameter' => ['nullable', 'numeric'],
-
-            // Упаковка
-            'package_id' => ['sometimes', 'nullable', 'exists:packages,id'],
-            // Количество упаковки
-            'quantity' => ['sometimes', 'nullable', 'numeric', 'max:3000'],
-            // компания груза
-            'company_id' => ['required', 'numeric', 'exists:companies,id'],
-            // страна загрузки
-            'country' => ['required', 'string', 'max:255'],
-            // адрес загрузки
-            'address' => ['required', 'string', 'max:255'],
-            // Когда готов груз
-            'when_type' => ['required', Rule::in([1, 2, 3])],
-
-            'ready_date' => [
-                Rule::requiredIf(fn () => request('when_type') == 1),
-                'date',
-            ],
-
-            'constant_frequency' => [
-                Rule::requiredIf(fn () => request('when_type') == 2),
-                'nullable',
-                Rule::in(['daily', 'workdays']),
-            ],
-
-            // archive_after_days — не обязательный
-            'archive_after_days' => ['nullable', 'integer', 'min:0', 'max:5'],
-
-            'time_at' => [
-//                Rule::requiredIf(fn () => !request('is_24h')),
-                'nullable',
-                'date_format:H:i',
-            ],
-            'time_to' => [
-//                Rule::requiredIf(fn () => !request('is_24h')),
-                'nullable',
-                'date_format:H:i',
-                'after:time_at', // end должен быть позже начала
-            ],
-
-            'is_24h' => ['nullable', Rule::in(['0', '1'])],
-
-            // Населенный пункт и адрес разгрузки
-            'final_unload_city' => ['required', 'string', 'max:255'],
-            'final_unload_address' => ['required', 'string', 'max:255'],
-
-            // Дата разгрузки: от и до (может быть диапазон)
-            'final_unload_date_from' => ['nullable', 'date'],
-            'final_unload_date_to' => ['nullable', 'date', 'after_or_equal:final_unload_date_from'],
-
-            // Время разгрузки: если не круглосуточно — обязательно
-            'final_unload_datetime_from' => [
-                'nullable',
-                'date_format:H:i',
-            ],
-            'final_unload_datetime_to' => [
-                'nullable',
-                'date_format:H:i',
-                'after:final_unload_datetime_from',
-            ],
-
-            // Круглосуточно чекбокс
-            'final_is_24h' => ['nullable', Rule::in(['0', '1'])],
-
-            'body_types' => ['required', 'array', 'min:1'],
-
-            'loading_types' => ['array'],
-
-            'unloading_types' => ['array'],
-
-            'payment_type' => ['required', Rule::in(['negotiable', 'no_haggling', 'payment_request'])],
-
-            'with_vat_cashless' => [
-                'nullable',
-                'numeric',
-                'required_without_all:without_vat_cashless,cash'
-            ],
-            'without_vat_cashless' => [
-                'nullable',
-                'numeric',
-                'required_without_all:with_vat_cashless,cash'
-            ],
-            'cash' => [
-                'nullable',
-                'numeric',
-                'required_without_all:with_vat_cashless,without_vat_cashless'
-            ],
-            'currency' => ['nullable', 'string'],
-            'on_cart' => ['nullable', Rule::in(['0', '1'])],
-            'counter_offers' => ['nullable', Rule::in(['0', '1'])],
-            'payment_via' => ['nullable', 'numeric'],
-        ]);
+        try {
+        DB::beginTransaction();
 
         $cargoLoading = CargoLoading::create([
             'company_id' => $request->input('company_id'),
             'country' => $request->input('country'),
-            'address' => $request->input('address'),
+//            'address' => $request->input('address'),
             'time_at' => $request->input('time_at'),
             'time_to' => $request->input('time_to'),
             'is_24h' => $request->input('is_24h'),
             'final_unload_country' => $request->input('final_unload_country'),
             'final_unload_city' => $request->input('final_unload_city'),
-            'final_unload_address' => $request->input('final_unload_address'),
+//            'final_unload_address' => $request->input('final_unload_address'),
             'final_unload_date_from' => $request->input('final_unload_date_from'),
             'final_unload_date_to' => $request->input('final_unload_date_to'),
             'final_unload_datetime_from' => $request->input('final_unload_datetime_from'),
@@ -276,12 +171,19 @@ class CargoController extends Controller
             'constant_frequency' => $request->input('constant_frequency'),
         ]);
 
+        DB::commit();
         return redirect()->route('workCargos');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
-    public function edit(CargoLoading $cargoLoading)
+    public function edit($lang, CargoLoading $cargoLoading)
     {
         $this->page = Page::findOrFail(11);
+        $cargoTypes = CargoType::all();
+        $packages = Package::all();
 
         return view('users.cargos.cargos-edit', [
             'page' => $this->page,
@@ -289,6 +191,8 @@ class CargoController extends Controller
             'footer' => $this->footer,
             'menu' => $this->menu,
             'cargoLoading' => $cargoLoading,
+            'cargoTypes' => $cargoTypes,
+            'packages' => $packages,
         ]);
     }
 }

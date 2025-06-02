@@ -180,9 +180,9 @@
                                     <div class="add-goods__inputs__row">
                                         <label for="when_type">
                                             <select id="when_type" class="add-input input-select label-big" name="when_type" required>
-                                                <option value="1">Готов к загрузке</option>
-                                                <option value="2">Постоянно</option>
-                                                <option value="3">Груза нет, запрос ставки</option>
+                                                <option value="1" {{ old('when_type') == 1 ? 'selected' : '' }}>Готов к загрузке</option>
+                                                <option value="2" {{ old('when_type') == 2 ? 'selected' : '' }}>Постоянно</option>
+                                                <option value="3" {{ old('when_type') == 3 ? 'selected' : '' }}>Груза нет, запрос ставки</option>
                                             </select>
                                             @if ($errors->has('when_type'))<br><p style="color:red;">{{ $errors->first('when_type') }}</p>@endif
                                         </label>
@@ -230,13 +230,13 @@
                                     <div>
                                         <div class="add-goods__inputs__row">
                                             <label for="place">
-                                                <input type="text" name="country" required id="place" value="{{ old('country') }}" class="add-input input-search" placeholder="Населенный пункт">
+                                                <input type="text" name="country" required id="place" value="{{ old('country') }}" class="add-input input-search" placeholder="Введите адрес">
                                                 @if ($errors->has('country'))<br><p style="color:red;">{{ $errors->first('country') }}</p>@endif
                                             </label>
-                                            <label for="address">
-                                                <input class="add-input input-big" type="text" id="address" value="{{ old('address') }}" name="address" required placeholder="Адрес в населенном пункте">
-                                                @if ($errors->has('address'))<br><p style="color:red;">{{ $errors->first('address') }}</p>@endif
-                                            </label>
+{{--                                            <label for="address">--}}
+{{--                                                <input class="add-input input-big" type="text" id="address" value="{{ old('address') }}" name="address" required placeholder="Адрес в населенном пункте">--}}
+{{--                                                @if ($errors->has('address'))<br><p style="color:red;">{{ $errors->first('address') }}</p>@endif--}}
+{{--                                            </label>--}}
                                             <svg width="16" height="18">
                                                 <use xlink:href="#map"></use>
                                             </svg>
@@ -287,13 +287,13 @@
                                     <div>
                                         <div class="add-goods__inputs__row">
                                             <label for="final_unload_country">
-                                                <input type="text" name="final_unload_city" required id="final_unload_city" value="{{ old('final_unload_city') }}" class="add-input input-search" placeholder="Населенный пункт">
+                                                <input type="text" name="final_unload_city" required id="final_unload_city" value="{{ old('final_unload_city') }}" class="add-input input-search" placeholder="Введите адрес">
                                                 @if ($errors->has('final_unload_city'))<br><p style="color:red;">{{ $errors->first('final_unload_city') }}</p>@endif
                                             </label>
-                                            <label for="final_unload_address">
-                                                <input class="add-input input-big" required type="text" id="final_unload_address" name="final_unload_address" value="{{ old('final_unload_address') }}" placeholder="Адрес в населенном пункте">
-                                                @if ($errors->has('final_unload_address'))<br><p style="color:red;">{{ $errors->first('final_unload_address') }}</p>@endif
-                                            </label>
+{{--                                            <label for="final_unload_address">--}}
+{{--                                                <input class="add-input input-big" required type="text" id="final_unload_address" name="final_unload_address" value="{{ old('final_unload_address') }}" placeholder="Адрес в населенном пункте">--}}
+{{--                                                @if ($errors->has('final_unload_address'))<br><p style="color:red;">{{ $errors->first('final_unload_address') }}</p>@endif--}}
+{{--                                            </label>--}}
                                             <svg width="16" height="18">
                                                 <use xlink:href="#map"></use>
                                             </svg>
@@ -1180,6 +1180,15 @@
 {{--                            <button type="reset">Очистить форму</button>--}}
                         </div>
                     </div>
+
+                    <!-- Загрузка -->
+                    <input type="hidden" id="place_lat" name="place_lat" value="{{ old('place_lat') }}">
+                    <input type="hidden" id="place_lng" name="place_lng" value="{{ old('place_lng') }}">
+
+                    <!-- Разгрузка -->
+                    <input type="hidden" id="final_unload_city_lat" name="final_unload_city_lat" value="{{ old('final_unload_city_lat') }}">
+                    <input type="hidden" id="final_unload_city_lng" name="final_unload_city_lng" value="{{ old('final_unload_city_lng') }}">
+
                 </form>
             </main>
 
@@ -1192,8 +1201,56 @@
 
     </div>
 </main>
-
+<script src="https://api-maps.yandex.ru/2.1/?apikey=49817d12-35af-402e-82b9-91b83b18ac74&suggest_apikey=7ed47521-ec68-4122-8f01-7f47b9e7672f
+&lang={{ app()->getLocale() }}"></script>
 <script src="{{ asset('assets/js/main.min.js') }}"></script>
+
+<script>
+    ymaps.ready(function () {
+        // Подсказки для городов (населенных пунктов)
+        const suggestLoadCity = new ymaps.SuggestView('place');
+        const suggestUnloadCity = new ymaps.SuggestView('final_unload_city');
+
+        // Функция геокодирования с объединением города + адрес
+        function geocodeFullAddress(cityId, addressId, latId, lngId) {
+            const city = document.getElementById(cityId).value.trim();
+            // const address = document.getElementById(addressId).value.trim();
+            if (!city) return;
+            // if (!city && !address) return;
+
+            // Формируем полный адрес для геокодирования
+            // const fullAddress = city + (address ? ', ' + address : '');
+            const fullAddress = city;
+
+            ymaps.geocode(fullAddress).then(function (res) {
+                const firstGeoObject = res.geoObjects.get(0);
+                if (!firstGeoObject) {
+                    console.warn('Адрес не найден:', fullAddress);
+                    return;
+                }
+                const coords = firstGeoObject.geometry.getCoordinates();
+                document.getElementById(latId).value = coords[1]; // широта
+                document.getElementById(lngId).value = coords[0]; // долгота
+            }).catch(function (err) {
+                console.error('Ошибка геокодирования:', err);
+            });
+        }
+
+        // Обработчики потери фокуса: геокодируем при уходе с адреса или города
+        ['place'].forEach(id => {
+            document.getElementById(id)?.addEventListener('blur', function () {
+                geocodeFullAddress('place', 'place_lat', 'place_lng');
+            });
+        });
+
+        ['final_unload_city'].forEach(id => {
+            document.getElementById(id)?.addEventListener('blur', function () {
+                geocodeFullAddress('final_unload_city', 'final_unload_city_lat', 'final_unload_city_lng');
+            });
+        });
+    });
+
+</script>
 
 </body>
 </html>
