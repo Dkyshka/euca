@@ -156,6 +156,7 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
     Route::get('cargos/edit/{cargoLoading}', [CargoController::class, 'edit'])->name('cargos.edit');
     Route::post('cargos/update/{cargoLoading}', [CargoController::class, 'update'])->name('cargos.update');
     Route::post('cargos/store', [CargoController::class, 'store'])->name('cargos.store');
+    Route::get('cargos/delete/{cargoLoading}', [CargoController::class, 'delete'])->name('cargos.delete');
 
     // Work-cargos
     Route::get('work-cargos', [CargoController::class, 'workCargos'])->name('workCargos');

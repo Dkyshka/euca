@@ -117,6 +117,10 @@
                                         <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">
                                     </a>
 
+                                    <a href="{{ route('cargos.delete', [app()->getLocale(), $cargo->id]) }}" onclick="return confirm('Вы уверены, что хотите удалить?');" class="chat-message" data-modal-target="dropdown-chat">
+                                        <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">
+                                    </a>
+
                                     <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat">
                                         <button class="order-close-btn" data-modal-close="dropdown-chat"></button>
                                         <div class="tr">

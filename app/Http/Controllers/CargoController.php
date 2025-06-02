@@ -195,4 +195,12 @@ class CargoController extends Controller
             'packages' => $packages,
         ]);
     }
+
+    public function delete($lang, CargoLoading $cargoLoading)
+    {
+        $cargoLoading->cargo()->delete();
+        $cargoLoading->delete();
+
+        return redirect()->route('workCargos');
+    }
 }
