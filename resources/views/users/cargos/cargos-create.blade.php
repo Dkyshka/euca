@@ -67,7 +67,7 @@
                                             </datalist>
                                         </label>
                                         <label for="weight">
-                                            <input class="add-input input-small" value="{{ old('weight') }}" type="number" id="weight" name="weight" placeholder="вес" required>
+                                            <input class="add-input input-small" value="{{ old('weight') }}" type="text" id="weight" name="weight" placeholder="вес" required>
                                             @if ($errors->has('weight'))<br><p style="color:red;">{{ $errors->first('weight') }}</p>@endif
                                         </label>
                                         <label for="weight_type">
@@ -80,7 +80,7 @@
                                             @endif
                                         </label>
                                         <label for="volume" class="label-value">
-                                            <input class="add-input input-small input-value" name="volume" value="{{ old('volume') }}" type="number" id="volume" placeholder="Объем" required>
+                                            <input class="add-input input-small input-value" name="volume" value="{{ old('volume') }}" type="text" id="volume" placeholder="Объем" required>
                                             @if ($errors->has('volume'))<br><p style="color:red;">{{ $errors->first('volume') }}</p>@endif
                                             <span>М<sup>3</sup></span>
                                         </label>
@@ -105,7 +105,7 @@
                                                style="display: {{ (old('quantity') || $errors->has('quantity')) ? 'block' : 'none' }};">
                                             <input class="add-input input-small input-value"
                                                    name="quantity"
-                                                   type="number"
+                                                   type="text"
                                                    id="quantity"
                                                    value="{{ old('quantity') }}">
                                             @if ($errors->has('quantity'))<br><p style="color:red;">{{ $errors->first('quantity') }}</p>@endif
@@ -121,7 +121,7 @@
                                         <label for="length" class="label-value"
                                                style="display: {{ (old('length') || $errors->has('length')) ? 'block' : 'none' }};">
                                             <label>Д</label>
-                                            <input class="add-input input-small input-value" name="length" value="{{ old('length') }}" type="number" id="length">
+                                            <input class="add-input input-small input-value" name="length" value="{{ old('length') }}" type="text" id="length">
                                             @if ($errors->has('length'))<br><p style="color:red;">{{ $errors->first('length') }}</p>@endif
                                             <span>м.</span>
                                         </label>
@@ -129,7 +129,7 @@
                                         <label for="width" class="label-value"
                                                style="display: {{ (old('width') || $errors->has('width')) ? 'block' : 'none' }};">
                                             <label>Ш</label>
-                                            <input class="add-input input-small input-value" name="width" value="{{ old('width') }}" type="number" id="width">
+                                            <input class="add-input input-small input-value" name="width" value="{{ old('width') }}" type="text" id="width">
                                             @if ($errors->has('width'))<br><p style="color:red;">{{ $errors->first('width') }}</p>@endif
                                             <span>м.</span>
                                         </label>
@@ -137,7 +137,7 @@
                                         <label for="height_d" class="label-value"
                                                style="display: {{ (old('height') || $errors->has('height')) ? 'block' : 'none' }};">
                                             <label>В</label>
-                                            <input class="add-input input-small input-value" name="height" value="{{ old('height') }}" type="number" id="height_d">
+                                            <input class="add-input input-small input-value" name="height" value="{{ old('height') }}" type="text" id="height_d">
                                             @if ($errors->has('height'))<br><p style="color:red;">{{ $errors->first('height') }}</p>@endif
                                             <span>м.</span>
                                         </label>
@@ -145,7 +145,7 @@
                                         <label for="diameter" class="label-value"
                                                style="display: {{ (old('diameter') || $errors->has('diameter')) ? 'block' : 'none' }};">
                                             <label>Диаметр</label>
-                                            <input class="add-input input-small input-value" name="diameter" value="{{ old('diameter') }}" type="number" id="diameter">
+                                            <input class="add-input input-small input-value" name="diameter" value="{{ old('diameter') }}" type="text" id="diameter">
                                             @if ($errors->has('diameter'))<br><p style="color:red;">{{ $errors->first('diameter') }}</p>@endif
                                             <span>м.</span>
                                         </label>
