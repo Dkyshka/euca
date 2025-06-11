@@ -14,12 +14,24 @@
 
             <div class="main__inner-cards">
                 <div class="main__inner-card">
-                    <div class="main-inner-card__title">Elite</div>
-                    <div class="main-inner-card__desc">12-дек-2027</div>
-                </div>
-                <div class="main__inner-card">
                     <div class="main-inner-card__title number">{{ $article->id }}</div>
                     <div class="main-inner-card__desc">Номер ID</div>
+                </div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    @if($article->status_id == 3)
+                        <img src="{{ asset('assets/images/statuses/Untitled-3V.png') }}" style="height: 40px; width: auto;">
+                    @endif
+                    @if($article->status_id == 4)
+                        <img src="{{ asset('assets/images/statuses/Start green.png') }}" style="height: 40px; width: auto;">
+                    @endif
+                    @if($article->status_id == 2)
+                        <img src="{{ asset('assets/images/statuses/Pro green.png') }}" style="height: 40px; width: auto;">
+                    @endif
+                    @if($article->is_partner)
+                        <img src="{{ asset('assets/images/statuses/Partner.png') }}" style="height: 40px; width: auto;">
+                    @else
+                        <img src="{{ asset('assets/images/statuses/Member.png') }}" style="height: 40px; width: auto;">
+                    @endif
                 </div>
             </div>
             <div class="main__inner-image">

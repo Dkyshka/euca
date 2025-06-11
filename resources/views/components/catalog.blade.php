@@ -199,7 +199,24 @@
                         {{ Str::limit($company->name, 20) }}
                     </div>
                     <p>{{ Str::limit($company?->country, 20) }}</p>
-                    <span>{{ $company?->status?->name }}</span>
+{{--                    <span>{{ $company?->status?->name }}</span>--}}
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        @if($company->status_id == 3)
+                        <img src="{{ asset('assets/images/statuses/Untitled-3V.png') }}" style="height: 40px; width: auto;">
+                        @endif
+                        @if($company->status_id == 4)
+                        <img src="{{ asset('assets/images/statuses/Start green.png') }}" style="height: 40px; width: auto;">
+                        @endif
+                        @if($company->status_id == 2)
+                        <img src="{{ asset('assets/images/statuses/Pro green.png') }}" style="height: 40px; width: auto;">
+                        @endif
+                        @if($company->is_partner)
+                        <img src="{{ asset('assets/images/statuses/Partner.png') }}" style="height: 40px; width: auto;">
+                        @else
+                        <img src="{{ asset('assets/images/statuses/Member.png') }}" style="height: 40px; width: auto;">
+                        @endif
+                    </div>
+
                     <div class="catalog-card__tags">
                         @if($company->directions->isNotEmpty())
                         @foreach($company->directions()->limit(10)->get() as $direction)

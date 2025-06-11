@@ -228,7 +228,7 @@
                                     <div>
                                         <div class="add-goods__inputs__row">
                                             <label for="place">
-                                                <input type="text" name="country" required id="place" value="{{ old('country') }}" class="add-input input-search" placeholder="Введите адрес">
+                                                <input type="text" name="country" required id="place" value="{{ old('country', $cargoLoading->country ?? '') }}" class="add-input input-search" placeholder="Введите адрес">
                                                 @if ($errors->has('country'))<br><p style="color:red;">{{ $errors->first('country') }}</p>@endif
                                             </label>
                                             {{--                                            <label for="address">--}}
@@ -245,9 +245,9 @@
 
                                             <label for="time_at" class="label-value"
                                                    style="display: {{ (old('time_at') || old('time_to') || $errors->has('time_at') || $errors->has('time_to')) ? 'block' : 'none' }};">
-                                                <input class="add-input input-small input-value" name="time_at" value="{{ old('time_at') }}" type="time" id="time_at">
+                                                <input class="add-input input-small input-value" name="time_at" value="{{ old('time_at', $cargoLoading->time_at ?? '') }}" type="time" id="time_at">
                                                 @if ($errors->has('time_at'))<br><p style="color:red;">{{ $errors->first('time_at') }}</p>@endif
-                                                <input class="add-input input-small input-value" name="time_to" value="{{ old('time_to') }}" type="time" id="time_to">
+                                                <input class="add-input input-small input-value" name="time_to" value="{{ old('time_to', $cargoLoading->time_to ?? '') }}" type="time" id="time_to">
                                                 @if ($errors->has('time_to'))<br><p style="color:red;">{{ $errors->first('time_to') }}</p>@endif
                                             </label>
 
@@ -285,7 +285,7 @@
                                     <div>
                                         <div class="add-goods__inputs__row">
                                             <label for="final_unload_country">
-                                                <input type="text" name="final_unload_city" required id="final_unload_city" value="{{ old('final_unload_city') }}" class="add-input input-search" placeholder="Введите адрес">
+                                                <input type="text" name="final_unload_city" required id="final_unload_city" value="{{ old('final_unload_city', $cargoLoading->final_unload_city ?? '') }}" class="add-input input-search" placeholder="Введите адрес">
                                                 @if ($errors->has('final_unload_city'))<br><p style="color:red;">{{ $errors->first('final_unload_city') }}</p>@endif
                                             </label>
                                             {{--                                            <label for="final_unload_address">--}}

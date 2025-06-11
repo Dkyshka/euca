@@ -21,24 +21,24 @@ class CargoRequest extends FormRequest
             // название груза
             'title' => ['required', 'string', 'min:3', 'max:255'],
             // вес груза
-            'weight' => ['required', 'text'],
+            'weight' => ['required', 'string'],
             // Тип веса груза
             'weight_type' => ['required', Rule::in(['t', 'kg'])],
             // Объём груза
-            'volume' => ['required', 'text'],
+            'volume' => ['required', 'string'],
 
-            'length' => ['nullable', 'text'],
+            'length' => ['nullable', 'string'],
 
-            'width' => ['nullable', 'text'],
+            'width' => ['nullable', 'string'],
 
-            'height' => ['nullable', 'text'],
+            'height' => ['nullable', 'string'],
 
-            'diameter' => ['nullable', 'text'],
+            'diameter' => ['nullable', 'string'],
 
             // Упаковка
             'package_id' => ['sometimes', 'nullable', 'exists:packages,id'],
             // Количество упаковки
-            'quantity' => ['sometimes', 'nullable', 'text', 'max:3000'],
+            'quantity' => ['sometimes', 'nullable', 'string', 'max:3000'],
             // компания груза
             'company_id' => ['required', 'numeric', 'exists:companies,id'],
             // страна загрузки
