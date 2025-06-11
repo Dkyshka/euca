@@ -200,7 +200,7 @@
                     </div>
                     <p>{{ Str::limit($company?->country, 20) }}</p>
 {{--                    <span>{{ $company?->status?->name }}</span>--}}
-                    <div style="display: flex; gap: 10px; align-items: center;">
+                    <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
                         @if($company->status_id == 3)
                         <img src="{{ asset('assets/images/statuses/Untitled-3V.png') }}" style="height: 40px; width: auto;">
                         @endif
