@@ -19,7 +19,7 @@ class Cargo extends Model
         'needs_hitch', 'needs_air_suspension', 'needs_koniki', 'truck_count',
         'crew_required', 'adr_classes', 'permits', 'strap_count', 'carrying_capacity',
         'bargain_type', 'rates', 'payments', 'direct_contract', 'constant_frequency',
-        'contact_id', 'note'
+        'contact_id', 'note', 'package_id',
     ];
 
     protected $casts = [

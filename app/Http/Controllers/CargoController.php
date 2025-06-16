@@ -116,9 +116,60 @@ class CargoController extends Controller
         ]);
     }
 
-    public function update()
+    public function update($lang, CargoRequest $request, CargoLoading $cargoLoading)
     {
+        try {
+            DB::beginTransaction();
 
+            $cargoLoading->update([
+                'country' => $request->input('country'),
+//            'address' => $request->input('address'),
+                'time_at' => $request->input('time_at'),
+                'time_to' => $request->input('time_to'),
+                'is_24h' => $request->input('is_24h') ?? 0,
+                'final_unload_country' => $request->input('final_unload_country'),
+                'final_unload_city' => $request->input('final_unload_city'),
+//            'final_unload_address' => $request->input('final_unload_address'),
+                'final_unload_date_from' => $request->input('final_unload_date_from'),
+                'final_unload_date_to' => $request->input('final_unload_date_to'),
+                'final_unload_datetime_from' => $request->input('final_unload_datetime_from'),
+                'final_unload_datetime_to' => $request->input('final_unload_datetime_to'),
+                'final_is_24h' => $request->input('final_is_24h') ?? 0,
+                'body_types' => $request->input('body_types'),
+                'loading_types' => $request->input('loading_types'),
+                'unloading_types' => $request->input('unloading_types'),
+                'payment_type' => $request->input('payment_type'),
+                'with_vat_cashless' => $request->input('with_vat_cashless'),
+                'without_vat_cashless' => $request->input('without_vat_cashless'),
+                'cash' => $request->input('cash'),
+                'currency' => $request->input('currency'),
+                'on_cart' => $request->input('on_cart'),
+                'counter_offers' => $request->input('counter_offers'),
+                'payment_via' => $request->input('payment_via'),
+            ]);
+
+            $cargoLoading->cargo->update([
+                'title' => $request->input('title'),
+                'weight' => $request->input('weight'),
+                'weight_type' => $request->input('weight_type'),
+                'volume' => $request->input('volume'),
+                'package_id' => $request->input('package_id'),
+                'quantity' => $request->input('quantity'),
+                'ready_date' => $request->input('when_type') == 3 ? null : $request->input('ready_date'),
+                'archive_after_days' => $request->input('archive_after_days'),
+                'length' => $request->input('length'),
+                'width' => $request->input('width'),
+                'height' => $request->input('height'),
+                'diameter' => $request->input('diameter'),
+                'constant_frequency' => $request->input('when_type') == 3 ? null : $request->input('constant_frequency'),
+            ]);
+
+            DB::commit();
+            return redirect()->route('workCargos');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
     }
 
     public function store(CargoRequest $request)
