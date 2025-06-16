@@ -34,7 +34,6 @@
                     <button class="form-btn" data-modal-target="add-ts">Добавить</button>
                 </div>
 
-
                 <div class="drivers__list">
                     <div class="drivers-content">
                         <h5>Автопарк</h5>
@@ -49,10 +48,14 @@
                                 <b>{{ $transport->body_type }}</b>
                                 <span>{{ $transport->country }} - {{ $transport->final_country }}, {{ $transport->capacity }} т</span>
                             </div>
-{{--                            <div class="drivers-card__buttons">--}}
-{{--                                <button>Редактировать</button>--}}
-{{--                                <button>Удалить</button>--}}
-{{--                            </div>--}}
+                            <div class="drivers-card__buttons">
+                                <button>
+                                    <a href="{{ route('transports.edit', [app()->getLocale(), $transport->id]) }}">Редактировать</a>
+                                </button>
+                                <button>
+                                    <a href="{{ route('transports.delete', [app()->getLocale(), $transport->id]) }}">Удалить</a>
+                                </button>
+                            </div>
                         </div>
                         @endforeach
                     </div>
@@ -168,7 +171,7 @@
                 <!-- Дата и кол-во дней -->
                 <div id="ready_block" style="display: flex; gap: 10px;">
                     <label for="ready_date" class="date-driver">
-                        <input id="ready_date" name="ready_date" type="date" class="add-input" required>
+                        <input id="ready_date" name="ready_date" type="date" class="add-input">
                     </label>
 
 {{--                    <label for="archive_after_days" style="display: none">--}}

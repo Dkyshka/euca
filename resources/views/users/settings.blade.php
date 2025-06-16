@@ -56,7 +56,7 @@
 							@endif
 						</div>
 						<div class="profile-content__info">
-							<b>{{ auth()->user()->login }}</b>
+							<b>{{ auth()->user()->full_name ?? auth()->user()->name }}</b>
 							<div class="profile-content__form">
 								<label for="upload" class="upload">Загрузить фото</label>
 								<input type="file" id="upload" name="file" accept="image/*">

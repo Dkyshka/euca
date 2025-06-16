@@ -166,8 +166,10 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
 
     // Auto
     Route::get('auto-park', [AutoController::class, 'autoPark'])->name('auto-park');
+
     // Drivers
     Route::get('drivers', [AutoController::class, 'drivers'])->name('drivers');
+
     // Notifications
     Route::get('notifications', [AutoController::class, 'notifications'])->name('notifications');
     Route::get('notifications/inner', [AutoController::class, 'notificationsInner'])->name('notificationsInner');
@@ -184,6 +186,9 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
 
     // Transport
     Route::post('/transports', [TransportController::class, 'store'])->name('transports.store');
+    Route::get('/transports/edit/{transport}', [AutoController::class, 'autoParkEdit'])->name('transports.edit');
+    Route::post('/transports/update/{transport}', [TransportController::class, 'update'])->name('transports.update');
+    Route::get('/transports/delete/{transport}', [TransportController::class, 'delete'])->name('transports.delete');
 });
 
 // Pages

@@ -13,6 +13,7 @@ class CargoBid extends Model
     protected $fillable = [
         'cargo_loading_id',
         'user_id',
+        'initiator_id',
         'price',
         'with_vat_cashless',
         'without_vat_cashless',
@@ -52,5 +53,10 @@ class CargoBid extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function initiator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'initiator_id');
     }
 }

@@ -11,7 +11,7 @@
                         <input type="text" id="from" placeholder="Напрмиер, Москва" class="input-form">
                     </label>
                     <label for="to">
-                        <span>Радиус</span>
+{{--                        <span>Радиус</span>--}}
                         <input type="number" id="to" placeholder="КМ" class="input-form">
                     </label>
                 </div>
@@ -28,7 +28,7 @@
                         <input type="text" id="from" placeholder="Напрмиер, Санкт-Петербург" class="input-form">
                     </label>
                     <label for="to">
-                        <span>Радиус</span>
+{{--                        <span>Радиус</span>--}}
                         <input type="number" id="to" placeholder="КМ" class="input-form">
                     </label>
                 </div>
@@ -124,30 +124,21 @@
                 </select>
             </label>
 
-            <label for="sel6">
-                <select name="" id="sel6" class="input-select">
-                    <option value="" hidden>Доп. параметры</option>
-                    <option value="">Гидролифт</option>
-                    <option value="">С кониками</option>
-                    <option value="">Не показывать «постоянные»</option>
-                </select>
-            </label>
+{{--            <label for="sel7">--}}
+{{--                <select name="" id="sel7" class="input-select">--}}
+{{--                    <option value="" hidden>Габариты и догруз</option>--}}
+{{--                    <option value="">Неважно</option>--}}
+{{--                    <option value="">Только догруз</option>--}}
+{{--                    <option value="">Отдельная машина</option>--}}
+{{--                </select>--}}
+{{--            </label>--}}
 
-            <label for="sel7">
-                <select name="" id="sel7" class="input-select">
-                    <option value="" hidden>Габариты и догруз</option>
-                    <option value="">Неважно</option>
-                    <option value="">Только догруз</option>
-                    <option value="">Отдельная машина</option>
-                </select>
-            </label>
-
-            <label for="sel7">
-                <select name="" id="sel7" class="input-select">
-                    <option value="" hidden>Поиск по фирмам</option>
-                    <option value="">Доступно только платным участникам</option>
-                </select>
-            </label>
+{{--            <label for="sel7">--}}
+{{--                <select name="" id="sel7" class="input-select">--}}
+{{--                    <option value="" hidden>Поиск по фирмам</option>--}}
+{{--                    <option value="">Доступно только платным участникам</option>--}}
+{{--                </select>--}}
+{{--            </label>--}}
         </div>
 
         <div class="form-search__footer">
@@ -229,7 +220,7 @@
                 <tr>
                     <td>
                         <p class="mobile-order-head">НАПРАВЛЕНИЕ</p>
-                        <span>UZB-TKM</span>
+                        <span>{{ Str::limit($transport->country, 30) }}-{{ Str::limit($transport->final_country, 30) }}</span>
                     </td>
                     <td>
                         <p class="mobile-order-head">ТРАНСПОРТ</p>
@@ -246,7 +237,11 @@
                     <td>
                         <p class="mobile-order-head">МАРШРУТ</p>
                         <strong>{{ $transport->country }}</strong><br> - <strong>{{ $transport->final_country }}</strong><br>
+                        @if($transport->ready_date)
                         <br><i><strong>готов {{ $transport->ready_date?->format('d.m.Y') }}</strong></i>
+                        @else
+                        <br><i><strong>{{ $transport->availability_mode == 'daily' ? __('Ежедневно') : __('По рабочим дням') }}</strong></i>
+                        @endif
                     </td>
                     <td>
                         <p class="mobile-order-head">СТАВКА</p>
@@ -260,7 +255,7 @@
                                 <p><strong>{{ $transport->without_vat_cashless }}</strong> {{ $transport->currency }} Без НДС, безнал</p>
                             @endif
                             @if($transport->cash)
-                                <p><strong>{{ $article->cash }}</strong> {{ $transport->currency }} Наличными</p>
+                                <p><strong>{{ $transport->cash }}</strong> {{ $transport->currency }} Наличными</p>
                             @endif
                         @endif
                     </td>

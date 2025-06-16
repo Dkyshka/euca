@@ -21,7 +21,7 @@
                         <input type="text" id="from" placeholder="Напрмиер, Узбекистан" class="input-form">
                     </label>
                     <label for="to">
-                        <span>Радиус</span>
+{{--                        <span>Радиус</span>--}}
                         <input type="number" id="to" placeholder="КМ" class="input-form">
                     </label>
                 </div>
@@ -50,7 +50,7 @@
                         <input type="text" id="from" placeholder="Например, Казахстан" class="input-form">
                     </label>
                     <label for="to">
-                        <span>Радиус</span>
+{{--                        <span>Радиус</span>--}}
                         <input type="number" id="to" placeholder="КМ" class="input-form">
                     </label>
                 </div>
@@ -80,7 +80,7 @@
 
             <div class="form-search-inputs form-search-inputs-small">
                 <label for="from">
-                    <span>Обьем3</span>
+                    <span>Объем3</span>
                     <input type="number" id="from" placeholder="от" class="input-form">
                 </label>
                 <label for="to">
@@ -201,12 +201,12 @@
 {{--                </select>--}}
 {{--            </label>--}}
 
-            <label for="sel7">
-                <select name="" id="sel7" class="input-select">
-                    <option value="" hidden>Поиск по фирмам</option>
-                    <option value="">Доступно только платным участникам</option>
-                </select>
-            </label>
+{{--            <label for="sel7">--}}
+{{--                <select name="" id="sel7" class="input-select">--}}
+{{--                    <option value="" hidden>Поиск по фирмам</option>--}}
+{{--                    <option value="">Доступно только платным участникам</option>--}}
+{{--                </select>--}}
+{{--            </label>--}}
         </div>
 
         <div class="form-search__footer">

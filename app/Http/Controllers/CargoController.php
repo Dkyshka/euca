@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CargoRequest;
 use App\Models\Cargo;
+use App\Models\CargoBid;
 use App\Models\CargoLoading;
 use App\Models\CargoType;
 use App\Models\Package;
@@ -67,7 +68,12 @@ class CargoController extends Controller
     {
         $user = auth()->user();
         $this->page = Page::findOrFail(11);
-        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)->where('status', CargoLoading::COORDINATION)->orderByDesc('id')->get();
+        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)
+            ->where('status', CargoLoading::COORDINATION)
+            ->orderByDesc('id')->get();
+        $cargoBids = CargoBid::where('user_id', $user->id)
+            ->where('status', CargoBid::PENDING)
+            ->orderByDesc('id')->get();
 
         return view('users.cargos.coordinations-cargos', [
             'page' => $this->page,
@@ -75,6 +81,7 @@ class CargoController extends Controller
             'footer' => $this->footer,
             'menu' => $this->menu,
             'cargoLoadings' => $cargoLoadings,
+            'cargoBids' => $cargoBids,
         ]);
     }
 
@@ -84,6 +91,9 @@ class CargoController extends Controller
         $this->page = Page::findOrFail(11);
         $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)
             ->where('status', CargoLoading::IN_PERFORMANCE)->orderByDesc('id')->get();
+        $cargoBids = CargoBid::where('user_id', $user->id)
+            ->where('status', CargoBid::ACCEPTED)
+            ->orderByDesc('id')->get();
 
         return view('users.cargos.execution-cargos', [
             'page' => $this->page,
@@ -91,6 +101,7 @@ class CargoController extends Controller
             'footer' => $this->footer,
             'menu' => $this->menu,
             'cargoLoadings' => $cargoLoadings,
+            'cargoBids' => $cargoBids,
         ]);
     }
 

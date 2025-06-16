@@ -37,7 +37,6 @@ class Transport extends Model
     ];
 
     protected $casts = [
-        'availability_mode' => 'boolean',
         'ready_date' => 'datetime',
     ];
 

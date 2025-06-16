@@ -47,6 +47,21 @@ class AutoController extends Controller
         ]);
     }
 
+    public function autoParkEdit($locale, Transport $transport)
+    {
+        $this->page = Page::findOrFail(11);
+        $drivers = Driver::where('user_id', auth()->user()->id)->get();
+
+        return view('users.auto.auto-park-edit', [
+            'page' => $this->page,
+            'setting' => $this->setting,
+            'footer' => $this->footer,
+            'menu' => $this->menu,
+            'drivers' => $drivers,
+            'transport' => $transport,
+        ]);
+    }
+
     public function drivers()
     {
         $this->page = Page::findOrFail(11);

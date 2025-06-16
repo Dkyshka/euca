@@ -888,12 +888,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCargoSummary() {
         const summary = [];
 
-        const title = titleInput.value.trim();
-        const weight = weightInput.value.trim();
-        const weightType = weightTypeSelect.value;
-        const volume = volumeInput.value.trim();
-        const quantity = quantityInput.value.trim();
-        const packaging = packageSelect.options[packageSelect.selectedIndex]?.text?.trim();
+        const title = titleInput?.value.trim();
+        const weight = weightInput?.value.trim();
+        const weightType = weightTypeSelect?.value;
+        const volume = volumeInput?.value.trim();
+        const quantity = quantityInput?.value.trim();
+        const packaging = packageSelect?.options[packageSelect.selectedIndex]?.text?.trim();
 
         const length = lengthInput?.value?.trim();
         const width = widthInput?.value?.trim();
@@ -916,7 +916,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (dimensions.length) summary.push(dimensions.join(', '));
 
-        sidebarCargoText.textContent = summary.length ? summary.join(', ') : 'не заполнено';
+        if (sidebarCargoText) {
+            sidebarCargoText.textContent = summary?.length ? summary?.join(', ') : 'не заполнено';
+        }
     }
 
     const inputs = [
@@ -942,8 +944,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         switch (whenType?.value) {
             case '1': // Готов к загрузке
-                const date = readyDate.value;
-                const days = archiveDays.value;
+                const date = readyDate?.value;
+                const days = archiveDays?.value;
                 summary = date ? `Готов с ${date}` : '';
                 if (days && days !== '0') {
                     summary += `, актуален ${days} дн.`;

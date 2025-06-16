@@ -1,6 +1,6 @@
 
 <footer class="footer">
-    <a href="{{ url(app()->getLocale()) }}" aria-label="на главную страннцу" class="nav__logo">
+    <a href="{{ url(app()->getLocale()) }}" class="nav__logo">
         <picture>
             <source srcset="{{ asset('assets/images/svg/search-logo.svg') }}">
             <img src="{{ asset('assets/images/svg/search-logo.svg') }}" width="230" height="50" alt="логотип компании">

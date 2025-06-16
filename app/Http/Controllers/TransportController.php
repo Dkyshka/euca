@@ -55,4 +55,58 @@ class TransportController extends Controller
 
         return response()->json(['status' => true]);
     }
+
+    public function update(Request $request, $locale, Transport $transport)
+    {
+        $validated = $request->validate([
+            'country' => 'required',
+            'final_country' => 'required',
+            'body_type' => 'required',
+            'driver_id' => 'nullable|exists:drivers,id',
+            'capacity' => 'nullable|integer|min:0',
+            'volume' => 'nullable|integer|min:0',
+            'length' => 'nullable|integer|min:0',
+            'width' => 'nullable|integer|min:0',
+            'height' => 'nullable|integer|min:0',
+
+            'payment_type' => 'required|in:no_haggling,payment_request',
+            'comment' => 'nullable|string',
+
+            'with_vat_cashless' => [
+                'nullable',
+                'numeric',
+                'required_without_all:without_vat_cashless,cash'
+            ],
+            'without_vat_cashless' => [
+                'nullable',
+                'numeric',
+                'required_without_all:with_vat_cashless,cash'
+            ],
+            'cash' => [
+                'nullable',
+                'numeric',
+                'required_without_all:with_vat_cashless,without_vat_cashless'
+            ],
+            'currency' => 'nullable|string',
+
+            'availability_mode' => 'nullable|in:date,workdays,weekends,daily',
+            'ready_date' => 'nullable|date|required_if:availability_mode,date',
+        ]);
+
+        $validated['ready_date'] = $request->when_type == 1 ? $validated['ready_date'] : null;
+        $validated['availability_mode'] = $request->when_type == 2 ? $validated['availability_mode'] : null;
+
+        $transport->update([
+            ...$validated,
+        ]);
+
+        return redirect()->route('auto-park');
+    }
+
+    public function delete($locale, Transport $transport)
+    {
+        $transport->delete();
+
+        return redirect()->route('auto-park');
+    }
 }

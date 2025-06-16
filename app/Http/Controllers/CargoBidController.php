@@ -106,7 +106,7 @@ class CargoBidController extends Controller
         // Перевести груз в архив
         $cargoLoading->update(['status' => CargoLoading::ARCHIVE]);
 
-        return back()->with('success', 'Груз завершён и отклики обновлены.');
+        return redirect()->route('сoordinations');
     }
 
 
