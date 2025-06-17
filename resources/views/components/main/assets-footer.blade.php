@@ -82,7 +82,7 @@
         <form action="{{ route('auth_login', app()->getLocale()) }}" method="post">
             @csrf
             <div class="input__row">
-                <p>Логин</p>
+                <p>{{ __('lang.Логин') }}</p>
 
                 <label for="auth-login">
                     <input type="text" name="login" id="auth-login" placeholder="{{ __('lang.Введите логин') }}">
