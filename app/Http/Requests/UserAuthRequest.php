@@ -30,7 +30,7 @@ class UserAuthRequest extends FormRequest
         return [
             'login.required' => __('lang.Введите логин'),
             'login.exists' => __('lang.Такого пользователя не существует'),
-            'password.required' => __('Введите пароль')
+            'password.required' => __('lang.Введите пароль')
         ];
     }
 }
