@@ -4,15 +4,15 @@
 
 <main class="main-wrapper search-inner-wrapper">
     <section class="search-page">
-        <h1 class="title">Поиск грузов</h1>
+        <h1 class="title">{{ __('lang.Груз') }}</h1>
         <div class="search-goods__head">
             <b>{{ $article->country }} - {{ $article->final_unload_city }}, {{ $article->cargo->title }}</b>
-            <p><strong>( Создан {{ $article->created_at?->format('d.m.Y') }} ) </strong>изменен {{ $article->updated_at?->format('d.m.Y') }}</p>
+            <p><strong>( {{ __('lang.Создан') }} {{ $article->created_at?->format('d.m.Y') }} ) </strong>изменен {{ $article->updated_at?->format('d.m.Y') }}</p>
         </div>
         <div class="add-goods__inner add-goods__main">
             <div class="add-gods__left search-goods__left">
                 <div class="route-goods">
-                    <p><strong>Маршрут и груз</strong></p>
+                    <p><strong>{{ __('lang.Маршрут и груз') }}</strong></p>
                     <div class="route-goods__card">
                         <div class="route-goods__line">
                             <svg width="18" height="14">
@@ -31,11 +31,11 @@
                             <div class="route-goods__info-top">
                                 <p>{{ $article->country }}</p>
                                 @if($article->cargo->constant_frequency)
-                                    <p><strong>{{ $article->cargo->constant_frequency == 'daily' ? 'Ежедневно' : 'По рабочим дням' }}</strong></p>
+                                    <p><strong>{{ $article->cargo->constant_frequency == 'daily' ? __('lang.Ежедневно') : __('lang.По рабочим дням') }}</strong></p>
                                 @elseif($article?->cargo?->ready_date)
                                     <p><strong>{{ $article?->cargo?->ready_date?->format('d.m.Y') }}</strong></p>
                                 @else
-                                    <p><strong>{{ __('Груза нет, запрос ставки') }}</strong></p>
+                                    <p><strong>{{ __('lang.Груза нет, запрос ставки') }}</strong></p>
                                 @endif
                                 <p>
                                     <svg width="24" height="18">
@@ -46,7 +46,7 @@
                             </div>
                             <div class="route-goods__info-bottom">
                                 <p>{{ $article->final_unload_city }}</p>
-                                <p><strong>Разгрузка</strong></p>
+                                <p><strong>{{ __('lang.Разгрузка') }}</strong></p>
                                 @if($article->final_unload_date_from)
                                 <p><strong>{{ $article->final_unload_date_from?->format('d.m.Y') }}</strong>
                                     @if($article->final_unload_date_to)
@@ -62,14 +62,14 @@
                                     </p>
                                 @endif
                                 @if($article->final_is_24h)
-                                    <p><strong>{{ __('Круглосуточно') }}</strong></p>
+                                    <p><strong>{{ __('lang.Круглосуточно') }}</strong></p>
                                 @endif
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="goods-map__wrapper">
-                    <p><strong>Расчет расстояний</strong></p>
+                    <p><strong>{{ __('lang.Расчет расстояний') }}</strong></p>
                     <div class="goods-map__cards">
                         <div class="goods-map__card">
                             <p id="distance"></p>
@@ -80,16 +80,16 @@
                     </div>
                 </div>
                 <div class="route-goods__bottom">
-                    <p><strong>Транспорт</strong></p>
+                    <p><strong>{{ __('lang.Транспорт') }}</strong></p>
                     <br>
-                    <p><strong>Кузов</strong></p>
+                    <p><strong>{{ __('lang.Кузов') }}</strong></p>
                     <p>{{ Str::limit(implode(', ', array_slice($article->body_types, 0, 5)), 70) }}</p>
                     @if (!empty($article->loading_types))
-                        <p><strong>Загрузка</strong></p>
+                        <p><strong>{{ __('lang.Загрузка') }}</strong></p>
                         <p>{{ Str::limit(implode(', ', array_slice($article->loading_types, 0, 5)), 70) }}</p>
                     @endif
                     @if (!empty($article->unloading_types))
-                        <p><strong>Выгрузка</strong></p>
+                        <p><strong>{{ __('lang.Выгрузка') }}</strong></p>
                         <p>{{ Str::limit(implode(', ', array_slice($article->unloading_types, 0, 5)), 70) }}</p>
                     @endif
 
@@ -105,25 +105,25 @@
                     @else
                         <div class="route-footer-col">
                         @if($article->with_vat_cashless)
-                            <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} С НДС, безнал</p>
+                            <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} {{ __('lang.С НДС, безнал') }}</p>
                         @endif
                         </div>
                         @if($article->without_vat_cashless)
                         <div class="route-footer-col">
-                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} Без НДС, безнал</p>
+                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} {{ __('lang.Без НДС, безнал') }}</p>
                         </div>
                         @endif
                         @if($article->cash)
                         <div class="route-footer-col">
-                            <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} Наличными</p>
+                            <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} {{ __('lang.Наличными') }}</p>
                         </div>
                         @endif
                     @endif
                     <div class="route-footer-col">
                         @auth
-                            <button class="form-btn" data-modal-target="send-offer">Отправить предложение</button>
+                            <button class="form-btn" data-modal-target="send-offer">{{ __('lang.Отправить предложение') }}</button>
                         @else
-                            <button class="form-btn" data-modal-target="modal-login">Отправить предложение</button>
+                            <button class="form-btn" data-modal-target="modal-login">{{ __('lang.Отправить предложение') }}</button>
                         @endauth
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                     @foreach($article->company->phones as $item)
                     <a href="tel:{{ str_replace(['(', ')', '-', ' '], '', $item->phone) }}">{{ $item->phone }}</a>
                     @endforeach
-                    <a class="company-link" href="javascript:;" data-modal-target="dropdown-chat1">Написать сообщение</a>
+                    <a class="company-link" href="javascript:;" data-modal-target="dropdown-chat1">{{ __('lang.Написать сообщение') }}</a>
 
                     <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat1" style="top: -100%;left: 0;">
                         <button class="order-close-btn" data-modal-close="dropdown-chat1"></button>
@@ -158,22 +158,22 @@
                                 <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
                             </svg>
                         </div>
-                        <b>Отправить сообщение</b>
+                        <b>{{ __('lang.Отправить сообщение') }}</b>
                         <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
                             @csrf
                             <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $article->company->user->id }}">
                             <textarea required name="message" id="chat_text_public" rows="5" style="height: auto; overflow: hidden"></textarea>
 
-                            <button class="form-btn" data-modal-close="dropdown-chat1">Отправить</button>
-                            <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">Отмена</button>
+                            <button class="form-btn" data-modal-close="dropdown-chat1">{{ __('lang.Отправить') }}</button>
+                            <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">{{ __('lang.Отмена') }}</button>
                         </form>
 
                     </div>
 
                     @auth
-                        <button class="form-btn" data-modal-target="send-offer">Отправить предложение</button>
+                        <button class="form-btn" data-modal-target="send-offer">{{ __('lang.Отправить предложение') }}</button>
                     @else
-                        <button class="form-btn" data-modal-target="modal-login">Отправить предложение</button>
+                        <button class="form-btn" data-modal-target="modal-login">{{ __('lang.Отправить предложение') }}</button>
                     @endauth
                 </div>
             </div>
@@ -330,29 +330,29 @@
     <div class="modal-overlay" data-modal="send-offer">
         <div class="modal modal-send-offer">
             <div class="send-offer__header">
-                <b>Груз</b>
+                <b>{{ __('lang.Груз') }}</b>
             </div>
             <div class="send-offer__card">
                 <div class="send-offer__row">
                     <div class="send-offer__col1">
-                        <p><strong>Транспорт:</strong></p>
+                        <p><strong>{{ __('lang.Транспорт') }}:</strong></p>
                     </div>
                     <div class="send-offer__col2">
-                        <p><strong>Кузов</strong></p>
+                        <p><strong>{{ __('lang.Кузов') }}</strong></p>
                         <p>{{ Str::limit(implode(', ', array_slice($article->body_types, 0, 5)), 70) }}</p>
                         @if (!empty($article->loading_types))
                             <p><strong>Загрузка</strong></p>
                             <p>{{ Str::limit(implode(', ', array_slice($article->loading_types, 0, 5)), 70) }}</p>
                         @endif
                         @if (!empty($article->unloading_types))
-                            <p><strong>Выгрузка</strong></p>
+                            <p><strong>{{ __('lang.Выгрузка') }}</strong></p>
                             <p>{{ Str::limit(implode(', ', array_slice($article->unloading_types, 0, 5)), 70) }}</p>
                         @endif
                     </div>
                 </div>
                 <div class="send-offer__row">
                     <div class="send-offer__col1">
-                        <p><strong>Вес / объем, м3, груз:</strong></p>
+                        <p><strong>{{ __('lang.Вес / объем, м3, груз:') }}</strong></p>
                     </div>
                     <div class="send-offer__col2">
                         <strong>{{ $article->cargo->weight }} - </strong>
@@ -363,7 +363,7 @@
                 </div>
                 <div class="send-offer__row">
                     <div class="send-offer__col1">
-                        <p><strong>Маршрут:</strong></p>
+                        <p><strong>{{ __('lang.Маршрут:') }}</strong></p>
                     </div>
                     <div class="send-offer__col2">
                         <p><strong>{{ $article->country }} - {{ $article->final_unload_city }}</strong></p>
@@ -372,20 +372,20 @@
                 </div>
                 <div class="send-offer__row">
                     <div class="send-offer__col1">
-                        <p><strong>Ставка:</strong></p>
+                        <p><strong>{{ __('lang.Ставка:') }}</strong></p>
                     </div>
                     <div class="send-offer__col2">
                         @if($article->payment_type == 'payment_request')
                             {{ __('Запрос ставки') }}
                         @else
                             @if($article->with_vat_cashless)
-                                <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} С НДС, безнал</p>
+                                <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} {{ __('lang.С НДС, безнал') }}</p>
                             @endif
                             @if($article->without_vat_cashless)
-                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} Без НДС, безнал</p>
+                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} {{ __('lang.Без НДС, безнал') }}</p>
                             @endif
                             @if($article->cash)
-                                <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} Наличными</p>
+                                <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} {{ __('lang.Наличными') }}</p>
                             @endif
                         @endif
                     </div>
@@ -393,13 +393,13 @@
 
                 <div class="send-offer__row">
                     <div class="send-offer__col">
-                        <p><strong>Ставка:</strong></p>
+                        <p><strong>{{ __('lang.Ставка:') }}</strong></p>
                     </div>
                     <div class="send-offer__col">
-                        <p><strong>Дополнительно</strong></p>
+                        <p><strong>{{ __('lang.Дополнительно') }}</strong></p>
                     </div>
                     <div class="send-offer__col">
-                        <p><strong>Добавлено</strong></p>
+                        <p><strong>{{ __('lang.Добавлено') }}</strong></p>
                     </div>
                 </div>
 
@@ -408,9 +408,9 @@
                         @foreach($article->bids as $bid)
                         <div class="send-offer__row">
                             <div class="send-offer__col">
-                                <p>{{ $bid->with_vat_cashless }} {{ $article->currency }} С НДС, безнал</p>
-                                <p>{{ $bid->without_vat_cashless }} {{ $article->currency }} Без НДС, безнал</p>
-                                <p>{{ $bid->cash }} {{ $article->currency }} наличными</p>
+                                <p>{{ $bid->with_vat_cashless }} {{ $article->currency }} {{ __('lang.С НДС, безнал') }}</p>
+                                <p>{{ $bid->without_vat_cashless }} {{ $article->currency }} {{ __('lang.Без НДС, безнал') }}</p>
+                                <p>{{ $bid->cash }} {{ $article->currency }} {{ __('lang.наличными') }}</p>
                             </div>
                             <div class="send-offer__col">
                                 <p>{{ $bid->created_at?->format('d.m.Y') }}</p>
@@ -422,21 +422,21 @@
                 @else
                     <div class="send-offer__row">
                         <div class="send-offer__col">
-                        <p>Грузовладелец скрыл встречные предложения</p>
+                        <p>{{ __('lang.Грузовладелец скрыл встречные предложения') }}</p>
                         </div>
                     </div>
                 @endif
             </div>
 
             <div class="send-offer__header">
-                <b>Ваше предложение</b>
+                <b>{{ __('lang.Ваше предложение') }}</b>
             </div>
             <form action="{{ route('cargo.bids.store', [app()->getLocale(), $article->id]) }}" method="POST" id="bidForm">
                 @csrf
                 <div class="send-offer__card">
                     <div class="send-offer__row">
                         <div class="send-offer__col1">
-                            <p><strong>Ставка:</strong></p>
+                            <p><strong>{{ __('lang.Ставка:') }}</strong></p>
                         </div>
 
                         <div class="send-offer__col2 send-offer__flex">
@@ -445,29 +445,29 @@
                             <label for="offer">
                                 <select name="price" id="offer">
                                     @if($article->with_vat_cashless)
-                                    <option value="{{ $article->with_vat_cashless }}">{{ $article->with_vat_cashless }} {{ $article->currency }} С НДС, безнал</option>
+                                    <option value="{{ $article->with_vat_cashless }}">{{ $article->with_vat_cashless }} {{ $article->currency }} {{ __('lang.С НДС, безнал') }}</option>
                                     @endif
                                     @if($article->without_vat_cashless)
-                                    <option value="{{ $article->without_vat_cashless }}">{{ $article->without_vat_cashless }} {{ $article->currency }} Без НДС, безнал</option>
+                                    <option value="{{ $article->without_vat_cashless }}">{{ $article->without_vat_cashless }} {{ $article->currency }} {{ __('lang.Без НДС, безнал') }}</option>
                                     @endif
                                     @if($article->cash)
-                                    <option value="{{ $article->cash }}">{{ $article->cash }} {{ $article->currency }} наличными</option>
+                                    <option value="{{ $article->cash }}">{{ $article->cash }} {{ $article->currency }} {{ __('lang.наличными') }}</option>
                                     @endif
                                 </select>
                             </label>
-                            <p>Ставка фиксирована и не предполагает торга</p>
+                            <p>{{ __('lang.Ставка фиксирована и не предполагает торга') }}</p>
                             @else
                             <label for="without_vat_cashless">
                                 <input type="number" name="with_vat_cashless">
-                                <p>С НДС, безнал</p>
+                                <p>{{ __('lang.С НДС, безнал') }}</p>
                             </label>
                             <label for="without_vat_cashless">
                                 <input type="number" name="without_vat_cashless">
-                                <p>Без НДС, безнал</p>
+                                <p>{{ __('lang.Без НДС, безнал') }}</p>
                             </label>
                             <label for="cash">
                                 <input type="number" name="cash">
-                                <p>наличными</p>
+                                <p>{{ __('lang.наличными') }}</p>
                             </label>
                             @endif
                         </div>
@@ -475,13 +475,13 @@
 
                     <div class="send-offer__row">
                         <div class="send-offer__col1">
-                            <p><strong>Дополнительно:</strong></p>
+                            <p><strong>{{ __('lang.Дополнительно:') }}</strong></p>
                         </div>
                         <div class="send-offer__col2 send-offer__flex">
                             <label for="is_prepayment" class="label-checkbox">
                                 <input type="checkbox" name="is_prepayment" hidden value="0">
                                 <input type="checkbox" name="is_prepayment" id="is_prepayment" value="1">
-                                <span>Предоплата</span>
+                                <span>{{ __('lang.Предоплата') }}</span>
                             </label>
                             <label for="prepayment_percent">
                                 <input type="number" name="prepayment_percent" id="prepayment_percent">
@@ -490,35 +490,35 @@
                             <label for="is_on_unloading" class="label-checkbox">
                                 <input type="checkbox" name="is_on_unloading" hidden value="0">
                                 <input type="checkbox" name="is_on_unloading" id="is_on_unloading" value="1">
-                                <span>На выгрузке</span>
+                                <span>{{ __('lang.На выгрузке') }}</span>
                             </label>
                             <label for="is_bank_transfer" class="label-checkbox">
                                 <input type="checkbox" name="is_bank_transfer" id="is_bank_transfer" hidden value="0">
                                 <input type="checkbox" name="is_bank_transfer" id="is_bank_transfer" value="1">
-                                <span>Через</span>
+                                <span>{{ __('lang.Через') }}</span>
                             </label>
                             <label for="bank_transfer_days">
                                 <input type="number" name="bank_transfer_days" id="bank_transfer_days">
-                                <span>банк дней</span>
+                                <span>{{ __('lang.банк дней') }}</span>
                             </label>
                         </div>
                     </div>
 
                     <div class="send-offer__row">
                         <div class="send-offer__col1">
-                            <p><strong>Комментарии:</strong></p>
+                            <p><strong>{{ __('lang.Комментарии:') }}</strong></p>
                         </div>
                         <div class="send-offer__col2">
                             <label class="commtent-textarea">
                                 <textarea name="payment_comment" id="payment_comment"></textarea>
                             </label>
-                            <p>не более 512 символов</p>
+                            <p>{{ __('lang.не более 512 символов') }}</p>
                         </div>
                     </div>
 
                     <div class="send-offer__row">
                         <div class="send-offer__col1">
-                            <p><strong>Дата:</strong></p>
+                            <p><strong>{{ __('lang.Дата:') }}</strong></p>
                         </div>
                         <div class="send-offer__col2">
                             <label for="ready_date" class="label-date">
@@ -529,7 +529,7 @@
 
                     <div class="send-offer__row">
                         <div class="send-offer__col1">
-                            <p><strong>Контакт:</strong></p>
+                            <p><strong>{{ __('lang.Контакт:') }}</strong></p>
                         </div>
 
                         <div class="send-offer__col2">
@@ -540,8 +540,8 @@
 
                 <div class="send-offer__bottom">
                     <div class="send-offer__buttons">
-                        <button class="form-btn">Отправить</button>
-                        <a href="javascript:;" class="form-btn-gray" data-modal-close="send-offer">Закрыть</a>
+                        <button class="form-btn">{{ __('lang.Отправить') }}</button>
+                        <a href="javascript:;" class="form-btn-gray" data-modal-close="send-offer">{{ __('lang.Закрыть') }}</a>
                     </div>
                 </div>
 

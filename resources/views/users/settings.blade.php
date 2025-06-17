@@ -67,16 +67,16 @@
 						<div class="form-wrapper">
 							<div class="left-col">
 								<div class="input__row-profile">
-									<label for="name">Фамилия Имя Отчество</label>
+									<label for="name">{{ __('lang.Фамилия Имя Отчество') }}</label>
 									<input type="text" id="name" placeholder="Имя Фамилия Отчество" required name="full_name" value="{{ old('full_name', auth()->user()->full_name ?? '') }}">
 								</div>
 								<div class="input__row-profile">
-									<label for="tel">Номер телефона</label>
+									<label for="tel">{{ __('lang.Номер телефона') }}</label>
 									<input type="tel" id="tel" placeholder="+7(928) 468-61- 30" required name="tel" value="{{ old('tel', auth()->user()->phone ?? '') }}">
 								</div>
 
 								<div class="input__row-profile">
-									<label for="email">Электронная почта</label>
+									<label for="email">Email</label>
 									<input type="email" id="email" placeholder="info@textmail.ru" required name="email" value="{{ old('email', auth()->user()->email ?? '') }}">
 								</div>
 
@@ -89,10 +89,10 @@
 							<div class="right-col">
 
 								<div class="input__row-profile">
-									<p>Пароль</p>
+									<p>{{ __('lang.Пароль') }}</p>
 
 									<label for="password">
-										<input type="password" name="password" id="register" placeholder="Введите пароль">
+										<input type="password" name="password" id="register" placeholder="{{ __('lang.Введите пароль') }}">
 										<div class="btn-hide">
 											<svg class="btn-eye" width="20" height="7">
 												<use xlink:href="#eye"></use>
@@ -105,13 +105,13 @@
 								</div>
 
 								<div class="input__row-profile">
-									<label for="inn">Инн</label>
+									<label for="inn">{{ __('lang.ИНН') }}</label>
 									<input type="text" id="inn" placeholder="..." name="inn" value="{{ old('inn', auth()->user()->inn ?? '') }}">
 								</div>
 							</div>
 						</div>
 						<div class="form-buttons">
-							<button type="submit" class="form-btn">Сохранить</button>
+							<button type="submit" class="form-btn">{{ __('lang.Сохранить') }}</button>
 						</div>
 					</form>
 				</div>

@@ -22,7 +22,7 @@
                     </svg>
                 </button>
 
-                <h1>Ваши грузы</h1>
+                <h1>{{ __('lang.Ваши уведомления') }}</h1>
 
                 <x-main.assets-notification/>
 

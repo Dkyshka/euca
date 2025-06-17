@@ -67,7 +67,7 @@
 
                 @guest
                 <div class="profile">
-                    <button type="button" class="footer-auth__btn login" data-modal-target="modal-login">Войти</button>
+                    <button type="button" class="footer-auth__btn login" data-modal-target="modal-login">{{ __('lang.Войти') }}</button>
                 </div>
                 @endguest
             </div>

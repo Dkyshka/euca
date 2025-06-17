@@ -33,8 +33,8 @@
     <div class="footer-icons">
         @guest
         <div class="footer-auth">
-            <button type="button" class="footer-auth__btn login" data-modal-target="modal-login">Войти</button>
-            <button type="button" class="footer-auth__btn register" data-modal-target="modal-register">Регистрация</button>
+            <button type="button" class="footer-auth__btn login" data-modal-target="modal-login">{{ __('lang.Войти') }}</button>
+            <button type="button" class="footer-auth__btn register" data-modal-target="modal-register">{{ __('lang.Регистрация') }}</button>
         </div>
         @endguest
 
@@ -77,7 +77,7 @@
 <div class="modal-overlay" data-modal="modal-login">
     <div class="modal modal-login">
 
-        <b>Вход в EUCA Alliance</b>
+        <b>{{ __('lang.Вход в EUCA Alliance') }}</b>
 
         <form action="{{ route('auth_login', app()->getLocale()) }}" method="post">
             @csrf
@@ -85,16 +85,16 @@
                 <p>Логин</p>
 
                 <label for="auth-login">
-                    <input type="text" name="login" id="auth-login" placeholder="Введите логин">
+                    <input type="text" name="login" id="auth-login" placeholder="{{ __('lang.Введите логин') }}">
                 </label>
 
             </div>
 
             <div class="input__row">
-                <p>Пароль</p>
+                <p>{{ __('lang.Пароль') }}</p>
 
                 <label for="login-password">
-                    <input type="password" name="password" id="login-password" placeholder="Введите пароль">
+                    <input type="password" name="password" id="login-password" placeholder="{{ __('lang.Введите пароль') }}">
                     <div class="btn-hide">
                         <svg class="btn-eye" width="20" height="7">
                             <use xlink:href="#eye"></use>
@@ -109,13 +109,13 @@
 
             <div class="recovery">
                 <input type="checkbox" class="visually-hidden" id="recovery" name="remember">
-                <label for="recovery">Запомнить</label>
+                <label for="recovery">{{ __('lang.Запомнить') }}</label>
             </div>
 
-            <button type="submit" class="form-btn">Войти</button>
+            <button type="submit" class="form-btn">{{ __('lang.Войти') }}</button>
 
             <button type="button" class="is-have-auth" data-modal-target="modal-register">
-                Нет аккаунта? Зарегистрироваться
+                {{ __('lang.Нет аккаунта? Зарегистрироваться') }}
             </button>
 
         </form>
@@ -132,7 +132,7 @@
 <div class="modal-overlay" data-modal="modal-register">
     <div class="modal modal-register">
 
-        <b>Создать аккаунт на EUCA Alliance</b>
+        <b>{{ __('lang.Создать аккаунт на EUCA Alliance') }}</b>
 
         <form action="{{ route('auth_store', app()->getLocale()) }}" id="register_form">
 
@@ -141,15 +141,15 @@
             </div>
 
             <div class="input__row">
-                <p>Укажите ваш профиль деятельности</p>
+                <p>{{ __('lang.Укажите ваш профиль деятельности') }}</p>
 
                 <label>
                     <select aria-label="укажите свой профиль" name="role_id" id="role_id">
-                        <option value="" hidden>Укажите ваш профиль</option>
-                        <option value="4">Перевозчик</option>
-                        <option value="5">Грузовладелец</option>
-                        <option value="6">Экспедитор</option>
-                        <option value="7">Логист</option>
+                        <option value="" hidden>{{ __('lang.Укажите ваш профиль') }}</option>
+                        <option value="4">{{ __('lang.Перевозчик') }}</option>
+                        <option value="5">{{ __('lang.Грузовладелец') }}</option>
+                        <option value="6">{{ __('lang.Экспедитор') }}</option>
+                        <option value="7">{{ __('lang.Логист') }}</option>
                     </select>
 
                     <span class="arrow"></span>
@@ -159,10 +159,10 @@
             </div>
 
             <div class="input__row">
-                <p>ФИО</p>
+                <p>{{ __('lang.ФИО') }}</p>
 
                 <label for="email">
-                    <input type="text" name="full_name" id="full_name" placeholder="ФИО">
+                    <input type="text" name="full_name" id="full_name" placeholder="{{ __('lang.ФИО') }}">
                 </label>
 
             </div>
@@ -171,25 +171,25 @@
                 <p>Email</p>
 
                 <label for="email">
-                    <input type="text" name="email" id="email" placeholder="Введите свой email" >
+                    <input type="text" name="email" id="email" placeholder="{{ __('lang.Введите свой email') }}" >
                 </label>
 
             </div>
 
             <div class="input__row">
-                <p>Логин</p>
+                <p>{{ __('lang.Логин') }}</p>
 
                 <label for="login">
-                    <input type="text" name="login" id="login" placeholder="Введите логин" >
+                    <input type="text" name="login" id="login" placeholder="{{ __('lang.Введите логин') }}" >
                 </label>
 
             </div>
 
             <div class="input__row">
-                <p>Пароль</p>
+                <p>{{ __('lang.Пароль') }}</p>
 
                 <label for="register-password">
-                    <input type="password" name="password" id="register-password" placeholder="Введите пароль" >
+                    <input type="password" name="password" id="register-password" placeholder="{{ __('lang.Введите пароль') }}" >
                     <div class="btn-hide">
                         <svg class="btn-eye" width="20" height="7">
                             <use xlink:href="#eye"></use>
@@ -204,7 +204,7 @@
 
             <div class="input__row">
 
-                <p>Номер телефона</p>
+                <p>{{ __('lang.Номер телефона') }}</p>
 
                 <div class="iput-row__wrapper">
 
@@ -216,15 +216,15 @@
                 </div>
             </div>
 
-            <button type="submit" class="form-btn" id="register_submit">Продолжить</button>
+            <button type="submit" class="form-btn" id="register_submit">{{ __('lang.Продолжить') }}</button>
 
             <button type="button" class="is-have-auth" data-modal-target="modal-login">
-                Уже есть аккаунт? войти
+                {{ __('lang.Уже есть аккаунт? войти') }}
             </button>
 
-            <span>Нажимая кнопку «Продолжить», вы принимаете условия</span>
-            <a href="{{ asset('assets/documents/public_offer.pdf') }}" target="_blank">Пользовательского соглашения</a>
-            <a href="{{ asset('assets/documents/registration.pdf') }}" target="_blank">Правила регистрации</a>
+            <span>{{ __('lang.Нажимая кнопку «Продолжить», вы принимаете условия') }}</span>
+            <a href="{{ asset('assets/documents/public_offer.pdf') }}" target="_blank">{{ __('lang.Пользовательского соглашения') }}</a>
+            <a href="{{ asset('assets/documents/registration.pdf') }}" target="_blank">{{ __('lang.Правила регистрации') }}</a>
         </form>
 
         <button class="modal-close" type="button" data-modal-close="modal-register">
@@ -238,13 +238,13 @@
 <div class="modal-overlay" data-modal="modal-verify">
     <div class="modal modal-verify">
 
-        <b>Подтвердите Email</b>
-        <p class="verify-instruction">Мы отправили 6-значный код на вашу почту. Введите его ниже:</p>
+        <b>{{ __('lang.Подтвердите Email') }}</b>
+        <p class="verify-instruction">{{ __('lang.Мы отправили 6-значный код на вашу почту. Введите его ниже:') }}</p>
 
         <form id="verify_email_form">
             <div class="input__row">
                 <label for="verification_code">
-                    <input type="text" name="code" id="verification_code" placeholder="Введите код" maxlength="6">
+                    <input type="text" name="code" id="verification_code" placeholder="{{ __('lang.Введите код') }}" maxlength="6">
                 </label>
             </div>
 
@@ -252,18 +252,16 @@
 
             <div class="error_box_verify" style="color: red; margin-bottom: 10px;"></div>
 
-            <button type="submit" class="form-btn">Подтвердить</button>
+            <button type="submit" class="form-btn">{{ __('lang.Подтвердить') }}</button>
 
             <p id="resend_info" style="margin-top: 10px;">
-                Отправить код повторно через <span id="resend_timer">60</span> сек.
+                {{ __('lang.Отправить код повторно через') }} <span id="resend_timer">60</span> {{ __('lang.сек') }}.
             </p>
             <button type="button" id="resend_code_btn" style="display:none;" class="form-btn-outline">
-                Отправить код повторно
+                {{ __('lang.Отправить код повторно') }}
             </button>
 
-            <button type="button" class="is-have-auth" data-modal-target="modal-login">
-                Уже есть аккаунт? Войти
-            </button>
+            <button type="button" class="is-have-auth" data-modal-target="modal-login">{{ __('lang.Уже есть аккаунт? Войти') }}</button>
         </form>
 
         <button class="modal-close" type="button" data-modal-close="modal-verify">

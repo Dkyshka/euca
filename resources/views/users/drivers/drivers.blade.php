@@ -22,7 +22,7 @@
                     </svg>
                 </button>
 
-                <h1>Ваши грузы</h1>
+                <h1>{{ __('lang.Ваши водители') }}</h1>
 
                 <x-main.assets-notification/>
 
@@ -32,12 +32,12 @@
             <main class="profile-content">
                 <div class="drivers__list">
                     <div class="drivers-head">
-                        <a class="current" href="{{ route('drivers', app()->getLocale()) }}">Активные</a>
-                        <button class="form-btn" data-modal-target="add-driver">Добавить</button>
+                        <a class="current" href="{{ route('drivers', app()->getLocale()) }}">{{ __('lang.Активные') }}</a>
+                        <button class="form-btn" data-modal-target="add-driver">{{ __('lang.Добавить') }}</button>
                     </div>
 
                     <div class="drivers-content">
-                        <b>Ваши водители</b>
+                        <b>{{ __('lang.Ваши водители') }}</b>
 
                         @foreach($drivers as $driver)
                         <div class="drivers-card" style="margin-bottom: 20px;">
@@ -76,47 +76,47 @@
 
 <div class="modal-overlay" data-modal="add-driver">
     <div class="modal modal-add-driver">
-        <b>Добавить водителя</b>
+        <b>{{ __('lang.Добавить водителя') }}</b>
 
         <form action="{{ route('drivers.store', app()->getLocale()) }}" id="add-driver-form" method="POST">
             @csrf
             <div class="driver-input-row">
-                <p><strong>* Фамилия</strong></p>
+                <p><strong>* {{ __('lang.Фамилия') }}</strong></p>
                 <label for="last_name">
-                    <input id="last_name" name="last_name" type="text" placeholder="Иванов" required>
+                    <input id="last_name" name="last_name" type="text" placeholder="{{ __('lang.Иванов') }}" required>
                 </label>
             </div>
 
             <div class="driver-input-row">
-                <p><strong>* Имя</strong></p>
+                <p><strong>* {{ __('lang.Имя') }}</strong></p>
                 <label for="first_name">
-                    <input id="first_name" name="first_name" type="text" placeholder="Иван" required>
+                    <input id="first_name" name="first_name" type="text" placeholder="{{ __('lang.Иван') }}" required>
                 </label>
             </div>
 
             <div class="driver-input-row">
-                <p><strong>Отчество</strong></p>
+                <p><strong>{{ __('lang.Отчество') }}</strong></p>
                 <label for="middle_name">
-                    <input id="middle_name" name="middle_name" type="text" placeholder="Иванович">
+                    <input id="middle_name" name="middle_name" type="text" placeholder="{{ __('lang.Иванович') }}">
                 </label>
             </div>
 
             <div class="driver-input-row">
-                <p><strong>* Телефон</strong></p>
+                <p><strong>* {{ __('lang.Телефон') }}</strong></p>
                 <label for="phone">
                     <input id="phone" name="phone" type="tel" placeholder="+998 90 000 00 00" required>
                 </label>
             </div>
 
             <div class="driver-input-row">
-                <p><strong>* Дата рождения</strong></p>
+                <p><strong>* {{ __('lang.Дата рождения') }}</strong></p>
                 <label for="birth_date" class="date-driver">
                     <svg width="12" height="12"><use xlink:href="#calendar"></use></svg>
                     <input id="birth_date" name="birth_date" type="date" required>
                 </label>
             </div>
 
-            <button type="submit" class="form-btn">Добавить</button>
+            <button type="submit" class="form-btn">{{ __('lang.Добавить') }}</button>
         </form>
 
         <button class="modal-close" type="button" data-modal-close="add-driver">

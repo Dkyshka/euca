@@ -7,9 +7,9 @@
 
         <div class="catalog-tabs">
             <div class="button-decor"></div>
-            <button type="button" class="navigations-button" data-tab="location">Расположение</button>
-            <button type="button" class="navigations-button" data-tab="name-company">Название компании</button>
-            <button type="button" class="navigations-button" data-tab="id-search">Поиск по ID</button>
+            <button type="button" class="navigations-button" data-tab="location">{{ __('lang.Расположение') }}</button>
+            <button type="button" class="navigations-button" data-tab="name-company">{{ __('lang.Название компании') }}</button>
+            <button type="button" class="navigations-button" data-tab="id-search">{{ __('lang.Поиск по ID') }}</button>
         </div>
 
         <form class="search" method="GET">
@@ -17,19 +17,19 @@
                 <div class="input-row" data-input="location">
                     <label for="country">
                         <svg width="12" height="15"><use xlink:href="#location"></use></svg>
-                        <input type="text" name="country" placeholder="Все страны" id="country" value="{{ request('country') }}">
+                        <input type="text" name="country" placeholder="{{ __('lang.Все страны') }}" id="country" value="{{ request('country') }}">
                     </label>
 
                     <label for="city">
                         <svg width="12" height="15"><use xlink:href="#location"></use></svg>
-                        <input type="text" name="city" placeholder="Все города" id="city" value="{{ request('city') }}">
+                        <input type="text" name="city" placeholder="{{ __('lang.Все города') }}" id="city" value="{{ request('city') }}">
                     </label>
                 </div>
 
                 <div class="input-row" data-input="name-company">
                     <label for="name-company">
                         <svg width="12" height="15"><use xlink:href="#location"></use></svg>
-                        <input type="text" name="name" placeholder="Название компании" id="name-company" value="{{ request('name') }}">
+                        <input type="text" name="name" placeholder="{{ __('lang.Название компании') }}" id="name-company" value="{{ request('name') }}">
                     </label>
                 </div>
 
@@ -38,7 +38,7 @@
                         <svg width="12" height="15">
                             <use xlink:href="#location"></use>
                         </svg>
-                        <input type="text" name="companyId" placeholder="Поиск по ID" id="id-search" value="{{ request('companyId') }}">
+                        <input type="text" name="companyId" placeholder="{{ __('lang.Поиск по ID') }}" id="id-search" value="{{ request('companyId') }}">
                     </label>
                 </div>
 
@@ -102,13 +102,13 @@
     <div class="catalog-form">
 
         <div class="filters">
-            <div class="filters-title">фильтры</div>
+            <div class="filters-title">{{ __('lang.фильтры') }}</div>
 
             <div class="filters-wrapper">
 
                 <form class="filters-directions" action="" method="post">
                     <fieldset>
-                        <legend>По направлениям</legend>
+                        <legend>{{ __('lang.По направлениям') }}</legend>
                         @foreach($directions as $direction)
                             <input
                                     class="visually-hidden"
@@ -134,7 +134,7 @@
 
                 <form class="filters-range" method="GET" onsubmit="event.preventDefault(); submitRangeFilter();">
                     <fieldset>
-                        <legend>Срок на платформе</legend>
+                        <legend>{{ __('lang.Срок на платформе') }}</legend>
                         <div class="range-wrapper">
                             <div class="range-row">
                                 <span class="min-hanler"></span>
@@ -157,7 +157,7 @@
 
                 <form class="filters-directions filters-status" method="GET" onsubmit="submitStatusFilter(event)">
                     <fieldset>
-                        <legend>По статусу</legend>
+                        <legend>{{ __('lang.По статусу') }}</legend>
 
                         @foreach(\App\Models\Status::all() as $status)
                             <input class="visually-hidden"
@@ -225,7 +225,7 @@
                         @endif
                     </div>
                 </div>
-                <a class="catalog-card__link" href="{{ $section->page->link .'/company/'.$company->id }}">{{ __('Подробнее о компании') }}</a>
+                <a class="catalog-card__link" href="{{ $section->page->link .'/company/'.$company->id }}">{{ __('lang.Подробнее о компании') }}</a>
             </div>
             @endforeach
         </div>
@@ -233,7 +233,7 @@
 
 
         <div class="catalog-new-members">
-            <div class="members-title">Новые участники</div>
+            <div class="members-title">{{ __('lang.Новые участники') }}</div>
 
             <div class="members-cards">
                 @foreach($newCompanies as $newCompany)
@@ -250,7 +250,7 @@
                         </picture>
                     @endif
                     <b>{{ Str::limit($newCompany->name, 20) }}</b>
-                    <span>Free</span>
+{{--                    <span>Free</span>--}}
 
                     <div>
                         <svg width="12" height="15">

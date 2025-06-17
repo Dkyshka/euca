@@ -22,7 +22,7 @@
                 <svg width="18" height="16">
                     <use xlink:href="#cargo"></use>
                 </svg>
-                <b>Грузы и заказы</b>
+                <b>{{ __('lang.Грузы и заказы') }}</b>
                 <span></span>
             </div>
 
@@ -31,9 +31,9 @@
                     'workCargos',
                     'cargos.create',
                 ], app()->getLocale()) ? 'open' : '' }}">
-                <li><a href="{{ route('cargos', app()->getLocale()) }}">Ваши грузы</a></li>
+                <li><a href="{{ route('cargos', app()->getLocale()) }}">{{ __('lang.Ваши грузы') }}</a></li>
                 <li>
-                    <a href="{{ route('workCargos', app()->getLocale()) }}">Грузы в работе</a>
+                    <a href="{{ route('workCargos', app()->getLocale()) }}">{{ __('lang.Грузы в работе') }}</a>
                 </li>
 {{--                <li><a href="#">Архив грузов</a></li>--}}
             </ul>
@@ -44,14 +44,14 @@
                 <svg width="18" height="16">
                     <use xlink:href="#search-icon"></use>
                 </svg>
-                <b>Поиск</b>
+                <b>{{ __('lang.Поиск') }}</b>
                 <span></span>
             </div>
 
             <ul class="dropdown-menu">
-                <li><a href="{{ url(app()->getLocale(), 'cargo-search') }}">Поиск Грузов</a></li>
+                <li><a href="{{ url(app()->getLocale(), 'cargo-search') }}">{{ __('lang.Поиск Грузов') }}</a></li>
                 <li>
-                    <a href="{{ url(app()->getLocale(), 'transport-search') }}">Поиск транспорта</a>
+                    <a href="{{ url(app()->getLocale(), 'transport-search') }}">{{ __('lang.Поиск транспорта') }}</a>
                 </li>
             </ul>
         </li>
@@ -64,7 +64,7 @@
                 <svg width="14" height="14">
                     <use xlink:href="#order"></use>
                 </svg>
-                <b>Заказы от вас</b>
+                <b>{{ __('lang.Заказы от вас') }}</b>
                 <span></span>
             </div>
             <ul class="dropdown-menu {{ request()->routeIs([
@@ -72,9 +72,9 @@
                     'execution',
                 ], app()->getLocale()) ? 'open' : '' }}">
                 <li>
-                    <a href="{{ route('сoordinations', app()->getLocale()) }}">Согласование</a>
+                    <a href="{{ route('сoordinations', app()->getLocale()) }}">{{ __('lang.Согласование') }}</a>
                 </li>
-                <li><a href="{{ route('execution', app()->getLocale()) }}">В исполнении</a></li>
+                <li><a href="{{ route('execution', app()->getLocale()) }}">{{ __('lang.В исполнении') }}</a></li>
 {{--                <li><a href="#">Документы и оплата</a></li>--}}
             </ul>
         </li>
@@ -87,7 +87,7 @@
                 <svg width="14" height="14">
                     <use xlink:href="#order"></use>
                 </svg>
-                <b>Справочники</b>
+                <b>{{ __('lang.Справочники') }}</b>
                 <span></span>
             </div>
 
@@ -96,9 +96,9 @@
                     'drivers',
                 ], app()->getLocale()) ? 'open' : '' }}">
                 <li>
-                    <a href="{{ route('auto-park', app()->getLocale()) }}">Автопарк</a>
+                    <a href="{{ route('auto-park', app()->getLocale()) }}">{{ __('lang.Автопарк') }}</a>
                 </li>
-                <li><a href="{{ route('drivers', app()->getLocale()) }}">Водители</a></li>
+                <li><a href="{{ route('drivers', app()->getLocale()) }}">{{ __('lang.Водители') }}</a></li>
             </ul>
         </li>
 
@@ -109,7 +109,7 @@
                 <svg width="15" height="16">
                     <use xlink:href="#profile-note"></use>
                 </svg>
-                <a href="{{ route('notifications', app()->getLocale()) }}">Уведомления</a>
+                <a href="{{ route('notifications', app()->getLocale()) }}">{{ __('lang.Уведомления') }}</a>
             </div>
         </li>
 
@@ -133,7 +133,7 @@
                     <use xlink:href="#message"></use>
                 </svg>
                 <a href="{{ route('messages', app()->getLocale()) }}">
-                    Сообщения
+                    {{ __('lang.Сообщения') }}
                     @if ($totalUnreadMessages > 0)
                         <div class="menu-count">{{ $totalUnreadMessages }}</div>
                     @endif
@@ -152,7 +152,7 @@
                 <svg width="16" height="16">
                     <use xlink:href="#profile"></use>
                 </svg>
-                <b>Профиль</b>
+                <b>{{ __('lang.Профиль') }}</b>
                 <span></span>
             </div>
             <ul class="dropdown-menu {{ request()->routeIs([
@@ -161,12 +161,12 @@
                     'tariffs',
                     'subscribes'
                 ], app()->getLocale()) ? 'open' : '' }}">
-                <li><a href="{{ route('settings', app()->getLocale()) }}">Настройки профиля</a></li>
+                <li><a href="{{ route('settings', app()->getLocale()) }}">{{ __('lang.Настройки профиля') }}</a></li>
                 <li>
-                    <a href="{{ route('companies', app()->getLocale()) }}">Настройки компании</a>
+                    <a href="{{ route('companies', app()->getLocale()) }}">{{ __('lang.Настройки компании') }}</a>
                 </li>
-                <li><a href="{{ route('tariffs', app()->getLocale()) }}">Тарифы</a></li>
-                <li><a href="{{ route('subscribes', app()->getLocale()) }}">Управление подпиской</a></li>
+                <li><a href="{{ route('tariffs', app()->getLocale()) }}">{{ __('lang.Тарифы') }}</a></li>
+                <li><a href="{{ route('subscribes', app()->getLocale()) }}">{{ __('lang.Управление подпиской') }}</a></li>
             </ul>
         </li>
     </ul>
@@ -175,6 +175,6 @@
         <svg width="14" height="16">
             <use xlink:href="#exit"></use>
         </svg>
-        Выйти
+        {{ __('lang.Выйти') }}
     </a>
 </div>

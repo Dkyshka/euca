@@ -66,8 +66,8 @@
             {!! $section->content->three !!}
             @guest
             <div class="reviews-col__links">
-                <button type="button" class="reviews-logout" data-modal-target="modal-login">Войти</button>
-                <button type="button" class="reviews-register" data-modal-target="modal-register">Зарегистрироваться</button>
+                <button type="button" class="reviews-logout" data-modal-target="modal-login">{{ __('lang.Войти') }}</button>
+                <button type="button" class="reviews-register" data-modal-target="modal-register">{{ __('lang.Зарегистрироваться') }}</button>
             </div>
             @endguest
         </div>

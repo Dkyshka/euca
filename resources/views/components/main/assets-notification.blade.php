@@ -13,7 +13,7 @@
         <div class="notifications-modal__head">
 
 
-            <a href="#" class="read">Сделать прочитаным</a>
+            <a href="#" class="read">{{ __('lang.Сделать прочитанным') }}</a>
 
             <div class="notifications-modal__btn">
                 <span></span>
@@ -23,7 +23,7 @@
 
         <div class="notifications-modal__content">
             <div class="notifications-modal__card">
-                <p>Пусто</p>
+                <p>{{ __('lang.Пусто') }}</p>
             </div>
 {{--            <div class="notifications-modal__card">--}}
 {{--                <svg width="20" height="20">--}}

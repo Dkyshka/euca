@@ -22,7 +22,7 @@
                     </svg>
                 </button>
 
-                <h1>Ваши грузы</h1>
+                <h1>{{ __('lang.Ваши грузы') }}</h1>
 
                 <x-main.assets-notification/>
 
@@ -38,7 +38,7 @@
                             <svg width="11" height="12">
                                 <use xlink:href="#plus"></use>
                             </svg>
-                            Добавить груз
+                            {{ __('lang.Добавить груз') }}
                         </a>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                         </div>
                     @endif
                     <a href="{{ route('cargos.create', app()->getLocale()) }}" class="form-btn">
-                        Добавить груз
+                        {{ __('lang.Добавить груз') }}
                     </a>
                 </div>
 

@@ -22,7 +22,7 @@
                     </svg>
                 </button>
 
-                <h1>Ваши грузы</h1>
+                <h1>{{ __('lang.Ваши уведомления') }}</h1>
 
                 <x-main.assets-notification/>
 
@@ -43,10 +43,10 @@
 
                             <label for="filter" class="filter-notifications">
                                 <select name="filter" id="filter">
-                                    <option value="" hidden>Все</option>
-                                    <option value="1">Важные</option>
-                                    <option value="2">Новые</option>
-                                    <option value="3">Горящие</option>
+                                    <option value="" hidden>{{ __('lang.Все') }}</option>
+                                    <option value="1">{{ __('lang.Важные') }}</option>
+                                    <option value="2">{{ __('lang.Новые') }}</option>
+                                    <option value="3">{{ __('lang.Горящие') }}</option>
                                 </select>
                             </label>
 
@@ -54,7 +54,7 @@
                                 <svg width="11" height="12">
                                     <use xlink:href="#read"></use>
                                 </svg>
-                                Все прочитано
+                                {{ __('lang.Все прочитано') }}
                             </button>
 
                             <div class="pagination-notifications">
@@ -117,124 +117,6 @@
 
     </div>
 </main>
-
-<div class="modal-overlay" data-modal="add-driver">
-    <div class="modal modal-add-driver">
-        <b>Добавить водителя</b>
-
-        <form action="" method="get">
-            @csrf
-            <div class="driver-input-row">
-                <p><strong>* Фамилия</strong></p>
-
-                <label for="name">
-                    <input id="name" name="" type="text" placeholder="Иванов">
-                </label>
-            </div>
-
-            <div class="driver-input-row">
-                <p><strong>* Имя</strong></p>
-
-                <label for="lastname">
-                    <input id="lastname" name="" type="text" placeholder="Иван">
-                </label>
-            </div>
-
-            <div class="driver-input-row">
-                <p><strong>Отчество</strong></p>
-
-                <label for="middlename">
-                    <input id="middlename" name="" type="text" placeholder="Иванович">
-                </label>
-            </div>
-
-            <div class="driver-input-row">
-                <p><strong>* Телефон</strong></p>
-
-                <label for="tel">
-                    <input id="middlename" name="" type="tel" placeholder="+998 90 000 00 00">
-                </label>
-            </div>
-            <label for="driver-check" class="driver-check">
-                <input id="driver-check" type="checkbox">
-                Привлеченный сотрудник
-            </label>
-
-            <div class="driver-input-row driver-input-row__m">
-                <p></p>
-
-                <label for="ser">
-                    <input id="ser" name="" type="text" placeholder="Серия, если есть">
-                </label>
-
-                <label for="number">
-                    <input id="number" name="" type="number" placeholder="Номер">
-                </label>
-
-                <label for="date" class="date-driver">
-                    <svg width="12" height="12">
-                        <use xlink:href="#calendar"></use>
-                    </svg>
-                    <input id="date" name="" type="number" placeholder="Дата выдачи">
-                </label>
-            </div>
-
-            <div class="driver-input-row">
-                <p><strong>* Кем выдан</strong></p>
-
-                <label for="who" class="textarea">
-                    <textarea name="" id="who"></textarea>
-                </label>
-            </div>
-
-            <div class="drivers-tags">
-                <button>
-                    <svg width="12" height="12">
-                        <use xlink:href="#plus"></use>
-                    </svg>
-                    Код подразделения
-                </button>
-                <button>
-                    <svg width="12" height="12">
-                        <use xlink:href="#plus"></use>
-                    </svg>
-                    Дата рождения
-                </button>
-                <button>
-                    <svg width="12" height="12">
-                        <use xlink:href="#plus"></use>
-                    </svg>
-                    Прописка
-                </button>
-                <button>
-                    <svg width="12" height="12">
-                        <use xlink:href="#plus"></use>
-                    </svg>
-                    Скан паспорта
-                </button>
-                <button>
-                    <svg width="12" height="12">
-                        <use xlink:href="#plus"></use>
-                    </svg>
-                    Водительское удостоверение
-                </button>
-                <button>
-                    <svg width="12" height="12">
-                        <use xlink:href="#plus"></use>
-                    </svg>
-                    ИНН
-                </button>
-            </div>
-
-            <button class="form-btn" data-modal-close="add-driver">Добавить</button>
-        </form>
-
-        <button class="modal-close" type="button" data-modal-close="add-driver">
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</div>
 
 <script src="{{ asset('assets/js/main.min.js') }}"></script>
 

@@ -22,7 +22,7 @@
                     </svg>
                 </button>
 
-                <h1>Ваши грузы</h1>
+                <h1>{{ __('lang.Ваши грузы') }}</h1>
 
                 <x-main.assets-notification/>
 
@@ -62,7 +62,7 @@
                             <use xlink:href="#plus"></use>
                         </svg>
 
-                        Добавить заявку водителю
+                        {{ __('lang.Добавить заявку водителю') }}
                     </a>
                 </div>
                 @endif
@@ -71,13 +71,13 @@
                     @foreach($cargoBids as $cargoBid)
                         <div class="order-info">
                             <div class="order-info__head order-info-second">
-                                <p>Груз</p>
+                                <p>{{ __('lang.Груз') }}</p>
 
-                                <p>загрузка</p>
-                                <p>разгрузка</p>
-                                <p>ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
-                                <p>Транспорт</p>
-                                <p>ставка</p>
+                                <p>{{ __('lang.загрузка') }}</p>
+                                <p>{{ __('lang.разгрузка') }}</p>
+                                <p>{{ __('lang.ВЕС, Т / ОБЬЕМ, М3 ГРУЗ') }}</p>
+                                <p>{{ __('lang.Транспорт') }}</p>
+                                <p>{{ __('lang.ставка') }}</p>
                             </div>
 
                             <div class="order-info-content">
@@ -87,10 +87,10 @@
                                     </div>
 
                                     <div class="order-info-col">
-                                        <p class="mobile-order-head">загрузка</p>
+                                        <p class="mobile-order-head">{{ __('lang.загрузка') }}</p>
                                         <p class="car-head"><strong>{{ Str::limit($cargoBid->cargoLoading->country, 50) }}</strong></p>
                                         @if($cargoBid->cargoLoading->cargo->constant_frequency)
-                                            <p><strong>{{ $cargoBid->cargoLoading->cargo->constant_frequency == 'daily' ? __('Ежедневно') : __('По рабочим дням') }}</strong></p>
+                                            <p><strong>{{ $cargoBid->cargoLoading->cargo->constant_frequency == 'daily' ? __('lang.Ежедневно') : __('lang.По рабочим дням') }}</strong></p>
                                         @elseif($cargoBid->cargoLoading?->cargo?->ready_date)
                                             <p><strong>{{ $cargoBid->cargoLoading?->cargo?->ready_date?->format('d.m.Y') }}</strong></p>
                                         @else
@@ -98,13 +98,13 @@
                                     </div>
 
                                     <div class="order-info-col">
-                                        <p class="mobile-order-head">ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
+                                        <p class="mobile-order-head">{{ __('lang.ВЕС, Т / ОБЬЕМ, М3 ГРУЗ') }}</p>
                                         <p class="car-head"><strong>{{ Str::limit($cargoBid->cargoLoading->final_unload_city, 50) }}</strong></p>
                                         <p>{{ $cargoBid->cargoLoading->final_unload_date_from?->format('d.m.Y') }}</p>
                                     </div>
 
                                     <div class="order-info-col">
-                                        <p class="mobile-order-head">Транспорт</p>
+                                        <p class="mobile-order-head">{{ __('lang.Транспорт') }}</p>
                                         <p class="car-head">
                                             <strong>{{ $cargoBid->cargoLoading->cargo->weight }} - </strong>
                                             {{ $cargoBid->cargoLoading->cargo->weight_type }} /
@@ -113,10 +113,10 @@
                                     </div>
 
                                     <div class="order-info-col">
-                                        <p class="mobile-order-head">ставка</p>
+                                        <p class="mobile-order-head">{{ __('lang.ставка') }}</p>
                                         <p class="car-head">
                                             <strong>
-                                                Кузов
+                                                {{ __('lang.Кузов') }}
                                             </strong>
                                         </p>
                                         <p>
@@ -130,13 +130,13 @@
                                             <p class="car-head">{{ __('Запрос ставки') }}</p>
                                         @else
                                             @if($cargoBid->cargoLoading->with_vat_cashless)
-                                                <p class="car-head"><strong>{{ $cargoBid->cargoLoading->with_vat_cashless }}</strong> {{ $cargoBid->cargoLoading->currency }} С НДС, безнал</p>
+                                                <p class="car-head"><strong>{{ $cargoBid->cargoLoading->with_vat_cashless }}</strong> {{ $cargoBid->cargoLoading->currency }} {{ __('lang.С НДС, безнал') }}</p>
                                             @endif
                                             @if($cargoBid->cargoLoading->without_vat_cashless)
-                                                <p class="car-head"><strong>{{ $cargoBid->cargoLoading->without_vat_cashless }}</strong> {{ $cargoBid->cargoLoading->currency }} Без НДС, безнал</p>
+                                                <p class="car-head"><strong>{{ $cargoBid->cargoLoading->without_vat_cashless }}</strong> {{ $cargoBid->cargoLoading->currency }} {{ __('lang.Без НДС, безнал') }}</p>
                                             @endif
                                             @if($cargoBid->cargoLoading->cash)
-                                                <p class="car-head"><strong>{{ $cargoBid->cargoLoading->cash }}</strong> {{ $cargoBid->cargoLoading->currency }} Наличными</p>
+                                                <p class="car-head"><strong>{{ $cargoBid->cargoLoading->cash }}</strong> {{ $cargoBid->cargoLoading->currency }} {{ __('lang.Наличными') }}</p>
                                             @endif
                                         @endif
                                     </div>
@@ -150,7 +150,7 @@
                                     <div class="order-info-col order-info-bottom__end">
                                         <div class="order-info-m">
                                         </div>
-                                        <b class="car-head">Ожидает одобрения</b>
+                                        <b class="car-head">{{ __('lang.Ожидает одобрения') }}</b>
                                     </div>
                                 </div>
                             </div>
@@ -158,21 +158,21 @@
 
                         <div class="modal-overlay" data-modal="modal-create-order-{{ $cargoBid->cargoLoading->id }}">
                             <div class="modal modal-create-order">
-                                <b>Предложение на перевозку</b>
-                                <p>Пока вы не примите решение, груз будет недоступен для других перевозчиков</p>
+                                <b>{{ __('lang.Предложение на перевозку') }}</b>
+                                <p>{{ __('lang.Пока вы не примите решение, груз будет недоступен для других перевозчиков') }}</p>
 
                                 <form action="{{ route('cargo.bids.accept', [app()->getLocale(), $cargoBid?->id]) }}" method="post">
                                     @csrf
 
                                     @if ($cargoBid?->user?->company)
-                                        <p>От фирмы</p>
+                                        <p>{{ __('lang.От фирмы') }}</p>
                                         <div class="create-order-card">
                                             <svg width="24" height="18">
                                                 <use xlink:href="#create1"></use>
                                             </svg>
                                             <div class="create-order-card__info">
                                                 <p>
-                                                    <strong>{{ $cargoBid?->user?->company?->name ?? 'Неизвестно' }}</strong>
+                                                    <strong>{{ $cargoBid?->user?->company?->name ?? __('lang.Неизвестно') }}</strong>
                                                 </p>
                                                 @foreach($cargoBid?->user?->company?->phones as $phone)
                                                     <p>{{ $phone->phone }}</p>
@@ -180,7 +180,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <p>Ставка</p>
+                                    <p>{{ __('lang.Ставка') }}</p>
                                     @if($cargoBid->price)
                                         <div class="cretae-order-row">
                                             <p>
@@ -198,7 +198,7 @@
                                                         <use xlink:href="#create1"></use>
                                                     </svg>
                                                     <strong>{{ $cargoBid->with_vat_cashless }} {{ $cargoBid->currency }}</strong>
-                                                    С НДС, безнал
+                                                    {{ __('lang.С НДС, безнал') }}
                                                 </p>
                                             </div>
                                         @endif
@@ -210,7 +210,7 @@
                                                         <use xlink:href="#create1"></use>
                                                     </svg>
                                                     <strong>{{ $cargoBid->without_vat_cashless }} {{ $cargoBid->currency }}</strong>
-                                                    Без НДС, безнал
+                                                    {{ __('lang.Без НДС, безнал') }}
                                                 </p>
                                             </div>
                                         @endif
@@ -222,7 +222,7 @@
                                                         <use xlink:href="#create1"></use>
                                                     </svg>
                                                     <strong>{{ $cargoBid->cash }} {{ $cargoBid->currency }}</strong>
-                                                    Наличными
+                                                    {{ __('lang.Наличными') }}
                                                 </p>
                                             </div>
                                         @endif
@@ -249,7 +249,7 @@
                                     {{--                                </p>--}}
                                     {{--                            </div>--}}
 
-                                    <p>Информация</p>
+                                    <p>{{ __('lang.Информация') }}</p>
                                     <div class="create-order-card">
                                         <svg width="24" height="18">
                                             <use xlink:href="#create1"></use>
@@ -258,11 +258,11 @@
                                             <p>
                                                 <strong>{{ $cargoBid?->user?->full_name }}</strong>
                                             </p>
-                                            <p><span>ИНН</span>{{ $cargoBid?->user?->inn }}</p>
+                                            <p><span>{{ __('lang.ИНН') }}</span>{{ $cargoBid?->user?->inn }}</p>
                                         </div>
                                     </div>
 
-                                    <p>Комментарий</p>
+                                    <p>{{ __('lang.Комментарий') }}</p>
                                     <div class="create-order-card">
                                         <div class="create-order-card__info">
                                             <p>{{ $cargoBid?->payment_comment }}</p>
@@ -270,7 +270,7 @@
                                     </div>
 
                                     <div class="create-order-buttons">
-                                        <button type="submit" class="form-btn" data-modal-close="modal-create-order-{{ $cargoBid->cargoLoading->id }}">Одобрить и создать заказ</button>
+                                        <button type="submit" class="form-btn" data-modal-close="modal-create-order-{{ $cargoBid->cargoLoading->id }}">{{ __('lang.Одобрить и создать заказ') }}</button>
                                     </div>
                                 </form>
 
@@ -287,13 +287,13 @@
                 @foreach($cargoLoadings as $cargoLoading)
                 <div class="order-info">
                     <div class="order-info__head order-info-second">
-                        <p>Груз</p>
+                        <p>{{ __('lang.Груз') }}</p>
 
-                        <p>загрузка</p>
-                        <p>разгрузка</p>
-                        <p>ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
-                        <p>Транспорт</p>
-                        <p>ставка</p>
+                        <p>{{ __('lang.загрузка') }}</p>
+                        <p>{{ __('lang.разгрузка') }}</p>
+                        <p>{{ __('lang.ВЕС, Т / ОБЬЕМ, М3 ГРУЗ') }}</p>
+                        <p>{{ __('lang.Транспорт') }}</p>
+                        <p>{{ __('lang.ставка') }}</p>
                     </div>
 
                     <div class="order-info-content">
@@ -303,10 +303,10 @@
                             </div>
 
                             <div class="order-info-col">
-                                <p class="mobile-order-head">загрузка</p>
+                                <p class="mobile-order-head">{{ __('lang.загрузка') }}</p>
                                 <p class="car-head"><strong>{{ Str::limit($cargoLoading->country, 50) }}</strong></p>
                                 @if($cargoLoading->cargo->constant_frequency)
-                                <p><strong>{{ $cargoLoading->cargo->constant_frequency == 'daily' ? __('Ежедневно') : __('По рабочим дням') }}</strong></p>
+                                <p><strong>{{ $cargoLoading->cargo->constant_frequency == 'daily' ? __('lang.Ежедневно') : __('lang.По рабочим дням') }}</strong></p>
                                 @elseif($cargoLoading?->cargo?->ready_date)
                                 <p><strong>{{ $cargoLoading?->cargo?->ready_date?->format('d.m.Y') }}</strong></p>
                                 @else
@@ -314,13 +314,13 @@
                             </div>
 
                             <div class="order-info-col">
-                                <p class="mobile-order-head">ВЕС, Т / ОБЬЕМ, М3 ГРУЗ</p>
+                                <p class="mobile-order-head">{{ __('lang.ВЕС, Т / ОБЬЕМ, М3 ГРУЗ') }}</p>
                                 <p class="car-head"><strong>{{ Str::limit($cargoLoading->final_unload_city, 50) }}</strong></p>
                                 <p>{{ $cargoLoading->final_unload_date_from?->format('d.m.Y') }}</p>
                             </div>
 
                             <div class="order-info-col">
-                                <p class="mobile-order-head">Транспорт</p>
+                                <p class="mobile-order-head">{{ __('lang.Транспорт') }}</p>
                                 <p class="car-head">
                                     <strong>{{ $cargoLoading->cargo->weight }} - </strong>
                                     {{ $cargoLoading->cargo->weight_type }} /
@@ -329,10 +329,10 @@
                             </div>
 
                             <div class="order-info-col">
-                                <p class="mobile-order-head">ставка</p>
+                                <p class="mobile-order-head">{{ __('lang.ставка') }}</p>
                                 <p class="car-head">
                                     <strong>
-                                        Кузов
+                                        {{ __('lang.Кузов') }}
                                     </strong>
                                 </p>
                                 <p>
@@ -343,16 +343,16 @@
                             <div class="order-info-col">
                                 <p class="mobile-order-head"></p>
                                 @if($cargoLoading->payment_type == 'payment_request')
-                                    <p class="car-head">{{ __('Запрос ставки') }}</p>
+                                    <p class="car-head">{{ __('lang.Запрос ставки') }}</p>
                                 @else
                                     @if($cargoLoading->with_vat_cashless)
-                                    <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} С НДС, безнал</p>
+                                    <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} {{ __('lang.С НДС, безнал') }}</p>
                                     @endif
                                     @if($cargoLoading->without_vat_cashless)
-                                    <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} Без НДС, безнал</p>
+                                    <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} {{ __('lang.Без НДС, безнал') }}</p>
                                     @endif
                                     @if($cargoLoading->cash)
-                                    <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} Наличными</p>
+                                    <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} {{ __('lang.Наличными') }}</p>
                                     @endif
                                 @endif
 
@@ -368,14 +368,14 @@
                                             <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
                                         </svg>
                                     </div>
-                                    <b>Отправить сообщение</b>
+                                    <b>{{ __('lang.Отправить сообщение') }}</b>
                                     <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
                                         @csrf
                                         <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $cargoLoading?->bids?->first()?->user->id }}">
                                         <textarea required name="message" id="chat_text_public" rows="5" style="height: auto; overflow: hidden"></textarea>
 
-                                        <button class="form-btn" data-modal-close="dropdown-chat1">Отправить</button>
-                                        <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">Отмена</button>
+                                        <button class="form-btn" data-modal-close="dropdown-chat1">{{ __('lang.Отправить') }}</button>
+                                        <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">{{ __('lang.Отмена') }}</button>
                                     </form>
                                 </div>
 
@@ -391,12 +391,12 @@
                                 <div class="order-info-m">
                                 </div>
                                 <div class="order-buttons-second">
-                                    <p>Перевозчик взял груз</p>
-                                    <p>Вы можете оформить заявку</p>
+                                    <p>{{ __('lang.Перевозчик взял груз') }}</p>
+                                    <p>{{ __('lang.Вы можете оформить заявку') }}</p>
                                     <div class="order-buttons">
-                                        <button class="form-btn button-text" data-modal-target="modal-create-order-{{ $cargoLoading->id }}">Оформить</button>
+                                        <button class="form-btn button-text" data-modal-target="modal-create-order-{{ $cargoLoading->id }}">{{ __('lang.Оформить') }}</button>
 
-                                        <button class="button-text chat-message" data-modal-target="dropdown-close">Отклонить</button>
+                                        <button class="button-text chat-message" data-modal-target="dropdown-close">{{ __('lang.Отклонить') }}</button>
 
                                         <span>{{ $cargoLoading->bid->created_at?->format('d.m.Y H:i') }}</span>
                                     </div>
@@ -408,26 +408,24 @@
                                                 <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
                                             </svg>
                                         </div>
-                                        <b>Отклонить предложение</b>
-                                        <p>Укажите причину отмены предложения</p>
+                                        <b>{{ __('lang.Отклонить предложение') }}</b>
+                                        <p>{{ __('lang.Укажите причину отмены предложения') }}</p>
                                         <form action="{{ route('cargo.bids.decline', [app()->getLocale(), $cargoLoading->bid->id]) }}" method="POST">
                                             @csrf
                                             <textarea name="comment" id="comment" style="height: auto; overflow: hidden"></textarea>
-                                            <b>Что сделать с грузом</b>
+                                            <b>{{ __('lang.Что сделать с грузом') }}</b>
 
                                             <label for="save">
-                                                Восстановить груз
+                                                {{ __('lang.Восстановить груз') }}
                                                 <input type="radio" name="archiveOption" id="save" value="restore" checked>
                                             </label>
                                             <label for="stay">
-                                                Оставить груз в архиве
+                                                {{ __('lang.Оставить груз в архиве') }}
                                                 <input type="radio" name="archiveOption" id="stay" value="keep">
                                             </label>
 
-                                            <button class="form-btn" data-modal-close="dropdown-close">Отклонить
-                                                предложение</button>
-                                            <button type="button" class="order-cansel" data-modal-close="dropdown-close">Не
-                                                отклонять</button>
+                                            <button class="form-btn" data-modal-close="dropdown-close">{{ __('lang.Отклонить предложение') }}</button>
+                                            <button type="button" class="order-cansel" data-modal-close="dropdown-close">{{ __('lang.Не отклонять') }}</button>
                                         </form>
                                     </div>
 
@@ -439,21 +437,21 @@
 
                 <div class="modal-overlay" data-modal="modal-create-order-{{ $cargoLoading->id }}">
                     <div class="modal modal-create-order">
-                        <b>Предложение на перевозку</b>
-                        <p>Пока вы не примите решение, груз будет недоступен для других перевозчиков</p>
+                        <b>{{ __('lang.Предложение на перевозку') }}</b>
+                        <p>{{ __('lang.Пока вы не примите решение, груз будет недоступен для других перевозчиков') }}</p>
 
                         <form action="{{ route('cargo.bids.accept', [app()->getLocale(), $cargoLoading->bid?->id]) }}" method="post">
                             @csrf
 
                             @if ($cargoLoading->bid?->user?->company)
-                            <p>От фирмы</p>
-                            <div class="create-order-card">
+                                <p>{{ __('lang.От фирмы') }}</p>
+                                <div class="create-order-card">
                                 <svg width="24" height="18">
                                     <use xlink:href="#create1"></use>
                                 </svg>
                                 <div class="create-order-card__info">
                                     <p>
-                                        <strong>{{ $cargoLoading->bid?->user?->company?->name ?? 'Неизвестно' }}</strong>
+                                        <strong>{{ $cargoLoading->bid?->user?->company?->name ?? __('lang.Неизвестно') }}</strong>
                                     </p>
                                     @foreach($cargoLoading->bid?->user?->company?->phones as $phone)
                                     <p>{{ $phone->phone }}</p>
@@ -461,7 +459,7 @@
                                 </div>
                             </div>
                             @endif
-                            <p>Ставка</p>
+                            <p>{{ __('lang.Ставка') }}</p>
                             @if($cargoLoading->bid->price)
                             <div class="cretae-order-row">
                                 <p>
@@ -479,7 +477,7 @@
                                                 <use xlink:href="#create1"></use>
                                             </svg>
                                             <strong>{{ $cargoLoading->bid->with_vat_cashless }} {{ $cargoLoading->bid->currency }}</strong>
-                                            С НДС, безнал
+                                            {{ __('lang.С НДС, безнал') }}
                                         </p>
                                     </div>
                                 @endif
@@ -491,7 +489,7 @@
                                                 <use xlink:href="#create1"></use>
                                             </svg>
                                             <strong>{{ $cargoLoading->bid->without_vat_cashless }} {{ $cargoLoading->bid->currency }}</strong>
-                                            Без НДС, безнал
+                                            {{ __('lang.Без НДС, безнал') }}
                                         </p>
                                     </div>
                                 @endif
@@ -503,34 +501,14 @@
                                                 <use xlink:href="#create1"></use>
                                             </svg>
                                             <strong>{{ $cargoLoading->bid->cash }} {{ $cargoLoading->bid->currency }}</strong>
-                                            Наличными
+                                            {{ __('lang.Наличными') }}
                                         </p>
                                     </div>
                                 @endif
 
                             @endif
 
-{{--                            <p>ТС</p>--}}
-{{--                            <div class="cretae-order-row">--}}
-{{--                                <p>--}}
-{{--                                    <svg width="24" height="18">--}}
-{{--                                        <use xlink:href="#create3"></use>--}}
-{{--                                    </svg>--}}
-{{--                                    <strong>Укажу данные позже</strong>--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-
-{{--                            <p>Водитель</p>--}}
-{{--                            <div class="cretae-order-row">--}}
-{{--                                <p>--}}
-{{--                                    <svg width="24" height="18">--}}
-{{--                                        <use xlink:href="#human"></use>--}}
-{{--                                    </svg>--}}
-{{--                                    <strong>Укажу данные позже</strong>--}}
-{{--                                </p>--}}
-{{--                            </div>--}}
-
-                            <p>Информация</p>
+                            <p>{{ __('lang.Информация') }}</p>
                             <div class="create-order-card">
                                 <svg width="24" height="18">
                                     <use xlink:href="#create1"></use>
@@ -539,11 +517,11 @@
                                     <p>
                                         <strong>{{ $cargoLoading->bid?->user?->full_name }}</strong>
                                     </p>
-                                    <p><span>ИНН</span>{{ $cargoLoading->bid?->user?->inn }}</p>
+                                    <p><span>{{ __('lang.ИНН') }}</span>{{ $cargoLoading->bid?->user?->inn }}</p>
                                 </div>
                             </div>
 
-                            <p>Комментарий</p>
+                            <p>{{ __('lang.Комментарий') }}</p>
                             <div class="create-order-card">
                                 <div class="create-order-card__info">
                                     <p>{{ $cargoLoading->bid?->payment_comment }}</p>
@@ -551,7 +529,7 @@
                             </div>
 
                             <div class="create-order-buttons">
-                                <button type="submit" class="form-btn" data-modal-close="modal-create-order-{{ $cargoLoading->id }}">Одобрить и создать заказ</button>
+                                <button type="submit" class="form-btn" data-modal-close="modal-create-order-{{ $cargoLoading->id }}">{{ __('lang.Одобрить и создать заказ') }}</button>
                             </div>
                         </form>
 
@@ -576,7 +554,7 @@
                             </div>
                         @endif
                         <a href="{{ route('cargos.create', app()->getLocale()) }}" class="form-btn">
-                            Добавить груз
+                            {{ __('lang.Добавить груз') }}
                         </a>
                     </div>
                 @endif

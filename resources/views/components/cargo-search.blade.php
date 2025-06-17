@@ -17,8 +17,8 @@
             <div class="form-search-inputs-wrapper">
                 <div class="form-search-inputs">
                     <label for="from">
-                        <span>Откуда</span>
-                        <input type="text" id="from" placeholder="Напрмиер, Узбекистан" class="input-form">
+                        <span>{{ __('lang.Откуда') }}</span>
+                        <input type="text" id="from" placeholder="{{ __('lang.Например, Узбекистан') }}" class="input-form">
                     </label>
                     <label for="to">
 {{--                        <span>Радиус</span>--}}
@@ -46,12 +46,12 @@
             <div class="form-search-inputs-wrapper">
                 <div class="form-search-inputs">
                     <label for="from">
-                        <span>Куда</span>
-                        <input type="text" id="from" placeholder="Например, Казахстан" class="input-form">
+                        <span>{{ __('lang.Куда') }}</span>
+                        <input type="text" id="from" placeholder="{{ __('lang.Например, Казахстан') }}" class="input-form">
                     </label>
                     <label for="to">
 {{--                        <span>Радиус</span>--}}
-                        <input type="number" id="to" placeholder="КМ" class="input-form">
+                        <input type="number" id="to" placeholder="{{ __('lang.КМ') }}" class="input-form">
                     </label>
                 </div>
 {{--                <div class="form-search-inputs__bottom">--}}
@@ -70,21 +70,21 @@
 
             <div class="form-search-inputs form-search-inputs-small">
                 <label for="from">
-                    <span>Вес,т</span>
-                    <input type="number" id="from" placeholder="от" class="input-form">
+                    <span>{{ __('lang.Вес,т') }}</span>
+                    <input type="number" id="from" placeholder="{{ __('lang.от') }}" class="input-form">
                 </label>
                 <label for="to">
-                    <input type="number" id="to" placeholder="до" class="input-form">
+                    <input type="number" id="to" placeholder="{{ __('lang.до') }}" class="input-form">
                 </label>
             </div>
 
             <div class="form-search-inputs form-search-inputs-small">
                 <label for="from">
-                    <span>Объем3</span>
-                    <input type="number" id="from" placeholder="от" class="input-form">
+                    <span>{{ __('lang.Объем3') }}</span>
+                    <input type="number" id="from" placeholder="{{ __('lang.от') }}" class="input-form">
                 </label>
                 <label for="to">
-                    <input type="number" id="to" placeholder="до" class="input-form">
+                    <input type="number" id="to" placeholder="{{ __('lang.до') }}" class="input-form">
                 </label>
             </div>
         </div>
@@ -92,91 +92,91 @@
         <div class="form-search-selects">
             <label for="sel1">
                 <select name="" id="sel1" class="input-select">
-                    <option value="" hidden>Дата погрузки</option>
-                    <option value="">Сегодня</option>
-                    <option value="">Завтра</option>
-                    <option value="">Сегодня и завтра</option>
-                    <option value="">Сегодня, завтра и послезавтра</option>
-                    <option value="">Сегодня + 3 дня</option>
+                    <option value="" hidden>{{ __('lang.Дата погрузки') }}</option>
+                    <option value="">{{ __('lang.Сегодня') }}</option>
+                    <option value="">{{ __('lang.Завтра') }}</option>
+                    <option value="">{{ __('lang.Сегодня и завтра') }}</option>
+                    <option value="">{{ __('lang.Сегодня, завтра и послезавтра') }}</option>
+                    <option value="">{{ __('lang.Сегодня + 3 дня') }}</option>
                 </select>
             </label>
 
             <label for="sel2">
                 <select name="" id="sel2" class="input-select">
-                    <option value="" hidden>Тип кузова</option>
-                    <option value="">Тентованный</option>
-                    <option value="">Контейнер</option>
-                    <option value="">Фургон</option>
-                    <option value="">Цельнометалл.</option>
-                    <option value="">Изотермический</option>
-                    <option value="">Рефрижератор</option>
-                    <option value="">Реф. мультирежимный</option>
-                    <option value="">Реф. с перегородкой</option>
-                    <option value="">Реф.-тушевоз</option>
-                    <option value="">Бортовой</option>
-                    <option value="">Открытый конт.</option>
-                    <option value="">Площадка без бортов</option>
-                    <option value="">Самосвал</option>
+                    <option value="" hidden>{{ __('lang.Тип кузова') }}</option>
+                    <option value="">{{ __('lang.Тентованный') }}</option>
+                    <option value="">{{ __('lang.Контейнер') }}</option>
+                    <option value="">{{ __('lang.Фургон') }}</option>
+                    <option value="">{{ __('lang.Цельнометалл.') }}</option>
+                    <option value="">{{ __('lang.Изотермический') }}</option>
+                    <option value="">{{ __('lang.Рефрижератор') }}</option>
+                    <option value="">{{ __('lang.Реф. мультирежимный') }}</option>
+                    <option value="">{{ __('lang.Реф. с перегородкой') }}</option>
+                    <option value="">{{ __('lang.Реф.-тушевоз') }}</option>
+                    <option value="">{{ __('lang.Бортовой') }}</option>
+                    <option value="">{{ __('lang.Открытый конт.') }}</option>
+                    <option value="">{{ __('lang.Площадка без бортов') }}</option>
+                    <option value="">{{ __('lang.Самосвал') }}</option>
                 </select>
             </label>
 
             <label for="sel3">
                 <select name="" id="sel3" class="input-select">
-                    <option value="" hidden>Наименование груза</option>
-                    <option value="">Вагонка</option>
-                    <option value="">Доски</option>
-                    <option value="">Продукты питания</option>
-                    <option value="">Стройматериалы</option>
-                    <option value="">ТНП</option>
-                    <option value="">Автомобиль(ли)</option>
-                    <option value="">Автошины</option>
-                    <option value="">Алкогольные напитки</option>
-                    <option value="">Арматура</option>
-                    <option value="">Балки надрессорные</option>
-                    <option value="">Безалкогольные напитки</option>
-                    <option value="">Боковая рама</option>
-                    <option value="">Бумага</option>
-                    <option value="">Бытовая техника</option>
-                    <option value="">Бытовая химия</option>
-                    <option value="">Вагонка</option>
-                    <option value="">Газосиликатные блоки</option>
-                    <option value="">Гипс</option>
-                    <option value="">Гофрокартон</option>
+                    <option value="" hidden>{{ __('lang.Наименование груза') }}</option>
+                    <option value="">{{ __('lang.Вагонка') }}</option>
+                    <option value="">{{ __('lang.Доски') }}</option>
+                    <option value="">{{ __('lang.Продукты питания') }}</option>
+                    <option value="">{{ __('lang.Стройматериалы') }}</option>
+                    <option value="">{{ __('lang.ТНП') }}</option>
+                    <option value="">{{ __('lang.Автомобиль(ли)') }}</option>
+                    <option value="">{{ __('lang.Автошины') }}</option>
+                    <option value="">{{ __('lang.Алкогольные напитки') }}</option>
+                    <option value="">{{ __('lang.Арматура') }}</option>
+                    <option value="">{{ __('lang.Балки надрессорные') }}</option>
+                    <option value="">{{ __('lang.Безалкогольные напитки') }}</option>
+                    <option value="">{{ __('lang.Боковая рама') }}</option>
+                    <option value="">{{ __('lang.Бумага') }}</option>
+                    <option value="">{{ __('lang.Бытовая техника') }}</option>
+                    <option value="">{{ __('lang.Бытовая химия') }}</option>
+                    <option value="">{{ __('lang.Вагонка') }}</option>
+                    <option value="">{{ __('lang.Газосиликатные блоки') }}</option>
+                    <option value="">{{ __('lang.Гипс') }}</option>
+                    <option value="">{{ __('lang.Гофрокартон') }}</option>
                 </select>
             </label>
 
             <label for="sel4">
                 <select name="" id="sel4" class="input-select">
-                    <option value="" hidden>Тип загрузки</option>
-                    <option value="">верхняя</option>
-                    <option value="">задняя</option>
-                    <option value="">с с полной растентовкой</option>
-                    <option value="">со снятием поперечных перекладин</option>
-                    <option value="">со снятием стоек</option>
-                    <option value="">без ворот</option>
-                    <option value="">гидроборт</option>
-                    <option value="">аппарели</option>
-                    <option value="">с обрешеткой</option>
-                    <option value="">с бортами</option>
-                    <option value="">боковая с 2-х сторон</option>
-                    <option value="">налив</option>
-                    <option value="">электрический</option>
-                    <option value="">гидравлический</option>
-                    <option value="">пневматический</option>
-                    <option value="">дизельный компрессор</option>
-                    <option value="">не указан</option>
+                    <option value="" hidden>{{ __('lang.Тип загрузки') }}</option>
+                    <option value="">{{ __('lang.верхняя') }}</option>
+                    <option value="">{{ __('lang.задняя') }}</option>
+                    <option value="">{{ __('lang.с полной растентовкой') }}</option>
+                    <option value="">{{ __('lang.со снятием поперечных перекладин') }}</option>
+                    <option value="">{{ __('lang.со снятием стоек') }}</option>
+                    <option value="">{{ __('lang.без ворот') }}</option>
+                    <option value="">{{ __('lang.гидроборт') }}</option>
+                    <option value="">{{ __('lang.аппарели') }}</option>
+                    <option value="">{{ __('lang.с обрешеткой') }}</option>
+                    <option value="">{{ __('lang.с бортами') }}</option>
+                    <option value="">{{ __('lang.боковая с 2-х сторон') }}</option>
+                    <option value="">{{ __('lang.налив') }}</option>
+                    <option value="">{{ __('lang.электрический') }}</option>
+                    <option value="">{{ __('lang.гидравлический') }}</option>
+                    <option value="">{{ __('lang.пневматический') }}</option>
+                    <option value="">{{ __('lang.дизельный компрессор') }}</option>
+                    <option value="">{{ __('lang.не указан') }}</option>
                 </select>
             </label>
 
             <label for="sel5">
                 <select name="" id="sel5" class="input-select">
-                    <option value="" hidden>Оплата</option>
-                    <option value="">С предоплатой</option>
-                    <option value="">Без ставки</option>
-                    <option value="">За наличную оплату</option>
-                    <option value="">Оплата б/н с НДС</option>
-                    <option value="">Оплата б/н без НДС</option>
-                    <option value="">Со ставкой</option>
+                    <option value="" hidden>{{ __('lang.Оплата') }}</option>
+                    <option value="">{{ __('lang.С предоплатой') }}</option>
+                    <option value="">{{ __('lang.Без ставки') }}</option>
+                    <option value="">{{ __('lang.За наличную оплату') }}</option>
+                    <option value="">{{ __('lang.Оплата б/н с НДС') }}</option>
+                    <option value="">{{ __('lang.Оплата б/н без НДС') }}</option>
+                    <option value="">{{ __('lang.Со ставкой') }}</option>
                 </select>
             </label>
 
@@ -213,7 +213,7 @@
             <a href="#" download>
             </a>
 
-            <button class="form-btn">Найти грузы</button>
+            <button class="form-btn">{{ __('lang.Найти грузы') }}</button>
         </div>
     </form>
 
@@ -223,7 +223,7 @@
 
     <div class="result-goods">
         <div class="result-goods__head">
-            <h1 class="title">Найдено {{ $cargoLoadings->total() }}</h1>
+            <h1 class="title">{{ __('lang.Найдено') }} {{ $cargoLoadings->total() }}</h1>
 
             @if ($cargoLoadings->hasPages())
                 <div class="result-pagination">
@@ -271,12 +271,12 @@
                 <thead>
                 <tr>
                     <th>
-                        <span>НАПРАВЛЕНИЕ</span>
+                        <span>{{ __('lang.НАПРАВЛЕНИЕ') }}</span>
                     </th>
-                    <th>ТРАНСПОРТ</th>
-                    <th>ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ</th>
-                    <th>МАРШРУТ</th>
-                    <th>СТАВКА</th>
+                    <th>{{ __('lang.ТРАНСПОРТ') }}</th>
+                    <th>{{ __('lang.ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ') }}</th>
+                    <th>{{ __('lang.МАРШРУТ') }}</th>
+                    <th>{{ __('lang.СТАВКА') }}</th>
                 </tr>
                 </thead>
 
@@ -284,65 +284,65 @@
                 <tbody>
                 <tr>
                     <td>
-                        <p class="mobile-order-head">НАПРАВЛЕНИЕ</p>
+                        <p class="mobile-order-head">{{ __('lang.НАПРАВЛЕНИЕ') }}</p>
                         <span>{{ Str::limit($cargoLoading->country, 50) }} - {{ Str::limit($cargoLoading->final_unload_city, 50) }}</span>
                     </td>
                     <td>
-                        <p class="mobile-order-head">ТРАНСПОРТ</p>
+                        <p class="mobile-order-head">{{ __('lang.ТРАНСПОРТ') }}</p>
                         <p class="car-head">
-                            <strong>Кузов</strong>
+                            <strong>{{ __('lang.Кузов') }}</strong>
                         </p>
                         <p>{{ Str::limit(implode(', ', array_slice($cargoLoading->body_types, 0, 5)), 70) }}</p>
                         @if (!empty($cargoLoading->loading_types))
-                        <strong>Загрузка</strong>
+                        <strong>{{ __('lang.Загрузка') }}</strong>
                         <p>{{ Str::limit(implode(', ', array_slice($cargoLoading->loading_types, 0, 5)), 70) }}</p>
                         @endif
                         @if (!empty($cargoLoading->unloading_types))
-                        <strong>Выгрузка</strong>
+                        <strong>{{ __('lang.Выгрузка') }}</strong>
                         <p>{{ Str::limit(implode(', ', array_slice($cargoLoading->unloading_types, 0, 5)), 70) }}</p>
                         @endif
                     </td>
                     <td>
-                        <p class="mobile-order-head">ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ</p>
+                        <p class="mobile-order-head">{{ __('lang.ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ') }}</p>
                         <p><strong>{{ $cargoLoading->cargo->title }}</strong></p>
                         <strong>{{ $cargoLoading->cargo->weight }} - </strong>
                         {{ $cargoLoading->cargo->weight_type }} /
                         {{ $cargoLoading->cargo->volume }} М3
                     </td>
                     <td>
-                        <p class="mobile-order-head">МАРШРУТ</p>
+                        <p class="mobile-order-head">{{ __('lang.МАРШРУТ') }}</p>
                         <strong>{{ Str::limit($cargoLoading->country, 50) }}</strong>
                         <br>
                         <strong>{{ $cargoLoading->final_unload_city }}</strong>
                         <br><br>
                         @if($cargoLoading->cargo->constant_frequency)
-                            <p><strong>{{ $cargoLoading->cargo->constant_frequency == 'daily' ? __('Ежедневно') : __('По рабочим дням') }}</strong></p>
+                            <p><strong>{{ $cargoLoading->cargo->constant_frequency == 'daily' ? __('lang.Ежедневно') : __('lang.По рабочим дням') }}</strong></p>
                         @elseif($cargoLoading?->cargo?->ready_date)
                             <i><strong>{{ $cargoLoading?->cargo?->ready_date?->format('d.m.Y') }}</strong></i>
                         @else
-                            <i><strong>{{ __('Груза нет, запрос ставки') }}</strong></i>
+                            <i><strong>{{ __('lang.Груза нет, запрос ставки') }}</strong></i>
                         @endif
                     </td>
                     <td>
-                        <p class="mobile-order-head">СТАВКА</p>
+                        <p class="mobile-order-head">{{ __('lang.СТАВКА') }}</p>
                         @if($cargoLoading->payment_type == 'payment_request')
-                            <p class="car-head"><strong>{{ __('Запрос ставки') }}</strong></p>
+                            <p class="car-head"><strong>{{ __('lang.Запрос ставки') }}</strong></p>
                         @else
                             @if($cargoLoading->with_vat_cashless)
-                                <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} С НДС, безнал</p>
+                                <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} {{ __('lang.С НДС, безнал') }}</p>
                             @endif
                             @if($cargoLoading->without_vat_cashless)
-                                <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} Без НДС, безнал</p>
+                                <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} {{ __('lang.Без НДС, безнал') }}</p>
                             @endif
                             @if($cargoLoading->cash)
-                                <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} Наличными</p>
+                                <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} {{ __('lang.Наличными') }}</p>
                             @endif
                         @endif
                     </td>
                 </tr>
                 <tr class="table-footer">
                     <th class="row-flex">
-                        <button type="button" class="show-contacts_btn">{{ __('показать контакты') }}</button>
+                        <button type="button" class="show-contacts_btn">{{ __('lang.показать контакты') }}</button>
 
                         <div class="show-info-contacts">
                             <p>{{ $cargoLoading->company->name }}</p>
@@ -381,14 +381,14 @@
                                         <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
                                     </svg>
                                 </div>
-                                <b>Отправить сообщение</b>
+                                <b>{{ __('lang.Отправить сообщение') }}</b>
                                 <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
                                     @csrf
                                     <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $cargoLoading->company->user->id }}">
                                     <textarea required name="message" id="chat_text_public" rows="5" style="height: auto; overflow: hidden"></textarea>
 
-                                    <button class="form-btn" data-modal-close="dropdown-chat1">Отправить</button>
-                                    <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">Отмена</button>
+                                    <button class="form-btn" data-modal-close="dropdown-chat1">{{ __('lang.Отправить') }}</button>
+                                    <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">{{ __('lang.Отмена') }}</button>
                                 </form>
                             </div>
                         </div>

@@ -44,7 +44,7 @@
                     @csrf
                     <input type="hidden" name="company_id" value="{{ auth()->user()?->company?->id }}">
                     <div class="add-goods__head">
-                        <b>Добавить груз</b>
+                        <b>{{ __('lang.Добавить груз') }}</b>
                         <div class="add-goods__buttons">
 {{--                            <button type="button">Заполнить из шаблона</button>--}}
 {{--                            <button type="reset">Очистить форму</button>--}}
@@ -54,11 +54,11 @@
                     <div class="add-goods__main">
                         <div class="add-gods__left">
                             <div class="add-goods__inputs">
-                                <b>*Груз</b>
+                                <b>*{{ __('lang.Груз') }}</b>
                                 <div>
                                     <div class="add-goods__inputs__row">
                                         <label for="cargo-name">
-                                            <input type="text" name="title" value="{{ old('title') }}" id="cargo-name" class="add-input input-search" list="cargo-types" required placeholder="Выберите или введите своё">
+                                            <input type="text" name="title" value="{{ old('title') }}" id="cargo-name" class="add-input input-search" list="cargo-types" required placeholder="{{ __('lang.Выберите или введите своё') }}">
                                             @if ($errors->has('title'))<br><p style="color:red;">{{ $errors->first('title') }}</p>@endif
                                             <datalist id="cargo-types">
                                                 @foreach($cargoTypes as $type)
@@ -67,20 +67,20 @@
                                             </datalist>
                                         </label>
                                         <label for="weight">
-                                            <input class="add-input input-small" value="{{ old('weight') }}" type="text" id="weight" name="weight" placeholder="вес" required>
+                                            <input class="add-input input-small" value="{{ old('weight') }}" type="text" id="weight" name="weight" placeholder="{{ __('lang.вес') }}" required>
                                             @if ($errors->has('weight'))<br><p style="color:red;">{{ $errors->first('weight') }}</p>@endif
                                         </label>
                                         <label for="weight_type">
                                             <select name="weight_type" id="weight_type" class="add-input input-small input-select" required>
-                                                <option value="t" {{ old('weight_type', 't') === 't' ? 'selected' : '' }}>т</option>
-                                                <option value="kg" {{ old('weight_type') === 'kg' ? 'selected' : '' }}>кг</option>
+                                                <option value="t" {{ old('weight_type', 't') === 't' ? 'selected' : '' }}>{{ __('lang.т') }}</option>
+                                                <option value="kg" {{ old('weight_type') === 'kg' ? 'selected' : '' }}>{{ __('lang.кг') }}</option>
                                             </select>
                                             @if ($errors->has('weight_type'))
                                                 <br><p style="color:red;">{{ $errors->first('weight_type') }}</p>
                                             @endif
                                         </label>
                                         <label for="volume" class="label-value">
-                                            <input class="add-input input-small input-value" name="volume" value="{{ old('volume') }}" type="text" id="volume" placeholder="Объем" required>
+                                            <input class="add-input input-small input-value" name="volume" value="{{ old('volume') }}" type="text" id="volume" placeholder="{{ __('lang.Объем') }}" required>
                                             @if ($errors->has('volume'))<br><p style="color:red;">{{ $errors->first('volume') }}</p>@endif
                                             <span>М<sup>3</sup></span>
                                         </label>
@@ -120,7 +120,7 @@
 
                                         <label for="length" class="label-value"
                                                style="display: {{ (old('length') || $errors->has('length')) ? 'block' : 'none' }};">
-                                            <label>Д</label>
+                                            <label>{{ __('lang.Д') }}</label>
                                             <input class="add-input input-small input-value" name="length" value="{{ old('length') }}" type="text" id="length">
                                             @if ($errors->has('length'))<br><p style="color:red;">{{ $errors->first('length') }}</p>@endif
                                             <span>м.</span>
@@ -128,7 +128,7 @@
 
                                         <label for="width" class="label-value"
                                                style="display: {{ (old('width') || $errors->has('width')) ? 'block' : 'none' }};">
-                                            <label>Ш</label>
+                                            <label>{{ __('lang.Ш') }}</label>
                                             <input class="add-input input-small input-value" name="width" value="{{ old('width') }}" type="text" id="width">
                                             @if ($errors->has('width'))<br><p style="color:red;">{{ $errors->first('width') }}</p>@endif
                                             <span>м.</span>
@@ -136,7 +136,7 @@
 
                                         <label for="height_d" class="label-value"
                                                style="display: {{ (old('height') || $errors->has('height')) ? 'block' : 'none' }};">
-                                            <label>В</label>
+                                            <label>{{ __('lang.В') }}</label>
                                             <input class="add-input input-small input-value" name="height" value="{{ old('height') }}" type="text" id="height_d">
                                             @if ($errors->has('height'))<br><p style="color:red;">{{ $errors->first('height') }}</p>@endif
                                             <span>м.</span>
@@ -144,7 +144,7 @@
 
                                         <label for="diameter" class="label-value"
                                                style="display: {{ (old('diameter') || $errors->has('diameter')) ? 'block' : 'none' }};">
-                                            <label>Диаметр</label>
+                                            <label>{{ __('lang.Диаметр') }}</label>
                                             <input class="add-input input-small input-value" name="diameter" value="{{ old('diameter') }}" type="text" id="diameter">
                                             @if ($errors->has('diameter'))<br><p style="color:red;">{{ $errors->first('diameter') }}</p>@endif
                                             <span>м.</span>
@@ -156,13 +156,13 @@
                                             <svg width="12" height="12">
                                                 <use xlink:href="#plus"></use>
                                             </svg>
-                                            Упаковка
+                                            {{ __('lang.Упаковка') }}
                                         </button>
                                         <button id="add_dimensions">
                                             <svg width="12" height="12">
                                                 <use xlink:href="#plus"></use>
                                             </svg>
-                                            Габариты и диаметр
+                                            {{ __('lang.Габариты и диаметр') }}
                                         </button>
 {{--                                        <button>--}}
 {{--                                            <svg width="12" height="12">--}}
@@ -175,14 +175,14 @@
                             </div>
 
                             <div class="add-goods__inputs">
-                                <b>*Когда</b>
+                                <b>*{{ __('lang.Когда') }}</b>
                                 <div>
                                     <div class="add-goods__inputs__row">
                                         <label for="when_type">
                                             <select id="when_type" class="add-input input-select label-big" name="when_type" required>
-                                                <option value="1" {{ old('when_type') == 1 ? 'selected' : '' }}>Готов к загрузке</option>
-                                                <option value="2" {{ old('when_type') == 2 ? 'selected' : '' }}>Постоянно</option>
-                                                <option value="3" {{ old('when_type') == 3 ? 'selected' : '' }}>Груза нет, запрос ставки</option>
+                                                <option value="1" {{ old('when_type') == 1 ? 'selected' : '' }}>{{ __('lang.Готов к загрузке') }}</option>
+                                                <option value="2" {{ old('when_type') == 2 ? 'selected' : '' }}>{{ __('lang.Постоянно') }}</option>
+                                                <option value="3" {{ old('when_type') == 3 ? 'selected' : '' }}>{{ __('lang.Груза нет, запрос ставки') }}</option>
                                             </select>
                                             @if ($errors->has('when_type'))<br><p style="color:red;">{{ $errors->first('when_type') }}</p>@endif
                                         </label>
@@ -190,19 +190,19 @@
                                         <!-- Дата и кол-во дней -->
                                         <div id="ready_block" style="display: flex; gap: 10px;">
                                             <label for="date" class="add-input input-date">
-                                                <span id="date-label-text">{{ old('ready_date') ? old('ready_date') : 'выберите дату'}}</span>
+                                                <span id="date-label-text">{{ old('ready_date') ? old('ready_date') : __('lang.выберите дату') }}</span>
                                                 <input type="date" id="date" name="ready_date" value="{{ old('ready_date') }}">
                                                 @if ($errors->has('ready_date'))<br><p style="color:red;">{{ $errors->first('ready_date') }}</p>@endif
                                             </label>
 
                                             <label for="archive_after_days">
                                                 <select name="archive_after_days" id="archive_after_days" class="add-input input-small input-select">
-                                                    <option value="0" {{ old('archive_after_days') == 0 ? 'selected' : '' }}>0 дн.</option>
-                                                    <option value="1" {{ old('archive_after_days') == 1 ? 'selected' : '' }}>1 дн.</option>
-                                                    <option value="2" {{ old('archive_after_days') == 2 ? 'selected' : '' }}>2 дн.</option>
-                                                    <option value="3" {{ old('archive_after_days') == 3 ? 'selected' : '' }}>3 дн.</option>
-                                                    <option value="4" {{ old('archive_after_days') == 4 ? 'selected' : '' }}>4 дн.</option>
-                                                    <option value="5" {{ old('archive_after_days') == 5 ? 'selected' : '' }}>5 дн.</option>
+                                                    <option value="0" {{ old('archive_after_days') == 0 ? 'selected' : '' }}>0 {{ __('lang.дн.') }}</option>
+                                                    <option value="1" {{ old('archive_after_days') == 1 ? 'selected' : '' }}>1 {{ __('lang.дн.') }}</option>
+                                                    <option value="2" {{ old('archive_after_days') == 2 ? 'selected' : '' }}>2 {{ __('lang.дн.') }}</option>
+                                                    <option value="3" {{ old('archive_after_days') == 3 ? 'selected' : '' }}>3 {{ __('lang.дн.') }}</option>
+                                                    <option value="4" {{ old('archive_after_days') == 4 ? 'selected' : '' }}>4 {{ __('lang.дн.') }}</option>
+                                                    <option value="5" {{ old('archive_after_days') == 5 ? 'selected' : '' }}>5 {{ __('lang.дн.') }}</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -212,9 +212,9 @@
                                              style="display: {{ (old('constant_frequency') || $errors->has('constant_frequency')) ? 'block' : 'none' }};">
                                             <label>
                                                 <select name="constant_frequency" class="add-input input-select">
-                                                    <option value="" {{ old('constant_frequency') === null ? 'selected' : '' }}>Выберите частоту</option>
-                                                    <option value="daily" {{ old('constant_frequency') === 'daily' ? 'selected' : '' }}>Ежедневно</option>
-                                                    <option value="workdays" {{ old('constant_frequency') === 'workdays' ? 'selected' : '' }}>По рабочим дням</option>
+                                                    <option value="" {{ old('constant_frequency') === null ? 'selected' : '' }}>{{ __('lang.Выберите частоту') }}</option>
+                                                    <option value="daily" {{ old('constant_frequency') === 'daily' ? 'selected' : '' }}>{{ __('lang.Ежедневно') }}</option>
+                                                    <option value="workdays" {{ old('constant_frequency') === 'workdays' ? 'selected' : '' }}>{{ __('lang.По рабочим дням') }}</option>
                                                 </select>
                                                 @if ($errors->has('constant_frequency'))<br><p style="color:red;">{{ $errors->first('constant_frequency') }}</p>@endif
                                             </label>
@@ -226,11 +226,11 @@
                             <div class="add-goods__wrapper">
                                 <div class="add-gods-ponts"></div>
                                 <div class="add-goods__inputs no-border">
-                                    <b>*Загрузка</b>
+                                    <b>*{{ __('lang.Загрузка') }}</b>
                                     <div>
                                         <div class="add-goods__inputs__row">
                                             <label for="place">
-                                                <input type="text" name="country" required id="place" value="{{ old('country') }}" class="add-input input-search" placeholder="Введите адрес">
+                                                <input type="text" name="country" required id="place" value="{{ old('country') }}" class="add-input input-search" placeholder="{{ __('lang.Введите адрес') }}">
                                                 @if ($errors->has('country'))<br><p style="color:red;">{{ $errors->first('country') }}</p>@endif
                                             </label>
 {{--                                            <label for="address">--}}
@@ -257,7 +257,7 @@
                                                    style="display: {{ (old('is_24h') || $errors->has('is_24h')) ? 'block' : 'none' }};">
                                                 <input type="hidden" name="is_24h" value="0">
                                                 <input class="add-input input-small input-value" name="is_24h" type="checkbox" id="is_24h" value="1" style="min-width: 25px;" {{ old('is_24h') ? 'checked' : '' }}>
-                                                круглосуточно
+                                                {{ __('lang.круглосуточно') }}
                                                 @if ($errors->has('is_24h'))<br><p style="color:red;">{{ $errors->first('is_24h') }}</p>@endif
                                             </label>
 
@@ -268,7 +268,7 @@
                                                 <svg width="12" height="12">
                                                     <use xlink:href="#plus"></use>
                                                 </svg>
-                                                Время загрузки
+                                                {{ __('lang.Время загрузки') }}
                                             </button>
                                         </div>
                                     </div>
@@ -283,11 +283,11 @@
 {{--                                </div>--}}
 
                                 <div class="add-goods__inputs">
-                                    <b>*Разгрузка</b>
+                                    <b>*{{ __('lang.Разгрузка') }}</b>
                                     <div>
                                         <div class="add-goods__inputs__row">
                                             <label for="final_unload_country">
-                                                <input type="text" name="final_unload_city" required id="final_unload_city" value="{{ old('final_unload_city') }}" class="add-input input-search" placeholder="Введите адрес">
+                                                <input type="text" name="final_unload_city" required id="final_unload_city" value="{{ old('final_unload_city') }}" class="add-input input-search" placeholder="{{ __('lang.Введите адрес') }}">
                                                 @if ($errors->has('final_unload_city'))<br><p style="color:red;">{{ $errors->first('final_unload_city') }}</p>@endif
                                             </label>
 {{--                                            <label for="final_unload_address">--}}
@@ -336,7 +336,7 @@
                                                    style="display: {{ (old('final_is_24h') || $errors->has('final_is_24h')) ? 'block' : 'none' }};">
                                                 <input type="hidden" name="final_is_24h" value="0">
                                                 <input class="add-input input-small input-value" name="final_is_24h" value="1" type="checkbox" id="final_is_24h" style="min-width: 25px;" {{ old('final_is_24h') ? 'checked' : '' }}>
-                                                круглосуточно
+                                                {{ __('lang.круглосуточно') }}
                                                 @if ($errors->has('final_is_24h'))<br><p style="color:red;">{{ $errors->first('final_is_24h') }}</p>@endif
                                             </label>
 
@@ -347,7 +347,7 @@
                                                 <svg width="12" height="12">
                                                     <use xlink:href="#plus"></use>
                                                 </svg>
-                                                Дата и время
+                                                {{ __('lang.Дата и время') }}
                                             </button>
                                         </div>
                                     </div>
@@ -356,7 +356,7 @@
 
                             <div class="add-inputs-cards">
                                 <div class="add-inputs-card">
-                                    <b>*Кузов</b>
+                                    <b>*{{ __('lang.Кузов') }}</b>
                                     <div class="add-inputs-card__wrapp">
                                         <div class="add-inputs-card_block border">
                                             <label for="all" class="add-input-general">
@@ -679,7 +679,7 @@
                                 </div>
 
                                 <div class="add-inputs-card">
-                                    <b>*Загрузка</b>
+                                    <b>*{{ __('lang.Загрузка') }}</b>
                                     <div class="add-inputs-card__wrapp">
                                         <div class="add-inputs-card_block">
                                             <label for="1">
@@ -776,7 +776,7 @@
                                 </div>
 
                                 <div class="add-inputs-card">
-                                    <b>*Выгрузка</b>
+                                    <b>*{{ __('lang.Выгрузка') }}</b>
                                     <div class="add-inputs-card__wrapp">
                                         <div class="add-inputs-card_block">
                                             <label for="111">
@@ -877,15 +877,15 @@
                             <div class="add-goods-choise choise-cash">
                                 <input type="radio" name="payment_type" id="tr" value="negotiable"
                                         {{ old('payment_type') === 'negotiable' ? 'checked' : '' }}>
-                                <label for="tr">Возможен торг</label>
+                                <label for="tr">{{ __('lang.Возможен торг') }}</label>
 
                                 <input type="radio" name="payment_type" id="notr" value="no_haggling"
                                         {{ old('payment_type', 'no_haggling') === 'no_haggling' ? 'checked' : '' }}>
-                                <label for="notr">Без торга</label>
+                                <label for="notr">{{ __('lang.Без торга') }}</label>
 
                                 <input type="radio" name="payment_type" id="net" value="payment_request"
                                         {{ old('payment_type') === 'payment_request' ? 'checked' : '' }}>
-                                <label for="net">Запрос</label>
+                                <label for="net">{{ __('lang.Запрос') }}</label>
 {{--                                <input type="radio" name="payment" id="rtr">--}}
 {{--                                <label for="rtr">Торги</label>--}}
                             </div>
@@ -893,7 +893,7 @@
                             <br>
                             <div class="add-goods__bid">
                                 <div class="add-goods__bid-row">
-                                    <p>С НДС, безнал</p>
+                                    <p>{{ __('lang.С НДС, безнал') }}</p>
                                     <label for="with_vat_cashless">
                                         <input type="number" name="with_vat_cashless" id="with_vat_cashless" value="{{ old('with_vat_cashless') }}">
                                         @if ($errors->has('with_vat_cashless'))<br><p style="color:red;">{{ $errors->first('with_vat_cashless') }}</p>@endif
@@ -916,29 +916,29 @@
                                     </label>
                                 </div>
                                 <div class="add-goods__bid-row">
-                                    <p>Без НДС, безнал</p>
+                                    <p>{{ __('lang.Без НДС, безнал') }}</p>
                                     <label for="without_vat_cashless">
                                         <input type="number" name="without_vat_cashless" value="{{ old('without_vat_cashless') }}" id="without_vat_cashless">
                                         @if ($errors->has('without_vat_cashless'))<br><p style="color:red;">{{ $errors->first('without_vat_cashless') }}</p>@endif
                                     </label>
-                                    <p>узб.сум</p>
+                                    <p>{{ __('lang.узб.сум') }}</p>
                                 </div>
                                 <div class="add-goods__bid-row">
-                                    <p>Наличными</p>
+                                    <p>{{ __('lang.Наличными') }}</p>
                                     <label for="cash">
                                         <input type="number" name="cash" id="cash" value="{{ old('cash') }}">
                                         @if ($errors->has('cash'))<br><p style="color:red;">{{ $errors->first('cash') }}</p>@endif
                                     </label>
-                                    <p>узб.сум</p>
+                                    <p>{{ __('lang.узб.сум') }}</p>
                                 </div>
                                 <div class="add-goods__bid-row">
-                                    <p>Встречные предложения</p>
+                                    <p>{{ __('lang.Встречные предложения') }}</p>
                                     <div class="add-goods__bid-inputs">
                                         <label for="on_cart">
                                             <input type="hidden" name="on_cart" value="0">
                                             <input type="checkbox" id="on_cart" name="on_cart" value="1"
                                                     {{ old('on_cart') ? 'checked' : '' }}>
-                                            на карту
+                                            {{ __('lang.на карту') }}
                                             @if ($errors->has('on_cart'))<br><p style="color:red;">{{ $errors->first('on_cart') }}</p>@endif
                                         </label>
 
@@ -946,7 +946,7 @@
                                             <input type="hidden" name="counter_offers" value="0">
                                             <input type="checkbox" id="counter_offers" name="counter_offers" value="1"
                                                     {{ old('counter_offers') ? 'checked' : '' }}>
-                                            видны только вам
+                                            {{ __('lang.видны только вам') }}
                                             @if ($errors->has('counter_offers'))<br><p style="color:red;">{{ $errors->first('counter_offers') }}</p>@endif
                                         </label>
                                     </div>
@@ -955,14 +955,14 @@
                             </div>
 
                             <div class="add-goods-more__row">
-                                <p>Оплата через</p>
+                                <p>{{ __('lang.Оплата через') }}</p>
 
                                 <div class="add-goods-more__payment">
                                     <label>
                                         <input type="number" name="payment_via" value="{{ old('payment_via') }}">
                                         @if ($errors->has('payment_via'))<br><p style="color:red;">{{ $errors->first('payment_via') }}</p>@endif
                                     </label>
-                                    <p>банковских дней</p>
+                                    <p>{{ __('lang.банковских дней') }}</p>
                                 </div>
                             </div>
 
@@ -1074,8 +1074,8 @@
 {{--                                </span>--}}
 
                                 <div class="side-bar__goods-info">
-                                    <b>Груз</b>
-                                    <p>не заполнено</p>
+                                    <b>{{ __('lang.Груз') }}</b>
+                                    <p>{{ __('lang.не заполнено') }}</p>
                                 </div>
                             </div>
                             <div class="side-bar__goods">
@@ -1087,8 +1087,8 @@
 
                                 <div class="side-bar__goods when-summary">
                                     <div class="side-bar__goods-info">
-                                        <b>Когда</b>
-                                        <p>не заполнено</p>
+                                        <b>{{ __('lang.Когда') }}</b>
+                                        <p>{{ __('lang.не заполнено') }}</p>
                                     </div>
                                 </div>
 
@@ -1102,8 +1102,8 @@
 
                                 <div class="side-bar__goods route-summary">
                                     <div class="side-bar__goods-info">
-                                        <b>Маршрут</b>
-                                        <p>не заполнено</p>
+                                        <b>{{ __('lang.Маршрут') }}</b>
+                                        <p>{{ __('lang.не заполнено') }}</p>
                                     </div>
                                 </div>
 
@@ -1131,8 +1131,8 @@
 
                                 <div class="side-bar__goods payment-summary">
                                     <div class="side-bar__goods-info">
-                                        <b>Оплата</b>
-                                        <p>не заполнено</p>
+                                        <b>{{ __('lang.Оплата') }}</b>
+                                        <p>{{ __('lang.не заполнено') }}</p>
                                     </div>
                                 </div>
 
@@ -1146,7 +1146,7 @@
 {{--                                </span>--}}
 
                                 <div class="side-bar__goods-info">
-                                    <b>Дополнительно</b>
+                                    <b>{{ __('lang.Дополнительно') }}</b>
                                     <p>
                                         <strong>
                                             {{ auth()->user()?->name }},<br>
@@ -1164,12 +1164,12 @@
 {{--                                </span>--}}
 
                                 <div class="side-bar__goods-info">
-                                    <b>Площадки</b>
-                                    <p><strong>Биржа EUCA ALLIANCE</strong></p>
+                                    <b>{{ __('lang.Площадки') }}</b>
+                                    <p><strong>{{ __('lang.Биржа EUCA ALLIANCE') }}</strong></p>
                                 </div>
                             </div>
 
-                            <button class="add-goods__btn">Опублковать груз</button>
+                            <button class="add-goods__btn">{{ __('lang.Опубликовать груз') }}</button>
 {{--                            <button class="add-goods__link">Сохранить как шаблон</button>--}}
                         </div>
                     </div>

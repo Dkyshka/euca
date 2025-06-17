@@ -22,7 +22,7 @@
                     </svg>
                 </button>
 
-                <h1>Ваши грузы</h1>
+                <h1>{{ __('lang.Автопарк') }}</h1>
 
                 <x-main.assets-notification/>
 
@@ -31,7 +31,7 @@
 
             <main class="profile-content">
                 <div class="notifications-head">
-                    <button class="form-btn" data-modal-target="add-ts">Добавить</button>
+                    <button class="form-btn" data-modal-target="add-ts">{{ __('lang.Добавить') }}</button>
                 </div>
 
                 <div class="drivers__list">
@@ -50,10 +50,10 @@
                             </div>
                             <div class="drivers-card__buttons">
                                 <button>
-                                    <a href="{{ route('transports.edit', [app()->getLocale(), $transport->id]) }}">Редактировать</a>
+                                    <a href="{{ route('transports.edit', [app()->getLocale(), $transport->id]) }}">{{ __('lang.Редактировать') }}</a>
                                 </button>
                                 <button>
-                                    <a href="{{ route('transports.delete', [app()->getLocale(), $transport->id]) }}">Удалить</a>
+                                    <a href="{{ route('transports.delete', [app()->getLocale(), $transport->id]) }}">{{ __('lang.Удалить') }}</a>
                                 </button>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
 
 <div class="modal-overlay" data-modal="add-ts">
     <div class="modal modal-add-ts">
-        <b>Добавить грузовик</b>
+        <b>{{ __('lang.Добавить грузовик') }}</b>
 
         <form action="{{ route('transports.store', app()->getLocale()) }}" method="POST" id="transportForm">
             @csrf
@@ -77,85 +77,85 @@
             <div class="choise-cash">
 
                 <input type="radio" name="payment_type" id="notr" value="no_haggling">
-                <label for="notr">Есть ставка</label>
+                <label for="notr">{{ __('lang.Есть ставка') }}</label>
 
                 <input type="radio" name="payment_type" id="tr" value="payment_request" checked>
-                <label for="tr">Запросить ставку</label>
+                <label for="tr">{{ __('lang.Запросить ставку') }}</label>
             </div>
 
             <div class="add-goods__bid">
                 <div class="add-goods__bid-row">
-                    <p>С НДС, безнал</p>
+                    <p>{{ __('lang.С НДС, безнал') }}</p>
                     <label for="with_vat_cashless">
                         <input type="number" name="with_vat_cashless" id="with_vat_cashless">
                     </label>
                     <label>
                         <select name="currency" id="currency" class="input-select">
-                            <option value="узб.сум" {{ old('currency') === 'узб.сум' ? 'selected' : '' }}>узб.сум</option>
-                            <option value="узб.сум/км" {{ old('currency') === 'узб.сум/км' ? 'selected' : '' }}>узб.сум/км</option>
-                            <option value="узб.сум/т" {{ old('currency') === 'узб.сум/т' ? 'selected' : '' }}>узб.сум/т</option>
-                            <option value="доллар" {{ old('currency') === 'доллар' ? 'selected' : '' }}>доллар</option>
-                            <option value="доллар/км" {{ old('currency') === 'доллар/км' ? 'selected' : '' }}>доллар/км</option>
-                            <option value="доллар/т" {{ old('currency') === 'доллар/т' ? 'selected' : '' }}>доллар/т</option>
-                            <option value="евро" {{ old('currency') === 'евро' ? 'selected' : '' }}>евро</option>
-                            <option value="евро/км" {{ old('currency') === 'евро/км' ? 'selected' : '' }}>евро/км</option>
-                            <option value="евро/т" {{ old('currency') === 'евро/т' ? 'selected' : '' }}>евро/т</option>
-                            <option value="руб" {{ old('currency') === 'руб' ? 'selected' : '' }}>руб</option>
-                            <option value="руб/км" {{ old('currency') === 'руб/км' ? 'selected' : '' }}>руб/км</option>
-                            <option value="руб/т" {{ old('currency') === 'руб/т' ? 'selected' : '' }}>руб/т</option>
+                            <option value="{{ __('lang.узб.сум') }}" {{ old('currency') === __('lang.узб.сум') ? 'selected' : '' }}>{{ __('lang.узб.сум') }}</option>
+                            <option value="{{ __('lang.узб.сум/км') }}" {{ old('currency') === __('lang.узб.сум/км') ? 'selected' : '' }}>{{ __('lang.узб.сум/км') }}</option>
+                            <option value="{{ __('lang.узб.сум/т') }}" {{ old('currency') === __('lang.узб.сум/т') ? 'selected' : '' }}>{{ __('lang.узб.сум/т') }}</option>
+                            <option value="{{ __('lang.доллар') }}" {{ old('currency') === __('lang.доллар') ? 'selected' : '' }}>{{ __('lang.доллар') }}</option>
+                            <option value="{{ __('lang.доллар/км') }}" {{ old('currency') === __('lang.доллар/км') ? 'selected' : '' }}>{{ __('lang.доллар/км') }}</option>
+                            <option value="{{ __('lang.доллар/т') }}" {{ old('currency') === __('lang.доллар/т') ? 'selected' : '' }}>{{ __('lang.доллар/т') }}</option>
+                            <option value="{{ __('lang.евро') }}" {{ old('currency') === __('lang.евро') ? 'selected' : '' }}>{{ __('lang.евро') }}</option>
+                            <option value="{{ __('lang.евро/км') }}" {{ old('currency') === __('lang.евро/км') ? 'selected' : '' }}>{{ __('lang.евро/км') }}</option>
+                            <option value="{{ __('lang.евро/т') }}" {{ old('currency') === __('lang.евро/т') ? 'selected' : '' }}>{{ __('lang.евро/т') }}</option>
+                            <option value="{{ __('lang.руб') }}" {{ old('currency') === __('lang.руб') ? 'selected' : '' }}>{{ __('lang.руб') }}</option>
+                            <option value="{{ __('lang.руб/км') }}" {{ old('currency') === __('lang.руб/км') ? 'selected' : '' }}>{{ __('lang.руб/км') }}</option>
+                            <option value="{{ __('lang.руб/т') }}" {{ old('currency') === __('lang.руб/т') ? 'selected' : '' }}>{{ __('lang.руб/т') }}</option>
                         </select>
                     </label>
                 </div>
                 <div class="add-goods__bid-row">
-                    <p>Без НДС, безнал</p>
+                    <p>{{ __('lang.Без НДС, безнал') }}</p>
                     <label for="without_vat_cashless">
                         <input type="number" name="without_vat_cashless" value="{{ old('without_vat_cashless') }}" id="without_vat_cashless">
                     </label>
-                    <p>узб.сум</p>
+                    <p>{{ __('lang.узб.сум') }}</p>
                 </div>
                 <div class="add-goods__bid-row">
-                    <p>Наличными</p>
+                    <p>{{ __('lang.Наличными') }}</p>
                     <label for="cash">
                         <input type="number" name="cash" id="cash" value="{{ old('cash') }}">
                     </label>
-                    <p>узб.сум</p>
+                    <p>{{ __('lang.узб.сум') }}</p>
                 </div>
             </div>
 
             <div class="descriptions-ts">
-                <b>Характеристики</b>
-                <span>Тип кузова</span>
+                <b>{{ __('lang.Характеристики') }}</b>
+                <span>{{ __('lang.Тип кузова') }}</span>
                 <label for="body_type">
                     <select name="body_type" id="body_type" required>
-                        <option value="" hidden>Выберите тип кузова</option>
-                        <option value="Тент">Тент</option>
-                        <option value="Рефрижератор">Рефрижератор</option>
-                        <option value="Открытый">Открытый</option>
-                        <option value="Контейнер">Контейнер</option>
-                        <option value="Другое">Другое</option>
+                        <option value="" hidden>{{ __('lang.Выберите тип кузова') }}</option>
+                        <option value="{{ __('lang.Тент') }}">{{  }}</option>
+                        <option value="{{ __('lang.Рефрижератор') }}">{{ __('lang.Рефрижератор') }}</option>
+                        <option value="{{ __('lang.Открытый') }}">{{ __('lang.Открытый') }}</option>
+                        <option value="{{ __('lang.Контейнер') }}">{{ __('lang.Контейнер') }}</option>
+                        <option value="{{ __('lang.Другое') }}">{{ __('lang.Другое') }}</option>
                     </select>
                 </label>
             </div>
 
             <div class="ts-inputs-cards" style="flex-wrap: wrap">
                 <label for="capacity">
-                    Грузоподъемность,т
+                    {{ __('lang.Грузоподъемность,т') }}
                     <input type="number" id="capacity" name="capacity" required>
                 </label>
                 <label for="volume">
-                    Объем, м3
+                    {{ __('lang.Объем, м3') }}
                     <input type="number" id="volume" name="volume" required>
                 </label>
                 <label for="length">
-                    Длина,м
+                    {{ __('lang.Длина,м') }}
                     <input type="number" id="length" name="length" required>
                 </label>
                 <label for="width">
-                    Ширина
+                    {{ __('lang.Ширина') }}
                     <input type="number" id="width" name="width" required>
                 </label>
                 <label for="height">
-                    Высота,м
+                    {{ __('lang.Высота,м') }}
                     <input type="number" id="height" name="height" required>
                 </label>
             </div>
@@ -163,8 +163,8 @@
             <div class="add-goods__inputs__row" style="margin-bottom: 20px;">
                 <label for="when_type">
                     <select id="when_type" class="add-input input-select label-big" name="when_type" required>
-                        <option value="1">Готов к загрузке</option>
-                        <option value="2">Постоянно</option>
+                        <option value="1">{{ __('lang.Готов к загрузке') }}</option>
+                        <option value="2">{{ __('lang.Постоянно') }}</option>
                     </select>
                 </label>
 
@@ -190,19 +190,19 @@
                 <div id="constant_block">
                     <label>
                         <select name="availability_mode" class="add-input input-select">
-                            <option value="" {{ old('availability_mode') === null ? 'selected' : '' }}>Выберите частоту</option>
-                            <option value="daily" {{ old('availability_mode') === 'daily' ? 'selected' : '' }}>Ежедневно</option>
-                            <option value="workdays" {{ old('availability_mode') === 'workdays' ? 'selected' : '' }}>По рабочим дням</option>
+                            <option value="" {{ old('availability_mode') === null ? 'selected' : '' }}>{{ __('lang.Выберите частоту') }}</option>
+                            <option value="daily" {{ old('availability_mode') === 'daily' ? 'selected' : '' }}>{{ __('lang.Ежедневно') }}</option>
+                            <option value="workdays" {{ old('availability_mode') === 'workdays' ? 'selected' : '' }}>{{ __('lang.По рабочим дням') }}</option>
                         </select>
                     </label>
                 </div>
             </div>
 
             <div class="descriptions-ts">
-                <span>Водитель</span>
+                <span>{{ __('lang.Водитель') }}</span>
                 <label for="driver_id">
                     <select name="driver_id" id="driver_id">
-                        <option value="" hidden>Выберите водителя</option>
+                        <option value="" hidden>{{ __('lang.Выберите водителя') }}</option>
                         @foreach($drivers as $driver)
                         <option value="{{ $driver->id }}">{{ $driver->first_name }} {{ $driver->middle_name }}</option>
                         @endforeach
@@ -211,22 +211,22 @@
             </div>
 
             <div class="add-goods__inputs no-border">
-                <b>*Загрузка</b>
+                <b>*{{ __('lang.Загрузка') }}</b>
                 <div>
                     <div class="add-goods__inputs__row">
                         <label for="country">
-                            <input type="text" name="country" required id="country" class="add-input input-search" placeholder="Населенный пункт">
+                            <input type="text" name="country" required id="country" class="add-input input-search" placeholder="{{ __('lang.Населенный пункт') }}">
                         </label>
                     </div>
                 </div>
             </div>
 
             <div class="add-goods__inputs">
-                <b>*Возможная разгрузка</b>
+                <b>*{{ __('lang.Возможная разгрузка') }}</b>
                 <div>
                     <div class="add-goods__inputs__row">
                         <label for="final_country">
-                            <input type="text" name="final_country" required id="final_country" class="add-input input-search" placeholder="Населенный пункт">
+                            <input type="text" name="final_country" required id="final_country" class="add-input input-search" placeholder="{{ __('lang.Населенный пункт') }}">
                         </label>
                     </div>
 
@@ -234,7 +234,7 @@
 
             </div>
 
-            <button class="form-btn">Добавить</button>
+            <button class="form-btn">{{ __('lang.Добавить') }}</button>
         </form>
 
         <button class="modal-close" type="button" data-modal-close="add-ts">

@@ -58,7 +58,7 @@
 							<div class="profile-content__info">
 								<b>{{ auth()->user()?->company->name ?? auth()->user()->login }}</b>
 								<div class="profile-content__form">
-									<label for="upload" class="upload">Загрузить фото</label>
+									<label for="upload" class="upload">{{ __('lang.Загрузить фото') }}</label>
 									<input type="file" id="upload" name="file" accept="image/*">
 								</div>
 							</div>
@@ -67,15 +67,15 @@
 							<div class="form-wrapper">
 								<div class="left-col">
 									<div class="input__row-profile">
-										<label for="role">Название компании</label>
+										<label for="role">{{ __('lang.Название компании') }}</label>
 										<input type="text" id="role" placeholder="Компания" name="name" required value="{{ old('name', auth()->user()?->company?->name ?? '') }}">
 									</div>
 									<div class="input__row-profile">
-										<label for="description">Описание компании</label>
+										<label for="description">{{ __('lang.Описание компании') }}</label>
 										<textarea type="text" id="description" name="description" rows="5" placeholder="Описание компании" required>{{ old('description', auth()->user()?->company?->description ?? '') }}</textarea>
 									</div>
 									<div class="input__row-profile">
-										<label for="address">Адрес компании</label>
+										<label for="address">{{ __('lang.Адрес компании') }}</label>
 										<input type="text" id="address" name="address" placeholder="...." required value="{{ old('address', auth()->user()?->company?->address ?? '') }}">
 									</div>
 									@php
@@ -83,18 +83,18 @@
                                         $formattedDate = \Carbon\Carbon::parse($workStartDate)?->format('Y-m-d');
 									@endphp
 									<div class="input__row-profile">
-										<label for="work_start_date">Начало работы компании</label>
+										<label for="work_start_date">{{ __('lang.Начало работы компании') }}</label>
 										<input type="date" id="work_start_date" name="work_start_date" placeholder="2002" required value="{{ old('work_start_date', $formattedDate ?? '') }}">
 									</div>
 
 									<div class="input__row-profile">
-										<label for="employees_count">Количество сотрудников</label>
+										<label for="employees_count">{{ __('lang.Количество сотрудников') }}</label>
 										<input type="number" id="employees_count" name="employees_count" placeholder="101-500" required value="{{ old('employees_count', auth()->user()?->company?->employees_count ?? '') }}">
 									</div>
 
 									<div class="profile-content__info">
 										<div class="profile-content__form">
-											<label for="upload-certificates" class="upload">Сертификаты</label>
+											<label for="upload-certificates" class="upload">{{ __('lang.Сертификаты') }}</label>
 											<input type="file" id="upload-certificates" name="certificates[]" accept="image/*" multiple>
 										</div>
 									</div>
@@ -113,22 +113,22 @@
 								</div>
 								<div class="right-col">
 									<div class="input__row-profile">
-										<label for="country">Страна компании</label>
+										<label for="country">{{ __('lang.Страна компании') }}</label>
 										<input type="text" id="country" name="country" placeholder="Страна" required value="{{ old('country', auth()->user()?->company?->country ?? '') }}">
 									</div>
 
 									<div class="input__row-profile">
-										<label for="city">Город компании</label>
+										<label for="city">{{ __('lang.Город компании') }}</label>
 										<input type="text" id="city" name="city" placeholder="Страна" required value="{{ old('city', auth()->user()?->company?->city ?? '') }}">
 									</div>
 
 									<div class="input__row-profile">
-										<label for="website">Ссылка на сайт</label>
+										<label for="website">{{ __('lang.Ссылка на сайт') }}</label>
 										<input type="text" id="website" name="website" placeholder="https://website.org" value="{{ old('website', auth()->user()?->company?->website ?? '') }}">
 									</div>
 
 									<div class="input__row-profile">
-										<p>Направления</p>
+										<p>{{ __('lang.Направления') }}</p>
 										<select class="js-example-basic-multiple" name="directions[]" multiple="multiple">
 											@foreach($directions as $direction)
 											<option value="{{ $direction->id }}"
@@ -145,7 +145,7 @@
 											@foreach(auth()->user()?->company?->emails as $email)
 											<div class="email-wrapper">
 												<input type="email" name="emails[]" placeholder="euca@euca.com" class="input-email" value="{{ old('emails.' . $loop->index, $email->email) }}" required>
-												<button type="button" class="delete-email">Удалить</button>
+												<button type="button" class="delete-email">{{ __('lang.Удалить') }}</button>
 											</div>
 											@endforeach
 											@endif
@@ -158,13 +158,13 @@
 									</div>
 
 									<div class="input__row-profile">
-										<label for="phone">Номер телефона</label>
+										<label for="phone">{{ __('lang.Номер телефона') }}</label>
 										<div id="phone-fields">
 											@if(auth()->user()?->company?->phones)
 											@foreach(auth()->user()?->company?->phones as $phone)
 											<div class="phone-wrapper">
 												<input type="tel" name="phones[]" placeholder="+000 00 000 00 00" class="input-phone" value="{{ old('phones.' . $loop->index, $phone->phone) }}" required>
-												<button type="button" class="delete-phone">Удалить</button>
+												<button type="button" class="delete-phone">{{ __('lang.Удалить') }}</button>
 											</div>
 											@endforeach
 											@endif
@@ -179,7 +179,7 @@
 								</div>
 							</div>
 							<div class="form-buttons">
-								<button type="submit" class="form-btn">Сохранить</button>
+								<button type="submit" class="form-btn">{{ __('lang.Сохранить') }}</button>
 							</div>
 					</div>
 				</form>
