@@ -28,8 +28,8 @@ class UserAuthRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'login.required' => 'Введите логин',
-            'login.exists' => __('Такого пользователя не существует'),
+            'login.required' => __('lang.Введите логин'),
+            'login.exists' => __('lang.Такого пользователя не существует'),
             'password.required' => __('Введите пароль')
         ];
     }

@@ -80,6 +80,7 @@ class LangSeeder extends Seeder
         'Автопарк' => 'Автопарк',
         'Водители' => 'Водители',
         'Уведомления' => 'Уведомления',
+        'Такого пользователя не существует' => 'Такого пользователя не существует',
         //---------------
 
         'Сообщения' => 'Сообщения',
@@ -786,9 +787,11 @@ class LangSeeder extends Seeder
         'Профиль компании' => 'Kompaniya profili',
         'Номер телефона:' => 'Telefon raqami:',
         'Разгрузка' => 'Yukni tushirish',
+        'Такого пользователя не существует' => 'Bunday foydalanuvchi mavjud emas',
     ];
 
     public array $langsEn =  [
+        'Такого пользователя не существует' => 'This user does not exist',
         'Ваш код подтверждения' => 'Your confirmation code',
         'Имя Фамилия Отчество' => 'First Name Last Name Patronymic',
         'В исполнении' => 'In progress',
