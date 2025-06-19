@@ -121,10 +121,10 @@
                                             <label for="name" class="col-sm-12 col-form-label"><u>Водитель</u></label>
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" value="{{ $transport->driver->first_name .' '. $transport->driver?->middle_name .' '. $transport->driver?->last_name }}" disabled>
+                                                    <input type="text" class="form-control" value="{{ $transport->driver?->first_name .' '. $transport->driver?->middle_name .' '. $transport->driver?->last_name }}" disabled>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <input type="text" class="form-control" value="{{ $transport->driver->phone }}" disabled>
+                                                    <input type="text" class="form-control" value="{{ $transport->driver?->phone }}" disabled>
                                                 </div>
                                             </div>
 

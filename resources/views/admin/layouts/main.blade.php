@@ -318,8 +318,8 @@
 {{--                    </li>--}}
 
                     <li class="nav-item {{ request()->is('admin/cargo') || request()->is('admin/cargo*') || request()->is('admin/transport')
-                || request()->is('admin/transport*') || request()->is('admin/handshake')
-                || request()->is('admin/handshake*')  ? 'menu-is-opening menu-open' : '' }}">
+                || request()->is('admin/transport*') || request()->is('admin/drivers')
+                || request()->is('admin/drivers*')  ? 'menu-is-opening menu-open' : '' }}">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
