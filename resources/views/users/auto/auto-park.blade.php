@@ -128,11 +128,11 @@
                 <label for="body_type">
                     <select name="body_type" id="body_type" required>
                         <option value="" hidden>{{ __('lang.Выберите тип кузова') }}</option>
-                        <option value="{{ __('lang.Тент') }}">{{  }}</option>
-                        <option value="{{ __('lang.Рефрижератор') }}">{{ __('lang.Рефрижератор') }}</option>
-                        <option value="{{ __('lang.Открытый') }}">{{ __('lang.Открытый') }}</option>
-                        <option value="{{ __('lang.Контейнер') }}">{{ __('lang.Контейнер') }}</option>
-                        <option value="{{ __('lang.Другое') }}">{{ __('lang.Другое') }}</option>
+                        <option value="Тент">{{ __('lang.Тент') }}</option>
+                        <option value="Рефрижератор">{{ __('lang.Рефрижератор') }}</option>
+                        <option value="Открытый">{{ __('lang.Открытый') }}</option>
+                        <option value="Контейнер">{{ __('lang.Контейнер') }}</option>
+                        <option value="Другое">{{ __('lang.Другое') }}</option>
                     </select>
                 </label>
             </div>

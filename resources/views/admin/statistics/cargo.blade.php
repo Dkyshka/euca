@@ -12,13 +12,17 @@
             <!-- /.container-fluid -->
         </section>
 
+        @if(session('success'))
+            <span id="events" data-message="{{ session('success') }}" data-action="success"></span>
+        @endif
+
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <!-- AREA CHART -->
-                        <div class="card card-primary">
+                        <div class="card card-primary" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Area Chart</h3>
 
@@ -43,7 +47,7 @@
                         <!-- DONUT CHART -->
                         <div class="card card-danger">
                             <div class="card-header">
-                                <h3 class="card-title">Donut Chart</h3>
+                                <h3 class="card-title">Статистика</h3>
 
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -59,10 +63,50 @@
                             </div>
                             <!-- /.card-body -->
                         </div>
+
+
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                <tr>
+                                    <th>Откуда</th>
+                                    <th>Куда</th>
+                                    <th>Путь</th>
+                                    <th>Статус</th>
+                                    <th>Действие</th></tr>
+                                </thead>
+                                <tbody>
+                                @php
+                                $cargoSearchPage = \App\Models\Page::find(3);
+                                @endphp
+
+                                @if(isset($cargoLoadings))
+                                    @foreach($cargoLoadings as $cargoLoading)
+                                        <tr>
+                                            <td style="vertical-align: middle;">{{ $cargoLoading->country }}</td>
+                                            <td style="vertical-align: middle;">{{ $cargoLoading->final_unload_city }}</td>
+                                            <td style="vertical-align: middle;"><a href="{{ url(app()->getLocale().'/'. $cargoSearchPage->slug. '/cargo-inner/' . $cargoLoading->id) }}" target="_blank">{{ substr($cargoSearchPage->slug, 0, 30) }}</a></td>
+                                            <td style="vertical-align: middle;">
+                                                {{ \App\Models\CargoLoading::STATUSES[$cargoLoading->status] }}
+                                            </td>
+                                            <td style="width: 5%; vertical-align: middle;">
+                                                <a href="{{ route('cargo_admin_edit', [$cargoLoading->id]) }}" style="padding: 0 15px;"><i class="fas fa-pen"></i></a>
+                                                <a href="{{ route('cargo_admin_delete', [$cargoLoading->id]) }}" onclick="return confirm('Вы уверены, что хотите удалить груз #{{ $cargoLoading->id }} - {{ $cargoLoading->country }}?');"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card-footer clearfix d-flex justify-content-end">
+                            {{ $cargoLoadings->appends(request()->input())->links() }}
+                        </div>
                         <!-- /.card -->
 
                         <!-- PIE CHART -->
-                        <div class="card card-danger">
+                        <div class="card card-danger" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Pie Chart</h3>
 
@@ -86,7 +130,7 @@
                     <!-- /.col (LEFT) -->
                     <div class="col-md-6">
                         <!-- LINE CHART -->
-                        <div class="card card-info">
+                        <div class="card card-info" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Line Chart</h3>
 
@@ -109,7 +153,7 @@
                         <!-- /.card -->
 
                         <!-- BAR CHART -->
-                        <div class="card card-success">
+                        <div class="card card-success" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Bar Chart</h3>
 
@@ -132,7 +176,7 @@
                         <!-- /.card -->
 
                         <!-- STACKED BAR CHART -->
-                        <div class="card card-success">
+                        <div class="card card-success" style="display: none">
                             <div class="card-header">
                                 <h3 class="card-title">Stacked Bar Chart</h3>
 

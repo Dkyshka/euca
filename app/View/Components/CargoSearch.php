@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Banner;
 use App\Models\CargoLoading;
 use App\Models\Section;
 use Closure;
@@ -23,8 +24,11 @@ class CargoSearch extends Component
      */
     public function render(): View|Closure|string
     {
+        $bannerSideBar = Banner::where('type_banner', 'header')->first();
+        $bannerSection = Banner::where('type_banner', 'section')->first();
+
         $cargoLoadings = CargoLoading::where('status', CargoLoading::IN_PROGRESS)->orderByDesc('id')->paginate(15);
 
-        return view('components.cargo-search', compact('cargoLoadings'));
+        return view('components.cargo-search', compact('cargoLoadings', 'bannerSection', 'bannerSideBar'));
     }
 }

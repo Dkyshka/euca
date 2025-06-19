@@ -37,9 +37,16 @@ class ArticleService
 
     public static function cargo(Page $page, $article): array
     {
-        self::$article = CargoLoading::where('status', 1)
-            ->where('id', $article)
-            ->firstOrFail();
+        $admin = auth()->guard('admin')->user();
+        if ($admin) {
+            self::$article = CargoLoading::where('id', $article)
+                ->firstOrFail();
+        } else {
+            self::$article = CargoLoading::where('status', 1)
+                ->where('id', $article)
+                ->firstOrFail();
+        }
+
 
         return [
             'template' => 'cargo-inner',

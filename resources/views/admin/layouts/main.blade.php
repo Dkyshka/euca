@@ -164,8 +164,8 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item {{ request()->is('admin/review') || request()->is('admin/review*') ? 'menu-is-opening menu-open' : '' }}">
-                        <a href="#" class="nav-link {{ request()->is('admin/review') || request()->is('admin/review*') ? 'active' : '' }}">
+                    <li class="nav-item {{ request()->is('admin/review') || request()->is('admin/review*') || request()->is('admin/banners') || request()->is('admin/banners*') ? 'menu-is-opening menu-open' : '' }}">
+                        <a href="#" class="nav-link {{ request()->is('admin/review') || request()->is('admin/review*') || request()->is('admin/banners') || request()->is('admin/banners*') ? 'active' : '' }}">
                             <i class="nav-icon far fa-image"></i>
                             <p>
                                 Контент
@@ -207,7 +207,7 @@
 {{--                            </li>--}}
 
                             <li class="nav-item ">
-                                <a href="" class="nav-link {{ request()->is('admin/banners') || request()->is('admin/banners*') ? 'active' : '' }}">
+                                <a href="{{ route('banner_admin') }}" class="nav-link {{ request()->is('admin/banners') || request()->is('admin/banners*') ? 'active' : '' }}">
                                     <i class="fas fa-poll-h nav-icon"></i>
                                     <p>Реклама</p>
                                 </a>
@@ -340,12 +340,12 @@
                                     <p>Транспорт</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route('statistic_handshake') }}" class="nav-link {{ request()->is('admin/handshake') || request()->is('admin/handshake*') ? 'active' : '' }}">
-                                    <i class="nav-icon fa fa-handshake"></i>
-                                    <p>Сделки</p>
-                                </a>
-                            </li>
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{ route('statistic_handshake') }}" class="nav-link {{ request()->is('admin/handshake') || request()->is('admin/handshake*') ? 'active' : '' }}">--}}
+{{--                                    <i class="nav-icon fa fa-handshake"></i>--}}
+{{--                                    <p>Сделки</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
                         </ul>
                     </li>
                     <li class="nav-item {{ request()->is('admin/users') || request()->is('admin/users*') || request()->is('admin/users*') || request()->is('admin/settings') || request()->is('admin/settings*') ||  request()->is('admin/telegram/users') || request()->is('admin/telegram/users*') || request()->is('admin/lang*')  ? 'menu-is-opening menu-open' : '' }}">
@@ -715,6 +715,12 @@
 
 </script>
 
+@php
+    $cargos = \App\Models\CargoLoading::all();
+    $transports = \App\Models\Transport::all();
+    $drivers = \App\Models\Driver::all();
+@endphp
+
 <script>
     $(function () {
         /* ChartJS
@@ -807,17 +813,19 @@
         var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
         var donutData        = {
             labels: [
-                'Chrome',
-                'IE',
-                'FireFox',
-                'Safari',
-                'Opera',
-                'Navigator',
+                'Грузы в работе',
+                'Грузы в согласовании',
+                'Грузы в исполнении',
+                'Грузы в архиве',
             ],
             datasets: [
                 {
-                    data: [700,500,400,600,300,100],
-                    backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+                    data: [
+                        {{ $cargos->where('status', \App\Models\CargoLoading::IN_PROGRESS)->count() }},
+                        {{ $cargos->where('status', \App\Models\CargoLoading::COORDINATION)->count() }},
+                        {{ $cargos->where('status', \App\Models\CargoLoading::IN_PERFORMANCE)->count() }},
+                        {{ $cargos->where('status', \App\Models\CargoLoading::ARCHIVE)->count() }}],
+                    backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef'],
                 }
             ]
         }
@@ -838,7 +846,22 @@
         //-------------
         // Get context with jQuery - using jQuery's .get() method.
         var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-        var pieData        = donutData;
+        var pieData        = {
+            labels: [
+                'Транспорт',
+                'Водители',
+            ],
+            datasets: [
+                {
+                    data: [
+                        {{ $transports->count() }},
+                        {{ $drivers->count() }},
+                    ],
+                    backgroundColor : ['#f56954', '#00a65a'],
+                }
+            ]
+        }
+
         var pieOptions     = {
             maintainAspectRatio : false,
             responsive : true,

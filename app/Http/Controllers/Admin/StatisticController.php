@@ -3,18 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CargoLoading;
+use App\Models\Transport;
 use Illuminate\Http\Request;
 
 class StatisticController extends Controller
 {
     public function cargoList()
     {
-        return view('admin.statistics.cargo');
+        $cargoLoadings = CargoLoading::orderBy('id', 'desc')->paginate(15);
+
+        return view('admin.statistics.cargo', compact('cargoLoadings'));
     }
 
     public function transportList()
     {
-        return view('admin.statistics.transport');
+        $transports = Transport::orderBy('id', 'desc')->paginate(15);
+
+        return view('admin.statistics.transport', compact('transports'));
     }
 
     public function handshakeList()

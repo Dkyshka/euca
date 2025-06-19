@@ -1,6 +1,8 @@
 <?php
 
 
+use App\Http\Controllers\Admin\BannerAdminController;
+use App\Http\Controllers\Admin\CargoAdminController;
 use App\Http\Controllers\Admin\IndexAdminController;
 use App\Http\Controllers\Admin\LangAdminController;
 use App\Http\Controllers\Admin\LogsController;
@@ -11,6 +13,7 @@ use App\Http\Controllers\Admin\SectionAdminController;
 use App\Http\Controllers\Admin\SettingAdminController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\TelegramUserAdminController;
+use App\Http\Controllers\Admin\TransportAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
@@ -112,8 +115,26 @@ Route::prefix('admin')->group(function () {
 
         // Statistic
         Route::get('cargo', [StatisticController::class, 'cargoList'])->name('statistic_cargo');
+        // Грузы
+        Route::get('cargo/edit/{cargoLoading}', [CargoAdminController::class, 'edit'])->name('cargo_admin_edit');
+        Route::get('cargo/delete/{cargoLoading}', [CargoAdminController::class, 'delete'])->name('cargo_admin_delete');
+        Route::post('cargo/update/{cargoLoading}', [CargoAdminController::class, 'update'])->name('cargo_admin_update');
+
         Route::get('transport', [StatisticController::class, 'transportList'])->name('statistic_transport');
+        // Транспорт
+        Route::get('transport/edit/{transport}', [TransportAdminController::class, 'edit'])->name('transport_admin_edit');
+        Route::get('transport/delete/{transport}', [TransportAdminController::class, 'delete'])->name('transport_admin_delete');
+        Route::post('transport/update/{transport}', [TransportAdminController::class, 'update'])->name('transport_admin_update');
+
         Route::get('handshake', [StatisticController::class, 'handshakeList'])->name('statistic_handshake');
+
+        // Banner
+        Route::get('banners', [BannerAdminController::class, 'index'])->name('banner_admin');
+        Route::get('banners/edit/{banner}', [BannerAdminController::class, 'edit'])->name('banner_edit');
+
+        // Change status Banner
+        Route::post('banners/update/status/{banner}', [BannerAdminController::class, 'changeStatus'])->name('banner_changeStatus');
+        Route::post('banners/update/{banner}', [BannerAdminController::class, 'update'])->name('banner_update');
     });
 
 });

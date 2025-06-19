@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             PartnersSeeder::class,
             LangSeeder::class,
+            BannerSeeder::class,
         ]);
     }
 }

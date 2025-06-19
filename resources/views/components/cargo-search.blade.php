@@ -218,7 +218,9 @@
     </form>
 
     <div class="banner__mark">
-        <img src="{{ asset('assets/images/0517.gif') }}" alt="" width="" height="">
+        @if($bannerSection->status)
+        <img src="{{ asset($bannerSection->picture()->orig) }}" alt="" width="" height="">
+        @endif
     </div>
 
     <div class="result-goods">
@@ -403,5 +405,7 @@
 </section>
 
 <div class="search-page__mark">
-    <img src="{{ asset('assets/images/banner_right.jpg') }}" alt="" width="" height="">
+    @if($bannerSideBar->status)
+        <img src="{{ asset($bannerSideBar->picture()->orig) }}" alt="" width="" height="">
+    @endif
 </div>
