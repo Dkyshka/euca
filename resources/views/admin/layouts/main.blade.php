@@ -164,7 +164,7 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item {{ request()->is('admin/review') || request()->is('admin/review*') || request()->is('admin/banners') || request()->is('admin/banners*') ? 'menu-is-opening menu-open' : '' }}">
+                    <li class="nav-item {{ request()->is('admin/review') || request()->is('admin/review*') || request()->is('admin/banners') || request()->is('admin/banners/*') ? 'menu-is-opening menu-open' : '' }}">
                         <a href="#" class="nav-link {{ request()->is('admin/review') || request()->is('admin/review*') || request()->is('admin/banners') || request()->is('admin/banners*') ? 'active' : '' }}">
                             <i class="nav-icon far fa-image"></i>
                             <p>
@@ -340,12 +340,12 @@
                                     <p>Транспорт</p>
                                 </a>
                             </li>
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{ route('statistic_handshake') }}" class="nav-link {{ request()->is('admin/handshake') || request()->is('admin/handshake*') ? 'active' : '' }}">--}}
-{{--                                    <i class="nav-icon fa fa-handshake"></i>--}}
-{{--                                    <p>Сделки</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
+                            <li class="nav-item">
+                                <a href="{{ route('statistic_drivers') }}" class="nav-link {{ request()->is('admin/drivers') || request()->is('admin/drivers*') ? 'active' : '' }}">
+                                    <i class="nav-icon fa fa-car"></i>
+                                    <p>Водители</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item {{ request()->is('admin/users') || request()->is('admin/users*') || request()->is('admin/users*') || request()->is('admin/settings') || request()->is('admin/settings*') ||  request()->is('admin/telegram/users') || request()->is('admin/telegram/users*') || request()->is('admin/lang*')  ? 'menu-is-opening menu-open' : '' }}">

@@ -103,7 +103,7 @@
                                             <td style="vertical-align: middle;">{{ $transport->country }}</td>
                                             <td style="vertical-align: middle;">{{ $transport->final_country }}</td>
                                             <td style="vertical-align: middle;">{{ $transport->body_type }}</td>
-                                            <td style="vertical-align: middle;">{{ $transport->driver->first_name }}</td>
+                                            <td style="vertical-align: middle;">{{ $transport->driver?->first_name }}</td>
                                             <td style="width: 5%; vertical-align: middle;">
                                                 <a href="{{ route('transport_admin_edit', [$transport->id]) }}" style="padding: 0 15px;"><i class="fas fa-pen"></i></a>
                                                 <a href="{{ route('transport_admin_delete', [$transport->id]) }}" onclick="return confirm('Вы уверены, что хотите удалить транспорт #{{ $transport->id }} - {{ $transport->country }}?');"><i class="fa fa-trash"></i></a>

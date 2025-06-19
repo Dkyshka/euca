@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CargoLoading;
+use App\Models\Driver;
 use App\Models\Transport;
 use Illuminate\Http\Request;
 
@@ -23,8 +24,10 @@ class StatisticController extends Controller
         return view('admin.statistics.transport', compact('transports'));
     }
 
-    public function handshakeList()
+    public function drivers()
     {
-        return view('admin.statistics.handshake');
+        $drivers = Driver::orderBy('id', 'desc')->paginate(15);
+
+        return view('admin.statistics.drivers', compact('drivers'));
     }
 }

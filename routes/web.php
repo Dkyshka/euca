@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Admin\BannerAdminController;
 use App\Http\Controllers\Admin\CargoAdminController;
+use App\Http\Controllers\Admin\DriverAdminController;
 use App\Http\Controllers\Admin\IndexAdminController;
 use App\Http\Controllers\Admin\LangAdminController;
 use App\Http\Controllers\Admin\LogsController;
@@ -126,7 +127,13 @@ Route::prefix('admin')->group(function () {
         Route::get('transport/delete/{transport}', [TransportAdminController::class, 'delete'])->name('transport_admin_delete');
         Route::post('transport/update/{transport}', [TransportAdminController::class, 'update'])->name('transport_admin_update');
 
-        Route::get('handshake', [StatisticController::class, 'handshakeList'])->name('statistic_handshake');
+        Route::get('drivers', [StatisticController::class, 'drivers'])->name('statistic_drivers');
+
+        // Водители
+        Route::get('drivers/edit/{driver}', [DriverAdminController::class, 'edit'])->name('driver_admin_edit');
+        Route::get('drivers/delete/{driver}', [DriverAdminController::class, 'delete'])->name('driver_admin_delete');
+        Route::post('drivers/update/{driver}', [DriverAdminController::class, 'update'])->name('driver_admin_update');
+
 
         // Banner
         Route::get('banners', [BannerAdminController::class, 'index'])->name('banner_admin');
