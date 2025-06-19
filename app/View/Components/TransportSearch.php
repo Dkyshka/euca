@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Banner;
 use App\Models\Section;
 use App\Models\Transport;
 use Closure;
@@ -23,8 +24,10 @@ class TransportSearch extends Component
      */
     public function render(): View|Closure|string
     {
+        $bannerSideBar = Banner::where('type_banner', 'header')->first();
+        $bannerSection = Banner::where('type_banner', 'section')->first();
         $transports = Transport::paginate(15);
 
-        return view('components.transport-search', compact('transports'));
+        return view('components.transport-search', compact('transports', 'bannerSideBar', 'bannerSection'));
     }
 }

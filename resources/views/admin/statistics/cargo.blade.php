@@ -83,8 +83,8 @@
                                 @if(isset($cargoLoadings))
                                     @foreach($cargoLoadings as $cargoLoading)
                                         <tr>
-                                            <td style="vertical-align: middle;">{{ $cargoLoading->country }}</td>
-                                            <td style="vertical-align: middle;">{{ $cargoLoading->final_unload_city }}</td>
+                                            <td style="vertical-align: middle;">{{ Str::limit($cargoLoading->country, 50) }}</td>
+                                            <td style="vertical-align: middle;">{{ Str::limit($cargoLoading->final_unload_city, 50) }}</td>
                                             <td style="vertical-align: middle;"><a href="{{ url(app()->getLocale().'/'. $cargoSearchPage->slug. '/cargo-inner/' . $cargoLoading->id) }}" target="_blank">{{ substr($cargoSearchPage->slug, 0, 30) }}</a></td>
                                             <td style="vertical-align: middle;">
                                                 {{ \App\Models\CargoLoading::STATUSES[$cargoLoading->status] }}
