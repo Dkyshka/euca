@@ -329,6 +329,12 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="{{ route('partner_admin') }}" class="nav-link {{ request()->is('admin/partners') || request()->is('admin/partners*') ? 'active' : '' }}">
+                                    <i class="nav-icon fa fa-user-plus"></i>
+                                    <p>Партнёры</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('statistic_cargo') }}" class="nav-link {{ request()->is('admin/cargo') || request()->is('admin/telegram/cargo*') ? 'active' : '' }}">
                                     <i class="nav-icon fa fa-cubes"></i>
                                     <p>Грузы</p>

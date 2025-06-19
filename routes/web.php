@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\IndexAdminController;
 use App\Http\Controllers\Admin\LangAdminController;
 use App\Http\Controllers\Admin\LogsController;
 use App\Http\Controllers\Admin\PageAdminController;
+use App\Http\Controllers\Admin\PartnerAdminController;
 use App\Http\Controllers\Admin\PictureController;
 use App\Http\Controllers\Admin\ReviewAdminController;
 use App\Http\Controllers\Admin\SectionAdminController;
@@ -75,6 +76,11 @@ Route::prefix('admin')->group(function () {
         Route::post('review/update/status/{review}', [ReviewAdminController::class, 'changeStatus'])->name('review_changeStatus');
         Route::post('review/update/{review}', [ReviewAdminController::class, 'update'])->name('review_update');
         Route::get('reviewdelete/{review}', [ReviewAdminController::class, 'destroy'])->name('review_delete');
+
+        // Партнёры
+        Route::get('partners', [PartnerAdminController::class, 'index'])->name('partner_admin');
+        Route::post('partners/update/{company}', [PartnerAdminController::class, 'update'])->name('partner_update');
+        Route::get('partners/edit/{company}', [PartnerAdminController::class, 'edit'])->name('partner_edit');
 
         // Lang
         Route::get('lang', [LangAdminController::class, 'index'])->name('lang_admin');
