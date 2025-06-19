@@ -84,7 +84,7 @@
                                         <div class="col-sm-12">
                                             <button type="submit" class="btn btn-primary">Сохранить</button>
                                             <button type="submit" name="apply" class="btn btn-primary">Применить</button>
-                                            <a href="{{ route('statistic_transport') }}" type="submit" class="btn btn-primary">Отменить</a>
+                                            <a href="{{ route('statistic_drivers') }}" type="submit" class="btn btn-primary">Отменить</a>
                                         </div>
                                     </div>
 
