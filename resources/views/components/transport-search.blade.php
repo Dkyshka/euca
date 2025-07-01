@@ -170,7 +170,7 @@
 
     <div class="result-goods">
         <div class="result-goods__head">
-            <h1 class="title">{{ __('lang.Транспорт') }} ({{ $transports->count() }})</h1>
+            <h1 class="title">{{ __('lang.Транспорт') }} ({{ $transports->total() }})</h1>
 
             @if ($transports->hasPages())
                 <div class="result-pagination">
