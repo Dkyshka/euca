@@ -28,7 +28,7 @@ class TransportSearch extends Component
         $bannerSideBar = Banner::where('type_banner', 'header')->first();
         $bannerSection = Banner::where('type_banner', 'section')->first();
         $transports = Transport::where('status', Transport::IN_PROGRESS)->orderBy('id', 'desc')->paginate(15);
-        $cargoLoadings = CargoLoading::where('status', CargoLoading::IN_PROGRESS)->orderBy('id', 'desc')->get();
+        $cargoLoadings = CargoLoading::where('company_id', auth()->user()?->company?->id)->where('status', CargoLoading::IN_PROGRESS)->orderBy('id', 'desc')->get();
 
         return view('components.transport-search', compact(
             'transports',
