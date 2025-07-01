@@ -58,7 +58,7 @@
                             </button>
 
                             <div class="pagination-notifications">
-                                <p>14 из 23</p>
+                                <p>1 - 1</p>
                                 <div class="links-pagination">
                                     <button>
                                         <svg width="7" height="12">

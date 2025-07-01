@@ -22,7 +22,7 @@
                     </svg>
                 </button>
 
-                <h1>{{ __('lang.Ваши грузы') }}</h1>
+                <h1>{{ __('lang.Архив грузов') }}</h1>
 
                 <x-main.assets-notification/>
 
@@ -113,13 +113,13 @@
                                 @endif
                                 <div class="order-icons">
                                     {{--Редактирование--}}
-                                    <a href="{{ route('cargos.edit', [app()->getLocale(), $cargo->id]) }}" class="chat-message" data-modal-target="dropdown-chat">
-                                        <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">
-                                    </a>
+{{--                                    <a href="{{ route('cargos.edit', [app()->getLocale(), $cargo->id]) }}" class="chat-message" data-modal-target="dropdown-chat">--}}
+{{--                                        <img src="{{ asset('assets/images/svg/order-pen.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                                    </a>--}}
 
-                                    <a href="{{ route('cargos.delete', [app()->getLocale(), $cargo->id]) }}" onclick="return confirm('{{ __('lang.Вы уверены, что хотите удалить?') }}');" class="chat-message" data-modal-target="dropdown-chat">
-                                        <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">
-                                    </a>
+{{--                                    <a href="{{ route('cargos.delete', [app()->getLocale(), $cargo->id]) }}" onclick="return confirm('{{ __('lang.Вы уверены, что хотите удалить?') }}');" class="chat-message" data-modal-target="dropdown-chat">--}}
+{{--                                        <img src="{{ asset('assets/images/svg/order-close.svg') }}" alt="meassge" width="30" height="30">--}}
+{{--                                    </a>--}}
 
                                     <div class="order-cansel-dropdown order-cansel-modal" data-modal="dropdown-chat">
                                         <button class="order-close-btn" data-modal-close="dropdown-chat"></button>
@@ -160,7 +160,7 @@
 
                             <div class="order-info-col order-goods-info order-info-bottom__end">
                                 <p><strong>{{ $cargo->created_at->format('d.m.Y H:i') }}</strong></p>
-                                <a href="{{ url(app()->getLocale(), 'transport-search') }}" target="_blank" class="form-btn" style="color: #fff; text-decoration: none;">{{ __('lang.Предложить груз') }}</a>
+                                <a href="{{ route('archive-cargos-update', [app()->getLocale(), $cargo->id])  }}" class="form-btn" style="color: #fff; text-decoration: none;">{{ __('lang.Вернуть груз') }}</a>
                             </div>
                         </div>
                     </div>

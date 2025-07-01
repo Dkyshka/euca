@@ -7,7 +7,7 @@ use App\Models\User;
 
 class NotificationService
 {
-    public function send(User $user, string $title, ?string $body = null): Notification
+    public static function send($user, string $title, ?string $body = null): Notification
     {
         return Notification::create([
             'user_id' => $user->id,
@@ -16,12 +16,12 @@ class NotificationService
         ]);
     }
 
-    public function markAsRead(Notification $notification): void
+    public static function markAsRead(Notification $notification): void
     {
         $notification->update(['is_read' => true]);
     }
 
-    public function markAllAsRead(User $user): void
+    public static function markAllAsRead(User $user): void
     {
         Notification::where('user_id', $user->id)->where('is_read', false)->update(['is_read' => true]);
     }

@@ -28,6 +28,7 @@ class CargoBid extends Model
         'bank_transfer_days',
         'payment_comment',
         'ready_date',
+        'transport_status',
     ];
 
     public const PENDING = 'pending';

@@ -26,6 +26,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\TransportController;
 use App\Http\Controllers\UserController;
@@ -198,6 +199,10 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
     Route::get('сoordinations', [CargoController::class, 'сoordinations'])->name('сoordinations');
     Route::get('execution', [CargoController::class, 'execution'])->name('execution');
 
+    // Archive
+    Route::get('archive', [CargoController::class, 'archive'])->name('archive-cargos');
+    Route::get('archive/update/{cargoLoading}', [CargoController::class, 'archiveUpdate'])->name('archive-cargos-update');
+
     // Auto
     Route::get('auto-park', [AutoController::class, 'autoPark'])->name('auto-park');
 
@@ -207,6 +212,7 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
     // Notifications
     Route::get('notifications', [AutoController::class, 'notifications'])->name('notifications');
     Route::get('notifications/inner', [AutoController::class, 'notificationsInner'])->name('notificationsInner');
+    Route::get('notifications/read', [NotificationController::class, 'allRead'])->name('allread');
 
 
     // Cargo bid
@@ -214,6 +220,7 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
     Route::post('/bids/{bid}/accept', [CargoBidController::class, 'accept'])->name('cargo.bids.accept');
     Route::post('/bids/{cargoLoading}/finish', [CargoBidController::class, 'finish'])->name('cargo.bids.finished');
     Route::post('/bids/{bid}/decline', [CargoBidController::class, 'decline'])->name('cargo.bids.decline');
+    Route::post('/bids/{bid}/change-status', [CargoBidController::class, 'changeStatus'])->name('cargo.bids.change-status');
 
     // Drivers
     Route::post('/drivers/store', [DriverController::class, 'store'])->name('drivers.store');

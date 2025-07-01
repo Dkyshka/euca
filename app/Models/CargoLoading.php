@@ -97,4 +97,8 @@ class CargoLoading extends Model
         return $this->hasOne(CargoBid::class)->where('status', CargoBid::PENDING);
     }
 
+    public function bidAccepted(): HasOne
+    {
+        return $this->hasOne(CargoBid::class)->where('status', CargoBid::ACCEPTED);
+    }
 }

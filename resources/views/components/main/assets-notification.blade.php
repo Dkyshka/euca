@@ -1,4 +1,7 @@
-<div class="has-notifications profile-notifications">
+@php
+    $notification = \App\Models\Notification::where('user_id', auth()->user()->id)->where('is_read', false)->orderBy('id', 'desc')->get();
+@endphp
+<div class="has-notifications profile-notifications {{ $notification->count() > 0 ? 'has-unread' : '' }}">
     <svg width="16" height="18">
         <use xlink:href="#notifications"></use>
     </svg>
@@ -13,7 +16,7 @@
         <div class="notifications-modal__head">
 
 
-            <a href="#" class="read">{{ __('lang.Сделать прочитанным') }}</a>
+            <a href="#" id="markAllAsRead" data-url="{{ route('allread', app()->getLocale()) }}" class="read">{{ __('lang.Сделать прочитанным') }}</a>
 
             <div class="notifications-modal__btn">
                 <span></span>
@@ -22,20 +25,18 @@
         </div>
 
         <div class="notifications-modal__content">
+            @if($notification->isEmpty())
             <div class="notifications-modal__card">
                 <p>{{ __('lang.Пусто') }}</p>
             </div>
-{{--            <div class="notifications-modal__card">--}}
-{{--                <svg width="20" height="20">--}}
-{{--                    <use xlink:href="#ntf"></use>--}}
-{{--                </svg>--}}
-{{--                <p>OOO TS1 взял груз: Санкт-Петербург-Улан-Удэ, 10т, 10 м2, Ставка-127188 руб</p>--}}
-{{--                <div class="notifications-modal__botom">--}}
-{{--                    <a href="#" class="notifications-modal__link">Посмотреть предложение</a>--}}
-{{--                    <span class="time">11:15</span>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
+            @else
+            @foreach($notification as $item)
+            <div class="notifications-modal__card">
+                <b>{{ $item->title }}</b>
+                <p>{!! Str::limit($item->body, 500) ?? '' !!}</p>
+            </div>
+            @endforeach
+            @endif
         </div>
     </div>
 </div>

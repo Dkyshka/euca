@@ -260,9 +260,34 @@ class CargoController extends Controller
 
     public function delete($lang, CargoLoading $cargoLoading)
     {
-        $cargoLoading->cargo()->delete();
-        $cargoLoading->delete();
+//        $cargoLoading->cargo()->delete();
+//        $cargoLoading->delete();
+
+        $cargoLoading->update(['status' => CargoLoading::ARCHIVE]);
 
         return redirect()->route('workCargos');
+    }
+
+    public function archive()
+    {
+        $user = auth()->user();
+        $this->page = Page::findOrFail(11);
+        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)
+            ->where('status', CargoLoading::ARCHIVE)->orderByDesc('id')->get();
+
+        return view('users.cargos.archive-cargos', [
+            'page' => $this->page,
+            'setting' => $this->setting,
+            'footer' => $this->footer,
+            'menu' => $this->menu,
+            'cargoLoadings' => $cargoLoadings,
+        ]);
+    }
+
+    public function archiveUpdate($lang, CargoLoading $cargoLoading)
+    {
+        $cargoLoading->update(['status' => CargoLoading::IN_PROGRESS]);
+
+        return redirect()->route('archive-cargos');
     }
 }

@@ -18,6 +18,7 @@
                     'cargos',
                     'workCargos',
                     'cargos.create',
+                    'archive-cargos',
                 ], app()->getLocale()) ? 'open' : '' }}">
                 <svg width="18" height="16">
                     <use xlink:href="#cargo"></use>
@@ -30,12 +31,13 @@
                     'cargos',
                     'workCargos',
                     'cargos.create',
+                    'archive-cargos',
                 ], app()->getLocale()) ? 'open' : '' }}">
                 <li><a href="{{ route('cargos', app()->getLocale()) }}">{{ __('lang.Ваши грузы') }}</a></li>
                 <li>
                     <a href="{{ route('workCargos', app()->getLocale()) }}">{{ __('lang.Грузы в работе') }}</a>
                 </li>
-{{--                <li><a href="#">Архив грузов</a></li>--}}
+                <li><a href="{{ route('archive-cargos', app()->getLocale()) }}">{{ __('lang.Архив грузов') }}</a></li>
             </ul>
         </li>
 

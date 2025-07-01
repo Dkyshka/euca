@@ -156,130 +156,130 @@
                             </div>
                         </div>
 
-                        <div class="modal-overlay" data-modal="modal-create-order-{{ $cargoBid->cargoLoading->id }}">
-                            <div class="modal modal-create-order">
-                                <b>{{ __('lang.Предложение на перевозку') }}</b>
-                                <p>{{ __('lang.Пока вы не примите решение, груз будет недоступен для других перевозчиков') }}</p>
+{{--                        <div class="modal-overlay" data-modal="modal-create-order-{{ $cargoBid->cargoLoading->id }}">--}}
+{{--                            <div class="modal modal-create-order">--}}
+{{--                                <b>{{ __('lang.Предложение на перевозку') }}</b>--}}
+{{--                                <p>{{ __('lang.Пока вы не примите решение, груз будет недоступен для других перевозчиков') }}</p>--}}
 
-                                <form action="{{ route('cargo.bids.accept', [app()->getLocale(), $cargoBid?->id]) }}" method="post">
-                                    @csrf
+{{--                                <form action="{{ route('cargo.bids.accept', [app()->getLocale(), $cargoBid?->id]) }}" method="post">--}}
+{{--                                    @csrf--}}
 
-                                    @if ($cargoBid?->user?->company)
-                                        <p>{{ __('lang.От фирмы') }}</p>
-                                        <div class="create-order-card">
-                                            <svg width="24" height="18">
-                                                <use xlink:href="#create1"></use>
-                                            </svg>
-                                            <div class="create-order-card__info">
-                                                <p>
-                                                    <strong>{{ $cargoBid?->user?->company?->name ?? __('lang.Неизвестно') }}</strong>
-                                                </p>
-                                                @foreach($cargoBid?->user?->company?->phones as $phone)
-                                                    <p>{{ $phone->phone }}</p>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <p>{{ __('lang.Ставка') }}</p>
-                                    @if($cargoBid->price)
-                                        <div class="cretae-order-row">
-                                            <p>
-                                                <svg width="24" height="18">
-                                                    <use xlink:href="#create1"></use>
-                                                </svg>
-                                                <strong>{{ $cargoBid?->price }} {{ $cargoBid->currency }}</strong>
-                                            </p>
-                                        </div>
-                                    @else
-                                        @if($cargoBid->cargoLoading->with_vat_cashless)
-                                            <div class="cretae-order-row">
-                                                <p>
-                                                    <svg width="24" height="18">
-                                                        <use xlink:href="#create1"></use>
-                                                    </svg>
-                                                    <strong>{{ $cargoBid->with_vat_cashless }} {{ $cargoBid->currency }}</strong>
-                                                    {{ __('lang.С НДС, безнал') }}
-                                                </p>
-                                            </div>
-                                        @endif
+{{--                                    @if ($cargoBid?->user?->company)--}}
+{{--                                        <p>{{ __('lang.От фирмы') }}</p>--}}
+{{--                                        <div class="create-order-card">--}}
+{{--                                            <svg width="24" height="18">--}}
+{{--                                                <use xlink:href="#create1"></use>--}}
+{{--                                            </svg>--}}
+{{--                                            <div class="create-order-card__info">--}}
+{{--                                                <p>--}}
+{{--                                                    <strong>{{ $cargoBid?->user?->company?->name ?? __('lang.Неизвестно') }}</strong>--}}
+{{--                                                </p>--}}
+{{--                                                @foreach($cargoBid?->user?->company?->phones as $phone)--}}
+{{--                                                    <p>{{ $phone->phone }}</p>--}}
+{{--                                                @endforeach--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    @endif--}}
+{{--                                    <p>{{ __('lang.Ставка') }}</p>--}}
+{{--                                    @if($cargoBid->price)--}}
+{{--                                        <div class="cretae-order-row">--}}
+{{--                                            <p>--}}
+{{--                                                <svg width="24" height="18">--}}
+{{--                                                    <use xlink:href="#create1"></use>--}}
+{{--                                                </svg>--}}
+{{--                                                <strong>{{ $cargoBid?->price }} {{ $cargoBid->currency }}</strong>--}}
+{{--                                            </p>--}}
+{{--                                        </div>--}}
+{{--                                    @else--}}
+{{--                                        @if($cargoBid->with_vat_cashless)--}}
+{{--                                            <div class="cretae-order-row">--}}
+{{--                                                <p>--}}
+{{--                                                    <svg width="24" height="18">--}}
+{{--                                                        <use xlink:href="#create1"></use>--}}
+{{--                                                    </svg>--}}
+{{--                                                    <strong>{{ $cargoBid->with_vat_cashless }} {{ $cargoBid->currency }}</strong>--}}
+{{--                                                    {{ __('lang.С НДС, безнал') }}--}}
+{{--                                                </p>--}}
+{{--                                            </div>--}}
+{{--                                        @endif--}}
 
-                                        @if($cargoBid->cargoLoading->without_vat_cashless)
-                                            <div class="cretae-order-row">
-                                                <p>
-                                                    <svg width="24" height="18">
-                                                        <use xlink:href="#create1"></use>
-                                                    </svg>
-                                                    <strong>{{ $cargoBid->without_vat_cashless }} {{ $cargoBid->currency }}</strong>
-                                                    {{ __('lang.Без НДС, безнал') }}
-                                                </p>
-                                            </div>
-                                        @endif
+{{--                                        @if($cargoBid->cargoLoading->without_vat_cashless)--}}
+{{--                                            <div class="cretae-order-row">--}}
+{{--                                                <p>--}}
+{{--                                                    <svg width="24" height="18">--}}
+{{--                                                        <use xlink:href="#create1"></use>--}}
+{{--                                                    </svg>--}}
+{{--                                                    <strong>{{ $cargoBid->without_vat_cashless }} {{ $cargoBid->currency }}</strong>--}}
+{{--                                                    {{ __('lang.Без НДС, безнал') }}--}}
+{{--                                                </p>--}}
+{{--                                            </div>--}}
+{{--                                        @endif--}}
 
-                                        @if($cargoBid->cargoLoading->cash)
-                                            <div class="cretae-order-row">
-                                                <p>
-                                                    <svg width="24" height="18">
-                                                        <use xlink:href="#create1"></use>
-                                                    </svg>
-                                                    <strong>{{ $cargoBid->cash }} {{ $cargoBid->currency }}</strong>
-                                                    {{ __('lang.Наличными') }}
-                                                </p>
-                                            </div>
-                                        @endif
+{{--                                        @if($cargoBid->cargoLoading->cash)--}}
+{{--                                            <div class="cretae-order-row">--}}
+{{--                                                <p>--}}
+{{--                                                    <svg width="24" height="18">--}}
+{{--                                                        <use xlink:href="#create1"></use>--}}
+{{--                                                    </svg>--}}
+{{--                                                    <strong>{{ $cargoBid->cash }} {{ $cargoBid->currency }}</strong>--}}
+{{--                                                    {{ __('lang.Наличными') }}--}}
+{{--                                                </p>--}}
+{{--                                            </div>--}}
+{{--                                        @endif--}}
 
-                                    @endif
+{{--                                    @endif--}}
 
-                                    {{--                            <p>ТС</p>--}}
-                                    {{--                            <div class="cretae-order-row">--}}
-                                    {{--                                <p>--}}
-                                    {{--                                    <svg width="24" height="18">--}}
-                                    {{--                                        <use xlink:href="#create3"></use>--}}
-                                    {{--                                    </svg>--}}
-                                    {{--                                    <strong>Укажу данные позже</strong>--}}
-                                    {{--                                </p>--}}
-                                    {{--                            </div>--}}
+{{--                                    --}}{{--                            <p>ТС</p>--}}
+{{--                                    --}}{{--                            <div class="cretae-order-row">--}}
+{{--                                    --}}{{--                                <p>--}}
+{{--                                    --}}{{--                                    <svg width="24" height="18">--}}
+{{--                                    --}}{{--                                        <use xlink:href="#create3"></use>--}}
+{{--                                    --}}{{--                                    </svg>--}}
+{{--                                    --}}{{--                                    <strong>Укажу данные позже</strong>--}}
+{{--                                    --}}{{--                                </p>--}}
+{{--                                    --}}{{--                            </div>--}}
 
-                                    {{--                            <p>Водитель</p>--}}
-                                    {{--                            <div class="cretae-order-row">--}}
-                                    {{--                                <p>--}}
-                                    {{--                                    <svg width="24" height="18">--}}
-                                    {{--                                        <use xlink:href="#human"></use>--}}
-                                    {{--                                    </svg>--}}
-                                    {{--                                    <strong>Укажу данные позже</strong>--}}
-                                    {{--                                </p>--}}
-                                    {{--                            </div>--}}
+{{--                                    --}}{{--                            <p>Водитель</p>--}}
+{{--                                    --}}{{--                            <div class="cretae-order-row">--}}
+{{--                                    --}}{{--                                <p>--}}
+{{--                                    --}}{{--                                    <svg width="24" height="18">--}}
+{{--                                    --}}{{--                                        <use xlink:href="#human"></use>--}}
+{{--                                    --}}{{--                                    </svg>--}}
+{{--                                    --}}{{--                                    <strong>Укажу данные позже</strong>--}}
+{{--                                    --}}{{--                                </p>--}}
+{{--                                    --}}{{--                            </div>--}}
 
-                                    <p>{{ __('lang.Информация') }}</p>
-                                    <div class="create-order-card">
-                                        <svg width="24" height="18">
-                                            <use xlink:href="#create1"></use>
-                                        </svg>
-                                        <div class="create-order-card__info">
-                                            <p>
-                                                <strong>{{ $cargoBid?->user?->full_name }}</strong>
-                                            </p>
-                                            <p><span>{{ __('lang.ИНН') }}</span>{{ $cargoBid?->user?->inn }}</p>
-                                        </div>
-                                    </div>
+{{--                                    <p>{{ __('lang.Информация') }}</p>--}}
+{{--                                    <div class="create-order-card">--}}
+{{--                                        <svg width="24" height="18">--}}
+{{--                                            <use xlink:href="#create1"></use>--}}
+{{--                                        </svg>--}}
+{{--                                        <div class="create-order-card__info">--}}
+{{--                                            <p>--}}
+{{--                                                <strong>{{ $cargoBid?->user?->full_name }}</strong>--}}
+{{--                                            </p>--}}
+{{--                                            <p><span>{{ __('lang.ИНН') }}</span>{{ $cargoBid?->user?->inn }}</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <p>{{ __('lang.Комментарий') }}</p>
-                                    <div class="create-order-card">
-                                        <div class="create-order-card__info">
-                                            <p>{{ $cargoBid?->payment_comment }}</p>
-                                        </div>
-                                    </div>
+{{--                                    <p>{{ __('lang.Комментарий') }}</p>--}}
+{{--                                    <div class="create-order-card">--}}
+{{--                                        <div class="create-order-card__info">--}}
+{{--                                            <p>{{ $cargoBid?->payment_comment }}</p>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                    <div class="create-order-buttons">
-                                        <button type="submit" class="form-btn" data-modal-close="modal-create-order-{{ $cargoBid->cargoLoading->id }}">{{ __('lang.Одобрить и создать заказ') }}</button>
-                                    </div>
-                                </form>
+{{--                                    <div class="create-order-buttons">--}}
+{{--                                        <button type="submit" class="form-btn" data-modal-close="modal-create-order-{{ $cargoBid->cargoLoading->id }}">{{ __('lang.Одобрить и создать заказ') }}</button>--}}
+{{--                                    </div>--}}
+{{--                                </form>--}}
 
-                                <button class="modal-close" type="button" data-modal-close="modal-create-order-{{ $cargoBid->cargoLoading->id }}">
-                                    <span></span>
-                                    <span></span>
-                                </button>
-                            </div>
-                        </div>
+{{--                                <button class="modal-close" type="button" data-modal-close="modal-create-order-{{ $cargoBid->cargoLoading->id }}">--}}
+{{--                                    <span></span>--}}
+{{--                                    <span></span>--}}
+{{--                                </button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     @endforeach
                 @endif
 
@@ -396,13 +396,13 @@
                                     <div class="order-buttons">
                                         <button class="form-btn button-text" data-modal-target="modal-create-order-{{ $cargoLoading->id }}">{{ __('lang.Оформить') }}</button>
 
-                                        <button class="button-text chat-message" data-modal-target="dropdown-close">{{ __('lang.Отклонить') }}</button>
+                                        <button class="button-text chat-message" data-modal-target="dropdown-close-{{ $cargoLoading->id }}">{{ __('lang.Отклонить') }}</button>
 
-                                        <span>{{ $cargoLoading->bid->created_at?->format('d.m.Y H:i') }}</span>
+                                        <span>{{ $cargoLoading?->bid?->created_at?->format('d.m.Y H:i') }}</span>
                                     </div>
 
-                                    <div class="order-cansel-modal order-cansel-dropdown" data-modal="dropdown-close">
-                                        <button class="order-close-btn" data-modal-close="dropdown-close"></button>
+                                    <div class="order-cansel-modal order-cansel-dropdown" data-modal="dropdown-close-{{ $cargoLoading->id }}">
+                                        <button class="order-close-btn" data-modal-close="dropdown-close-{{ $cargoLoading->id }}"></button>
                                         <div class="tr">
                                             <svg width="33" height="26" viewBox="0 0 33 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M14.8433 1.44929C15.6365 0.276561 17.3635 0.276559 18.1567 1.44929L32.1431 22.1293C33.0414 23.4575 32.0898 25.2498 30.4864 25.2498H2.51359C0.910168 25.2498 -0.041364 23.4575 0.856918 22.1293L14.8433 1.44929Z" fill="white"></path>
@@ -410,22 +410,22 @@
                                         </div>
                                         <b>{{ __('lang.Отклонить предложение') }}</b>
                                         <p>{{ __('lang.Укажите причину отмены предложения') }}</p>
-                                        <form action="{{ route('cargo.bids.decline', [app()->getLocale(), $cargoLoading->bid->id]) }}" method="POST">
+                                        <form action="{{ route('cargo.bids.decline', [app()->getLocale(), $cargoLoading?->bid?->id]) }}" method="POST">
                                             @csrf
-                                            <textarea name="comment" id="comment" style="height: auto; overflow: hidden"></textarea>
+                                            <textarea name="comment" data-error="{{ __('lang.Пожалуйста, укажите причину отмены.') }}" id="comment-{{ $cargoLoading?->bid?->id }}" style="height: auto; overflow: hidden" required></textarea>
                                             <b>{{ __('lang.Что сделать с грузом') }}</b>
 
-                                            <label for="save">
+                                            <label for="save-{{ $cargoLoading?->bid?->id }}">
                                                 {{ __('lang.Восстановить груз') }}
-                                                <input type="radio" name="archiveOption" id="save" value="restore" checked>
+                                                <input type="radio" name="archiveOption" id="save-{{ $cargoLoading?->bid?->id }}" value="restore" checked>
                                             </label>
-                                            <label for="stay">
+                                            <label for="stay-{{ $cargoLoading?->bid?->id }}">
                                                 {{ __('lang.Оставить груз в архиве') }}
-                                                <input type="radio" name="archiveOption" id="stay" value="keep">
+                                                <input type="radio" name="archiveOption" id="stay-{{ $cargoLoading?->bid?->id }}" value="keep">
                                             </label>
 
-                                            <button class="form-btn" data-modal-close="dropdown-close">{{ __('lang.Отклонить предложение') }}</button>
-                                            <button type="button" class="order-cansel" data-modal-close="dropdown-close">{{ __('lang.Не отклонять') }}</button>
+                                            <button class="form-btn" onclick="submitDeclineForm({{ $cargoLoading?->bid?->id }})" data-modal-close="dropdown-close-{{ $cargoLoading->id }}">{{ __('lang.Отклонить предложение') }}</button>
+                                            <button type="button" class="order-cansel" data-modal-close="dropdown-close-{{ $cargoLoading->id }}">{{ __('lang.Не отклонять') }}</button>
                                         </form>
                                     </div>
 
@@ -443,22 +443,16 @@
                         <form action="{{ route('cargo.bids.accept', [app()->getLocale(), $cargoLoading->bid?->id]) }}" method="post">
                             @csrf
 
-                            @if ($cargoLoading->bid?->user?->company)
-                                <p>{{ __('lang.От фирмы') }}</p>
-                                <div class="create-order-card">
+                            <div class="create-order-card">
                                 <svg width="24" height="18">
                                     <use xlink:href="#create1"></use>
                                 </svg>
                                 <div class="create-order-card__info">
-                                    <p>
-                                        <strong>{{ $cargoLoading->bid?->user?->company?->name ?? __('lang.Неизвестно') }}</strong>
-                                    </p>
-                                    @foreach($cargoLoading->bid?->user?->company?->phones as $phone)
-                                    <p>{{ $phone->phone }}</p>
-                                    @endforeach
+                                    <p><strong>{{ $cargoLoading->bid?->user?->full_name ?? __('lang.Неизвестно') }}</strong></p>
+                                    <p>{{ $cargoLoading->bid?->user?->phone }}</p>
                                 </div>
                             </div>
-                            @endif
+
                             <p>{{ __('lang.Ставка') }}</p>
                             @if($cargoLoading->bid->price)
                             <div class="cretae-order-row">
@@ -470,7 +464,7 @@
                                 </p>
                             </div>
                             @else
-                                @if($cargoLoading->with_vat_cashless)
+                                @if($cargoLoading->bid->with_vat_cashless)
                                     <div class="cretae-order-row">
                                         <p>
                                             <svg width="24" height="18">
@@ -482,7 +476,7 @@
                                     </div>
                                 @endif
 
-                                @if($cargoLoading->without_vat_cashless)
+                                @if($cargoLoading->bid->without_vat_cashless)
                                     <div class="cretae-order-row">
                                         <p>
                                             <svg width="24" height="18">
@@ -494,7 +488,7 @@
                                     </div>
                                 @endif
 
-                                @if($cargoLoading->cash)
+                                @if($cargoLoading->bid->cash)
                                     <div class="cretae-order-row">
                                         <p>
                                             <svg width="24" height="18">
@@ -502,6 +496,28 @@
                                             </svg>
                                             <strong>{{ $cargoLoading->bid->cash }} {{ $cargoLoading->bid->currency }}</strong>
                                             {{ __('lang.Наличными') }}
+                                        </p>
+                                    </div>
+                                @endif
+                                @if($cargoLoading->bid->is_prepayment || $cargoLoading->bid->prepayment_percent)
+                                    <div class="cretae-order-row">
+                                        <p>
+                                            <strong>{{ __('lang.Предоплата:') }} {{ $cargoLoading->bid?->prepayment_percent }}%</strong>
+                                        </p>
+                                    </div>
+                                @endif
+
+                                @if($cargoLoading->bid->is_on_unloading || $cargoLoading->bid->is_bank_transfer || $cargoLoading->bid->bank_transfer_days)
+                                    <div class="cretae-order-row">
+
+                                        <p>
+                                            @if($cargoLoading->bid->is_on_unloading)
+                                                <strong>{{ __('lang.На выгрузке') }}</strong>
+                                            @endif
+
+                                            @if($cargoLoading->bid->is_on_unloading || $cargoLoading->bid->bank_transfer_days)
+                                            <strong>{{ __('lang.Через:') }}</strong> {{ $cargoLoading->bid->bank_transfer_days }} {{ __('lang.дней') }}
+                                            @endif
                                         </p>
                                     </div>
                                 @endif
@@ -514,9 +530,6 @@
                                     <use xlink:href="#create1"></use>
                                 </svg>
                                 <div class="create-order-card__info">
-                                    <p>
-                                        <strong>{{ $cargoLoading->bid?->user?->full_name }}</strong>
-                                    </p>
                                     <p><span>{{ __('lang.ИНН') }}</span>{{ $cargoLoading->bid?->user?->inn }}</p>
                                 </div>
                             </div>
@@ -768,6 +781,22 @@
 </div>
 
 <script src="{{ asset('assets/js/main.min.js') }}"></script>
+
+<script>
+    function submitDeclineForm(id) {
+        const textarea = document.getElementById('comment-' + id);
+        const form = document.getElementById('declineForm-' + id);
+        const errorMessage = textarea.dataset.error || 'Поле не заполнено';
+
+        if (!textarea.value.trim()) {
+            alert(errorMessage);
+            textarea.focus();
+            return;
+        }
+
+        form.submit();
+    }
+</script>
 
 </body>
 </html>

@@ -4707,26 +4707,7 @@ input[type=number]::-ms-clear {
   cursor: pointer;
   position: relative;
 }
-.profile-notifications::after {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  content: "";
-  display: block;
-  position: absolute;
-  top: calc(max(calc(1.25 * 1vw), 15px) * 0.5);
-  top: calc(var(--offset) * 0.5);
-  right: calc(max(calc(1.25 * 1vw), 15px) * 0.6);
-  right: calc(var(--offset) * 0.6);
-  width: calc(max(calc(1.25 * 1vw), 15px) * 0.5);
-  width: calc(var(--offset) * 0.5);
-  height: calc(max(calc(1.25 * 1vw), 15px) * 0.5);
-  height: calc(var(--offset) * 0.5);
-  border-radius: 50%;
-  background-color: #fc4739;
-  background-color: var(--color-text-secondary);
-  border: 0.15em solid #fff;
-  border: 0.15em solid var(--color-text-primary);
-}
+
 .profile-notifications.open svg {
   fill: #fc4739;
   fill: var(--color-text-secondary);

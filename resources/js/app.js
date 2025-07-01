@@ -1095,7 +1095,7 @@ document.getElementById('bidForm')?.addEventListener('submit', function (e) {
                 for (let field in errors) {
                     messages += errors[field].join('\n') + '\n';
                 }
-                alert('Ошибка валидации:\n' + messages);
+                alert(messages);
             } else {
                 alert('Ошибка сервера. Попробуйте позже.');
             }
@@ -1130,7 +1130,7 @@ document.getElementById('add-driver-form')?.addEventListener('submit', function 
                 for (let field in errors) {
                     messages += errors[field].join('\n') + '\n';
                 }
-                alert('Ошибка валидации:\n' + messages);
+                alert(messages);
             } else {
                 alert('Ошибка сервера. Попробуйте позже.');
             }
@@ -1156,10 +1156,50 @@ document.getElementById('transportForm')?.addEventListener('submit', function (e
                 for (let field in errors) {
                     messages += errors[field].join('\n') + '\n';
                 }
-                alert('Ошибка валидации:\n' + messages);
+                alert(messages);
             } else {
                 alert('Ошибка сервера. Попробуйте позже.');
             }
         });
 });
 
+// Notification read
+document?.getElementById('markAllAsRead')?.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    const button = e.currentTarget;
+    const url = button.dataset.url;
+
+    axios.get(url)
+        .then(response => {
+            if (response.data.status) {
+                const container = document.querySelector('.notifications-modal__content');
+
+                if (container) {
+                    container.innerHTML = ``;
+                }
+
+                // Также можно убрать индикатор/красную точку
+                document.querySelector('.profile-notifications')?.classList.remove('has-unread');
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+});
+
+// обновление статуса перевозки груза
+document?.querySelectorAll('.cargo-status').forEach(select => {
+    select.addEventListener('change', function () {
+        const action = this.dataset.action;
+        const status = this.value;
+        const successMessage = this.dataset.success || 'Updated';
+        const errorMessage = this.dataset.error || 'Error';
+
+        axios.post(action, {
+            transport_status: status
+        })
+            .then(() => alert(successMessage))
+            .catch(() => alert(errorMessage));
+    });
+});
