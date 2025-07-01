@@ -270,7 +270,12 @@
                             @endif
                         @endif
                         <br><br>
+                        @auth
                         <a href="javascript:;" class="send_transport_request" data-modal-target="send-offer-{{ $transport->id }}">{{ __('lang.Отправить предложение') }}</a>
+                        @endauth
+                        @guest
+                            <a href="javascript:;" class="send_transport_request" data-modal-target="modal-login">{{ __('lang.Отправить предложение') }}</a>
+                        @endguest
                     </td>
                 </tr>
                 <tr class="table-footer">
