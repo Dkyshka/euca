@@ -4,11 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Transport extends Model
 {
     use HasFactory;
 
+    public const IN_PROGRESS = 1;
+
+    public const COORDINATION = 2;
+
+    public const IN_PERFORMANCE = 3;
+
+    public const STATUSES = [
+        self::IN_PROGRESS => 'В работе',
+        self::COORDINATION => 'Согласование',
+        self::IN_PERFORMANCE => 'В исполнении',
+    ];
     protected $fillable = [
         'driver_id',
         'user_id',
@@ -34,6 +47,7 @@ class Transport extends Model
 
         'availability_mode',
         'ready_date',
+        'status',
     ];
 
     protected $casts = [
@@ -53,6 +67,11 @@ class Transport extends Model
     public function driver(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Driver::class);
+    }
+
+    public function cargoBids(): HasMany
+    {
+        return $this->hasMany(CargoBid::class);
     }
 
 }

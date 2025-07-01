@@ -29,6 +29,7 @@ class CargoBid extends Model
         'payment_comment',
         'ready_date',
         'transport_status',
+        'transport_id',
     ];
 
     public const PENDING = 'pending';
@@ -59,5 +60,10 @@ class CargoBid extends Model
     public function initiator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'initiator_id');
+    }
+
+    public function transport(): BelongsTo
+    {
+        return $this->belongsTo(Transport::class);
     }
 }

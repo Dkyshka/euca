@@ -32,6 +32,7 @@
             @else
             @foreach($notification as $item)
             <div class="notifications-modal__card">
+                <b>{{ $item->created_at?->format('d.m.Y H:i') }}</b>
                 <b>{{ $item->title }}</b>
                 <p>{!! Str::limit($item->body, 500) ?? '' !!}</p>
             </div>

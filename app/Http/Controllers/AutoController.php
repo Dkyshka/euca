@@ -35,7 +35,7 @@ class AutoController extends Controller
     {
         $this->page = Page::findOrFail(11);
         $drivers = Driver::where('user_id', auth()->user()->id)->get();
-        $transports = Transport::where('user_id', auth()->user()->id)->get();
+        $transports = Transport::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
 
         return view('users.auto.auto-park', [
             'page' => $this->page,
@@ -65,7 +65,7 @@ class AutoController extends Controller
     public function drivers()
     {
         $this->page = Page::findOrFail(11);
-        $drivers = Driver::where('user_id', auth()->user()->id)->get();
+        $drivers = Driver::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
 
         return view('users.drivers.drivers', [
             'page' => $this->page,

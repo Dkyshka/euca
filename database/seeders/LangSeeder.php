@@ -9,6 +9,14 @@ use Illuminate\Database\Seeder;
 class LangSeeder extends Seeder
 {
     public array $langs =  [
+        'Взять груз' => 'Взять груз',
+        'Грузовладелец предложил груз' => 'Грузовладелец предложил груз',
+        'Вы не можете отправить предложение на собственный транспорт.' => 'Вы не можете отправить предложение на собственный транспорт.',
+        'Вы уже отправили предложение.' => 'Вы уже отправили предложение.',
+        'Вы не можете откликнуться на собственный груз.' => 'Вы не можете откликнуться на собственный груз.',
+        'Вы уже откликались на этот груз.' => 'Вы уже откликались на этот груз.',
+        'Выберете груз' => 'Выберете груз',
+        'Укажите ставку или хотя бы один из вариантов оплаты (с НДС, без НДС, наличными).' => 'Укажите ставку или хотя бы один из вариантов оплаты (с НДС, без НДС, наличными).',
         'Заказ завершён' => 'Заказ завершён',
         'Водитель отклонил заказ' => 'Водитель отклонил заказ',
         'Статус обновлён' => 'Статус обновлён',
@@ -450,6 +458,14 @@ class LangSeeder extends Seeder
     ];
 
     public array $langsUz =  [
+        'Взять груз' => 'Yukni olish',
+        'Грузовладелец предложил груз' => 'Yuk jo‘natuvchi yuk taklif qildi',
+        'Вы не можете отправить предложение на собственный транспорт.' => 'Siz o‘z transportingizga taklif yubora olmaysiz.',
+        'Вы уже отправили предложение.' => 'Siz allaqachon taklif yuborgansiz.',
+        'Вы не можете откликнуться на собственный груз.' => 'Siz o‘z yukingizga javob bera olmaysiz.',
+        'Вы уже откликались на этот груз.' => 'Siz bu yukka allaqachon javob bergansiz.',
+        'Выберете груз' => 'Yükni tanlang',
+        'Укажите ставку или хотя бы один из вариантов оплаты (с НДС, без НДС, наличными).' => 'Tarifni yoki kamida bitta to‘lov variantini ko‘rsating (QQS bilan, QQS siz, naqd).',
         'Заказ завершён' => 'Buyurtma yakunlandi',
         'Водитель отклонил заказ' => 'Haydovchi buyurtmani rad etdi',
         'Статус обновлён' => 'Holat yangilandi',
@@ -856,6 +872,14 @@ class LangSeeder extends Seeder
     ];
 
     public array $langsEn =  [
+        'Взять груз' => 'Take the cargo',
+        'Грузовладелец предложил груз' => 'The shipper has offered the cargo',
+        'Вы не можете отправить предложение на собственный транспорт.' => 'You cannot send an offer for your own transport.',
+        'Вы уже отправили предложение.' => 'You have already sent a proposal.',
+        'Вы не можете откликнуться на собственный груз.' => 'You cannot respond to your own cargo.',
+        'Вы уже откликались на этот груз.' => 'You have already responded to this cargo.',
+        'Выберете груз' => 'Select a cargo',
+        'Укажите ставку или хотя бы один из вариантов оплаты (с НДС, без НДС, наличными).' => 'Specify a rate or at least one payment option (with VAT, without VAT, cash).',
         'Заказ завершён' => 'Order completed',
         'Водитель отклонил заказ' => 'The driver declined the order',
         'Статус обновлён' => 'Status updated',

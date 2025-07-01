@@ -68,19 +68,26 @@ class CargoController extends Controller
     {
         $user = auth()->user();
         $this->page = Page::findOrFail(11);
-        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)
-            ->where('status', CargoLoading::COORDINATION)
-            ->orderByDesc('id')->get();
-        $cargoBids = CargoBid::where('user_id', $user->id)
-            ->where('status', CargoBid::PENDING)
-            ->orderByDesc('id')->get();
+//        $cargoLoadings = CargoLoading::where('company_id', $user?->company?->id)
+//            ->where('status', CargoLoading::COORDINATION)
+//            ->orderByDesc('id')->get();
+        $cargoBids = CargoBid::where(function ($query) use ($user) {
+            $query->where('user_id', $user->id)
+                ->orWhere('initiator_id', $user->id)
+                ->orWhereHas('cargoLoading.company', function ($subQuery) use ($user) {
+                    $subQuery->where('user_id', $user->id);
+                });
+        })
+        ->where('status', CargoBid::PENDING)
+        ->orderByDesc('id')
+        ->get();
 
         return view('users.cargos.coordinations-cargos', [
             'page' => $this->page,
             'setting' => $this->setting,
             'footer' => $this->footer,
             'menu' => $this->menu,
-            'cargoLoadings' => $cargoLoadings,
+//            'cargoLoadings' => $cargoLoadings,
             'cargoBids' => $cargoBids,
         ]);
     }

@@ -191,3 +191,8 @@
     border: .15em solid #fff;
     border: .15em solid var(--color-text-primary);
 }
+
+.send_transport_request {
+    color: #fc4739;
+    text-decoration: underline;
+}

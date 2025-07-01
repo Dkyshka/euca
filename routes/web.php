@@ -221,6 +221,8 @@ Route::prefix('{locale?}')->middleware(['localization', 'auth'])->group(function
     Route::post('/bids/{cargoLoading}/finish', [CargoBidController::class, 'finish'])->name('cargo.bids.finished');
     Route::post('/bids/{bid}/decline', [CargoBidController::class, 'decline'])->name('cargo.bids.decline');
     Route::post('/bids/{bid}/change-status', [CargoBidController::class, 'changeStatus'])->name('cargo.bids.change-status');
+    Route::post('/transport/{transport}/counter-offer', [CargoBidController::class, 'counterOffer'])->name('transport.counter-offer');
+
 
     // Drivers
     Route::post('/drivers/store', [DriverController::class, 'store'])->name('drivers.store');

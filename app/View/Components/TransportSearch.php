@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Banner;
+use App\Models\CargoLoading;
 use App\Models\Section;
 use App\Models\Transport;
 use Closure;
@@ -26,8 +27,14 @@ class TransportSearch extends Component
     {
         $bannerSideBar = Banner::where('type_banner', 'header')->first();
         $bannerSection = Banner::where('type_banner', 'section')->first();
-        $transports = Transport::paginate(15);
+        $transports = Transport::where('status', Transport::IN_PROGRESS)->orderBy('id', 'desc')->paginate(15);
+        $cargoLoadings = CargoLoading::where('status', CargoLoading::IN_PROGRESS)->orderBy('id', 'desc')->get();
 
-        return view('components.transport-search', compact('transports', 'bannerSideBar', 'bannerSection'));
+        return view('components.transport-search', compact(
+            'transports',
+            'bannerSideBar',
+            'bannerSection',
+            'cargoLoadings')
+        );
     }
 }

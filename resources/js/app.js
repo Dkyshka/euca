@@ -329,65 +329,63 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('chatForm');
-    const textarea = document.getElementById('chat_text_public');
+    const chatForms = document.querySelectorAll('.chat-form');
     const MAX_TEXT_LENGTH = 1000;
 
-    if (!form || !textarea) return;
+    chatForms.forEach(form => {
+        const textarea = form.querySelector('textarea[name="message"]');
+        const recipientInput = form.querySelector('input[name="recipient_id"]');
 
-    // Enter = отправить (без shift)
-    textarea.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            form.dispatchEvent(new SubmitEvent('submit', {
-                cancelable: true,
-                bubbles: true
-            }));
-        }
-    });
+        if (!textarea || !recipientInput) return;
 
-    form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        const message = textarea.value.trim();
-
-        if (message.length > MAX_TEXT_LENGTH) {
-            alert(`Сообщение не может превышать ${MAX_TEXT_LENGTH} символов.`);
-            return;
-        }
-
-        const formData = new FormData(form);
-        const action = form.action;
-
-        const recipientInput = document.getElementById('recipient_id');
-        if (!recipientInput) {
-            alert('Не найден recipient_id');
-            return;
-        }
-
-        try {
-            const response = await axios.post(action, formData, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            });
-
-            form.reset();
-            textarea.style.height = 'auto';
-        } catch (error) {
-            if (error.response) {
-                const status = error.response.status;
-                const data = error.response.data;
-
-                if (status === 422 && data.errors?.recipient_id) {
-                    alert('Нельзя отправлять самому себе.');
-                } else if (status === 429) {
-                    alert('Слишком много сообщений. Подождите немного и попробуйте снова.');
-                } else {
-                    alert(data.message || 'Произошла ошибка при отправке сообщения.');
-                }
-            } else {
-                alert('Сетевая ошибка. Проверьте соединение.');
+        // Enter = отправить (без shift)
+        textarea.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                form.dispatchEvent(new SubmitEvent('submit', {
+                    cancelable: true,
+                    bubbles: true
+                }));
             }
-        }
+        });
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const message = textarea.value.trim();
+
+            if (message.length > MAX_TEXT_LENGTH) {
+                alert(`Сообщение не может превышать ${MAX_TEXT_LENGTH} символов.`);
+                return;
+            }
+
+            const formData = new FormData(form);
+            const action = form.action;
+
+            try {
+                const response = await axios.post(action, formData, {
+                    headers: {'Content-Type': 'multipart/form-data'}
+                });
+
+                form.reset();
+                textarea.style.height = 'auto';
+            } catch (error) {
+                if (error.response) {
+                    const status = error.response.status;
+                    const data = error.response.data;
+
+                    if (status === 422 && data.errors?.recipient_id) {
+                        alert('Нельзя отправлять самому себе.');
+                    } else if (status === 429) {
+                        alert('Слишком много сообщений. Подождите немного и попробуйте снова.');
+                    } else {
+                        alert(data.message || 'Произошла ошибка при отправке сообщения.');
+                    }
+                } else {
+                    alert('Сетевая ошибка. Проверьте соединение.');
+                }
+            }
+        });
     });
 });
 
@@ -1100,6 +1098,36 @@ document.getElementById('bidForm')?.addEventListener('submit', function (e) {
                 alert('Ошибка сервера. Попробуйте позже.');
             }
         });
+});
+
+document.querySelectorAll('.transport-request').forEach((form) => {
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        axios.post(this.action, formData)
+            .then(response => {
+                if (response.data.status) {
+                    alert(response.data.message);
+                    this.closest('.modal').classList.remove('open');
+                    document.body.classList.remove('modal-open');
+                } else {
+                    alert(response.data.message);
+                }
+            })
+            .catch(error => {
+                if (error.response?.status === 422) {
+                    let messages = '';
+                    for (let field in error.response.data.errors) {
+                        messages += error.response.data.errors[field].join('\n') + '\n';
+                    }
+                    alert(messages);
+                } else {
+                    alert('Ошибка сервера. Попробуйте позже.');
+                }
+            });
+    });
 });
 
 

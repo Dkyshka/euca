@@ -1,7 +1,7 @@
 <section class="search-page">
     <h1 class="title">{{ $section->page->name }}</h1>
 
-    <form action="" method class="form-search">
+    <form action="" class="form-search">
 
         <div class="form-search-head">
             <div class="form-search-inputs-wrapper">
@@ -10,9 +10,9 @@
                         <span>{{ __('lang.Откуда') }}</span>
                         <input type="text" id="from" placeholder="{{ __('lang.Например, Узбекистан') }}" class="input-form">
                     </label>
-                    <label for="to">
+                    <label for="from_to">
 {{--                        <span>Радиус</span>--}}
-                        <input type="number" id="to" placeholder="{{ __('lang.КМ') }}" class="input-form">
+                        <input type="number" id="from_to" placeholder="{{ __('lang.КМ') }}" class="input-form">
                     </label>
                 </div>
             </div>
@@ -23,13 +23,13 @@
 
             <div class="form-search-inputs-wrapper">
                 <div class="form-search-inputs">
-                    <label for="from">
+                    <label for="where">
                         <span>{{ __('lang.Куда') }}</span>
-                        <input type="text" id="from" placeholder="{{ __('lang.Например, Казахстан') }}" class="input-form">
+                        <input type="text" id="where" placeholder="{{ __('lang.Например, Казахстан') }}" class="input-form">
                     </label>
-                    <label for="to">
+                    <label for="where_to">
 {{--                        <span>Радиус</span>--}}
-                        <input type="number" id="to" placeholder="{{ __('lang.КМ') }}" class="input-form">
+                        <input type="number" id="where_to" placeholder="{{ __('lang.КМ') }}" class="input-form">
                     </label>
                 </div>
 {{--                <div class="form-search-inputs__bottom">--}}
@@ -47,22 +47,22 @@
             </div>
 
             <div class="form-search-inputs form-search-inputs-small">
-                <label for="from">
+                <label for="capacity">
                     <span>{{ __('lang.Грузоподъемность') }}</span>
-                    <input type="number" id="from" placeholder="{{ __('lang.от (т)') }}" class="input-form">
+                    <input type="number" id="capacity" placeholder="{{ __('lang.от (т)') }}" class="input-form">
                 </label>
-                <label for="to">
-                    <input type="number" id="to" placeholder="{{ __('lang.до (т)') }}" class="input-form">
+                <label for="capacity_to">
+                    <input type="number" id="capacity_to" placeholder="{{ __('lang.до (т)') }}" class="input-form">
                 </label>
             </div>
 
             <div class="form-search-inputs form-search-inputs-small">
-                <label for="from">
+                <label for="volume">
                     <span>{{ __('lang.Объем') }}</span>
-                    <input type="number" id="from" placeholder="{{ __('lang.от м3') }}" class="input-form">
+                    <input type="number" id="volume" placeholder="{{ __('lang.от м3') }}" class="input-form">
                 </label>
-                <label for="to">
-                    <input type="number" id="to" placeholder="{{ __('lang.до м3') }}" class="input-form">
+                <label for="volume_to">
+                    <input type="number" id="volume_to" placeholder="{{ __('lang.до м3') }}" class="input-form">
                 </label>
             </div>
         </div>
@@ -269,6 +269,8 @@
                                 <p><strong>{{ $transport->cash }}</strong> {{ $transport->currency }} {{ __('lang.Наличными') }}</p>
                             @endif
                         @endif
+                        <br><br>
+                        <a href="javascript:;" class="send_transport_request" data-modal-target="send-offer-{{ $transport->id }}">Отправить предложение</a>
                     </td>
                 </tr>
                 <tr class="table-footer">
@@ -313,10 +315,13 @@
                                     </svg>
                                 </div>
                                 <b>{{ __('lang.Отправить сообщение') }}</b>
-                                <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
+                                <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}"
+                                      method="POST"
+                                      enctype="multipart/form-data"
+                                      class="chat-form">
                                     @csrf
-                                    <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $transport->user->id }}">
-                                    <textarea required name="message" id="chat_text_public" rows="5" style="height: auto; overflow: hidden"></textarea>
+                                    <input type="hidden" name="recipient_id" value="{{ $transport->user->id }}">
+                                    <textarea required name="message" rows="5" style="height: auto; overflow: hidden"></textarea>
 
                                     <button class="form-btn" data-modal-close="dropdown-chat1">{{ __('lang.Отправить') }}</button>
                                     <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">{{ __('lang.Отмена') }}</button>
@@ -326,6 +331,170 @@
                     </th>
                 </tr>
                 </tbody>
+
+                <div class="modal-overlay" data-modal="send-offer-{{ $transport->id }}">
+                    <div class="modal modal-send-offer" style="max-height: 90vh;">
+                        <div class="send-offer__header">
+                            <b>{{ __('lang.Встречное предложение') }}</b>
+                        </div>
+                        <div class="send-offer__card">
+                            <div class="send-offer__row">
+                                <div class="send-offer__col1">
+                                    <p><strong>{{ __('lang.Транспорт') }}:</strong></p>
+                                </div>
+                                <div class="send-offer__col2">
+                                    <p><strong>{{ __('lang.Кузов') }}:</strong></p>
+                                    <strong>{{ $transport->body_type }}</strong><br>
+                                    <p>{{ __('lang.Грузоподъёмность') }} - {{ $transport->capacity }} T</p>
+                                </div>
+                            </div>
+                            <div class="send-offer__row">
+                                <div class="send-offer__col1">
+                                    <p><strong>{{ __('lang.ОБЪЕМ, М³ Д-Ш-В') }}</strong></p>
+                                </div>
+                                <div class="send-offer__col2">
+                                    <strong>{{ $transport->volume }}  М³</strong> /
+                                    {{ $transport->length }} /
+                                    {{ $transport->width }} /
+                                    {{ $transport->height }}
+                                </div>
+                            </div>
+                            <div class="send-offer__row">
+                                <div class="send-offer__col1">
+                                    <p><strong>{{ __('lang.Ставка:') }}</strong></p>
+                                </div>
+                                <div class="send-offer__col2">
+                                    <p class="mobile-order-head">{{ __('lang.СТАВКА') }}</p>
+                                    @if($transport->payment_type == 'payment_request')
+                                        <p>{{ __('lang.Скрыто') }}</p>
+                                    @else
+                                        @if($transport->with_vat_cashless)
+                                            <p><strong>{{ $transport->with_vat_cashless }}</strong> {{ $transport->currency }} {{ __('lang.С НДС, безнал') }}</p>
+                                        @endif
+                                        @if($transport->without_vat_cashless)
+                                            <p><strong>{{ $transport->without_vat_cashless }}</strong> {{ $transport->currency }} {{ __('lang.Без НДС, безнал') }}</p>
+                                        @endif
+                                        @if($transport->cash)
+                                            <p><strong>{{ $transport->cash }}</strong> {{ $transport->currency }} {{ __('lang.Наличными') }}</p>
+                                        @endif
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="send-offer__header">
+                            <b>{{ __('lang.Ваше предложение') }}</b>
+                        </div>
+                        <form action="{{ route('transport.counter-offer', [app()->getLocale(), $transport->id]) }}" method="POST" class="transport-request">
+                            @csrf
+                            <div class="send-offer__card">
+                                <div class="send-offer__row">
+                                    <div class="send-offer__col1">
+                                        <p><strong>{{ __('lang.Груз') }}:</strong></p>
+                                    </div>
+
+                                    <div class="send-offer__col2 send-offer__flex">
+                                            <label for="cargo_loading_id-{{ $transport->id }}">
+                                                <select name="cargo_loading_id" id="cargo_loading_id-{{ $transport->id }}" required>
+                                                    <option value="" selected>{{ __('lang.Выберете груз') }}</option>
+                                                    @foreach($cargoLoadings as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->cargo->title }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </label>
+                                    </div>
+                                </div>
+
+                                <div class="send-offer__row">
+                                    <div class="send-offer__col1">
+                                        <p><strong>{{ __('lang.Дополнительно:') }}</strong></p>
+                                    </div>
+                                    <div class="send-offer__col2 send-offer__flex">
+                                        <label for="without_vat_cashless-{{ $transport->id }}">
+                                            <input type="number" name="with_vat_cashless">
+                                            <p>{{ __('lang.С НДС, безнал') }}</p>
+                                        </label>
+                                        <label for="without_vat_cashless-{{ $transport->id }}">
+                                            <input type="number" name="without_vat_cashless">
+                                            <p>{{ __('lang.Без НДС, безнал') }}</p>
+                                        </label>
+                                        <label for="cash-{{ $transport->id }}">
+                                            <input type="number" name="cash">
+                                            <p>{{ __('lang.наличными') }}</p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="send-offer__row">
+                                    <div class="send-offer__col1">
+                                        <p><strong>{{ __('lang.Дополнительно:') }}</strong></p>
+                                    </div>
+                                    <div class="send-offer__col2 send-offer__flex">
+                                        <label for="is_prepayment-{{ $transport->id }}" class="label-checkbox">
+                                            <input type="checkbox" name="is_prepayment" hidden value="0">
+                                            <input type="checkbox" name="is_prepayment" id="is_prepayment-{{ $transport->id }}" value="1">
+                                            <span>{{ __('lang.Предоплата') }}</span>
+                                        </label>
+                                        <label for="prepayment_percent-{{ $transport->id }}">
+                                            <input type="number" name="prepayment_percent" id="prepayment_percent-{{ $transport->id }}">
+                                            <span>%</span>
+                                        </label>
+                                        <label for="is_on_unloading-{{ $transport->id }}" class="label-checkbox">
+                                            <input type="checkbox" name="is_on_unloading" hidden value="0">
+                                            <input type="checkbox" name="is_on_unloading" id="is_on_unloading-{{ $transport->id }}" value="1">
+                                            <span>{{ __('lang.На выгрузке') }}</span>
+                                        </label>
+                                        <label for="is_bank_transfer-{{ $transport->id }}" class="label-checkbox">
+                                            <input type="checkbox" name="is_bank_transfer" hidden value="0">
+                                            <input type="checkbox" name="is_bank_transfer" id="is_bank_transfer-{{ $transport->id }}" value="1">
+                                            <span>{{ __('lang.Через') }}</span>
+                                        </label>
+                                        <label for="bank_transfer_days-{{ $transport->id }}">
+                                            <input type="number" name="bank_transfer_days" id="bank_transfer_days-{{ $transport->id }}">
+                                            <span>{{ __('lang.банк дней') }}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="send-offer__row">
+                                    <div class="send-offer__col1">
+                                        <p><strong>{{ __('lang.Комментарии:') }}</strong></p>
+                                    </div>
+                                    <div class="send-offer__col2">
+                                        <label for="payment_comment-{{ $transport->id }}" class="commtent-textarea">
+                                            <textarea name="payment_comment" id="payment_comment-{{ $transport->id }}"></textarea>
+                                        </label>
+                                        <p>{{ __('lang.не более 512 символов') }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="send-offer__row">
+                                    <div class="send-offer__col1">
+                                        <p><strong>{{ __('lang.Дата:') }}</strong></p>
+                                    </div>
+                                    <div class="send-offer__col2">
+                                        <label for="ready_date-{{ $transport->id }}" class="label-date">
+                                            <input type="date" name="ready_date" id="ready_date-{{ $transport->id }}">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="send-offer__bottom">
+                                <div class="send-offer__buttons">
+                                    <button class="form-btn">{{ __('lang.Отправить') }}</button>
+                                    <a href="javascript:;" class="form-btn-gray" data-modal-close="send-offer-{{ $transport->id }}">{{ __('lang.Закрыть') }}</a>
+                                </div>
+                            </div>
+
+                        </form>
+                        <button class="modal-close" type="button" data-modal-close="send-offer-{{ $transport->id }}">
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
                 @endforeach
             </table>
         </div>

@@ -66,10 +66,10 @@
                             </svg>
                         </div>
                         <b>{{ __('lang.Отправить сообщение') }}</b>
-                        <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" id="chatForm">
+                        <form action="{{ route('chats.getOrCreatePrivate', app()->getLocale()) }}" method="POST" enctype="multipart/form-data" class="chat-form">
                             @csrf
                             <input type="hidden" name="recipient_id" id="recipient_id" value="{{ $article->user->id }}">
-                            <textarea required name="message" id="chat_text_public" style="height: auto; overflow: hidden"></textarea>
+                            <textarea required name="message" style="height: auto; overflow: hidden"></textarea>
 
                             <button class="form-btn" data-modal-close="dropdown-chat1">{{ __('lang.Отправить') }}</button>
                             <button type="button" class="order-cansel" data-modal-close="dropdown-chat1">{{ __('lang.Отмена') }}</button>
