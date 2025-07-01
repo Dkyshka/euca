@@ -30,6 +30,7 @@ class PartnerAdminController extends Controller
         try {
             $request->validate([
                 'status_id' => 'required|integer|exists:statuses,id',
+                'is_partner' => 'required|integer|in:0,1',
                 'name' => 'required|string|max:255',
                 'country' => 'required|string|max:255',
                 'city' => 'required|string|max:255',

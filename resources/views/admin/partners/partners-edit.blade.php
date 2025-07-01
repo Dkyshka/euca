@@ -48,7 +48,7 @@
 
                                             <div class="row">
 
-                                                <div class="form-group col-md-12">
+                                                <div class="form-group col-md-6">
                                                     <div class="col-sm-12">
                                                         <label for="status_id"><u>Статус</u></label>
                                                         <select class="custom-select rounded-0 js-select" name="status_id" id="status_id">
@@ -61,6 +61,16 @@
                                                     @if($errors->has('status_id'))<span class="text-danger"> {{ $errors->first('status_id') }}</span>@endif
                                                 </div>
 
+                                                <div class="form-group col-md-6">
+                                                    <div class="col-sm-12">
+                                                        <label for="is_partner"><u>Партнёр</u></label>
+                                                        <select class="custom-select rounded-0 js-select" name="is_partner" id="is_partner">
+                                                            <option value="0" {{ $company->is_partner == 0 ? 'selected' : '' }}>Нет</option>
+                                                            <option value="1" {{ $company->is_partner == 1 ? 'selected' : '' }}>Да</option>
+                                                        </select>
+                                                    </div>
+                                                    @if($errors->has('is_partner'))<span class="text-danger"> {{ $errors->first('is_partner') }}</span>@endif
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
