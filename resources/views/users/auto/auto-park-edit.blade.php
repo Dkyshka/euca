@@ -119,27 +119,27 @@
                             <div class="ts-inputs-cards" style="flex-wrap: wrap">
                                 <label for="capacity">
                                     {{ __('lang.Грузоподъемность,т') }}
-                                    <input type="number" id="capacity" name="capacity" required value="{{ $transport->capacity }}">
+                                    <input type="text" id="capacity" name="capacity" required value="{{ $transport->capacity }}">
                                     @if ($errors->has('capacity'))<br><p style="color:red;">{{ $errors->first('capacity') }}</p>@endif
                                 </label>
                                 <label for="volume">
                                     {{ __('lang.Объем, м3') }}
-                                    <input type="number" id="volume" name="volume" required value="{{ $transport->volume }}">
+                                    <input type="text" id="volume" name="volume" required value="{{ $transport->volume }}">
                                     @if ($errors->has('volume'))<br><p style="color:red;">{{ $errors->first('volume') }}</p>@endif
                                 </label>
                                 <label for="length">
                                     {{ __('lang.Длина,м') }}
-                                    <input type="number" id="length" name="length" required value="{{ $transport->length }}">
+                                    <input type="text" id="length" name="length" required value="{{ $transport->length }}">
                                     @if ($errors->has('length'))<br><p style="color:red;">{{ $errors->first('length') }}</p>@endif
                                 </label>
                                 <label for="width">
                                     {{ __('lang.Ширина, м') }}
-                                    <input type="number" id="width" name="width" required value="{{ $transport->width }}">
+                                    <input type="text" id="width" name="width" required value="{{ $transport->width }}">
                                     @if ($errors->has('width'))<br><p style="color:red;">{{ $errors->first('width') }}</p>@endif
                                 </label>
                                 <label for="height">
                                     {{ __('lang.Высота,м') }}
-                                    <input type="number" id="height" name="height" required value="{{ $transport->height }}">
+                                    <input type="text" id="height" name="height" required value="{{ $transport->height }}">
                                     @if ($errors->has('height'))<br><p style="color:red;">{{ $errors->first('height') }}</p>@endif
                                 </label>
                             </div>

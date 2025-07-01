@@ -140,23 +140,23 @@
             <div class="ts-inputs-cards" style="flex-wrap: wrap">
                 <label for="capacity">
                     {{ __('lang.Грузоподъемность,т') }}
-                    <input type="number" id="capacity" name="capacity" required>
+                    <input type="text" id="capacity" name="capacity" required>
                 </label>
                 <label for="volume">
                     {{ __('lang.Объем, м3') }}
-                    <input type="number" id="volume" name="volume" required>
+                    <input type="text" id="volume" name="volume" required>
                 </label>
                 <label for="length">
                     {{ __('lang.Длина,м') }}
-                    <input type="number" id="length" name="length" required>
+                    <input type="text" id="length" name="length" required>
                 </label>
                 <label for="width">
                     {{ __('lang.Ширина') }}
-                    <input type="number" id="width" name="width" required>
+                    <input type="text" id="width" name="width" required>
                 </label>
                 <label for="height">
                     {{ __('lang.Высота,м') }}
-                    <input type="number" id="height" name="height" required>
+                    <input type="text" id="height" name="height" required>
                 </label>
             </div>
 
