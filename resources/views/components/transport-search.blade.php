@@ -270,7 +270,7 @@
                             @endif
                         @endif
                         <br><br>
-                        <a href="javascript:;" class="send_transport_request" data-modal-target="send-offer-{{ $transport->id }}">Отправить предложение</a>
+                        <a href="javascript:;" class="send_transport_request" data-modal-target="send-offer-{{ $transport->id }}">{{ __('lang.Отправить предложение') }}</a>
                     </td>
                 </tr>
                 <tr class="table-footer">
