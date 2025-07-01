@@ -167,7 +167,7 @@
                 <li>
                     <a href="{{ route('companies', app()->getLocale()) }}">{{ __('lang.Настройки компании') }}</a>
                 </li>
-                <li><a href="{{ route('tariffs', app()->getLocale()) }}">{{ __('lang.Тарифы') }}</a></li>
+{{--                <li><a href="{{ route('tariffs', app()->getLocale()) }}">{{ __('lang.Тарифы') }}</a></li>--}}
                 <li><a href="{{ route('subscribes', app()->getLocale()) }}">{{ __('lang.Управление подпиской') }}</a></li>
             </ul>
         </li>

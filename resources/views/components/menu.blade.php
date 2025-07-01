@@ -30,19 +30,19 @@
                 </li>
             </ul>
 
-            @auth
-            <a href="{{ route('tariffs', app()->getLocale()) }}" class="nav__link nav__member">
-            @endauth
-            @guest
-            <a href="javascript:;" class="nav__link nav__member" data-modal-target="modal-login">
-            @endguest
-                <picture>
-                    <source srcset="{{ asset('assets/images/member.png') }}">
-                    <img src="{{ asset('asset/images/member.png') }}" alt="member" width="37" height="37">
-                </picture>
+{{--            @auth--}}
+{{--            <a href="{{ route('tariffs', app()->getLocale()) }}" class="nav__link nav__member">--}}
+{{--            @endauth--}}
+{{--            @guest--}}
+{{--            <a href="javascript:;" class="nav__link nav__member" data-modal-target="modal-login">--}}
+{{--            @endguest--}}
+{{--                <picture>--}}
+{{--                    <source srcset="{{ asset('assets/images/member.png') }}">--}}
+{{--                    <img src="{{ asset('asset/images/member.png') }}" alt="member" width="37" height="37">--}}
+{{--                </picture>--}}
 
-                <b>{{ __('lang.Стать участником') }}</b>
-            </a>
+{{--                <b>{{ __('lang.Стать участником') }}</b>--}}
+{{--            </a>--}}
 
             <div class="auth_box">
                 @auth
