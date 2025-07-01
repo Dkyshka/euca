@@ -219,7 +219,13 @@
 
     <div class="banner__mark">
         @if($bannerSection->status)
-        <img src="{{ asset($bannerSection->picture()->orig) }}" alt="" width="" height="">
+            @if($bannerSection->link)
+                <a href="{{ $bannerSection->link }}" target="_blank">
+                    <img src="{{ asset($bannerSection->picture()->orig) }}" alt="" width="" height="">
+                </a>
+            @else
+                <img src="{{ asset($bannerSection->picture()->orig) }}" alt="" width="" height="">
+            @endif
         @endif
     </div>
 
@@ -406,6 +412,12 @@
 
 <div class="search-page__mark">
     @if($bannerSideBar->status)
-        <img src="{{ asset($bannerSideBar->picture()->orig) }}" alt="" width="" height="">
+        @if($bannerSideBar->link)
+            <a href="{{ $bannerSideBar->link }}" target="_blank">
+                <img src="{{ asset($bannerSideBar->picture()->orig) }}" alt="" width="" height="">
+            </a>
+        @else
+            <img src="{{ asset($bannerSideBar->picture()->orig) }}" alt="" width="" height="">
+        @endif
     @endif
 </div>
