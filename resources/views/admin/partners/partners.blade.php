@@ -22,6 +22,7 @@
             <span id="events" data-message="{{ session('success') }}" data-action="success"></span>
         @endif
 
+
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
@@ -30,6 +31,48 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Партнёры</h3>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="text-right">
+                                    <a class="btn btn-warning" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Фильтр</a>
+                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="collapse multi-collapse {{ request()->input() ? 'show' : '' }}" id="multiCollapseExample1">
+                                            <div class="card-body">
+
+                                                <form method="GET" action="{{ route('partner_admin') }}" class="p-3 row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="status_id">Статус</label>
+                                                            <select name="status_id" id="status_id" class="form-control">
+                                                                <option value="">Все</option>
+                                                                @foreach ($statuses as $status)
+                                                                    <option value="{{ $status->id }}" {{ request('status_id') == $status->id ? 'selected' : '' }}>
+                                                                        {{ $status->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        <label for="is_partner">Партнёрство</label>
+                                                        <select name="is_partner" id="is_partner" class="form-control">
+                                                            <option value="">Все</option>
+                                                            <option value="1" {{ request('is_partner') === '1' ? 'selected' : '' }}>✅ Партнёр</option>
+                                                            <option value="0" {{ request('is_partner') === '0' ? 'selected' : '' }}>❌ Не партнёр</option>
+                                                        </select>
+                                                    </div>
+
+                                                        <div class="form-group col-md-12">
+                                                            <button type="submit" class="btn btn-outline-info btn-flat">Фильтровать</button>
+                                                            <a href="{{ route('partner_admin') }}" class="btn btn-outline-info btn-flat">Сброс фильтров</a>
+                                                        </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="card-body table-responsive p-0">

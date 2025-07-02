@@ -13,11 +13,23 @@ use Illuminate\View\View;
 
 class PartnerAdminController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $partners = Company::orderByDesc('id')->paginate(15);
+        $query = Company::query()->orderByDesc('id');
 
-        return view('admin.partners.partners', compact('partners'));
+        if ($request->filled('status_id')) {
+            $query->where('status_id', $request->input('status_id'));
+        }
+
+        if ($request->has('is_partner') && $request->input('is_partner') !== '') {
+            $query->where('is_partner', $request->input('is_partner'));
+        }
+
+        $partners = $query->paginate(15);
+
+        $statuses = \App\Models\Status::all();
+
+        return view('admin.partners.partners', compact('partners', 'statuses'));
     }
 
     public function edit(Company $company): View
