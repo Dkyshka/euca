@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Services\TranslatorFreeService;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -16,9 +18,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton('google.translator', function () {
-            return new GoogleTranslate(); // по умолчанию auto -> en
+//        $this->app->singleton('google.translator', function () {
+//            return new GoogleTranslate(); // по умолчанию auto -> en
+//        });
+
+        $this->app->singleton(TranslatorFreeService::class, function () {
+            return new TranslatorFreeService();
         });
+
+        $this->app->alias(TranslatorFreeService::class, 'custom.translator');
+
+//        $this->app->singleton('google.translator', function () {
+//            return new \App\Services\TranslatorFreeService();
+//        });
     }
 
     /**
