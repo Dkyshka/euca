@@ -293,35 +293,35 @@
                 <tr>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.НАПРАВЛЕНИЕ') }}</p>
-                        <span>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate($cargoLoading->country), 255) }} - {{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate($cargoLoading->final_unload_city), 255) }}</span>
+                        <span>{{ Str::limit($cargoLoading->country, 255) }} - {{ Str::limit($cargoLoading->final_unload_city, 255) }}</span>
                     </td>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.ТРАНСПОРТ') }}</p>
                         <p class="car-head">
                             <strong>{{ __('lang.Кузов') }}</strong>
                         </p>
-                        <p>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate(implode(', ', array_slice($cargoLoading->body_types, 0, 5))), 70) }}</p>
+                        <p>{{ Str::limit(implode(', ', array_slice($cargoLoading->body_types, 0, 5)), 70) }}</p>
                         @if (!empty($cargoLoading->loading_types))
                         <strong>{{ __('lang.Загрузка') }}</strong>
-                        <p>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate(implode(', ', array_slice($cargoLoading->loading_types, 0, 5))), 70) }}</p>
+                        <p>{{ Str::limit(implode(', ', array_slice($cargoLoading->loading_types, 0, 5)), 70) }}</p>
                         @endif
                         @if (!empty($cargoLoading->unloading_types))
                         <strong>{{ __('lang.Выгрузка') }}</strong>
-                        <p>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate(implode(', ', array_slice($cargoLoading->unloading_types, 0, 5))), 70) }}</p>
+                        <p>{{ Str::limit(implode(', ', array_slice($cargoLoading->unloading_types, 0, 5)), 70) }}</p>
                         @endif
                     </td>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.ВЕС, Т/ ОБЪЕМ, М³ ГРУЗ') }}</p>
-                        <p><strong>{{ app('google.translator')->setTarget(app()->getLocale())->translate($cargoLoading->cargo->title) }}</strong></p>
+                        <p><strong>{{ $cargoLoading->cargo->title }}</strong></p>
                         <strong>{{ $cargoLoading->cargo->weight }} - </strong>
                         {{ $cargoLoading->cargo->weight_type }} /
                         {{ $cargoLoading->cargo->volume }} М3
                     </td>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.МАРШРУТ') }}</p>
-                        <strong>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate($cargoLoading->country), 50) }}</strong>
+                        <strong>{{ Str::limit($cargoLoading->country, 50) }}</strong>
                         <br>
-                        <strong>{{ app('google.translator')->setTarget(app()->getLocale())->translate($cargoLoading->final_unload_city) }}</strong>
+                        <strong>{{ $cargoLoading->final_unload_city }}</strong>
                         <br><br>
                         @if($cargoLoading->cargo->constant_frequency)
                             <p><strong>{{ $cargoLoading->cargo->constant_frequency == 'daily' ? __('lang.Ежедневно') : __('lang.По рабочим дням') }}</strong></p>
@@ -337,13 +337,13 @@
                             <p class="car-head"><strong>{{ __('lang.Запрос ставки') }}</strong></p>
                         @else
                             @if($cargoLoading->with_vat_cashless)
-                                <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($cargoLoading->currency) }} {{ __('lang.С НДС, безнал') }}</p>
+                                <p class="car-head"><strong>{{ $cargoLoading->with_vat_cashless }}</strong> {{ $cargoLoading->currency }} {{ __('lang.С НДС, безнал') }}</p>
                             @endif
                             @if($cargoLoading->without_vat_cashless)
-                                <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($cargoLoading->currency) }} {{ __('lang.Без НДС, безнал') }}</p>
+                                <p class="car-head"><strong>{{ $cargoLoading->without_vat_cashless }}</strong> {{ $cargoLoading->currency }} {{ __('lang.Без НДС, безнал') }}</p>
                             @endif
                             @if($cargoLoading->cash)
-                                <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($cargoLoading->currency) }} {{ __('lang.Наличными') }}</p>
+                                <p class="car-head"><strong>{{ $cargoLoading->cash }}</strong> {{ $cargoLoading->currency }} {{ __('lang.Наличными') }}</p>
                             @endif
                         @endif
                     </td>

@@ -237,11 +237,11 @@
                 <tr>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.НАПРАВЛЕНИЕ') }}</p>
-                        <span>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate($transport->country), 255) }}-{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate($transport->final_country), 255) }}</span>
+                        <span>{{ Str::limit($transport->country, 255) }}-{{ Str::limit($transport->final_country, 255) }}</span>
                     </td>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.ТРАНСПОРТ') }}</p>
-                        <strong>{{ app('google.translator')->setTarget(app()->getLocale())->translate($transport->body_type) }}</strong><br>
+                        <strong>{{ $transport->body_type }}</strong><br>
                         <p>{{ __('lang.Грузоподъёмность') }} - {{ $transport->capacity }} T</p>
                     </td>
                     <td>
@@ -253,7 +253,7 @@
                     </td>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.МАРШРУТ') }}</p>
-                        <strong>{{ app('google.translator')->setTarget(app()->getLocale())->translate($transport->country) }}</strong><br> - <strong>{{ app('google.translator')->setTarget(app()->getLocale())->translate($transport->final_country) }}</strong><br>
+                        <strong>{{ $transport->country }}</strong><br> - <strong>{{ $transport->final_country }}</strong><br>
                         @if($transport->ready_date)
                         <br><i><strong>{{ __('lang.готов') }} {{ $transport->ready_date?->format('d.m.Y') }}</strong></i>
                         @else
@@ -266,13 +266,13 @@
                         <span>{{ __('lang.Скрыто') }}</span>
                         @else
                             @if($transport->with_vat_cashless)
-                                <p><strong>{{ $transport->with_vat_cashless }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($transport->currency) }} {{ __('lang.С НДС, безнал') }}</p>
+                                <p><strong>{{ $transport->with_vat_cashless }}</strong> {{ $transport->currency }} {{ __('lang.С НДС, безнал') }}</p>
                             @endif
                             @if($transport->without_vat_cashless)
-                                <p><strong>{{ $transport->without_vat_cashless }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($transport->currency) }} {{ __('lang.Без НДС, безнал') }}</p>
+                                <p><strong>{{ $transport->without_vat_cashless }}</strong> {{ $transport->currency }} {{ __('lang.Без НДС, безнал') }}</p>
                             @endif
                             @if($transport->cash)
-                                <p><strong>{{ $transport->cash }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($transport->currency) }} {{ __('lang.Наличными') }}</p>
+                                <p><strong>{{ $transport->cash }}</strong> {{ $transport->currency }} {{ __('lang.Наличными') }}</p>
                             @endif
                         @endif
                         <br><br>
