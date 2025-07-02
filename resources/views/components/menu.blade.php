@@ -140,7 +140,7 @@
                     @foreach ($langs as $code => $label)
                         @if ($code !== $locale)
                             <li class="dropdown-item">
-                                <a href="{{ url($code) }}"
+                                <a href="{{ url($code . '/' . preg_replace('#^(ru|uz|en)/?#', '', request()->path())) }}"
                                    class="dropdown-link"
                                    aria-label="{{ $label }} язык">
                                     {{ $label }}
