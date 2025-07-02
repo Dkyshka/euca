@@ -21,8 +21,12 @@ class PartnerAdminController extends Controller
             $query->where('status_id', $request->input('status_id'));
         }
 
-        if ($request->has('is_partner') && $request->input('is_partner') !== '') {
+        if ($request->filled('is_partner')) {
             $query->where('is_partner', $request->input('is_partner'));
+        }
+
+        if ($request->filled('name')) {
+            $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->input('name')) . '%']);
         }
 
         $partners = $query->paginate(15);

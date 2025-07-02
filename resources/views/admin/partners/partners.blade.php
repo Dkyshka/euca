@@ -43,7 +43,12 @@
                                             <div class="card-body">
 
                                                 <form method="GET" action="{{ route('partner_admin') }}" class="p-3 row">
-                                                        <div class="form-group col-md-6">
+                                                        <div class="form-group col-md-4">
+                                                            <label for="name">Название компании</label>
+                                                            <input type="text" name="name" id="name" class="form-control" value="{{ request('name') }}">
+                                                        </div>
+
+                                                        <div class="form-group col-md-4">
                                                             <label for="status_id">Статус</label>
                                                             <select name="status_id" id="status_id" class="form-control">
                                                                 <option value="">Все</option>
@@ -55,14 +60,14 @@
                                                             </select>
                                                         </div>
 
-                                                    <div class="form-group col-md-6">
-                                                        <label for="is_partner">Партнёрство</label>
-                                                        <select name="is_partner" id="is_partner" class="form-control">
-                                                            <option value="">Все</option>
-                                                            <option value="1" {{ request('is_partner') === '1' ? 'selected' : '' }}>✅ Партнёр</option>
-                                                            <option value="0" {{ request('is_partner') === '0' ? 'selected' : '' }}>❌ Не партнёр</option>
-                                                        </select>
-                                                    </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label for="is_partner">Партнёрство</label>
+                                                            <select name="is_partner" id="is_partner" class="form-control">
+                                                                <option value="">Все</option>
+                                                                <option value="1" {{ request('is_partner') === '1' ? 'selected' : '' }}>✅ Партнёр</option>
+                                                                <option value="0" {{ request('is_partner') === '0' ? 'selected' : '' }}>❌ Не партнёр</option>
+                                                            </select>
+                                                        </div>
 
                                                         <div class="form-group col-md-12">
                                                             <button type="submit" class="btn btn-outline-info btn-flat">Фильтровать</button>
