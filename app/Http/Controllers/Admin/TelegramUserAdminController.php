@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Services\LogHistoryService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class TelegramUserAdminController extends Controller
@@ -39,10 +41,16 @@ class TelegramUserAdminController extends Controller
     public function update(User $user, \Illuminate\Http\Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'name'                      => ['required', 'string'],
             'login' => ['required', 'string', 'exists:users,login'],
-            'phone'                     => ['required'],
+            'password' => ['nullable', 'string', 'min:6'],
+            'phone' => ['required'],
         ]);
+
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
+        } else {
+            unset($data['password']);
+        }
 
         $user->update($data);
         LogHistoryService::setLog($request->ip(), 'Пользователь «'.$request->name.'» отредактирован');

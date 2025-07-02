@@ -40,6 +40,13 @@
                                             @csrf
 
                                             <div class="form-group">
+                                                <label for="login" class="col-sm-2 col-form-label">ФИО</label>
+                                                <div class="col-sm-12">
+                                                    <input type="text" disabled name="login" class="form-control" value="{{ $user->full_name }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="login" class="col-sm-2 col-form-label">Логин</label>
                                                 <div class="col-sm-12">
                                                     <input type="text" name="login" class="form-control" id="login" value="{{ $user->login }}">
@@ -81,6 +88,14 @@
                                                 <label for="phone" class="col-sm-2 col-form-label">Телефон</label>
                                                 <div class="col-sm-12">
                                                     <input type="text" name="phone" class="form-control"  value="{{ $user->phone }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="password" class="col-sm-2 col-form-label">Новый пароль</label>
+                                                <div class="col-sm-12">
+                                                    <input type="password" name="password" class="form-control" id="password" value="">
+                                                    @if($errors->has('password'))<span class="text-danger"> {{ $errors->first('password') }}</span>@endif
                                                 </div>
                                             </div>
 
