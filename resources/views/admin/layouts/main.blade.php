@@ -724,6 +724,9 @@
 @php
     $cargos = \App\Models\CargoLoading::all();
     $transports = \App\Models\Transport::all();
+    $transportsInProgress = \App\Models\Transport::where('status', \App\Models\Transport::IN_PROGRESS)->get();
+    $transportsInCoordination = \App\Models\Transport::where('status', \App\Models\Transport::COORDINATION)->get();
+    $transportsInPerformance = \App\Models\Transport::where('status', \App\Models\Transport::IN_PERFORMANCE)->get();
     $drivers = \App\Models\Driver::all();
 @endphp
 
@@ -854,16 +857,20 @@
         var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
         var pieData        = {
             labels: [
-                'Транспорт',
+                'Транспорт в работе',
+                'Транспорт в согласовании',
+                'Транспорт в исполнении',
                 'Водители',
             ],
             datasets: [
                 {
                     data: [
-                        {{ $transports->count() }},
+                        {{ $transportsInProgress->count() }},
+                        {{ $transportsInCoordination->count() }},
+                        {{ $transportsInPerformance->count() }},
                         {{ $drivers->count() }},
                     ],
-                    backgroundColor : ['#f56954', '#00a65a'],
+                    backgroundColor : ['#f56954', '#00a65a', '#DAEB6B', '#62ACEE'],
                 }
             ]
         }
