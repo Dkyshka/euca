@@ -22,11 +22,11 @@ class AppServiceProvider extends ServiceProvider
 //            return new GoogleTranslate(); // по умолчанию auto -> en
 //        });
 
-        $this->app->singleton(TranslatorFreeService::class, function () {
-            return new TranslatorFreeService();
-        });
-
-        $this->app->alias(TranslatorFreeService::class, 'custom.translator');
+//        $this->app->singleton(TranslatorFreeService::class, function () {
+//            return new TranslatorFreeService();
+//        });
+//
+//        $this->app->alias(TranslatorFreeService::class, 'custom.translator');
 
 //        $this->app->singleton('google.translator', function () {
 //            return new \App\Services\TranslatorFreeService();

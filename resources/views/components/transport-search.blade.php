@@ -237,7 +237,7 @@
                 <tr>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.НАПРАВЛЕНИЕ') }}</p>
-                        <span>{{ Str::limit(app('custom.translator')->translateAuto($transport->country), 255) }}-{{ Str::limit(app('custom.translator')->translateAuto($transport->final_country), 255) }}</span>
+                        <span>{{ Str::limit($transport->country, 255) }}-{{ Str::limit($transport->final_country, 255) }}</span>
                     </td>
                     <td>
                         <p class="mobile-order-head">{{ __('lang.ТРАНСПОРТ') }}</p>
