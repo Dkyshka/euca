@@ -6,8 +6,8 @@
     <section class="search-page">
         <h1 class="title">{{ __('lang.Груз') }}</h1>
         <div class="search-goods__head">
-            <b>{{ $article->country }} - {{ $article->final_unload_city }}, {{ $article->cargo->title }}</b>
-            <p><strong>( {{ __('lang.Создан') }} {{ $article->created_at?->format('d.m.Y') }} ) </strong>изменен {{ $article->updated_at?->format('d.m.Y') }}</p>
+            <b>{{ app('google.translator')->setTarget(app()->getLocale())->translate($article->country) }} - {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->final_unload_city) }}, {{ $article->cargo->title }}</b>
+            <p><strong>( {{ __('lang.Создан') }} {{ $article->created_at?->format('d.m.Y') }} ) </strong>{{ app('google.translator')->setTarget(app()->getLocale())->translate('изменен') }} {{ $article->updated_at?->format('d.m.Y') }}</p>
         </div>
         <div class="add-goods__inner add-goods__main">
             <div class="add-gods__left search-goods__left">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="route-goods__info">
                             <div class="route-goods__info-top">
-                                <p>{{ $article->country }}</p>
+                                <p>{{ app('google.translator')->setTarget(app()->getLocale())->translate($article->country)}}</p>
                                 @if($article->cargo->constant_frequency)
                                     <p><strong>{{ $article->cargo->constant_frequency == 'daily' ? __('lang.Ежедневно') : __('lang.По рабочим дням') }}</strong></p>
                                 @elseif($article?->cargo?->ready_date)
@@ -41,11 +41,11 @@
                                     <svg width="24" height="18">
                                         <use xlink:href="#get-goods"></use>
                                     </svg>
-                                    <strong>{{ $article->cargo->title }}</strong>
+                                    <strong>{{ app('google.translator')->setTarget(app()->getLocale())->translate($article->cargo->title) }}</strong>
                                 </p>
                             </div>
                             <div class="route-goods__info-bottom">
-                                <p>{{ $article->final_unload_city }}</p>
+                                <p>{{ app('google.translator')->setTarget(app()->getLocale())->translate($article->final_unload_city) }}</p>
                                 <p><strong>{{ __('lang.Разгрузка') }}</strong></p>
                                 @if($article->final_unload_date_from)
                                 <p><strong>{{ $article->final_unload_date_from?->format('d.m.Y') }}</strong>
@@ -83,39 +83,39 @@
                     <p><strong>{{ __('lang.Транспорт') }}</strong></p>
                     <br>
                     <p><strong>{{ __('lang.Кузов') }}</strong></p>
-                    <p>{{ Str::limit(implode(', ', array_slice($article->body_types, 0, 5)), 70) }}</p>
+                    <p>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate(implode(', ', array_slice($article->body_types, 0, 5))), 70) }}</p>
                     @if (!empty($article->loading_types))
                         <p><strong>{{ __('lang.Загрузка') }}</strong></p>
-                        <p>{{ Str::limit(implode(', ', array_slice($article->loading_types, 0, 5)), 70) }}</p>
+                        <p>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate(implode(', ', array_slice($article->loading_types, 0, 5))), 70) }}</p>
                     @endif
                     @if (!empty($article->unloading_types))
                         <p><strong>{{ __('lang.Выгрузка') }}</strong></p>
-                        <p>{{ Str::limit(implode(', ', array_slice($article->unloading_types, 0, 5)), 70) }}</p>
+                        <p>{{ Str::limit(app('google.translator')->setTarget(app()->getLocale())->translate(implode(', ', array_slice($article->unloading_types, 0, 5))), 70) }}</p>
                     @endif
 
 {{--                    <b>Комментарии</b>--}}
 {{--                    <p><strong>шумоизоляция оплата по копиям 5 дней</strong></p>--}}
                 </div>
-                <p><strong>Ставка</strong></p>
+                <p><strong>{{ __('lang.Ставка') }}</strong></p>
                 <div class="route-footer">
                     @if($article->payment_type == 'payment_request')
                         <div class="route-footer-col">
-                            <p><strong>{{ __('Запрос ставки') }}</strong></p>
+                            <p><strong>{{ __('lang.Запрос ставки') }}</strong></p>
                         </div>
                     @else
                         <div class="route-footer-col">
                         @if($article->with_vat_cashless)
-                            <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} {{ __('lang.С НДС, безнал') }}</p>
+                            <p><strong>{{ $article->with_vat_cashless }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.С НДС, безнал') }}</p>
                         @endif
                         </div>
                         @if($article->without_vat_cashless)
                         <div class="route-footer-col">
-                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} {{ __('lang.Без НДС, безнал') }}</p>
+                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.Без НДС, безнал') }}</p>
                         </div>
                         @endif
                         @if($article->cash)
                         <div class="route-footer-col">
-                            <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} {{ __('lang.Наличными') }}</p>
+                            <p><strong>{{ $article->cash }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.Наличными') }}</p>
                         </div>
                         @endif
                     @endif
@@ -143,7 +143,7 @@
                     @endif
                 </div>
                 <b>{{ $article->company->name }}</b>
-                <p>{{ $article->company->country }}</p>
+                <p>{{ app('google.translator')->setTarget(app()->getLocale())->translate($article->company->country) }}</p>
                 <div class="company-contacts" style="position: relative">
                     <p>{{ $article->company->user?->full_name }}</p>
                     @foreach($article->company->phones as $item)
@@ -379,13 +379,13 @@
                             {{ __('Запрос ставки') }}
                         @else
                             @if($article->with_vat_cashless)
-                                <p><strong>{{ $article->with_vat_cashless }}</strong> {{ $article->currency }} {{ __('lang.С НДС, безнал') }}</p>
+                                <p><strong>{{ $article->with_vat_cashless }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.С НДС, безнал') }}</p>
                             @endif
                             @if($article->without_vat_cashless)
-                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ $article->currency }} {{ __('lang.Без НДС, безнал') }}</p>
+                                <p><strong>{{ $article->without_vat_cashless }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.Без НДС, безнал') }}</p>
                             @endif
                             @if($article->cash)
-                                <p><strong>{{ $article->cash }}</strong> {{ $article->currency }} {{ __('lang.Наличными') }}</p>
+                                <p><strong>{{ $article->cash }}</strong> {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.Наличными') }}</p>
                             @endif
                         @endif
                     </div>
@@ -408,9 +408,9 @@
                         @foreach($article->bids as $bid)
                         <div class="send-offer__row">
                             <div class="send-offer__col">
-                                <p>{{ $bid->with_vat_cashless }} {{ $article->currency }} {{ __('lang.С НДС, безнал') }}</p>
-                                <p>{{ $bid->without_vat_cashless }} {{ $article->currency }} {{ __('lang.Без НДС, безнал') }}</p>
-                                <p>{{ $bid->cash }} {{ $article->currency }} {{ __('lang.наличными') }}</p>
+                                <p>{{ $bid->with_vat_cashless }} {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.С НДС, безнал') }}</p>
+                                <p>{{ $bid->without_vat_cashless }} {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.Без НДС, безнал') }}</p>
+                                <p>{{ $bid->cash }} {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.наличными') }}</p>
                             </div>
                             <div class="send-offer__col">
                                 <p>{{ $bid->created_at?->format('d.m.Y') }}</p>
@@ -445,13 +445,13 @@
                             <label for="offer">
                                 <select name="price" id="offer">
                                     @if($article->with_vat_cashless)
-                                    <option value="{{ $article->with_vat_cashless }}">{{ $article->with_vat_cashless }} {{ $article->currency }} {{ __('lang.С НДС, безнал') }}</option>
+                                    <option value="{{ $article->with_vat_cashless }}">{{ $article->with_vat_cashless }} {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.С НДС, безнал') }}</option>
                                     @endif
                                     @if($article->without_vat_cashless)
-                                    <option value="{{ $article->without_vat_cashless }}">{{ $article->without_vat_cashless }} {{ $article->currency }} {{ __('lang.Без НДС, безнал') }}</option>
+                                    <option value="{{ $article->without_vat_cashless }}">{{ $article->without_vat_cashless }} {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.Без НДС, безнал') }}</option>
                                     @endif
                                     @if($article->cash)
-                                    <option value="{{ $article->cash }}">{{ $article->cash }} {{ $article->currency }} {{ __('lang.наличными') }}</option>
+                                    <option value="{{ $article->cash }}">{{ $article->cash }} {{ app('google.translator')->setTarget(app()->getLocale())->translate($article->currency) }} {{ __('lang.наличными') }}</option>
                                     @endif
                                 </select>
                             </label>

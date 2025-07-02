@@ -314,18 +314,18 @@
                         <div class="order-info__card-search">
                             <label>
                                 <select name="transport_status"
-                                        id="transport_status-{{ $cargoLoading->bidAccepted->id }}" disabled>
-                                    <option value="" hidden {{ $cargoLoading->bidAccepted->transport_status === null ? 'selected' : '' }}>{{ __('lang.Нет статуса') }}</option>
-                                    <option value="on_the_way_to_loading" {{ $cargoLoading->bidAccepted->transport_status === 'on_the_way_to_loading' ? 'selected' : '' }}>{{ __('lang.Еду на загрузку') }}</option>
-                                    <option value="arrived_at_loading" {{ $cargoLoading->bidAccepted->transport_status === 'arrived_at_loading' ? 'selected' : '' }}>{{ __('lang.На погрузке') }}</option>
-                                    <option value="loading" {{ $cargoLoading->bidAccepted->transport_status === 'loading' ? 'selected' : '' }}>{{ __('lang.Загружаюсь') }}</option>
-                                    <option value="loaded" {{ $cargoLoading->bidAccepted->transport_status === 'loaded' ? 'selected' : '' }}>{{ __('lang.Загружен') }}</option>
-                                    <option value="on_the_way_to_unload" {{ $cargoLoading->bidAccepted->transport_status === 'on_the_way_to_unload' ? 'selected' : '' }}>{{ __('lang.В пути') }}</option>
-                                    <option value="waiting_for_unloading" {{ $cargoLoading->bidAccepted->transport_status === 'waiting_for_unloading' ? 'selected' : '' }}>{{ __('lang.Ожидаю выгрузку') }}</option>
-                                    <option value="unloading" {{ $cargoLoading->bidAccepted->transport_status === 'unloading' ? 'selected' : '' }}>{{ __('lang.Выгружается') }}</option>
-                                    <option value="unloaded" {{ $cargoLoading->bidAccepted->transport_status === 'unloaded' ? 'selected' : '' }}>{{ __('lang.Выгрузился') }}</option>
-                                    <option value="completed" {{ $cargoLoading->bidAccepted->transport_status === 'completed' ? 'selected' : '' }}>{{ __('lang.Завершено') }}</option>
-                                    <option value="canceled" {{ $cargoLoading->bidAccepted->transport_status === 'canceled' ? 'selected' : '' }}>{{ __('lang.Отменено') }}</option>
+                                        id="transport_status-{{ $cargoLoading?->bidAccepted?->id }}" disabled>
+                                    <option value="" hidden {{ $cargoLoading?->bidAccepted?->transport_status === null ? 'selected' : '' }}>{{ __('lang.Нет статуса') }}</option>
+                                    <option value="on_the_way_to_loading" {{ $cargoLoading?->bidAccepted?->transport_status === 'on_the_way_to_loading' ? 'selected' : '' }}>{{ __('lang.Еду на загрузку') }}</option>
+                                    <option value="arrived_at_loading" {{ $cargoLoading?->bidAccepted?->transport_status === 'arrived_at_loading' ? 'selected' : '' }}>{{ __('lang.На погрузке') }}</option>
+                                    <option value="loading" {{ $cargoLoading?->bidAccepted?->transport_status === 'loading' ? 'selected' : '' }}>{{ __('lang.Загружаюсь') }}</option>
+                                    <option value="loaded" {{ $cargoLoading?->bidAccepted?->transport_status === 'loaded' ? 'selected' : '' }}>{{ __('lang.Загружен') }}</option>
+                                    <option value="on_the_way_to_unload" {{ $cargoLoading?->bidAccepted?->transport_status === 'on_the_way_to_unload' ? 'selected' : '' }}>{{ __('lang.В пути') }}</option>
+                                    <option value="waiting_for_unloading" {{ $cargoLoading?->bidAccepted?->transport_status === 'waiting_for_unloading' ? 'selected' : '' }}>{{ __('lang.Ожидаю выгрузку') }}</option>
+                                    <option value="unloading" {{ $cargoLoading?->bidAccepted?->transport_status === 'unloading' ? 'selected' : '' }}>{{ __('lang.Выгружается') }}</option>
+                                    <option value="unloaded" {{ $cargoLoading?->bidAccepted?->transport_status === 'unloaded' ? 'selected' : '' }}>{{ __('lang.Выгрузился') }}</option>
+                                    <option value="completed" {{ $cargoLoading?->bidAccepted?->transport_status === 'completed' ? 'selected' : '' }}>{{ __('lang.Завершено') }}</option>
+                                    <option value="canceled" {{ $cargoLoading?->bidAccepted?->transport_status === 'canceled' ? 'selected' : '' }}>{{ __('lang.Отменено') }}</option>
                                 </select>
                             </label>
                         </div>
