@@ -58,8 +58,63 @@
                                     </button>
                                 </div>
                             </div>
+
                             <div class="card-body">
                                 <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="text-right">
+                                    <a class="btn btn-warning" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Фильтр</a>
+                                </p>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="collapse multi-collapse {{ request()->input() ? 'show' : '' }}" id="multiCollapseExample1">
+                                            <div class="card-body">
+
+                                                <form method="GET" action="{{ route('statistic_cargo') }}" class="p-3 row">
+                                                    <div class="form-group col-md-3">
+                                                        <label for="from">Откуда</label>
+                                                        <input type="text" name="from" id="from" class="form-control" value="{{ request('from') }}">
+                                                    </div>
+
+                                                    <div class="form-group col-md-3">
+                                                        <label for="to">Куда</label>
+                                                        <input type="text" name="to" id="to" class="form-control" value="{{ request('to') }}">
+                                                    </div>
+
+                                                    <div class="form-group col-md-3">
+                                                        <label for="status_id">Статус</label>
+                                                        <select name="status_id" id="status_id" class="form-control">
+                                                            <option value="">Все</option>
+                                                            @foreach(\App\Models\CargoLoading::STATUSES as $key => $label)
+                                                                <option value="{{ $key }}" {{ request('status_id') == $key ? 'selected' : '' }}>
+                                                                    {{ $label }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group col-md-3">
+                                                        <label>Дата создания (от)</label>
+                                                        <input type="date" name="date_from" class="form-control" value="{{ request('date_from') }}">
+                                                    </div>
+
+                                                    <div class="form-group col-md-3">
+                                                        <label>Дата создания (до)</label>
+                                                        <input type="date" name="date_to" class="form-control" value="{{ request('date_to') }}">
+                                                    </div>
+
+                                                    <div class="form-group col-md-12 mt-3">
+                                                        <button type="submit" class="btn btn-outline-info btn-flat">Фильтровать</button>
+                                                        <a href="{{ route('statistic_cargo') }}" class="btn btn-outline-secondary btn-flat">Сбросить</a>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -71,6 +126,7 @@
                                 <tr>
                                     <th>Откуда</th>
                                     <th>Куда</th>
+                                    <th>Создано</th>
                                     <th>Путь</th>
                                     <th>Статус</th>
                                     <th>Действие</th></tr>
@@ -85,6 +141,7 @@
                                         <tr>
                                             <td style="vertical-align: middle;">{{ Str::limit($cargoLoading->country, 50) }}</td>
                                             <td style="vertical-align: middle;">{{ Str::limit($cargoLoading->final_unload_city, 50) }}</td>
+                                            <td style="vertical-align: middle;">{{ $cargoLoading->created_at?->format('d.m.Y') }}</td>
                                             <td style="vertical-align: middle;"><a href="{{ url(app()->getLocale().'/'. $cargoSearchPage->slug. '/cargo-inner/' . $cargoLoading->id) }}" target="_blank">{{ substr($cargoSearchPage->slug, 0, 30) }}</a></td>
                                             <td style="vertical-align: middle;">
                                                 {{ \App\Models\CargoLoading::STATUSES[$cargoLoading->status] }}
