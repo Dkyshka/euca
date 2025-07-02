@@ -122,6 +122,34 @@
                                                 </div>
                                             </div>
 
+
+                                            {{-- Публичная оферта --}}
+                                            <div class="form-group">
+                                                <label for="public_offer"><u>Публичная оферта (PDF)</u></label>
+
+                                                @if(!empty($setting->markup['public_offer']))
+                                                    <p>
+                                                        <a href="{{ asset($setting->markup['public_offer']) }}" target="_blank">Скачать текущую оферту</a>
+                                                    </p>
+                                                @endif
+
+                                                <input type="file" name="public_offer" class="form-control" accept=".pdf">
+                                            </div>
+
+                                            {{-- Правила регистрации --}}
+                                            <div class="form-group">
+                                                <label for="terms"><u>Правила регистрации (PDF)</u></label>
+
+                                                @if(!empty($setting->markup['terms']))
+                                                    <p>
+                                                        <a href="{{ asset($setting->markup['terms']) }}" target="_blank">Скачать текущие правила</a>
+                                                    </p>
+                                                @endif
+
+                                                <input type="file" name="terms" class="form-control" accept=".pdf">
+                                            </div>
+
+
                                             <div class="form-group">
                                                 <div class="col-sm-12">
                                                     <button type="submit" class="btn btn-primary">Сохранить</button>

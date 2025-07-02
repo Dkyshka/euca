@@ -25,36 +25,37 @@ class SettingAdminController extends Controller
             'markup.video.ru' => 'nullable|file|mimes:mp4,webm|max:102400',
             'markup.video.uz' => 'nullable|file|mimes:mp4,webm|max:102400',
             'markup.video.en' => 'nullable|file|mimes:mp4,webm|max:102400',
+            'public_offer' => 'nullable|file|mimes:pdf|max:10240',
+            'terms'        => 'nullable|file|mimes:pdf|max:10240',
         ]);
 
         $markup = $setting->markup ?? [];
-        $newMarkup = $request->input('markup', []);
 
-        foreach (['ru', 'uz', 'en'] as $lang) {
-            if ($request->hasFile("markup.public_offer.$lang")) {
-                if (isset($markup['public_offer'][$lang])) {
-                    Storage::delete(str_replace('storage/', 'public/', $markup['public_offer'][$lang]));
-                }
-
-                $filePath = $request->file("markup.public_offer.$lang")->store('public/public_offers');
-                $newMarkup['public_offer'][$lang] = str_replace('public/', 'storage/', $filePath);
-            } elseif (isset($markup['public_offer'][$lang])) {
-                $newMarkup['public_offer'][$lang] = $markup['public_offer'][$lang];
+        // Загрузка оферты
+        if ($request->hasFile('public_offer')) {
+            if (!empty($markup['public_offer'])) {
+                Storage::delete(str_replace('storage/', 'public/', $markup['public_offer']));
             }
 
-            if ($request->hasFile("markup.video.$lang")) {
-                if (isset($markup['video'][$lang])) {
-                    Storage::delete(str_replace('storage/', 'public/', $markup['video'][$lang]));
-                }
-
-                $filePath = $request->file("markup.video.$lang")->store('public/videos');
-                $newMarkup['video'][$lang] = str_replace('public/', 'storage/', $filePath);
-            } elseif (isset($markup['video'][$lang])) {
-                $newMarkup['video'][$lang] = $markup['video'][$lang];
-            }
+            $request->file('public_offer')->storeAs('public/public_offers', 'public_offer.pdf');
+            $markup['public_offer'] = 'storage/public_offers/public_offer.pdf';
         }
 
-        $setting->update(['markup' => $newMarkup]);
+        // Загрузка правил регистрации
+        if ($request->hasFile('terms')) {
+            if (!empty($markup['terms'])) {
+                Storage::delete(str_replace('storage/', 'public/', $markup['terms']));
+            }
+
+            $request->file('terms')->storeAs('public/registration_terms', 'registration.pdf');
+            $markup['terms'] = 'storage/registration_terms/registration.pdf';
+        }
+
+        // Остальные данные, если есть
+        $newMarkup = $request->input('markup', []);
+        $markup = array_merge($markup, $newMarkup);
+
+        $setting->update(['markup' => $markup]);
 
         return redirect(route('setting_index'))
             ->with('success', 'Настройки успешно обновлены');

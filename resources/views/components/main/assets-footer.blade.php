@@ -229,8 +229,8 @@
             </button>
 
             <span>{{ __('lang.Нажимая кнопку «Продолжить», вы принимаете условия') }}</span>
-            <a href="{{ asset('assets/documents/public_offer.pdf') }}" target="_blank">{{ __('lang.Пользовательского соглашения') }}</a>
-            <a href="{{ asset('assets/documents/registration.pdf') }}" target="_blank">{{ __('lang.Правила регистрации') }}</a>
+            <a href="{{ asset('storage/public_offers/public_offer.pdf') }}" target="_blank">{{ __('lang.Пользовательского соглашения') }}</a>
+            <a href="{{ asset('storage/registration_terms/registration.pdf') }}" target="_blank">{{ __('lang.Правила регистрации') }}</a>
         </form>
 
         <button class="modal-close" type="button" data-modal-close="modal-register">
