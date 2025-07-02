@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 class LangSeeder extends Seeder
 {
     public array $langs =  [
+        'Согласен' => 'Согласен',
         'Взять груз' => 'Взять груз',
         'Грузовладелец предложил груз' => 'Грузовладелец предложил груз',
         'Вы не можете отправить предложение на собственный транспорт.' => 'Вы не можете отправить предложение на собственный транспорт.',
@@ -458,6 +459,7 @@ class LangSeeder extends Seeder
     ];
 
     public array $langsUz =  [
+        'Согласен' => 'Roziman',
         'Взять груз' => 'Yukni olish',
         'Грузовладелец предложил груз' => 'Yuk jo‘natuvchi yuk taklif qildi',
         'Вы не можете отправить предложение на собственный транспорт.' => 'Siz o‘z transportingizga taklif yubora olmaysiz.',
@@ -872,6 +874,7 @@ class LangSeeder extends Seeder
     ];
 
     public array $langsEn =  [
+        'Согласен' => 'I agree',
         'Взять груз' => 'Take the cargo',
         'Грузовладелец предложил груз' => 'The shipper has offered the cargo',
         'Вы не можете отправить предложение на собственный транспорт.' => 'You cannot send an offer for your own transport.',

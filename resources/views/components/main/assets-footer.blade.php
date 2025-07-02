@@ -214,6 +214,12 @@
 
 
                 </div>
+
+            </div>
+
+            <div class="recovery">
+                <input type="checkbox" class="visually-hidden" id="access" name="access" required>
+                <label for="access">{{ __('lang.Согласен') }}</label>
             </div>
 
             <button type="submit" class="form-btn" id="register_submit">{{ __('lang.Продолжить') }}</button>
