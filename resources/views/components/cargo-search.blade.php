@@ -2,16 +2,6 @@
     <h1 class="title">{{ $section->page->name }}</h1>
 
     <form action="" method class="form-search">
-{{--        <div class="form-search-row">--}}
-{{--            <label for="point" class="input-check-red">--}}
-{{--                <input type="checkbox" id="point">--}}
-{{--                <span>Искать грузы в “эллипсе” маршрута</span>--}}
-{{--            </label>--}}
-{{--            <label for="length" class="input-check-red">--}}
-{{--                <input type="checkbox" id="length">--}}
-{{--                <span>Длина маршрута</span>--}}
-{{--            </label>--}}
-{{--        </div>--}}
 
         <div class="form-search-head">
             <div class="form-search-inputs-wrapper">
@@ -21,22 +11,9 @@
                         <input type="text" id="from" placeholder="{{ __('lang.Например, Узбекистан') }}" class="input-form">
                     </label>
                     <label for="to">
-{{--                        <span>Радиус</span>--}}
-                        <input type="number" id="to" placeholder="КМ" class="input-form">
+                        <input type="number" disabled id="to" placeholder="КМ" class="input-form">
                     </label>
                 </div>
-{{--                <div class="form-search-inputs__bottom">--}}
-{{--                    <select name="" id="">--}}
-{{--                        <option value="" hidden>Выбрать список</option>--}}
-{{--                        <option value="">список 1</option>--}}
-{{--                        <option value="">список 2</option>--}}
-{{--                    </select>--}}
-
-{{--                    <label for="goods" class="input-check-red">--}}
-{{--                        <input type="checkbox" id="goods">--}}
-{{--                        <span>точно по Загрузке</span>--}}
-{{--                    </label>--}}
-{{--                </div>--}}
             </div>
 
             <svg width="23" height="23">
@@ -50,22 +27,10 @@
                         <input type="text" id="from" placeholder="{{ __('lang.Например, Казахстан') }}" class="input-form">
                     </label>
                     <label for="to">
-{{--                        <span>Радиус</span>--}}
-                        <input type="number" id="to" placeholder="{{ __('lang.КМ') }}" class="input-form">
+                        <input type="number" id="to" disabled placeholder="{{ __('lang.КМ') }}" class="input-form">
                     </label>
                 </div>
-{{--                <div class="form-search-inputs__bottom">--}}
-{{--                    <select name="" id="">--}}
-{{--                        <option value="" hidden>Выбрать список</option>--}}
-{{--                        <option value="">список 1</option>--}}
-{{--                        <option value="">список 2</option>--}}
-{{--                    </select>--}}
 
-{{--                    <label for="goods" class="input-check-red">--}}
-{{--                        <input type="checkbox" id="goods">--}}
-{{--                        <span>точно по Загрузке</span>--}}
-{{--                    </label>--}}
-{{--                </div>--}}
             </div>
 
             <div class="form-search-inputs form-search-inputs-small">

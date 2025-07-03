@@ -27,7 +27,7 @@ class AuthController extends Controller
         ], $remember)) {
             return response()->json([
                 'success' => true,
-                'redirect_url' => url(app()->getLocale()),
+                'redirect_url' => url()->previous(),
             ]);
         }
 
